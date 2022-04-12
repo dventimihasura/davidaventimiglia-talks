@@ -19,3 +19,12 @@ remote_relationships:
         - city_id
       remote_schema: Weather
     name: weather
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - city_id
+        - created_at
+        - updated_at
+        - id
+      filter: {}

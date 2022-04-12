@@ -9,3 +9,15 @@ array_relationships:
         table:
           schema: public
           name: review
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - email
+        - name
+        - created_at
+        - updated_at
+        - id
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
