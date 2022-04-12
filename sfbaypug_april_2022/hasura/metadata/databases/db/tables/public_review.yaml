@@ -28,4 +28,6 @@ select_permissions:
         - account_id
         - city_id
         - id
-      filter: {}
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
