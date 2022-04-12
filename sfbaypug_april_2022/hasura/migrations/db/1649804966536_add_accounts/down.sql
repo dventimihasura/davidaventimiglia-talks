@@ -1,0 +1,12 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- insert into account (name, email) values ('Gloria', 'gbenbough0@bizjournals.com');
+-- insert into account (name, email) values ('Talia', 'tvyel1@fotki.com');
+-- insert into account (name, email) values ('Andrej', 'amccoid2@indiatimes.com');
+-- insert into account (name, email) values ('Burr', 'bondracek3@ucsd.edu');
+-- insert into account (name, email) values ('Elfreda', 'ekynforth4@omniture.com');
+-- insert into account (name, email) values ('Sybila', 'smico5@odnoklassniki.ru');
+-- insert into account (name, email) values ('Gelya', 'gcamilleri6@github.com');
+-- insert into account (name, email) values ('Jim', 'jree7@qq.com');
+-- insert into account (name, email) values ('Duke', 'dambrosoni8@creativecommons.org');
+-- insert into account (name, email) values ('Janenna', 'jtruesdale9@nydailynews.com');
