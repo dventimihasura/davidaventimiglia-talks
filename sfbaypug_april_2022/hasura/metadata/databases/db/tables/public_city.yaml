@@ -1,6 +1,14 @@
 table:
   schema: public
   name: city
+array_relationships:
+  - name: reviews
+    using:
+      foreign_key_constraint_on:
+        column: city_id
+        table:
+          schema: public
+          name: review
 remote_relationships:
   - definition:
       remote_field:

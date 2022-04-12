@@ -1,0 +1,31 @@
+table:
+  schema: public
+  name: review
+object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: account_id
+  - name: city
+    using:
+      foreign_key_constraint_on: city_id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        account_id:
+          _eq: X-Hasura-User-Id
+      columns:
+        - body
+        - city_id
+      backend_only: false
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - body
+        - created_at
+        - updated_at
+        - account_id
+        - city_id
+        - id
+      filter: {}
