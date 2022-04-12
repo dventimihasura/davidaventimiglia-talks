@@ -1,0 +1,1 @@
+INSERT INTO "public"."city"("id", "created_at", "updated_at", "city_id") VALUES (E'fe13905f-6337-4069-b92e-79d9acd27c5b', E'2022-04-12T22:29:07.172149+00:00', E'2022-04-12T22:29:07.172149+00:00', E'2267057');

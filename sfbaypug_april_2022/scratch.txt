@@ -1,0 +1,6 @@
+# -*- mode: restclient; -*-
+
+# Unsplash
+GET https://api.unsplash.com/photos/random/
+
+Authorization: Client-ID Db46NDNUTlXUY3p43tefUR3W1A6C050iL2IJV6P7NFs

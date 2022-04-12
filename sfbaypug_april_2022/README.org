@@ -1,0 +1,330 @@
+* Queries
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "San Francisco") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "US",
+:       "id": "5391959",
+:       "name": "San Francisco"
+:     }
+:   }
+: }
+
+#+begin_src restclient
+  GET	
+#+end_src
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "Seattle") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "US",
+:       "id": "5809844",
+:       "name": "Seattle"
+:     }
+:   }
+: }
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "Portland") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "US",
+:       "id": "5746545",
+:       "name": "Portland"
+:     }
+:   }
+: }
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "Los Angeles") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "US",
+:       "id": "5368361",
+:       "name": "Los Angeles"
+:     }
+:   }
+: }
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "San Diego") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "Chicago") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "US",
+:       "id": "4887398",
+:       "name": "Chicago"
+:     }
+:   }
+: }
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "New Orleans") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "US",
+:       "id": "4335045",
+:       "name": "New Orleans"
+:     }
+:   }
+: }
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "New York") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "US",
+:       "id": "5128581",
+:       "name": "New York"
+:     }
+:   }
+: }
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "Boston") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "US",
+:       "id": "4930956",
+:       "name": "Boston"
+:     }
+:   }
+: }
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "Honolulu") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "US",
+:       "id": "5856195",
+:       "name": "Honolulu"
+:     }
+:   }
+: }
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "Phuket") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "TH",
+:       "id": "1151253",
+:       "name": "Phuket"
+:     }
+:   }
+: }
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "Sydney") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "AU",
+:       "id": "2147714",
+:       "name": "Sydney"
+:     }
+:   }
+: }
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "London") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "GB",
+:       "id": "2643743",
+:       "name": "London"
+:     }
+:   }
+: }
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "Tokyo") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "JP",
+:       "id": "1850144",
+:       "name": "Tokyo"
+:     }
+:   }
+: }
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "Saigon") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "VN",
+:       "id": "1580578",
+:       "name": "Ho Chi Minh City"
+:     }
+:   }
+: }
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    getCityByName(name: "Lisbon") {
+      country
+      id
+      name
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "getCityByName": {
+:       "country": "PT",
+:       "id": "2267057",
+:       "name": "Lisbon"
+:     }
+:   }
+: }

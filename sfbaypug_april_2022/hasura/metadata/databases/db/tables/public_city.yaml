@@ -1,0 +1,13 @@
+table:
+  schema: public
+  name: city
+remote_relationships:
+  - definition:
+      remote_field:
+        getCityById:
+          arguments:
+            id: $city_id
+      hasura_fields:
+        - city_id
+      remote_schema: Weather
+    name: weather
