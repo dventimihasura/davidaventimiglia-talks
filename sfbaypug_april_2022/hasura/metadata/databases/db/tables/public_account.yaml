@@ -1,0 +1,23 @@
+table:
+  schema: public
+  name: account
+array_relationships:
+  - name: reviews
+    using:
+      foreign_key_constraint_on:
+        column: account_id
+        table:
+          schema: public
+          name: review
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - email
+        - name
+        - created_at
+        - updated_at
+        - id
+      filter:
+        id:
+          _eq: X-Hasura-User-Id

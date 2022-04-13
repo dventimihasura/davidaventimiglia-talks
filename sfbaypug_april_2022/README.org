@@ -1,0 +1,202 @@
+#+TITLE: Hasura GraphQL for PostgreSQL
+#+AUTHOR: David A Ventimiglia
+#+EMAIL: davidaventimiglia@gmail.com
+
+#+options: timestamp:nil title:t toc:nil todo:t |:t
+
+* Who
+
+*David A. Ventimiglia*
+
+#+BEGIN_QUOTE
+"I'm a physicist, data scientist, data engineer, and software
+engineer.  I work for [[https://hasura.io/][*Hasura*]], a software technology company that
+provides developer-focused tooling products.  And, I believe that the
+best code is the code that you don't have to write."
+#+END_QUOTE
+
+* What
+
+#+REVEAL: split
+
+#+begin_quote
+"From your databases to a unified GraphQL API in just one minute"
+#+end_quote
+
+* What?
+
+** GraphQL API
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- Query Language
+- Schema
+  - Types
+    - Fields
+- Types relate to Types
+- Sound familiar?
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
+
+#+ATTR_HTML: :width 100%
+#+ATTR_HTML: :height 100%
+[[file:GraphQL.png]]
+
+#+REVEAL_HTML: </div>
+
+** In Just One Minute
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:Hasura_Connections.png]]
+
+* Why?
+
+** Two-Tier
+
+- 1986-1996
+- Client + Server
+- Visual Basic + MSSQL + SQL
+
+** Three-Tier
+
+- 1996-1999
+- Presentation + Application + Data
+- JSPs + EJBs + ORM + Oracle (+ SQL)
+
+** N-Tier
+
+- 1999-2002
+- Client + WAF + Business Logic + Messaging + Loads of Caching + Data
+- HTML/Javascript + Nginx + Ruby + Rails + RabbitMQ + Redis + ActiveRecord + MySQL (+ SQL)
+
+** SOA
+
+- 2002-2012
+- UI + WSDL + SOAP + Event Bus + POJOs + ORM + Data
+- HTML/Javascipt + JAX-WS + Java + Spring + Hibernate + Oracle (+ SQL)
+
+** Microservices
+
+- 2012-???
+- UI + REST
+- HTML/Javascript/TypeScript/Angular/React + AWS DynamoDB + Python + Flask + API Endpoints + SQLAlchemy + ECS + MySQL (+ SQL)
+
+** Containerization
+
+- 2013-???
+- Clients + Containers
+- Angular + Docker + AWS ECS/EKS + Linkerd + AWS RDS (+ SQL)
+
+** Serverless
+
+- 2014-???
+- UI + Functions
+- SPA / Mobile + API Gateway + AWS Lambda + AWS Aurora (+ SQL)
+
+** Low-Code
+
+- 2017-???
+- UI + Database
+- React / Flutter + Hasura + PostgreSQL + SQL!
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+[[file:clipart2825061.png]]
+
+** No-Code
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- 2018-???
+- UI + Spreadsheet
+- Glide + AirTable
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+[[file:Glide-symbol-white.png]]
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+[[file:pngwing.com.png]]
+
+#+REVEAL_HTML: </div>
+  
+* Demo
+
+* Product Features
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- +GraphQL API+
+- Relay API
+- +PostgreSQL+
+- MS SQL Server
+- BigQuery
+- Actions
+- +Remote Schemas+
+
+#+REVEAL_HTML: </div>
+  
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- Event Triggers
+- Scheduled Triggers
+- Authentication
+- +Authorization+
+- Database Migrations
+- CLI
+
+#+REVEAL_HTML: </div>
+
+* Honorable Mentions
+
+#+REVEAL_HTML: <div class="row">
+
+- [[https://www.graphile.org/postgraphile/][PostGraphile]]
+- [[https://www.prisma.io/][Prisma]]
+- [[https://github.com/supabase/pg_graphql][=pg_graphql=]]
+- [[https://postgrest.org/en/stable/][PostgREST]]
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="row">
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+#+ATTR_HTML: :style float:left
+#+ATTR_HTML: :margin 10px
+  [[file:postgraphile.png]]
+
+#+ATTR_HTML: :width 15%
+#+ATTR_HTML: :height 15%
+#+ATTR_HTML: :style float:left
+#+ATTR_HTML: :margin 10px
+  [[file:prisma_logo-freelogovectors.net_.png]]
+
+#+ATTR_HTML: :width 15%
+#+ATTR_HTML: :height 15%
+#+ATTR_HTML: :style float:right
+#+ATTR_HTML: :margin 10px
+  [[file:supabase.jpg]]
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+#+ATTR_HTML: :style float:right
+#+ATTR_HTML: :margin 10px
+  [[file:postgrest.png]]
+
+#+REVEAL_HTML: </div>
+
+* Parting Thoughts
+
+* 
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:frame.png]]
