@@ -28,6 +28,38 @@ services:
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       ## uncomment next line to set an admin secret
       # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+  client:
+    tty: true
+    stdin_open: true
+    image: tooljet/tooljet-client-ce:latest
+    restart: always
+    env_file: .env
+    depends_on:
+      - server
+    volumes:
+      - logs:/var/log/openresty/
+      - certs:/etc/resty-auto-ssl/
+      - fallbackcerts:/etc/fallback-certs
+    ports:
+      - 80:80
+      - 443:443
+    command: openresty -g "daemon off;"
+  server:
+    image: tooljet/tooljet-server-ce:latest
+    tty: true
+    stdin_open: true
+    restart: always
+    ports:
+      - 3000
+    env_file: .env
+    environment:
+      SERVE_CLIENT: "false"
+    command: npm run start:prod
+    depends_on:
+      - postgres
 volumes:
   db_data:
+  certs:
+  logs:
+  fallbackcerts:
 

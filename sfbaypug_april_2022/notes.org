@@ -45,26 +45,26 @@
       "name": "San Francisco",
       "weather": {
         "clouds": {
-          "all": 20,
-          "humidity": 69,
+          "all": 40,
+          "humidity": 78,
           "visibility": 10000
         },
         "summary": {
-          "description": "few clouds",
-          "icon": "02n",
+          "description": "scattered clouds",
+          "icon": "03n",
           "title": "Clouds"
         },
         "temperature": {
-          "actual": 282.23,
-          "feelsLike": 278.19,
-          "max": 283.73,
-          "min": 280.79
+          "actual": 279.68,
+          "feelsLike": 277.81,
+          "max": 281.7,
+          "min": 276.4
         },
         "wind": {
-          "deg": 280,
-          "speed": 9.77
+          "deg": 30,
+          "speed": 2.57
         },
-        "timestamp": 1649819529
+        "timestamp": 1649853465
       }
     }
   }
@@ -395,6 +395,10 @@
   '(("X-Hasura-Role" . "user")
     ("X-Hasura-User-ID" . "a3960613-6c9e-480c-9289-fcd8aa457745"))
 #+end_src
+
+#+RESULTS: my-reviews-plus-weather-headers
+: ((X-Hasura-Role . user) (X-Hasura-User-ID . a3960613-6c9e-480c-9289-fcd8aa457745))
+
 #+begin_src graphql :url http://localhost:8081/v1/graphql :headers my-reviews-plus-weather-headers
   query MyReviewsPlusWeather {
     review {

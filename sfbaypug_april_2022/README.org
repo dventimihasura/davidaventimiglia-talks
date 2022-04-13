@@ -1,5 +1,5 @@
 #+TITLE: Hasura GraphQL for PostgreSQL
-#+SUBTITLE: The Voyage Home
+#+SUBTITLE: [[https://en.wikipedia.org/wiki/Star_Trek_IV:_The_Voyage_Home][The Voyage Home]]
 #+AUTHOR: David A Ventimiglia
 #+EMAIL: davidaventimiglia@neptunestation.com
 
@@ -48,9 +48,14 @@ best code is the code that you don't have to write."
 #+REVEAL_HTML: </div>
 
 ** In Just One Minute
+
 #+ATTR_HTML: :width 50%
 #+ATTR_HTML: :height 50%
 [[file:Hasura_Connections.png]]
+
+#+REVEAL: split
+
+[[file:what_is_hasura.png]]
 
 * Why?
 
@@ -199,7 +204,7 @@ best code is the code that you don't have to write."
 - What have we accomplished?
 - Why don't we just write SQL?
 - Should we just be grateful?
-- How can we help them?
+- How can we help other developers?
 - Are database professionals ready for the moment?
 
 * /Thank you!/
@@ -225,6 +230,10 @@ Or just let it slip?
 #+ATTR_HTML: :width 50%
 #+ATTR_HTML: :height 50%
 [[file:frame.png]]
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:hasura-logo-primary-light.png]]
 
 #+REVEAL_HTML: </div>
 
