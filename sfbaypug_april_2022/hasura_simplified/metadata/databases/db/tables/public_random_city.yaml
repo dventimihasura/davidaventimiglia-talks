@@ -1,0 +1,12 @@
+table:
+  schema: public
+  name: random_city
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - city_id
+        - created_at
+        - id
+        - updated_at
+      filter: {}

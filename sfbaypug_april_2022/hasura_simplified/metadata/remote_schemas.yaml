@@ -1,0 +1,5 @@
+- name: Weather
+  definition:
+    url: https://graphql-weather-api.herokuapp.com/
+    timeout_seconds: 60
+  comment: "Retrieve the current weather for any given city\t"
