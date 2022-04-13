@@ -1,0 +1,667 @@
+* NomadPages Queries
+
+** Weather API Alone Via Hasura
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query WeatherAPIAloneViaHasura {
+    getCityByName(name: "San Francisco") {
+      country
+      id
+      name
+      weather {
+        clouds {
+          all
+          humidity
+          visibility
+        }
+        summary {
+          description
+          icon
+          title
+        }
+        temperature {
+          actual
+          feelsLike
+          max
+          min
+        }
+        wind {
+          deg
+          speed
+        }
+        timestamp
+      }
+    }
+  }
+#+end_src
+
+#+RESULTS:
+#+begin_example
+{
+  "data": {
+    "getCityByName": {
+      "country": "US",
+      "id": "5391959",
+      "name": "San Francisco",
+      "weather": {
+        "clouds": {
+          "all": 20,
+          "humidity": 69,
+          "visibility": 10000
+        },
+        "summary": {
+          "description": "few clouds",
+          "icon": "02n",
+          "title": "Clouds"
+        },
+        "temperature": {
+          "actual": 282.23,
+          "feelsLike": 278.19,
+          "max": 283.73,
+          "min": 280.79
+        },
+        "wind": {
+          "deg": 280,
+          "speed": 9.77
+        },
+        "timestamp": 1649819529
+      }
+    }
+  }
+}
+#+end_example
+
+** Cities with Weather Summary and Reviews
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query MyQuery {
+    city {
+      id
+      weather {
+        weather {
+          summary {
+            description
+            icon
+            title
+          }
+        }
+      }
+      reviews {
+        body
+      }
+    }
+  }
+#+end_src
+
+#+RESULTS:
+#+begin_example
+{
+  "data": {
+    "city": [
+      {
+        "id": "1b16c7e8-0a64-46a7-a945-844c04df68da",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "few clouds",
+                "icon": "02n",
+                "title": "Clouds"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "cold and windy"
+          }
+        ]
+      },
+      {
+        "id": "b1542c96-46bf-4b5c-a47b-d78babb81eb8",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "broken clouds",
+                "icon": "04n",
+                "title": "Clouds"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "rainy"
+          }
+        ]
+      },
+      {
+        "id": "75fe47ec-164e-42b0-9266-19c744c61409",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "light rain",
+                "icon": "10n",
+                "title": "Rain"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "dreary but cool"
+          }
+        ]
+      },
+      {
+        "id": "642e1dfb-d414-45a7-b78c-f420571d08f0",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "clear sky",
+                "icon": "01n",
+                "title": "Clear"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "hot and trendy"
+          }
+        ]
+      },
+      {
+        "id": "b1a0ba20-e483-4ec5-a728-3cd5ca3dc9a4",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "overcast clouds",
+                "icon": "04n",
+                "title": "Clouds"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "windy but fun"
+          }
+        ]
+      },
+      {
+        "id": "bd738df3-60b8-44db-aee2-238ba12e6658",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "overcast clouds",
+                "icon": "04n",
+                "title": "Clouds"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "jazzy and humid"
+          }
+        ]
+      },
+      {
+        "id": "72dfc1cd-fab8-4376-84ba-c3ee0fe96275",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "clear sky",
+                "icon": "01n",
+                "title": "Clear"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "a city that never sleeps"
+          }
+        ]
+      },
+      {
+        "id": "ba67d3e6-7089-47b7-a4f5-ea6c1207c952",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "few clouds",
+                "icon": "02n",
+                "title": "Clouds"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "historic!"
+          }
+        ]
+      },
+      {
+        "id": "3769699a-001e-4943-9ff3-4ac72ec8bbf2",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "broken clouds",
+                "icon": "04d",
+                "title": "Clouds"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "paradise"
+          }
+        ]
+      },
+      {
+        "id": "33497b06-f50d-447d-a773-6389a6b2d4cd",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "few clouds",
+                "icon": "02d",
+                "title": "Clouds"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "exotic"
+          }
+        ]
+      },
+      {
+        "id": "f92d7b62-6b77-4b64-ac0c-d76b01d19f44",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "light rain",
+                "icon": "10d",
+                "title": "Rain"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "lively and hot"
+          }
+        ]
+      },
+      {
+        "id": "7a76ff83-8473-49e5-aa16-e2ea6a63d310",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "few clouds",
+                "icon": "02n",
+                "title": "Clouds"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "cloudy and damp"
+          }
+        ]
+      },
+      {
+        "id": "ef058257-9d04-4d93-b97b-8761649a36b3",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "overcast clouds",
+                "icon": "04d",
+                "title": "Clouds"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "hot but amazing food"
+          }
+        ]
+      },
+      {
+        "id": "72ad6499-38c6-44e8-a8c8-af63ea72c2e4",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "broken clouds",
+                "icon": "04d",
+                "title": "Clouds"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "happiest place on earth"
+          }
+        ]
+      },
+      {
+        "id": "fe13905f-6337-4069-b92e-79d9acd27c5b",
+        "weather": [
+          {
+            "weather": {
+              "summary": {
+                "description": "few clouds",
+                "icon": "02n",
+                "title": "Clouds"
+              }
+            }
+          }
+        ],
+        "reviews": [
+          {
+            "body": "perfect weather"
+          }
+        ]
+      }
+    ]
+  }
+}
+#+end_example
+
+** MyReviewsPlusWeather
+
+#+NAME: my-reviews-plus-weather-headers
+#+begin_src emacs-lisp
+  '(("X-Hasura-Role" . "user")
+    ("X-Hasura-User-ID" . "a3960613-6c9e-480c-9289-fcd8aa457745"))
+#+end_src
+#+begin_src graphql :url http://localhost:8081/v1/graphql :headers my-reviews-plus-weather-headers
+  query MyReviewsPlusWeather {
+    review {
+      account_id
+      body
+      city {
+        weather {
+          name
+          weather {
+            summary {
+              description
+              icon
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+#+end_src
+
+#+RESULTS:
+#+begin_example
+{
+  "data": {
+    "review": [
+      {
+        "account_id": "a3960613-6c9e-480c-9289-fcd8aa457745",
+        "body": "a city that never sleeps",
+        "city": {
+          "weather": [
+            {
+              "name": "New York",
+              "weather": {
+                "summary": {
+                  "description": "clear sky",
+                  "icon": "01n",
+                  "title": "Clear"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "account_id": "a3960613-6c9e-480c-9289-fcd8aa457745",
+        "body": "happiest place on earth",
+        "city": {
+          "weather": [
+            {
+              "name": "Ho Chi Minh City",
+              "weather": {
+                "summary": {
+                  "description": "broken clouds",
+                  "icon": "04d",
+                  "title": "Clouds"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+#+end_example
+
+** All City Names
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query AllCityNames {
+    city {
+      id
+      weather {
+        name
+      }
+    }
+  }
+#+end_src
+
+#+RESULTS:
+#+begin_example
+{
+  "data": {
+    "city": [
+      {
+        "id": "1b16c7e8-0a64-46a7-a945-844c04df68da",
+        "weather": [
+          {
+            "name": "San Francisco"
+          }
+        ]
+      },
+      {
+        "id": "b1542c96-46bf-4b5c-a47b-d78babb81eb8",
+        "weather": [
+          {
+            "name": "Seattle"
+          }
+        ]
+      },
+      {
+        "id": "75fe47ec-164e-42b0-9266-19c744c61409",
+        "weather": [
+          {
+            "name": "Portland"
+          }
+        ]
+      },
+      {
+        "id": "642e1dfb-d414-45a7-b78c-f420571d08f0",
+        "weather": [
+          {
+            "name": "Los Angeles"
+          }
+        ]
+      },
+      {
+        "id": "b1a0ba20-e483-4ec5-a728-3cd5ca3dc9a4",
+        "weather": [
+          {
+            "name": "Chicago"
+          }
+        ]
+      },
+      {
+        "id": "bd738df3-60b8-44db-aee2-238ba12e6658",
+        "weather": [
+          {
+            "name": "New Orleans"
+          }
+        ]
+      },
+      {
+        "id": "72dfc1cd-fab8-4376-84ba-c3ee0fe96275",
+        "weather": [
+          {
+            "name": "New York"
+          }
+        ]
+      },
+      {
+        "id": "ba67d3e6-7089-47b7-a4f5-ea6c1207c952",
+        "weather": [
+          {
+            "name": "Boston"
+          }
+        ]
+      },
+      {
+        "id": "3769699a-001e-4943-9ff3-4ac72ec8bbf2",
+        "weather": [
+          {
+            "name": "Honolulu"
+          }
+        ]
+      },
+      {
+        "id": "33497b06-f50d-447d-a773-6389a6b2d4cd",
+        "weather": [
+          {
+            "name": "Phuket"
+          }
+        ]
+      },
+      {
+        "id": "f92d7b62-6b77-4b64-ac0c-d76b01d19f44",
+        "weather": [
+          {
+            "name": "Sydney"
+          }
+        ]
+      },
+      {
+        "id": "7a76ff83-8473-49e5-aa16-e2ea6a63d310",
+        "weather": [
+          {
+            "name": "London"
+          }
+        ]
+      },
+      {
+        "id": "ef058257-9d04-4d93-b97b-8761649a36b3",
+        "weather": [
+          {
+            "name": "Tokyo"
+          }
+        ]
+      },
+      {
+        "id": "72ad6499-38c6-44e8-a8c8-af63ea72c2e4",
+        "weather": [
+          {
+            "name": "Ho Chi Minh City"
+          }
+        ]
+      },
+      {
+        "id": "fe13905f-6337-4069-b92e-79d9acd27c5b",
+        "weather": [
+          {
+            "name": "Lisbon"
+          }
+        ]
+      }
+    ]
+  }
+}
+#+end_example
+
+** Add a City Review
+
+#+NAME: add-a-city-review
+#+begin_src emacs-lisp
+  '(("X-Hasura-Role" . "user")
+    ("X-Hasura-User-ID" . "a3960613-6c9e-480c-9289-fcd8aa457745"))
+#+end_src
+#+NAME: add-a-city-review-vars
+#+begin_example
+{
+  "accountId": "a3960613-6c9e-480c-9289-fcd8aa457745",
+  "cityId": "fe13905f-6337-4069-b92e-79d9acd27c5b",
+  "reviewBody": "Lisbon is lovely!"
+}
+#+end_example
+#+begin_src graphql :url http://localhost:8081/v1/graphql :headers add-a-city-review :variables add-a-city-review-vars
+  mutation AddReview($accountId: uuid, $cityId: uuid, $reviewBody: String) {
+    insert_review(objects: [
+        {
+          account_id: $accountId,
+          city_id: $cityId,
+          body: $reviewBody
+        }
+      ]) {
+      returning {
+        id
+        city {
+          weather {
+            name
+          }
+        }
+        body
+      }
+    }
+  }
+#+end_src
+
+#+RESULTS:
+#+begin_example
+{
+  "data": {
+    "insert_review": {
+      "returning": [
+        {
+          "id": "b795c6c3-99d8-4463-b622-e1faecb29a77",
+          "city": {
+            "weather": [
+              {
+                "name": "Lisbon"
+              }
+            ]
+          },
+          "body": "Lisbon is lovely!"
+        }
+      ]
+    }
+  }
+}
+#+end_example
+

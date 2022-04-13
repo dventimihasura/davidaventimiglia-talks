@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Hasura GraphQL for PostgreSQL</title>
+<meta name="author" content="David A Ventimiglia"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/moon.css" id="theme"/>
+
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Hasura GraphQL for PostgreSQL</h1><p class="subtitle"></p>
+<h2 class="author">David A Ventimiglia</h2>
+</section>
+
+<section>
+<section id="slide-orgf11cb16">
+<h2 id="orgf11cb16"><span class="section-number-2">1.</span> Who</h2>
+<p>
+<b>David A. Ventimiglia</b>
+</p>
+
+<blockquote >
+<p>
+"I'm a physicist, data scientist, data engineer, and software
+engineer.  I work for <a href="https://hasura.io/"><b>Hasura</b></a>, a software technology company that
+provides developer-focused tooling products.  And, I believe that the
+best code is the code that you don't have to write."
+</p>
+</blockquote>
+
+</section>
+</section>
+<section>
+<section id="slide-org9bd0f23">
+<h2 id="org9bd0f23"><span class="section-number-2">2.</span> What</h2>
+</section>
+<section id="slide-org9bd0f23-split">
+
+<blockquote >
+<p>
+"From your databases to a unified GraphQL API in just one minute"
+</p>
+</blockquote>
+
+</section>
+</section>
+<section>
+<section id="slide-org51a436b">
+<h2 id="org51a436b"><span class="section-number-2">3.</span> What?</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+</section>
+<section id="slide-org56aa27b">
+<h3 id="org56aa27b"><span class="section-number-3">3.1.</span> GraphQL API</h3>
+<div class="column" style="float:left; width:50%">
+
+<ul>
+<li>Query Language</li>
+<li>Schema
+<ul>
+<li>Types
+<ul>
+<li>Fields</li>
+
+</ul></li>
+
+</ul></li>
+<li>Types relate to Types</li>
+<li>Sound familiar?</li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:right; width:50%;">
+
+
+<div id="org3c7d8c9" class="figure">
+<p><img src="GraphQL.png" alt="GraphQL.png" height="100%" width="100%" />
+</p>
+</div>
+
+</div>
+
+</section>
+<section id="slide-orgfb73219">
+<h3 id="orgfb73219"><span class="section-number-3">3.2.</span> In Just One Minute</h3>
+
+<div id="org71794e7" class="figure">
+<p><img src="Hasura_Connections.png" alt="Hasura_Connections.png" height="50%" width="50%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org6a97a1b">
+<h2 id="org6a97a1b"><span class="section-number-2">4.</span> Why?</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+</section>
+<section id="slide-org31da8e0">
+<h3 id="org31da8e0"><span class="section-number-3">4.1.</span> Two-Tier</h3>
+<ul>
+<li>1986-1996</li>
+<li>Client + Server</li>
+<li>Visual Basic + MSSQL + SQL</li>
+
+</ul>
+
+</section>
+<section id="slide-org9a86139">
+<h3 id="org9a86139"><span class="section-number-3">4.2.</span> Three-Tier</h3>
+<ul>
+<li>1996-1999</li>
+<li>Presentation + Application + Data</li>
+<li>JSPs + EJBs + ORM + Oracle (+ SQL)</li>
+
+</ul>
+
+</section>
+<section id="slide-org0d83ee8">
+<h3 id="org0d83ee8"><span class="section-number-3">4.3.</span> N-Tier</h3>
+<ul>
+<li>1999-2002</li>
+<li>Client + WAF + Business Logic + Messaging + Loads of Caching + Data</li>
+<li>HTML/Javascript + Nginx + Ruby + Rails + RabbitMQ + Redis + ActiveRecord + MySQL (+ SQL)</li>
+
+</ul>
+
+</section>
+<section id="slide-org0de2270">
+<h3 id="org0de2270"><span class="section-number-3">4.4.</span> SOA</h3>
+<ul>
+<li>2002-2012</li>
+<li>UI + WSDL + SOAP + Event Bus + POJOs + ORM + Data</li>
+<li>HTML/Javascipt + JAX-WS + Java + Spring + Hibernate + Oracle (+ SQL)</li>
+
+</ul>
+
+</section>
+<section id="slide-org2d7d5b5">
+<h3 id="org2d7d5b5"><span class="section-number-3">4.5.</span> Microservices</h3>
+<ul>
+<li>2012-???</li>
+<li>UI + REST</li>
+<li>HTML/Javascript/TypeScript/Angular/React + AWS DynamoDB + Python + Flask + API Endpoints + SQLAlchemy + ECS + MySQL (+ SQL)</li>
+
+</ul>
+
+</section>
+<section id="slide-orgb43e016">
+<h3 id="orgb43e016"><span class="section-number-3">4.6.</span> Containerization</h3>
+<ul>
+<li>2013-???</li>
+<li>Clients + Containers</li>
+<li>Angular + Docker + AWS ECS/EKS + Linkerd + AWS RDS (+ SQL)</li>
+
+</ul>
+
+</section>
+<section id="slide-orge2fb2f1">
+<h3 id="orge2fb2f1"><span class="section-number-3">4.7.</span> Serverless</h3>
+<ul>
+<li>2014-???</li>
+<li>UI + Functions</li>
+<li>SPA / Mobile + API Gateway + AWS Lambda + AWS Aurora (+ SQL)</li>
+
+</ul>
+
+</section>
+<section id="slide-orgea4a209">
+<h3 id="orgea4a209"><span class="section-number-3">4.8.</span> Low-Code</h3>
+<ul>
+<li>2017-???</li>
+<li>UI + Database</li>
+<li>React / Flutter + Hasura + PostgreSQL + SQL!</li>
+
+</ul>
+
+
+<div id="org3b324ac" class="figure">
+<p><img src="clipart2825061.png" alt="clipart2825061.png" height="25%" width="25%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org9c88958">
+<h3 id="org9c88958"><span class="section-number-3">4.9.</span> No-Code</h3>
+<div class="column" style="float:left; width:50%">
+
+<ul>
+<li>2018-???</li>
+<li>UI + Spreadsheet</li>
+<li>Glide + AirTable</li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:right; width:50%">
+
+
+<div id="orga08756e" class="figure">
+<p><img src="Glide-symbol-white.png" alt="Glide-symbol-white.png" height="25%" width="25%" />
+</p>
+</div>
+
+
+<div id="org3f21225" class="figure">
+<p><img src="pngwing.com.png" alt="pngwing.com.png" height="25%" width="25%" />
+</p>
+</div>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org2b89d37">
+<h2 id="org2b89d37"><span class="section-number-2">5.</span> Demo</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd11b262">
+<h2 id="orgd11b262"><span class="section-number-2">6.</span> Product Features</h2>
+<div class="column" style="float:left; width:50%">
+
+<ul>
+<li><del>GraphQL API</del></li>
+<li>Relay API</li>
+<li><del>PostgreSQL</del></li>
+<li>MS SQL Server</li>
+<li>BigQuery</li>
+<li>Actions</li>
+<li><del>Remote Schemas</del></li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:left; width:50%">
+
+<ul>
+<li>Event Triggers</li>
+<li>Scheduled Triggers</li>
+<li>Authentication</li>
+<li><del>Authorization</del></li>
+<li>Database Migrations</li>
+<li>CLI</li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org0fa883e">
+<h2 id="org0fa883e"><span class="section-number-2">7.</span> Honorable Mentions</h2>
+<div class="row">
+
+<ul>
+<li><a href="https://www.graphile.org/postgraphile/">PostGraphile</a></li>
+<li><a href="https://www.prisma.io/">Prisma</a></li>
+<li><a href="https://github.com/supabase/pg_graphql"><code>pg_graphql</code></a></li>
+<li><a href="https://postgrest.org/en/stable/">PostgREST</a></li>
+
+</ul>
+
+</div>
+
+<div class="row">
+
+
+<div id="orgdfa876c" class="figure">
+<p><img src="postgraphile.png" alt="postgraphile.png" margin="10px" style="float:left" height="25%" width="25%" />
+</p>
+</div>
+
+
+<div id="org70072e6" class="figure">
+<p><img src="prisma_logo-freelogovectors.net_.png" alt="prisma_logo-freelogovectors.net_.png" margin="10px" style="float:left" height="15%" width="15%" />
+</p>
+</div>
+
+
+<div id="orgd593552" class="figure">
+<p><img src="supabase.jpg" alt="supabase.jpg" margin="10px" style="float:right" height="15%" width="15%" />
+</p>
+</div>
+
+
+<div id="org06466a4" class="figure">
+<p><img src="postgrest.png" alt="postgrest.png" margin="10px" style="float:right" height="25%" width="25%" />
+</p>
+</div>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb7aec64">
+<h2 id="orgb7aec64"><span class="section-number-2">8.</span> Parting Thoughts</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org2751b88">
+<h2 id="org2751b88"><span class="section-number-2">9.</span> GitHub Repository</h2>
+
+<div id="orgb9862d5" class="figure">
+<p><img src="frame.png" alt="frame.png" height="50%" width="50%" />
+</p>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/dist/reveal.js"></script>
+<script src="./reveal.js/plugin/markdown/markdown.js"></script>
+<script src="./reveal.js/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown, RevealZoom, RevealNotes]
+});
+
+</script>
+</body>
+</html>

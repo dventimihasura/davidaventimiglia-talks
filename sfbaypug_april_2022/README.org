@@ -195,7 +195,7 @@ best code is the code that you don't have to write."
 
 * Parting Thoughts
 
-* 
+* GitHub Repository
 
 #+ATTR_HTML: :width 50%
 #+ATTR_HTML: :height 50%
