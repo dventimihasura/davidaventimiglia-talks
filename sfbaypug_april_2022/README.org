@@ -1,474 +1,202 @@
-* Weather Queries
+#+TITLE: Hasura GraphQL for PostgreSQL
+#+AUTHOR: David A Ventimiglia
+#+EMAIL: davidaventimiglia@gmail.com
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "San Francisco") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+#+options: timestamp:nil title:t toc:nil todo:t |:t
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "US",
-:       "id": "5391959",
-:       "name": "San Francisco"
-:     }
-:   }
-: }
+* Who
 
-#+begin_src restclient
-  GET	
-#+end_src
+*David A. Ventimiglia*
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "Seattle") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+#+BEGIN_QUOTE
+"I'm a physicist, data scientist, data engineer, and software
+engineer.  I work for [[https://hasura.io/][*Hasura*]], a software technology company that
+provides developer-focused tooling products.  And, I believe that the
+best code is the code that you don't have to write."
+#+END_QUOTE
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "US",
-:       "id": "5809844",
-:       "name": "Seattle"
-:     }
-:   }
-: }
+* What
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "Portland") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+#+REVEAL: split
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "US",
-:       "id": "5746545",
-:       "name": "Portland"
-:     }
-:   }
-: }
+#+begin_quote
+"From your databases to a unified GraphQL API in just one minute"
+#+end_quote
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "Los Angeles") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+* What?
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "US",
-:       "id": "5368361",
-:       "name": "Los Angeles"
-:     }
-:   }
-: }
+** GraphQL API
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "San Diego") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "Chicago") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+- Query Language
+- Schema
+  - Types
+    - Fields
+- Types relate to Types
+- Sound familiar?
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "US",
-:       "id": "4887398",
-:       "name": "Chicago"
-:     }
-:   }
-: }
+#+REVEAL_HTML: </div>
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "New Orleans") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "US",
-:       "id": "4335045",
-:       "name": "New Orleans"
-:     }
-:   }
-: }
+#+ATTR_HTML: :width 100%
+#+ATTR_HTML: :height 100%
+[[file:GraphQL.png]]
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "New York") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+#+REVEAL_HTML: </div>
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "US",
-:       "id": "5128581",
-:       "name": "New York"
-:     }
-:   }
-: }
+** In Just One Minute
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:Hasura_Connections.png]]
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "Boston") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+* Why?
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "US",
-:       "id": "4930956",
-:       "name": "Boston"
-:     }
-:   }
-: }
+** Two-Tier
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "Honolulu") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+- 1986-1996
+- Client + Server
+- Visual Basic + MSSQL + SQL
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "US",
-:       "id": "5856195",
-:       "name": "Honolulu"
-:     }
-:   }
-: }
+** Three-Tier
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "Phuket") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+- 1996-1999
+- Presentation + Application + Data
+- JSPs + EJBs + ORM + Oracle (+ SQL)
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "TH",
-:       "id": "1151253",
-:       "name": "Phuket"
-:     }
-:   }
-: }
+** N-Tier
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "Sydney") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+- 1999-2002
+- Client + WAF + Business Logic + Messaging + Loads of Caching + Data
+- HTML/Javascript + Nginx + Ruby + Rails + RabbitMQ + Redis + ActiveRecord + MySQL (+ SQL)
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "AU",
-:       "id": "2147714",
-:       "name": "Sydney"
-:     }
-:   }
-: }
+** SOA
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "London") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+- 2002-2012
+- UI + WSDL + SOAP + Event Bus + POJOs + ORM + Data
+- HTML/Javascipt + JAX-WS + Java + Spring + Hibernate + Oracle (+ SQL)
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "GB",
-:       "id": "2643743",
-:       "name": "London"
-:     }
-:   }
-: }
+** Microservices
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "Tokyo") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+- 2012-???
+- UI + REST
+- HTML/Javascript/TypeScript/Angular/React + AWS DynamoDB + Python + Flask + API Endpoints + SQLAlchemy + ECS + MySQL (+ SQL)
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "JP",
-:       "id": "1850144",
-:       "name": "Tokyo"
-:     }
-:   }
-: }
+** Containerization
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "Saigon") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+- 2013-???
+- Clients + Containers
+- Angular + Docker + AWS ECS/EKS + Linkerd + AWS RDS (+ SQL)
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "VN",
-:       "id": "1580578",
-:       "name": "Ho Chi Minh City"
-:     }
-:   }
-: }
+** Serverless
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    getCityByName(name: "Lisbon") {
-      country
-      id
-      name
-    }
-  }
-#+end_src
+- 2014-???
+- UI + Functions
+- SPA / Mobile + API Gateway + AWS Lambda + AWS Aurora (+ SQL)
 
-#+RESULTS:
-: {
-:   "data": {
-:     "getCityByName": {
-:       "country": "PT",
-:       "id": "2267057",
-:       "name": "Lisbon"
-:     }
-:   }
-: }
+** Low-Code
 
-* NomadPages Queries
+- 2017-???
+- UI + Database
+- React / Flutter + Hasura + PostgreSQL + SQL!
 
-#+begin_src graphql :url http://localhost:8081/v1/graphql
-  query MyQuery {
-    city {
-      id
-      weather {
-        name
-      }
-    }
-  }
-#+end_src
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+[[file:clipart2825061.png]]
 
-#+RESULTS:
-#+begin_example
-{
-  "data": {
-    "city": [
-      {
-        "id": "1b16c7e8-0a64-46a7-a945-844c04df68da",
-        "weather": [
-          {
-            "name": "San Francisco"
-          }
-        ]
-      },
-      {
-        "id": "b1542c96-46bf-4b5c-a47b-d78babb81eb8",
-        "weather": [
-          {
-            "name": "Seattle"
-          }
-        ]
-      },
-      {
-        "id": "75fe47ec-164e-42b0-9266-19c744c61409",
-        "weather": [
-          {
-            "name": "Portland"
-          }
-        ]
-      },
-      {
-        "id": "642e1dfb-d414-45a7-b78c-f420571d08f0",
-        "weather": [
-          {
-            "name": "Los Angeles"
-          }
-        ]
-      },
-      {
-        "id": "b1a0ba20-e483-4ec5-a728-3cd5ca3dc9a4",
-        "weather": [
-          {
-            "name": "Chicago"
-          }
-        ]
-      },
-      {
-        "id": "bd738df3-60b8-44db-aee2-238ba12e6658",
-        "weather": [
-          {
-            "name": "New Orleans"
-          }
-        ]
-      },
-      {
-        "id": "72dfc1cd-fab8-4376-84ba-c3ee0fe96275",
-        "weather": [
-          {
-            "name": "New York"
-          }
-        ]
-      },
-      {
-        "id": "ba67d3e6-7089-47b7-a4f5-ea6c1207c952",
-        "weather": [
-          {
-            "name": "Boston"
-          }
-        ]
-      },
-      {
-        "id": "3769699a-001e-4943-9ff3-4ac72ec8bbf2",
-        "weather": [
-          {
-            "name": "Honolulu"
-          }
-        ]
-      },
-      {
-        "id": "33497b06-f50d-447d-a773-6389a6b2d4cd",
-        "weather": [
-          {
-            "name": "Phuket"
-          }
-        ]
-      },
-      {
-        "id": "f92d7b62-6b77-4b64-ac0c-d76b01d19f44",
-        "weather": [
-          {
-            "name": "Sydney"
-          }
-        ]
-      },
-      {
-        "id": "7a76ff83-8473-49e5-aa16-e2ea6a63d310",
-        "weather": [
-          {
-            "name": "London"
-          }
-        ]
-      },
-      {
-        "id": "ef058257-9d04-4d93-b97b-8761649a36b3",
-        "weather": [
-          {
-            "name": "Tokyo"
-          }
-        ]
-      },
-      {
-        "id": "72ad6499-38c6-44e8-a8c8-af63ea72c2e4",
-        "weather": [
-          {
-            "name": "Ho Chi Minh City"
-          }
-        ]
-      },
-      {
-        "id": "fe13905f-6337-4069-b92e-79d9acd27c5b",
-        "weather": [
-          {
-            "name": "Lisbon"
-          }
-        ]
-      }
-    ]
-  }
-}
-#+end_example
+** No-Code
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- 2018-???
+- UI + Spreadsheet
+- Glide + AirTable
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+[[file:Glide-symbol-white.png]]
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+[[file:pngwing.com.png]]
+
+#+REVEAL_HTML: </div>
+  
+* Demo
+
+* Product Features
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- +GraphQL API+
+- Relay API
+- +PostgreSQL+
+- MS SQL Server
+- BigQuery
+- Actions
+- +Remote Schemas+
+
+#+REVEAL_HTML: </div>
+  
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- Event Triggers
+- Scheduled Triggers
+- Authentication
+- +Authorization+
+- Database Migrations
+- CLI
+
+#+REVEAL_HTML: </div>
+
+* Honorable Mentions
+
+#+REVEAL_HTML: <div class="row">
+
+- [[https://www.graphile.org/postgraphile/][PostGraphile]]
+- [[https://www.prisma.io/][Prisma]]
+- [[https://github.com/supabase/pg_graphql][=pg_graphql=]]
+- [[https://postgrest.org/en/stable/][PostgREST]]
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="row">
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+#+ATTR_HTML: :style float:left
+#+ATTR_HTML: :margin 10px
+  [[file:postgraphile.png]]
+
+#+ATTR_HTML: :width 15%
+#+ATTR_HTML: :height 15%
+#+ATTR_HTML: :style float:left
+#+ATTR_HTML: :margin 10px
+  [[file:prisma_logo-freelogovectors.net_.png]]
+
+#+ATTR_HTML: :width 15%
+#+ATTR_HTML: :height 15%
+#+ATTR_HTML: :style float:right
+#+ATTR_HTML: :margin 10px
+  [[file:supabase.jpg]]
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+#+ATTR_HTML: :style float:right
+#+ATTR_HTML: :margin 10px
+  [[file:postgrest.png]]
+
+#+REVEAL_HTML: </div>
+
+* Parting Thoughts
+
+* 
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:frame.png]]
