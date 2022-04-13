@@ -6,29 +6,26 @@
 
 * Who
 
+*David A. Ventimiglia*
+
 #+BEGIN_QUOTE
-I'm a physicist, software engineer, data engineer, and data scientist
-with 25 years of experience building systems. I believe the art of
-coding like the art of writing lies in thrift. The best code is the
-code you don't have to write.
+"I'm a physicist, data scientist, data engineer, and software
+engineer.  I work for [[https://hasura.io/][*Hasura*]], a software technology company that
+provides developer-focused tooling products.  And, I believe that the
+best code is the code that you don't have to write."
 #+END_QUOTE
 
 #+REVEAL: split
-
-- David A. Ventimiglia
-- [[mailto:davidaventimiglia@gmail.com][davidaventimiglia@gmail.com]]
-- [[mailto:davidaventimiglia@neptunestation.com][davidaventimiglia@neptunestation.com]]
-- [[mailto:davidaventimiglia@hasura.io][davidaventimiglia@hasura.io]]
-- [[https://twitter.com/TheRealDventimi][=@TheRealDventimi=]]
-- [[https://twitter.com/Neptune_Station][=@neptune_station=]]
-- [[https://neptunestation.com/][=neptunestation.com=]]
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:frame.png]]
 
 * What
 
 #+REVEAL: split
 
 #+begin_quote
-From your databases to a unified GraphQL API in just one minute
+"From your databases to a unified GraphQL API in just one minute"
 #+end_quote
 
 * What?
@@ -36,18 +33,22 @@ From your databases to a unified GraphQL API in just one minute
 ** GraphQL API
 
 #+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
 - Query Language
 - Schema
   - Types
     - Fields
 - Types relate to Types
 - Sound familiar?
+
 #+REVEAL_HTML: </div>
 
 #+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
+
 #+ATTR_HTML: :width 100%
 #+ATTR_HTML: :height 100%
 [[file:GraphQL.png]]
+
 #+REVEAL_HTML: </div>
 
 ** In Just One Minute
@@ -67,18 +68,18 @@ From your databases to a unified GraphQL API in just one minute
 
 - 1996-1999
 - Presentation + Application + Data
-- HTML + Java + EJBs + ORM + Oracle (+ SQL)
+- JSPs + EJBs + ORM + Oracle (+ SQL)
 
 ** N-Tier
 
 - 1999-2002
 - Client + WAF + Business Logic + Messaging + Loads of Caching + Data
-- HTML/Javascript + Ninx + Ruby + Rails + RabbitMQ + Redis + ActiveRecord + MySQL (+ SQL)
+- HTML/Javascript + Nginx + Ruby + Rails + RabbitMQ + Redis + ActiveRecord + MySQL (+ SQL)
 
 ** SOA
 
 - 2002-2012
-- UI + WSDL + SOAP + Event Busses + POJOs + ORM + Data
+- UI + WSDL + SOAP + Event Bus + POJOs + ORM + Data
 - HTML/Javascipt + JAX-WS + Java + Spring + Hibernate + Oracle (+ SQL)
 
 ** Microservices
@@ -91,7 +92,7 @@ From your databases to a unified GraphQL API in just one minute
 
 - 2013-???
 - Clients + Containers
-- UI (whatever) + Docker + AWS ECS/EKS + Linkerd + AWS Aurora + AWS RDS (+ SQL)
+- Angular + Docker + AWS ECS/EKS + Linkerd + AWS RDS (+ SQL)
 
 ** Serverless
 
@@ -111,67 +112,88 @@ From your databases to a unified GraphQL API in just one minute
 
 ** No-Code
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
 - 2018-???
 - UI
 - Glide + AirTable
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+[[file:Glide-symbol-white.png]]
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+[[file:pngwing.com.png]]
+
+#+REVEAL_HTML: </div>
   
 * Demo
 
-** Databases
+* Product Features
 
-    - PostgreSQL
-    - MS SQL Server
-    - Big Query
-    - Oracle
-    - MongoDB
-    - MySQL
-    - ElasticSearch
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 
-** Schema
+- +GraphQL API+
+- Relay API
+- +PostgreSQL+
+- MS SQL Server
+- BigQuery
+- Actions
+- +Remote Schemas+
 
-    - Introspection
-    - Documentation
+#+REVEAL_HTML: </div>
+  
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 
-** Remote Schema
+- Event Triggers
+- Scheduled Triggers
+- Authentication
+- +Authorization+
+- Database Migrations
+- CLI
 
-    - Remote Joins
+#+REVEAL_HTML: </div>
 
-** Explorer
+* Honorable Mentions
 
-** API
+#+REVEAL_HTML: <div class="row">
 
-    - GraphQL
-    - Relay
-    - REST
-    - Metadata
-    - Version
-    - Healthcheck
-    - PG Dump
-    - Config
-    - Explain
+- [[https://www.graphile.org/postgraphile/][PostGraphile]]
+- [[https://www.prisma.io/][Prisma]]
+- [[https://github.com/supabase/pg_graphql][pg_graphql]]
+- [[https://postgrest.org/en/stable/][PostgREST]]
 
-** Subscriptions
+#+REVEAL_HTML: </div>
 
-** Event Triggers
+#+REVEAL_HTML: <div class="row">
 
-** Actions
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+#+ATTR_HTML: :style float:left
+#+ATTR_HTML: :margin 10px
+  [[file:postgraphile.png]]
 
-** Migrations
+#+ATTR_HTML: :width 15%
+#+ATTR_HTML: :height 15%
+#+ATTR_HTML: :style float:left
+#+ATTR_HTML: :margin 10px
+  [[file:prisma_logo-freelogovectors.net_.png]]
 
-** Miscellaneous
+#+ATTR_HTML: :width 15%
+#+ATTR_HTML: :height 15%
+#+ATTR_HTML: :style float:right
+#+ATTR_HTML: :margin 10px
+  [[file:supabase.jpg]]
 
-    - Metadata
-    - Version
-    - Healthcheck
-    - PG Dump
-    - Config
-    - Explain
-    - Migrations
-    - Metadata
-    - CLI
-    - Caching
-    - Security
-    - Monitoring
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+#+ATTR_HTML: :style float:right
+#+ATTR_HTML: :margin 10px
+  [[file:postgrest.png]]
 
-* Discussion
-
+#+REVEAL_HTML: </div>
