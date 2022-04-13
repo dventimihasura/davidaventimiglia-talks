@@ -1,12 +1,13 @@
 #+TITLE: Hasura GraphQL for PostgreSQL
+#+SUBTITLE: The Voyage Home
 #+AUTHOR: David A Ventimiglia
-#+EMAIL: davidaventimiglia@gmail.com
+#+EMAIL: davidaventimiglia@neptunestation.com
 
 #+options: timestamp:nil title:t toc:nil todo:t |:t
 
 * Who
 
-*David A. Ventimiglia*
+[[http://neptunestation.com][neptunestation.com]]
 
 #+BEGIN_QUOTE
 "I'm a physicist, data scientist, data engineer, and software
@@ -75,7 +76,7 @@ best code is the code that you don't have to write."
 
 - 2002-2012
 - UI + WSDL + SOAP + Event Bus + POJOs + ORM + Data
-- HTML/Javascipt + JAX-WS + Java + Spring + Hibernate + Oracle (+ SQL)
+- HTML/Javascript + JAX-WS + Java + Spring + Hibernate + Oracle (+ SQL)
 
 ** Microservices
 
@@ -171,32 +172,60 @@ best code is the code that you don't have to write."
 #+ATTR_HTML: :height 25%
 #+ATTR_HTML: :style float:left
 #+ATTR_HTML: :margin 10px
-  [[file:postgraphile.png]]
+[[file:postgraphile.png]]
 
 #+ATTR_HTML: :width 15%
 #+ATTR_HTML: :height 15%
 #+ATTR_HTML: :style float:left
 #+ATTR_HTML: :margin 10px
-  [[file:prisma_logo-freelogovectors.net_.png]]
+[[file:prisma_logo-freelogovectors.net_.png]]
 
 #+ATTR_HTML: :width 15%
 #+ATTR_HTML: :height 15%
 #+ATTR_HTML: :style float:right
 #+ATTR_HTML: :margin 10px
-  [[file:supabase.jpg]]
+[[file:supabase.jpg]]
 
 #+ATTR_HTML: :width 25%
 #+ATTR_HTML: :height 25%
 #+ATTR_HTML: :style float:right
 #+ATTR_HTML: :margin 10px
-  [[file:postgrest.png]]
+[[file:postgrest.png]]
 
 #+REVEAL_HTML: </div>
 
-* Parting Thoughts
+* Concluding Remarks
 
-* GitHub Repository
+- What have we accomplished?
+- Why don't we just write SQL?
+- Should we just be grateful?
+- How can we help them?
+- Are database professionals ready for the moment?
+
+* /Thank you!/
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+#+begin_verse
+If you had
+One shot
+Or one opportunity
+To seize everything you ever wanted
+In one moment
+Would you capture it
+Or just let it slip?
+
+   ---Eminem
+#+end_verse
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
 
 #+ATTR_HTML: :width 50%
 #+ATTR_HTML: :height 50%
 [[file:frame.png]]
+
+#+REVEAL_HTML: </div>
+
+

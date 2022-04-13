@@ -17,15 +17,15 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h1 class="title">Hasura GraphQL for PostgreSQL</h1><p class="subtitle"></p>
+<section id="sec-title-slide"><h1 class="title">Hasura GraphQL for PostgreSQL</h1><p class="subtitle">The Voyage Home</p>
 <h2 class="author">David A Ventimiglia</h2>
 </section>
 
 <section>
-<section id="slide-orgf11cb16">
-<h2 id="orgf11cb16"><span class="section-number-2">1.</span> Who</h2>
+<section id="slide-org452c217">
+<h2 id="org452c217"><span class="section-number-2">1.</span> Who</h2>
 <p>
-<b>David A. Ventimiglia</b>
+<a href="http://neptunestation.com">neptunestation.com</a>
 </p>
 
 <blockquote >
@@ -40,10 +40,10 @@ best code is the code that you don't have to write."
 </section>
 </section>
 <section>
-<section id="slide-org9bd0f23">
-<h2 id="org9bd0f23"><span class="section-number-2">2.</span> What</h2>
+<section id="slide-orge144524">
+<h2 id="orge144524"><span class="section-number-2">2.</span> What</h2>
 </section>
-<section id="slide-org9bd0f23-split">
+<section id="slide-orge144524-split">
 
 <blockquote >
 <p>
@@ -54,13 +54,13 @@ best code is the code that you don't have to write."
 </section>
 </section>
 <section>
-<section id="slide-org51a436b">
-<h2 id="org51a436b"><span class="section-number-2">3.</span> What?</h2>
+<section id="slide-org040a206">
+<h2 id="org040a206"><span class="section-number-2">3.</span> What?</h2>
 <div class="outline-text-2" id="text-3">
 </div>
 </section>
-<section id="slide-org56aa27b">
-<h3 id="org56aa27b"><span class="section-number-3">3.1.</span> GraphQL API</h3>
+<section id="slide-org0a43b8e">
+<h3 id="org0a43b8e"><span class="section-number-3">3.1.</span> GraphQL API</h3>
 <div class="column" style="float:left; width:50%">
 
 <ul>
@@ -84,7 +84,7 @@ best code is the code that you don't have to write."
 <div class="column" style="float:right; width:50%;">
 
 
-<div id="org3c7d8c9" class="figure">
+<div id="orgf939397" class="figure">
 <p><img src="GraphQL.png" alt="GraphQL.png" height="100%" width="100%" />
 </p>
 </div>
@@ -92,10 +92,10 @@ best code is the code that you don't have to write."
 </div>
 
 </section>
-<section id="slide-orgfb73219">
-<h3 id="orgfb73219"><span class="section-number-3">3.2.</span> In Just One Minute</h3>
+<section id="slide-org9d6cf36">
+<h3 id="org9d6cf36"><span class="section-number-3">3.2.</span> In Just One Minute</h3>
 
-<div id="org71794e7" class="figure">
+<div id="org3ed887b" class="figure">
 <p><img src="Hasura_Connections.png" alt="Hasura_Connections.png" height="50%" width="50%" />
 </p>
 </div>
@@ -103,13 +103,13 @@ best code is the code that you don't have to write."
 </section>
 </section>
 <section>
-<section id="slide-org6a97a1b">
-<h2 id="org6a97a1b"><span class="section-number-2">4.</span> Why?</h2>
+<section id="slide-orgc35a735">
+<h2 id="orgc35a735"><span class="section-number-2">4.</span> Why?</h2>
 <div class="outline-text-2" id="text-4">
 </div>
 </section>
-<section id="slide-org31da8e0">
-<h3 id="org31da8e0"><span class="section-number-3">4.1.</span> Two-Tier</h3>
+<section id="slide-org5f1035a">
+<h3 id="org5f1035a"><span class="section-number-3">4.1.</span> Two-Tier</h3>
 <ul>
 <li>1986-1996</li>
 <li>Client + Server</li>
@@ -118,8 +118,8 @@ best code is the code that you don't have to write."
 </ul>
 
 </section>
-<section id="slide-org9a86139">
-<h3 id="org9a86139"><span class="section-number-3">4.2.</span> Three-Tier</h3>
+<section id="slide-org9257bc6">
+<h3 id="org9257bc6"><span class="section-number-3">4.2.</span> Three-Tier</h3>
 <ul>
 <li>1996-1999</li>
 <li>Presentation + Application + Data</li>
@@ -128,8 +128,8 @@ best code is the code that you don't have to write."
 </ul>
 
 </section>
-<section id="slide-org0d83ee8">
-<h3 id="org0d83ee8"><span class="section-number-3">4.3.</span> N-Tier</h3>
+<section id="slide-orgf171df5">
+<h3 id="orgf171df5"><span class="section-number-3">4.3.</span> N-Tier</h3>
 <ul>
 <li>1999-2002</li>
 <li>Client + WAF + Business Logic + Messaging + Loads of Caching + Data</li>
@@ -138,8 +138,8 @@ best code is the code that you don't have to write."
 </ul>
 
 </section>
-<section id="slide-org0de2270">
-<h3 id="org0de2270"><span class="section-number-3">4.4.</span> SOA</h3>
+<section id="slide-orgbe2776c">
+<h3 id="orgbe2776c"><span class="section-number-3">4.4.</span> SOA</h3>
 <ul>
 <li>2002-2012</li>
 <li>UI + WSDL + SOAP + Event Bus + POJOs + ORM + Data</li>
@@ -148,8 +148,8 @@ best code is the code that you don't have to write."
 </ul>
 
 </section>
-<section id="slide-org2d7d5b5">
-<h3 id="org2d7d5b5"><span class="section-number-3">4.5.</span> Microservices</h3>
+<section id="slide-org92dcb69">
+<h3 id="org92dcb69"><span class="section-number-3">4.5.</span> Microservices</h3>
 <ul>
 <li>2012-???</li>
 <li>UI + REST</li>
@@ -158,8 +158,8 @@ best code is the code that you don't have to write."
 </ul>
 
 </section>
-<section id="slide-orgb43e016">
-<h3 id="orgb43e016"><span class="section-number-3">4.6.</span> Containerization</h3>
+<section id="slide-org997e04e">
+<h3 id="org997e04e"><span class="section-number-3">4.6.</span> Containerization</h3>
 <ul>
 <li>2013-???</li>
 <li>Clients + Containers</li>
@@ -168,8 +168,8 @@ best code is the code that you don't have to write."
 </ul>
 
 </section>
-<section id="slide-orge2fb2f1">
-<h3 id="orge2fb2f1"><span class="section-number-3">4.7.</span> Serverless</h3>
+<section id="slide-orgee4084b">
+<h3 id="orgee4084b"><span class="section-number-3">4.7.</span> Serverless</h3>
 <ul>
 <li>2014-???</li>
 <li>UI + Functions</li>
@@ -178,8 +178,8 @@ best code is the code that you don't have to write."
 </ul>
 
 </section>
-<section id="slide-orgea4a209">
-<h3 id="orgea4a209"><span class="section-number-3">4.8.</span> Low-Code</h3>
+<section id="slide-orgd4df4df">
+<h3 id="orgd4df4df"><span class="section-number-3">4.8.</span> Low-Code</h3>
 <ul>
 <li>2017-???</li>
 <li>UI + Database</li>
@@ -188,14 +188,14 @@ best code is the code that you don't have to write."
 </ul>
 
 
-<div id="org3b324ac" class="figure">
+<div id="org56fbb7a" class="figure">
 <p><img src="clipart2825061.png" alt="clipart2825061.png" height="25%" width="25%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org9c88958">
-<h3 id="org9c88958"><span class="section-number-3">4.9.</span> No-Code</h3>
+<section id="slide-org3e737b0">
+<h3 id="org3e737b0"><span class="section-number-3">4.9.</span> No-Code</h3>
 <div class="column" style="float:left; width:50%">
 
 <ul>
@@ -210,13 +210,13 @@ best code is the code that you don't have to write."
 <div class="column" style="float:right; width:50%">
 
 
-<div id="orga08756e" class="figure">
+<div id="org7c49961" class="figure">
 <p><img src="Glide-symbol-white.png" alt="Glide-symbol-white.png" height="25%" width="25%" />
 </p>
 </div>
 
 
-<div id="org3f21225" class="figure">
+<div id="org04b56e8" class="figure">
 <p><img src="pngwing.com.png" alt="pngwing.com.png" height="25%" width="25%" />
 </p>
 </div>
@@ -226,14 +226,14 @@ best code is the code that you don't have to write."
 </section>
 </section>
 <section>
-<section id="slide-org2b89d37">
-<h2 id="org2b89d37"><span class="section-number-2">5.</span> Demo</h2>
+<section id="slide-orgfb45920">
+<h2 id="orgfb45920"><span class="section-number-2">5.</span> Demo</h2>
 
 </section>
 </section>
 <section>
-<section id="slide-orgd11b262">
-<h2 id="orgd11b262"><span class="section-number-2">6.</span> Product Features</h2>
+<section id="slide-org23f072a">
+<h2 id="org23f072a"><span class="section-number-2">6.</span> Product Features</h2>
 <div class="column" style="float:left; width:50%">
 
 <ul>
@@ -266,8 +266,8 @@ best code is the code that you don't have to write."
 </section>
 </section>
 <section>
-<section id="slide-org0fa883e">
-<h2 id="org0fa883e"><span class="section-number-2">7.</span> Honorable Mentions</h2>
+<section id="slide-orgb7c8828">
+<h2 id="orgb7c8828"><span class="section-number-2">7.</span> Honorable Mentions</h2>
 <div class="row">
 
 <ul>
@@ -283,25 +283,25 @@ best code is the code that you don't have to write."
 <div class="row">
 
 
-<div id="orgdfa876c" class="figure">
+<div id="orga970cc1" class="figure">
 <p><img src="postgraphile.png" alt="postgraphile.png" margin="10px" style="float:left" height="25%" width="25%" />
 </p>
 </div>
 
 
-<div id="org70072e6" class="figure">
+<div id="org058c977" class="figure">
 <p><img src="prisma_logo-freelogovectors.net_.png" alt="prisma_logo-freelogovectors.net_.png" margin="10px" style="float:left" height="15%" width="15%" />
 </p>
 </div>
 
 
-<div id="orgd593552" class="figure">
+<div id="org5fb35d8" class="figure">
 <p><img src="supabase.jpg" alt="supabase.jpg" margin="10px" style="float:right" height="15%" width="15%" />
 </p>
 </div>
 
 
-<div id="org06466a4" class="figure">
+<div id="org83ffdcd" class="figure">
 <p><img src="postgrest.png" alt="postgrest.png" margin="10px" style="float:right" height="25%" width="25%" />
 </p>
 </div>
@@ -311,18 +311,46 @@ best code is the code that you don't have to write."
 </section>
 </section>
 <section>
-<section id="slide-orgb7aec64">
-<h2 id="orgb7aec64"><span class="section-number-2">8.</span> Parting Thoughts</h2>
+<section id="slide-org6042ae1">
+<h2 id="org6042ae1"><span class="section-number-2">8.</span> Concluding Remarks</h2>
+<ul>
+<li>What have we accomplished?</li>
+<li>Why don't we just write SQL?</li>
+<li>Should we just be grateful?</li>
+<li>How can we help them?</li>
+<li>Are database professionals ready to take the spotlight again?</li>
+
+</ul>
 
 </section>
 </section>
 <section>
-<section id="slide-org2751b88">
-<h2 id="org2751b88"><span class="section-number-2">9.</span> GitHub Repository</h2>
+<section id="slide-org7c5d1aa">
+<h2 id="org7c5d1aa"><span class="section-number-2">9.</span> <i>Thank you!</i></h2>
+<div class="column" style="float:left; width:50%">
 
-<div id="orgb9862d5" class="figure">
+<p class="verse">
+If you had<br />
+One shot<br />
+Or one opportunity<br />
+To seize everything you ever wanted<br />
+In one moment<br />
+Would you capture it<br />
+Or just let it slip?<br />
+<br />
+&#xa0;&#xa0;&#xa0;&#x2014;Eminem<br />
+</p>
+
+</div>
+
+<div class="column" style="float:right; width:50%">
+
+
+<div id="orgacecbe4" class="figure">
 <p><img src="frame.png" alt="frame.png" height="50%" width="50%" />
 </p>
+</div>
+
 </div>
 </section>
 </section>

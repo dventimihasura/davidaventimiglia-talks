@@ -605,6 +605,27 @@
 }
 #+end_example
 
+** Get a Random City Id
+
+#+begin_src graphql :url http://localhost:8081/v1/graphql
+  query {
+    random_city {
+      id
+    }
+  }
+#+end_src
+
+#+RESULTS:
+: {
+:   "data": {
+:     "random_city": [
+:       {
+:         "id": "3769699a-001e-4943-9ff3-4ac72ec8bbf2"
+:       }
+:     ]
+:   }
+: }
+
 ** Add a City Review
 
 #+NAME: add-a-city-review
@@ -649,7 +670,7 @@
     "insert_review": {
       "returning": [
         {
-          "id": "b795c6c3-99d8-4463-b622-e1faecb29a77",
+          "id": "257609ab-5eb3-463e-a48a-8db4a20dfd63",
           "city": {
             "weather": [
               {
