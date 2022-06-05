@@ -1,0 +1,2 @@
+- "!include public_product_fuzzy_search.yaml"
+- "!include public_product_search.yaml"

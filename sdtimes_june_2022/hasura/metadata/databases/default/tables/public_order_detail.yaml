@@ -1,0 +1,10 @@
+table:
+  schema: public
+  name: order_detail
+object_relationships:
+  - name: order
+    using:
+      foreign_key_constraint_on: order_id
+  - name: product
+    using:
+      foreign_key_constraint_on: product_id

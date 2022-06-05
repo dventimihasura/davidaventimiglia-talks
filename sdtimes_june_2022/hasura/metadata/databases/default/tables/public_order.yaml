@@ -1,0 +1,15 @@
+table:
+  schema: public
+  name: order
+object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: account_id
+array_relationships:
+  - name: order_details
+    using:
+      foreign_key_constraint_on:
+        column: order_id
+        table:
+          schema: public
+          name: order_detail
