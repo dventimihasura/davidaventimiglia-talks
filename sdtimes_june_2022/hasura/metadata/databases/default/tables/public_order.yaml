@@ -13,3 +13,24 @@ array_relationships:
         table:
           schema: public
           name: order_detail
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        account_id:
+          _eq: X-Hasura-User-Id
+      columns:
+        - account_id
+      backend_only: false
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - updated_at
+        - account_id
+        - id
+      filter:
+        account_id:
+          _eq: X-Hasura-User-Id
+      limit: 10

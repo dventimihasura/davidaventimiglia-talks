@@ -11,3 +11,12 @@ object_relationships:
         insertion_order: null
         column_mapping:
           id: id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - sum
+        - id
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
