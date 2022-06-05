@@ -1,240 +1,170 @@
-#+TITLE: Hasura GraphQL for PostgreSQL
-#+SUBTITLE: [[https://en.wikipedia.org/wiki/Star_Trek_IV:_The_Voyage_Home][The Voyage Home]]
-#+AUTHOR: David A Ventimiglia
+#+TITLE: GraphQL Security
+#+AUTHOR: David A. Ventimiglia
 #+EMAIL: davidaventimiglia@neptunestation.com
 
 #+options: timestamp:nil title:t toc:nil todo:t |:t
 
 * Who
 
-[[http://neptunestation.com][neptunestation.com]]
-
 #+BEGIN_QUOTE
 "I'm a physicist, data scientist, data engineer, and software
-engineer.  I work for [[https://hasura.io/][*Hasura*]], a software technology company that
-provides developer-focused tooling products.  And, I believe that the
-best code is the code that you don't have to write."
+engineer, and I work for [[https://hasura.io/][*Hasura*]], a software technology company that
+provides developer-focused tooling products.  I am not, however, a
+cybersecurity expert nor a certified financial planner.  Always
+consult professionals for security and financial advice."
 #+END_QUOTE
 
 * What
 
-#+REVEAL: split
+*** In
 
-#+begin_quote
-"From your databases to a unified GraphQL API in just one minute"
-#+end_quote
+    - Principles
+    - Opinions
+    - Hasura Demo
+    - Summary
 
-* What?
+*** Out
 
-** GraphQL API
+    - +Cybersecurity+
+      - See:  Certified Experts
+    - +REST Security+
+      - See:  [[https://owasp.org/www-project-api-security/][OWASP]]
+    - +Comprehensive Tooling Demo+
+      - See:  References
 
-#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+* Principles
 
-- Query Language
-- Schema
-  - Types
-    - Fields
-- Types relate to Types
-- Sound familiar?
+*** Life is about trade-offs
 
-#+REVEAL_HTML: </div>
+    - Focus, engage, act.
+    - Conduct a frank self-assessment.
+    - Avoid [[https://en.wikipedia.org/wiki/Cargo_cult][Cargo Cults]].
 
-#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
+    #+BEGIN_QUOTE
+    There Is No Such Thing As Absolute Security.
+    #+END_QUOTE
+    #+BEGIN_QUOTE
+    Security = Risk Management.
+    #+END_QUOTE
 
-#+ATTR_HTML: :width 100%
-#+ATTR_HTML: :height 100%
-[[file:GraphQL.png]]
+*** Know Your Enemy
 
-#+REVEAL_HTML: </div>
+    - Disclosure (Confidentiality)
+    - Destruction (Integrity)
+    - Denial (Availability)
 
-** In Just One Minute
+    #+BEGIN_QUOTE
+    The Three Security Goals Are Confidentiality, Integrity, and
+    Availability.
+    #+END_QUOTE
 
-#+ATTR_HTML: :width 50%
-#+ATTR_HTML: :height 50%
-[[file:Hasura_Connections.png]]
+*** Bottom Up
 
-#+REVEAL: split
+    - Build authorization into the data model.
+    - Apply redundant measures at every level (within reason).
+    - Avoid identity erasure.
 
-[[file:what_is_hasura.png]]
+    #+BEGIN_QUOTE
+    Defense in Depth as Strategy
+    #+END_QUOTE
 
-* Why?
+*** Keep It Simply Simple (KISS)
 
-** Two-Tier
+    - Adopt a small set of principles.
+    - Apply them ruthlessly and redundantly.
+    - Repeat, repeat, repeat.
 
-- 1986-1996
-- Client + Server
-- Visual Basic + MSSQL + SQL
+    #+BEGIN_QUOTE
+    Complexity Is the Enemy of Security.
+    #+END_QUOTE
 
-** Three-Tier
+*** Least Privilege
 
-- 1996-1999
-- Presentation + Application + Data
-- JSPs + EJBs + ORM + Oracle (+ SQL)
+    - The most secure API is the one that does nothing at all.
+    - Never trust anyone.
+    - Opt in.  Don't Opt out.
 
-** N-Tier
+    #+BEGIN_QUOTE
+    When Left on Their Own, People Tend to Make the Worst Security
+    Decisions.
+    #+END_QUOTE
 
-- 1999-2002
-- Client + WAF + Business Logic + Messaging + Loads of Caching + Data
-- HTML/Javascript + Nginx + Ruby + Rails + RabbitMQ + Redis + ActiveRecord + MySQL (+ SQL)
+* GraphQL Security Orthodoxy
 
-** SOA
+*** Disable Console Access
 
-- 2002-2012
-- UI + WSDL + SOAP + Event Bus + POJOs + ORM + Data
-- HTML/Javascript + JAX-WS + Java + Spring + Hibernate + Oracle (+ SQL)
+    - GraphQL servers often host an "admin console".
+    - Disable it in production.
 
-** Microservices
+*** Disable Schema Introspection
 
-- 2012-???
-- UI + REST
-- HTML/Javascript/TypeScript/Angular/React + AWS DynamoDB + Python + Flask + API Endpoints + SQLAlchemy + ECS + MySQL (+ SQL)
+    - Introspection is in the spec and in most (all?) servers.
+    - Disable it in production.
 
-** Containerization
+*** Disable Query Suggestions
 
-- 2013-???
-- Clients + Containers
-- Angular + Docker + AWS ECS/EKS + Linkerd + AWS RDS (+ SQL)
+    - /Some/ GraphQL servers try to be overly helpful.
+    - Disable it in production.
 
-** Serverless
+*** Impose Limits
 
-- 2014-???
-- UI + Functions
-- SPA / Mobile + API Gateway + AWS Lambda + AWS Aurora (+ SQL)
+    - Traditional rate limits are a start but are not enough.
+    - Limit rate.
+    - Limit time.
+    - Limit depth.
+    - Limit nodes.
+    - Limit complexity.
 
-** Low-Code
+*** Whitelist Operations
 
-- 2017-???
-- UI + Database
-- React / Flutter + Hasura + PostgreSQL + SQL!
+    - Bless a fixed set of allowed queries.
+    - Be careful in general.
+    - Be careful with Automatic Persisted Queries (APQ) in particular.
 
-#+ATTR_HTML: :width 25%
-#+ATTR_HTML: :height 25%
-[[file:clipart2825061.png]]
+* GraphQL Security Heterodoxy
 
-** No-Code
+*** Don't Confuse Public vs Private.
 
-#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+    - If you don't /need/ to offer a public API, then don't provide one.
+    - If you're not providing a public API, then don't act like you are.
 
-- 2018-???
-- UI + Spreadsheet
-- Glide + AirTable
+*** Don't Disable Console Access
 
-#+REVEAL_HTML: </div>
+    - If you applied the Bottom-Up and Least Privilege principles,
+      then the console can't do anything unauthorized anyway.
 
-#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+*** Don't Disable Schema Introspection and Query Suggestions
 
-#+ATTR_HTML: :width 25%
-#+ATTR_HTML: :height 25%
-[[file:Glide-symbol-white.png]]
+    - The public needs to know how to use your public API.
+    - The public shouldn't have access to your private API.
+    - The information will get out anyway.
 
-#+ATTR_HTML: :width 25%
-#+ATTR_HTML: :height 25%
-[[file:pngwing.com.png]]
+*** Don't Use GraphQL Security
 
-#+REVEAL_HTML: </div>
-  
-* Demo
+    - Or at least, don't rely on GraphQL security.
+    - Work diligently from the bottom up, and you (almost) won't need
+      it.
 
-* Product Features
+*** Don't Use GraphQL
 
-#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+    - For private APIs, that is.
+    - Use Allow Lists.
+    - And if you're using Allow Lists, turn them into REST endpoints
+      or RPCs.
+    - GraphQL is for people, not for machines.
 
-- +GraphQL API+
-- Relay API
-- +PostgreSQL+
-- MS SQL Server
-- BigQuery
-- Actions
-- +Remote Schemas+
+* Hasura Demo
 
-#+REVEAL_HTML: </div>
-  
-#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+* Summary
 
-- Event Triggers
-- Scheduled Triggers
-- Authentication
-- +Authorization+
-- Database Migrations
-- CLI
+  - Cybersecurity is a vast topic.
+  - Take it seriously and consult with experts.
+  - Tame the vastness with a principled approach.
+  - Do the easy things for GraphQL, but only because they're easy.
+  - Focus, engage, and manage trade-offs.
 
-#+REVEAL_HTML: </div>
+* References
 
-* Honorable Mentions
-
-#+REVEAL_HTML: <div class="row">
-
-- [[https://www.graphile.org/postgraphile/][PostGraphile]]
-- [[https://www.prisma.io/][Prisma]]
-- [[https://github.com/supabase/pg_graphql][=pg_graphql=]]
-- [[https://postgrest.org/en/stable/][PostgREST]]
-
-#+REVEAL_HTML: </div>
-
-#+REVEAL_HTML: <div class="row">
-
-#+ATTR_HTML: :width 25%
-#+ATTR_HTML: :height 25%
-#+ATTR_HTML: :style float:left
-#+ATTR_HTML: :margin 10px
-[[file:postgraphile.png]]
-
-#+ATTR_HTML: :width 15%
-#+ATTR_HTML: :height 15%
-#+ATTR_HTML: :style float:left
-#+ATTR_HTML: :margin 10px
-[[file:prisma_logo-freelogovectors.net_.png]]
-
-#+ATTR_HTML: :width 15%
-#+ATTR_HTML: :height 15%
-#+ATTR_HTML: :style float:right
-#+ATTR_HTML: :margin 10px
-[[file:supabase.jpg]]
-
-#+ATTR_HTML: :width 25%
-#+ATTR_HTML: :height 25%
-#+ATTR_HTML: :style float:right
-#+ATTR_HTML: :margin 10px
-[[file:postgrest.png]]
-
-#+REVEAL_HTML: </div>
-
-* Concluding Remarks
-
-- What have we accomplished?
-- Why don't we just write SQL?
-- Should we just be grateful?
-- How can we help other developers?
-- Are database professionals ready for the moment?
-
-* /Thank you!/
-
-#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
-
-#+begin_verse
-If you had
-One shot
-Or one opportunity
-To seize everything you ever wanted
-In one moment
-Would you capture it
-Or just let it slip?
-
-   ---Eminem
-#+end_verse
-
-#+REVEAL_HTML: </div>
-
-#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
-
-#+ATTR_HTML: :width 50%
-#+ATTR_HTML: :height 50%
-[[file:frame.png]]
-
-#+ATTR_HTML: :width 50%
-#+ATTR_HTML: :height 50%
-[[file:hasura-logo-primary-light.png]]
-
-#+REVEAL_HTML: </div>
-
-
+  - [[https://www.pearson.com/us/higher-education/program/Merkow-Information-Security-Principles-and-Practices-2nd-Edition/PGM91863.html][Information Security: Principles and Practices, 2nd Edition]]
+    by Mark S. Merkow and Jim Breithaupt
+  - [[https://spec.graphql.org/June2018/][GraphQL Specification]]
