@@ -6,13 +6,17 @@
 
 * Who
 
-#+BEGIN_QUOTE
-"I'm a physicist, data scientist, data engineer, and software
-engineer, and I work for [[https://hasura.io/][*Hasura*]], a software technology company that
-provides developer-focused tooling products.  I am not, however, a
-cybersecurity expert nor a certified financial planner.  Always
-consult professionals for security and financial advice."
-#+END_QUOTE
+*** David A. Ventimiglia
+
+    [[http://neptunestation.com][neptunestation.com]]
+
+  #+BEGIN_QUOTE
+  "I'm a physicist, data scientist, data engineer, and software
+  engineer, and I work for [[https://hasura.io/][*Hasura*]], a software technology company that
+  provides developer-focused tooling products.  I am not, however, a
+  cybersecurity expert nor a certified financial planner.  Always
+  consult professionals for security and financial advice."
+  #+END_QUOTE
 
 * What
 
@@ -36,58 +40,118 @@ consult professionals for security and financial advice."
 
 *** Life is about trade-offs
 
+    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+
     - Focus, engage, act.
     - Conduct a frank self-assessment.
     - Avoid [[https://en.wikipedia.org/wiki/Cargo_cult][Cargo Cults]].
 
     #+BEGIN_QUOTE
-    There Is No Such Thing As Absolute Security.
+    "There Is No Such Thing As Absolute Security."
     #+END_QUOTE
     #+BEGIN_QUOTE
-    Security = Risk Management.
+    "Security = Risk Management."
     #+END_QUOTE
 
+    #+REVEAL_HTML: </div>
+
+    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
+
+    #+ATTR_HTML: :width 100%
+    #+ATTR_HTML: :height 100%
+    [[file:ShowCover.jpeg]]
+
+    #+REVEAL_HTML: </div>
+
 *** Know Your Enemy
+
+    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
 
     - Disclosure (Confidentiality)
     - Destruction (Integrity)
     - Denial (Availability)
 
     #+BEGIN_QUOTE
-    The Three Security Goals Are Confidentiality, Integrity, and
-    Availability.
+    "The Three Security Goals Are Confidentiality, Integrity, and
+    Availability."
     #+END_QUOTE
 
+    #+REVEAL_HTML: </div>
+
+    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
+
+    #+ATTR_HTML: :width 100%
+    #+ATTR_HTML: :height 100%
+    [[file:ShowCover.jpeg]]
+
+    #+REVEAL_HTML: </div>
+
 *** Bottom Up
+
+    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
 
     - Build authorization into the data model.
     - Apply redundant measures at every level (within reason).
     - Avoid identity erasure.
 
     #+BEGIN_QUOTE
-    Defense in Depth as Strategy
+    "Defense in Depth as Strategy"
     #+END_QUOTE
 
-*** Keep It Simply Simple (KISS)
+    #+REVEAL_HTML: </div>
+
+    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
+
+    #+ATTR_HTML: :width 100%
+    #+ATTR_HTML: :height 100%
+    [[file:ShowCover.jpeg]]
+
+    #+REVEAL_HTML: </div>
+
+*** Keep It Simple [Stupid] (KISS)
+
+    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
 
     - Adopt a small set of principles.
     - Apply them ruthlessly and redundantly.
     - Repeat, repeat, repeat.
 
     #+BEGIN_QUOTE
-    Complexity Is the Enemy of Security.
+    "Complexity Is the Enemy of Security."
     #+END_QUOTE
 
+    #+REVEAL_HTML: </div>
+
+    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
+
+    #+ATTR_HTML: :width 100%
+    #+ATTR_HTML: :height 100%
+    [[file:ShowCover.jpeg]]
+
+    #+REVEAL_HTML: </div>
+
 *** Least Privilege
+
+    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
 
     - The most secure API is the one that does nothing at all.
     - Never trust anyone.
     - Opt in.  Don't Opt out.
 
     #+BEGIN_QUOTE
-    When Left on Their Own, People Tend to Make the Worst Security
-    Decisions.
+    "When Left on Their Own, People Tend to Make the Worst Security
+    Decisions."
     #+END_QUOTE
+
+    #+REVEAL_HTML: </div>
+
+    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
+
+    #+ATTR_HTML: :width 100%
+    #+ATTR_HTML: :height 100%
+    [[file:ShowCover.jpeg]]
+
+    #+REVEAL_HTML: </div>
 
 * GraphQL Security Orthodoxy
 

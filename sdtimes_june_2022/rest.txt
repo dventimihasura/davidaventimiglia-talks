@@ -1,0 +1,13 @@
+# -*- mode: restclient -*-
+
+# Account Order Details
+GET https://graphql-security-1.hasura.app/api/rest/account-order-details
+Content-type: application/json
+x-hasura-role: user
+x-hasura-user-id: 003701fe-0f29-41b7-94dc-b92073bb955a
+
+# Account Summary
+GET https://graphql-security-1.hasura.app/api/rest/account-summary
+Content-type: application/json
+x-hasura-role: user
+x-hasura-user-id: 003701fe-0f29-41b7-94dc-b92073bb955a
