@@ -1,14 +1,20 @@
 #+TITLE: GraphQL Security
+#+SUBTITLE: Something Old, Something New
 #+AUTHOR: David A. Ventimiglia
 #+EMAIL: davidaventimiglia@neptunestation.com
 
-#+options: timestamp:nil title:t toc:nil todo:t |:t
+#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
+
+#+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+
+#+REVEAL_THEME: black
+
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./slide_background.png
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./slide_background.png
 
 * Who
 
 *** David A. Ventimiglia
-
-    [[http://neptunestation.com][neptunestation.com]]
 
   #+BEGIN_QUOTE
   "I'm a physicist, data scientist, data engineer, and software
@@ -135,7 +141,7 @@
     #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
 
     - The most secure API is the one that does nothing at all.
-    - Never trust anyone.
+    - Never trust anyone (within reason).
     - Opt in.  Don't Opt out.
 
     #+BEGIN_QUOTE
