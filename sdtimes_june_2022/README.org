@@ -5,11 +5,9 @@
 
 #+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
 
-#+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
-
-#+REVEAL_THEME: black
-
 #+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./slide_background.png
+#+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+#+REVEAL_THEME: black
 #+REVEAL_TITLE_SLIDE_BACKGROUND: ./slide_background.png
 
 * Who
@@ -26,14 +24,14 @@
 
 * What
 
-*** In
+*** GraphQL Security: In
 
     - Principles
     - Opinions
     - Hasura Demo
     - Summary
 
-*** Out
+*** GraphQL Security: Out
 
     - +Cybersecurity+
       - See:  Certified Experts
