@@ -1,0 +1,11 @@
+table:
+  schema: core
+  name: account
+array_relationships:
+  - name: orders
+    using:
+      foreign_key_constraint_on:
+        column: account_id
+        table:
+          schema: core
+          name: order
