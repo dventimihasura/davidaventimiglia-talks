@@ -236,3 +236,14 @@
   - [[https://www.pearson.com/us/higher-education/program/Merkow-Information-Security-Principles-and-Practices-2nd-Edition/PGM91863.html][Information Security: Principles and Practices, 2nd Edition]]
     by Mark S. Merkow and Jim Breithaupt
   - [[https://spec.graphql.org/June2018/][GraphQL Specification]]
+
+* References
+
+  | [[https://www.sofa-api.com/][Sofa]]                  | REST endpoints                       |
+  | [[https://www.graphql-mesh.com/][Mesh]]                  | Whitelisting                         |
+  | [[https://www.graphql-shield.com/][Shield]]                | Authorization                        |
+  | [[https://github.com/pa-bru/graphql-cost-analysis][graphql-cost-analysis]] | Limit complexity                     |
+  | Hasura                | Everything (except query complexity) |
+
+
+
