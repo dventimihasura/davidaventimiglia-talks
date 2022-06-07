@@ -245,5 +245,7 @@
   | [[https://github.com/pa-bru/graphql-cost-analysis][graphql-cost-analysis]] | Limit complexity                     |
   | Hasura                | Everything (except query complexity) |
 
+* /Thank you!/
 
+[[file:sdtimes.png]]
 
