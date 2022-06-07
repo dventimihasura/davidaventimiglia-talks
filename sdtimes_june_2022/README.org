@@ -24,6 +24,27 @@
 
 * What
 
+** GraphQL API
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- Query Language
+- Schema
+  - Types
+    - Fields
+- Types relate to Types
+- Sound familiar?
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
+
+#+ATTR_HTML: :width 100%
+#+ATTR_HTML: :height 100%
+[[file:GraphQL.png]]
+
+#+REVEAL_HTML: </div>
+
 *** GraphQL Security: In
 
     - Principles
