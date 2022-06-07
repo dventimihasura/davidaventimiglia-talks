@@ -1,23 +1,22 @@
 table:
   schema: public
-  name: order
+  name: order_detail
 object_relationships:
-  - name: account
+  - name: order
     using:
       manual_configuration:
         remote_table:
           schema: public
-          name: account
+          name: order
         insertion_order: null
         column_mapping:
-          account_id: id
-array_relationships:
-  - name: order_details
+          order_id: id
+  - name: product
     using:
       manual_configuration:
         remote_table:
           schema: public
-          name: order_detail
+          name: product
         insertion_order: null
         column_mapping:
-          id: order_id
+          product_id: id
