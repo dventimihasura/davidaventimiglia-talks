@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>GraphQL Security</title>
+<meta name="author" content="David A. Ventimiglia"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/black.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-background="./slide_background.png"><h1 class="title">GraphQL Security</h1><p class="subtitle">Something Old, Something New</p>
+
+</section>
+
+<section>
+<section id="slide-org032b30b" data-background="./slide_background.png">
+<h2 id="org032b30b">Who</h2>
+<div class="outline-text-2" id="text-org032b30b">
+</div>
+</section>
+<section id="slide-orgc895dc3" data-background="./slide_background.png">
+<h3 id="orgc895dc3">David A. Ventimiglia</h3>
+<blockquote >
+<p>
+"I'm a physicist, data scientist, data engineer, and software
+engineer, and I work for <a href="https://hasura.io/"><b>Hasura</b></a>, a software technology company that
+provides developer-focused tooling products.  I am not, however, a
+cybersecurity expert nor a certified financial planner.  Always
+consult professionals for security and financial advice."
+</p>
+</blockquote>
+
+</section>
+</section>
+<section>
+<section id="slide-org3805730" data-background="./slide_background.png">
+<h2 id="org3805730">What</h2>
+<div class="outline-text-2" id="text-org3805730">
+</div>
+</section>
+<section id="slide-orgafc3455" data-background="./slide_background.png">
+<h3 id="orgafc3455">GraphQL API</h3>
+<div class="column" style="float:left; width:50%">
+
+<ul>
+<li>Query Language</li>
+<li>Schema
+<ul>
+<li>Types
+<ul>
+<li>Fields</li>
+
+</ul></li>
+
+</ul></li>
+<li>Types relate to Types</li>
+<li>Sound familiar?</li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:right; width:50%;">
+
+
+<div id="orgbc80af5" class="figure">
+<p><img src="GraphQL.png" alt="GraphQL.png" height="100%" width="100%" />
+</p>
+</div>
+
+</div>
+
+</section>
+<section id="slide-org8397bb0" data-background="./slide_background.png">
+<h3 id="org8397bb0">GraphQL Security: In</h3>
+<ul>
+<li>Principles</li>
+<li>Opinions</li>
+<li>Hasura Demo</li>
+<li>Summary</li>
+
+</ul>
+
+</section>
+<section id="slide-orgde9e606" data-background="./slide_background.png">
+<h3 id="orgde9e606">GraphQL Security: Out</h3>
+<ul>
+<li><del>Cybersecurity</del>
+<ul>
+<li>See:  Certified Experts</li>
+
+</ul></li>
+<li><del>REST Security</del>
+<ul>
+<li>See:  <a href="https://owasp.org/www-project-api-security/">OWASP</a></li>
+
+</ul></li>
+<li><del>Comprehensive Tooling Demo</del>
+<ul>
+<li>See:  References</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org890da3b" data-background="./slide_background.png">
+<h2 id="org890da3b">Principles</h2>
+<div class="outline-text-2" id="text-org890da3b">
+</div>
+</section>
+<section id="slide-org032727a" data-background="./slide_background.png">
+<h3 id="org032727a">Life is about trade-offs</h3>
+<div class="column" style="float:left; width:75%">
+
+<ul>
+<li>Focus, engage, act.</li>
+<li>Conduct a frank self-assessment.</li>
+<li>Avoid <a href="https://en.wikipedia.org/wiki/Cargo_cult">Cargo Cults</a>.</li>
+
+</ul>
+
+<blockquote >
+<p>
+"There Is No Such Thing As Absolute Security."
+</p>
+</blockquote>
+<blockquote >
+<p>
+"Security = Risk Management."
+</p>
+</blockquote>
+
+</div>
+
+<div class="column" style="float:right; width:25%;">
+
+
+<div id="orga62f863" class="figure">
+<p><img src="ShowCover.jpeg" alt="ShowCover.jpeg" height="100%" width="100%" />
+</p>
+</div>
+
+</div>
+
+</section>
+<section id="slide-orgdae6f14" data-background="./slide_background.png">
+<h3 id="orgdae6f14">Know Your Enemy</h3>
+<div class="column" style="float:left; width:75%">
+
+<ul>
+<li>Disclosure (Confidentiality)</li>
+<li>Destruction (Integrity)</li>
+<li>Denial (Availability)</li>
+
+</ul>
+
+<blockquote >
+<p>
+"The Three Security Goals Are Confidentiality, Integrity, and
+Availability."
+</p>
+</blockquote>
+
+</div>
+
+<div class="column" style="float:right; width:25%;">
+
+
+<div id="org71f05ce" class="figure">
+<p><img src="ShowCover.jpeg" alt="ShowCover.jpeg" height="100%" width="100%" />
+</p>
+</div>
+
+</div>
+
+</section>
+<section id="slide-org527c597" data-background="./slide_background.png">
+<h3 id="org527c597">Bottom Up</h3>
+<div class="column" style="float:left; width:75%">
+
+<ul>
+<li>Build authorization into the data model.</li>
+<li>Apply redundant measures at every level (within reason).</li>
+<li>Avoid identity erasure.</li>
+
+</ul>
+
+<blockquote >
+<p>
+"Defense in Depth as Strategy"
+</p>
+</blockquote>
+
+</div>
+
+<div class="column" style="float:right; width:25%;">
+
+
+<div id="orga2ff02e" class="figure">
+<p><img src="ShowCover.jpeg" alt="ShowCover.jpeg" height="100%" width="100%" />
+</p>
+</div>
+
+</div>
+
+</section>
+<section id="slide-orgc11036d" data-background="./slide_background.png">
+<h3 id="orgc11036d">Keep It Simple [Stupid] (KISS)</h3>
+<div class="column" style="float:left; width:75%">
+
+<ul>
+<li>Adopt a small set of principles.</li>
+<li>Apply them ruthlessly and redundantly.</li>
+<li>Repeat, repeat, repeat.</li>
+
+</ul>
+
+<blockquote >
+<p>
+"Complexity Is the Enemy of Security."
+</p>
+</blockquote>
+
+</div>
+
+<div class="column" style="float:right; width:25%;">
+
+
+<div id="org58d3f36" class="figure">
+<p><img src="ShowCover.jpeg" alt="ShowCover.jpeg" height="100%" width="100%" />
+</p>
+</div>
+
+</div>
+
+</section>
+<section id="slide-org71c51af" data-background="./slide_background.png">
+<h3 id="org71c51af">Least Privilege</h3>
+<div class="column" style="float:left; width:75%">
+
+<ul>
+<li>The most secure API is the one that does nothing at all.</li>
+<li>Never trust anyone (within reason).</li>
+<li>Opt in.  Don't Opt out.</li>
+
+</ul>
+
+<blockquote >
+<p>
+"When Left on Their Own, People Tend to Make the Worst Security
+Decisions."
+</p>
+</blockquote>
+
+</div>
+
+<div class="column" style="float:right; width:25%;">
+
+
+<div id="orga46731a" class="figure">
+<p><img src="ShowCover.jpeg" alt="ShowCover.jpeg" height="100%" width="100%" />
+</p>
+</div>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org231bcbf" data-background="./slide_background.png">
+<h2 id="org231bcbf">GraphQL Security Orthodoxy</h2>
+<div class="outline-text-2" id="text-org231bcbf">
+</div>
+</section>
+<section id="slide-org0b498ac" data-background="./slide_background.png">
+<h3 id="org0b498ac">Disable Console Access</h3>
+<ul>
+<li>GraphQL servers often host an "admin console".</li>
+<li>Disable it in production.</li>
+
+</ul>
+
+</section>
+<section id="slide-org17e5b3a" data-background="./slide_background.png">
+<h3 id="org17e5b3a">Disable Schema Introspection</h3>
+<ul>
+<li>Introspection is in the spec and in most (all?) servers.</li>
+<li>Disable it in production.</li>
+
+</ul>
+
+</section>
+<section id="slide-orgecf8eac" data-background="./slide_background.png">
+<h3 id="orgecf8eac">Disable Query Suggestions</h3>
+<ul>
+<li><i>Some</i> GraphQL servers try to be overly helpful.</li>
+<li>Disable it in production.</li>
+
+</ul>
+
+</section>
+<section id="slide-org3178fee" data-background="./slide_background.png">
+<h3 id="org3178fee">Impose Limits</h3>
+<ul>
+<li>Traditional rate limits are a start but are not enough.</li>
+<li>Limit rate.</li>
+<li>Limit time.</li>
+<li>Limit depth.</li>
+<li>Limit nodes.</li>
+<li>Limit complexity.</li>
+
+</ul>
+
+</section>
+<section id="slide-orgc3cee78" data-background="./slide_background.png">
+<h3 id="orgc3cee78">Whitelist Operations</h3>
+<ul>
+<li>Bless a fixed set of allowed queries.</li>
+<li>Be careful in general.</li>
+<li>Be careful with Automatic Persisted Queries (APQ) in particular.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf1a12ef" data-background="./slide_background.png">
+<h2 id="orgf1a12ef">GraphQL Security Heterodoxy</h2>
+<div class="outline-text-2" id="text-orgf1a12ef">
+</div>
+</section>
+<section id="slide-org0d4cbde" data-background="./slide_background.png">
+<h3 id="org0d4cbde">Don't Confuse Public vs Private.</h3>
+<ul>
+<li>If you don't <i>need</i> to offer a public API, then don't provide one.</li>
+<li>If you're not providing a public API, then don't act like you are.</li>
+
+</ul>
+
+</section>
+<section id="slide-orga78b3d7" data-background="./slide_background.png">
+<h3 id="orga78b3d7">Don't Disable Console Access</h3>
+<ul>
+<li>If you applied the Bottom-Up and Least Privilege principles,
+then the console can't do anything unauthorized anyway.</li>
+
+</ul>
+
+</section>
+<section id="slide-org79ecd70" data-background="./slide_background.png">
+<h3 id="org79ecd70">Don't Disable Schema Introspection and Query Suggestions</h3>
+<ul>
+<li>The public needs to know how to use your public API.</li>
+<li>The public shouldn't have access to your private API.</li>
+<li>The information will get out anyway.</li>
+
+</ul>
+
+</section>
+<section id="slide-org90929d9" data-background="./slide_background.png">
+<h3 id="org90929d9">Don't Use GraphQL Security</h3>
+<ul>
+<li>Or at least, don't rely on GraphQL security.</li>
+<li>Work diligently from the bottom up, and you (almost) won't need
+it.</li>
+
+</ul>
+
+</section>
+<section id="slide-orgd927869" data-background="./slide_background.png">
+<h3 id="orgd927869">Don't Use GraphQL</h3>
+<ul>
+<li>For private APIs, that is.</li>
+<li>Use Allow Lists.</li>
+<li>And if you're using Allow Lists, turn them into REST endpoints
+or RPCs.</li>
+<li>GraphQL is for people, not for machines.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgbb22e65" data-background="./slide_background.png">
+<h2 id="orgbb22e65">Hasura Demo</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org13f09c1" data-background="./slide_background.png">
+<h2 id="org13f09c1">Summary</h2>
+<ul>
+<li>Cybersecurity is a vast topic.</li>
+<li>Take it seriously and consult with experts.</li>
+<li>Tame the vastness with a principled approach.</li>
+<li>Do the easy things for GraphQL, but only because they're easy.</li>
+<li>Focus, engage, and manage trade-offs.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org7f0bf2f" data-background="./slide_background.png">
+<h2 id="org7f0bf2f">References</h2>
+<ul>
+<li><a href="https://www.pearson.com/us/higher-education/program/Merkow-Information-Security-Principles-and-Practices-2nd-Edition/PGM91863.html">Information Security: Principles and Practices, 2nd Edition</a>
+by Mark S. Merkow and Jim Breithaupt</li>
+<li><a href="https://spec.graphql.org/June2018/">GraphQL Specification</a></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org8f3dfcc" data-background="./slide_background.png">
+<h2 id="org8f3dfcc">References</h2>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><a href="https://www.sofa-api.com/">Sofa</a></td>
+<td class="org-left">REST endpoints</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="https://www.graphql-mesh.com/">Mesh</a></td>
+<td class="org-left">Whitelisting</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="https://www.graphql-shield.com/">Shield</a></td>
+<td class="org-left">Authorization</td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="https://github.com/pa-bru/graphql-cost-analysis">graphql-cost-analysis</a></td>
+<td class="org-left">Limit complexity</td>
+</tr>
+
+<tr>
+<td class="org-left">Hasura</td>
+<td class="org-left">Everything (except query complexity)</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-org0ae9026" data-background="./slide_background.png">
+<h2 id="org0ae9026"><i>Thank you!</i></h2>
+
+<div id="orga134c6a" class="figure">
+<p><img src="sdtimes.png" alt="sdtimes.png" />
+</p>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/dist/reveal.js"></script>
+<script src="./reveal.js/plugin/markdown/markdown.js"></script>
+<script src="./reveal.js/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown, RevealZoom, RevealNotes],
+transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+});
+
+</script>
+</body>
+</html>

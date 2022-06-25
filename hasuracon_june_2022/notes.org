@@ -1,0 +1,161 @@
+#+TITLE: GraphQL Security Workshop
+#+SUBTITLE: HasuraCon
+#+AUTHOR: David A. Ventimiglia
+#+EMAIL: davidaventimiglia@hasura.io
+
+#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
+
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./slide_background.png
+#+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+#+REVEAL_THEME: black
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./slide_background.png
+
+* Introduction
+
+*** Bio
+
+*** Risk Management
+
+*** Security Goals
+
+- Confidentiality :: disclosure of sensitive information
+- Integrity :: destruction of sensitive information
+- Availability :: denial of service of an information provider
+
+*** Defense in Depth
+
+- Build authorization into the data model.
+- Apply redundant measures at every level (within reason).
+- Avoid identity erasure (i.e., preserve contextual information
+  especially about the caller, throughout the call-chain, in order to
+  enable authorization to be implemented properly).
+
+*** Simplicity
+
+- Complexity is the enemy of security.
+- Adopt a principled approach.
+
+*** Least privilege
+
+- The most secure API is the one that does nothing at all.
+- Never trust anyone (within reason).
+- Opt /in/ to functionality (i.e., "whitelist").Don't rely on Opt
+  /out/ (i.e. "blacklist").
+
+* Workshop
+
+*** Secure your service
+
+- The "admin secret" and the role it plays
+
+*** Add authentication
+
+- Remember "identity erasure"?
+
+*** Develop a secure data model
+
+- Remember "defense in depth"?
+- Set up database roles.
+- (Hasura has insufficient support for these, but they're prudent anyway)
+- Do /not/ configure the Hasura database credentials with a database
+  superuser. What are you /Crazy/?
+- Understand the Hasura authorization model
+- We will have to revisit the interplay between data modeling and the
+  Hasura authorization model repeatedly.
+- Think carefully about what you need to expose.
+- Expose the bare minimum, and no more.
+- Consider organizing your data model with multiple schema, with
+  appropriate roles, with a core set of tables that are not tracked
+  and not even accessible, and with all operations going through
+  views.
+- Note: you lose the convenience of Hasura suggesting relationships
+  based on foreign key constraints.
+- Use all the data modeling tools at your disposal to develop a rich,
+  detailed, domain-specific data model.Your data model and especially
+  its types and constraints are foundational.They are your ultimate
+  line-of-defense against invalid operations.
+- core data types
+- custom data types
+- custom domains
+- constraints (unique, foreign, check)
+- triggers
+- functions
+- views
+- policies
+
+*** Apply Hasura permissions
+
+- With and without custom checks
+- Column permissions
+- "Backend only" mutations
+
+*** Apply Hasura API Security
+
+- Turning off introspection
+- Applying limits
+- Depth
+- Nodes
+- Rate
+- Time
+- +Complexity+
+
+*** Applying Hasura Allow Lists
+
+- Through the CLI
+- Through Console
+
+*** Miscellaneous
+
+- Disabling Console
+- Disallowing unauthenticated access
+- REST Endpoints
+- ???
+
+* Discussion
+
+*** GraphQL Security Orthodoxy
+
+AKA: rituals, cargo cults, security theater which you can get anywhere
+- Disable Console Access
+- Disable Schema Introspection
+- Disable Query Suggestions (unneccessary in Hasura)
+- Impose API Limits
+- Whitelist Operations
+
+*** GraphQL Security Heterodoxy
+
+AKA: possibly controversial opinions which you will get from me
+- Don't confuse public vs private:
+- If you don't /need/ to provide a public API, then don't.
+- If you're not providing a public API, then don't act like you are.
+- Don't disable console access
+- If you applied the security principles carefully, deliberately, thoughtfully, then the console can't do anything unauthorized anyway.
+- Don't disable schema introspection and query suggestions.
+- The public will need to know how to use your public API (which you almost certainly shouldn't have anyway)
+- The public shouldn't have access to your private API (you did secure your API, add authentication, disable unauthorized access, build a rich data model, and apply fine-graned authorization, didn't you?)
+- The information will get out anyway.
+- Don't use GraphQL security
+- Or at least, don't rely on it.
+- Work diligently from the bottom-up, applying the principles carefully, deliberately, thoughtfully, and you (almost) won't need it.
+- Remember "managing risk", "cargo cults", and "security theater".
+Life is about trade-offs.
+- Don't use GraphQL
+- For private APIs, that is.
+- Use Allow Lists.
+- And if you're using Allow Lists, you might as well use REST endpoints.
+- GraphQL is for /people/ (i.e. developers), not for machines.
+
+* Closing Remarks
+
+*** References
+
+*** How and where to get help
+
+white_check_mark
+100
+raised_hands
+
+
+
+
+

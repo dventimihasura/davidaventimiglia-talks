@@ -1,0 +1,272 @@
+#+TITLE: GraphQL Security
+#+SUBTITLE: Something Old, Something New
+#+AUTHOR: David A. Ventimiglia
+#+EMAIL: davidaventimiglia@neptunestation.com
+
+#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
+
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./slide_background.png
+#+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+#+REVEAL_THEME: black
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./slide_background.png
+
+* Who
+
+*** David A. Ventimiglia
+
+  #+BEGIN_QUOTE
+  "I'm a physicist, data scientist, data engineer, and software
+  engineer, and I work for [[https://hasura.io/][*Hasura*]], a software technology company that
+  provides developer-focused tooling products.  I am not, however, a
+  cybersecurity expert nor a certified financial planner.  Always
+  consult professionals for security and financial advice."
+  #+END_QUOTE
+
+* What
+
+** GraphQL API
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- Query Language
+- Schema
+  - Types
+    - Fields
+- Types relate to Types
+- Sound familiar?
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
+
+#+ATTR_HTML: :width 100%
+#+ATTR_HTML: :height 100%
+[[file:GraphQL.png]]
+
+#+REVEAL_HTML: </div>
+
+*** GraphQL Security: In
+
+    - Principles
+    - Opinions
+    - Hasura Demo
+    - Summary
+
+*** GraphQL Security: Out
+
+    - +Cybersecurity+
+      - See:  Certified Experts
+    - +REST Security+
+      - See:  [[https://owasp.org/www-project-api-security/][OWASP]]
+    - +Comprehensive Tooling Demo+
+      - See:  References
+
+* Principles
+
+*** Life is about trade-offs
+
+    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+
+    - Focus, engage, act.
+    - Conduct a frank self-assessment.
+    - Avoid [[https://en.wikipedia.org/wiki/Cargo_cult][Cargo Cults]].
+
+    #+BEGIN_QUOTE
+    "There Is No Such Thing As Absolute Security."
+    #+END_QUOTE
+    #+BEGIN_QUOTE
+    "Security = Risk Management."
+    #+END_QUOTE
+
+    #+REVEAL_HTML: </div>
+
+    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
+
+    #+ATTR_HTML: :width 100%
+    #+ATTR_HTML: :height 100%
+    [[file:ShowCover.jpeg]]
+
+    #+REVEAL_HTML: </div>
+
+*** Know Your Enemy
+
+    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+
+    - Disclosure (Confidentiality)
+    - Destruction (Integrity)
+    - Denial (Availability)
+
+    #+BEGIN_QUOTE
+    "The Three Security Goals Are Confidentiality, Integrity, and
+    Availability."
+    #+END_QUOTE
+
+    #+REVEAL_HTML: </div>
+
+    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
+
+    #+ATTR_HTML: :width 100%
+    #+ATTR_HTML: :height 100%
+    [[file:ShowCover.jpeg]]
+
+    #+REVEAL_HTML: </div>
+
+*** Bottom Up
+
+    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+
+    - Build authorization into the data model.
+    - Apply redundant measures at every level (within reason).
+    - Avoid identity erasure.
+
+    #+BEGIN_QUOTE
+    "Defense in Depth as Strategy"
+    #+END_QUOTE
+
+    #+REVEAL_HTML: </div>
+
+    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
+
+    #+ATTR_HTML: :width 100%
+    #+ATTR_HTML: :height 100%
+    [[file:ShowCover.jpeg]]
+
+    #+REVEAL_HTML: </div>
+
+*** Keep It Simple [Stupid] (KISS)
+
+    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+
+    - Adopt a small set of principles.
+    - Apply them ruthlessly and redundantly.
+    - Repeat, repeat, repeat.
+
+    #+BEGIN_QUOTE
+    "Complexity Is the Enemy of Security."
+    #+END_QUOTE
+
+    #+REVEAL_HTML: </div>
+
+    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
+
+    #+ATTR_HTML: :width 100%
+    #+ATTR_HTML: :height 100%
+    [[file:ShowCover.jpeg]]
+
+    #+REVEAL_HTML: </div>
+
+*** Least Privilege
+
+    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+
+    - The most secure API is the one that does nothing at all.
+    - Never trust anyone (within reason).
+    - Opt in.  Don't Opt out.
+
+    #+BEGIN_QUOTE
+    "When Left on Their Own, People Tend to Make the Worst Security
+    Decisions."
+    #+END_QUOTE
+
+    #+REVEAL_HTML: </div>
+
+    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
+
+    #+ATTR_HTML: :width 100%
+    #+ATTR_HTML: :height 100%
+    [[file:ShowCover.jpeg]]
+
+    #+REVEAL_HTML: </div>
+
+* GraphQL Security Orthodoxy
+
+*** Disable Console Access
+
+    - GraphQL servers often host an "admin console".
+    - Disable it in production.
+
+*** Disable Schema Introspection
+
+    - Introspection is in the spec and in most (all?) servers.
+    - Disable it in production.
+
+*** Disable Query Suggestions
+
+    - /Some/ GraphQL servers try to be overly helpful.
+    - Disable it in production.
+
+*** Impose Limits
+
+    - Traditional rate limits are a start but are not enough.
+    - Limit rate.
+    - Limit time.
+    - Limit depth.
+    - Limit nodes.
+    - Limit complexity.
+
+*** Whitelist Operations
+
+    - Bless a fixed set of allowed queries.
+    - Be careful in general.
+    - Be careful with Automatic Persisted Queries (APQ) in particular.
+
+* GraphQL Security Heterodoxy
+
+*** Don't Confuse Public vs Private.
+
+    - If you don't /need/ to offer a public API, then don't provide one.
+    - If you're not providing a public API, then don't act like you are.
+
+*** Don't Disable Console Access
+
+    - If you applied the Bottom-Up and Least Privilege principles,
+      then the console can't do anything unauthorized anyway.
+
+*** Don't Disable Schema Introspection and Query Suggestions
+
+    - The public needs to know how to use your public API.
+    - The public shouldn't have access to your private API.
+    - The information will get out anyway.
+
+*** Don't Use GraphQL Security
+
+    - Or at least, don't rely on GraphQL security.
+    - Work diligently from the bottom up, and you (almost) won't need
+      it.
+
+*** Don't Use GraphQL
+
+    - For private APIs, that is.
+    - Use Allow Lists.
+    - And if you're using Allow Lists, turn them into REST endpoints
+      or RPCs.
+    - GraphQL is for people, not for machines.
+
+* Hasura Demo
+
+* Summary
+
+  - Cybersecurity is a vast topic.
+  - Take it seriously and consult with experts.
+  - Tame the vastness with a principled approach.
+  - Do the easy things for GraphQL, but only because they're easy.
+  - Focus, engage, and manage trade-offs.
+
+* References
+
+  - [[https://www.pearson.com/us/higher-education/program/Merkow-Information-Security-Principles-and-Practices-2nd-Edition/PGM91863.html][Information Security: Principles and Practices, 2nd Edition]]
+    by Mark S. Merkow and Jim Breithaupt
+  - [[https://spec.graphql.org/June2018/][GraphQL Specification]]
+
+* References
+
+  | [[https://www.sofa-api.com/][Sofa]]                  | REST endpoints                       |
+  | [[https://www.graphql-mesh.com/][Mesh]]                  | Whitelisting                         |
+  | [[https://www.graphql-shield.com/][Shield]]                | Authorization                        |
+  | [[https://github.com/pa-bru/graphql-cost-analysis][graphql-cost-analysis]] | Limit complexity                     |
+  | Hasura                | Everything (except query complexity) |
+
+* /Thank you!/
+
+[[file:sdtimes.png]]
+
