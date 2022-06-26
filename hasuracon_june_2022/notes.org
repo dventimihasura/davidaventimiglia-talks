@@ -44,6 +44,21 @@
 
 * Workshop
 
+*** Log Into Heroku
+
+*** Log Into Hasura Cloud
+
+*** Create New Hasura Cloud Project
+
+*** Create New Heroku Database
+
+*** Create Data Model
+
+#+begin_src sql
+#+end_src
+
+*** Insert Sample Data
+
 *** Secure your service
 
 - The "admin secret" and the role it plays
@@ -154,8 +169,3 @@ Life is about trade-offs.
 white_check_mark
 100
 raised_hands
-
-
-
-
-
