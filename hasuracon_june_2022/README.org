@@ -1,7 +1,7 @@
-#+TITLE: GraphQL Security
-#+SUBTITLE: Something Old, Something New
+#+TITLE: GraphQL Security Workshop
+#+SUBTITLE: HasuraCon
 #+AUTHOR: David A. Ventimiglia
-#+EMAIL: davidaventimiglia@neptunestation.com
+#+EMAIL: davidaventimiglia@hasura.io
 
 #+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
 
@@ -10,263 +10,163 @@
 #+REVEAL_THEME: black
 #+REVEAL_TITLE_SLIDE_BACKGROUND: ./slide_background.png
 
-* Who
+* Introduction
 
-*** David A. Ventimiglia
+*** Bio
 
-  #+BEGIN_QUOTE
-  "I'm a physicist, data scientist, data engineer, and software
-  engineer, and I work for [[https://hasura.io/][*Hasura*]], a software technology company that
-  provides developer-focused tooling products.  I am not, however, a
-  cybersecurity expert nor a certified financial planner.  Always
-  consult professionals for security and financial advice."
-  #+END_QUOTE
+*** Risk Management
 
-* What
+*** Security Goals
 
-** GraphQL API
+- Confidentiality :: disclosure of sensitive information
+- Integrity :: destruction of sensitive information
+- Availability :: denial of service of an information provider
 
-#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+*** Defense in Depth
 
-- Query Language
-- Schema
-  - Types
-    - Fields
-- Types relate to Types
-- Sound familiar?
+- Build authorization into the data model.
+- Apply redundant measures at every level (within reason).
+- Avoid identity erasure (i.e., preserve contextual information
+  especially about the caller, throughout the call-chain, in order to
+  enable authorization to be implemented properly).
 
-#+REVEAL_HTML: </div>
+*** Simplicity
 
-#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
+- Complexity is the enemy of security.
+- Adopt a principled approach.
 
-#+ATTR_HTML: :width 100%
-#+ATTR_HTML: :height 100%
-[[file:GraphQL.png]]
+*** Least privilege
 
-#+REVEAL_HTML: </div>
+- The most secure API is the one that does nothing at all.
+- Never trust anyone (within reason).
+- Opt /in/ to functionality (i.e., "whitelist").Don't rely on Opt
+  /out/ (i.e. "blacklist").
 
-*** GraphQL Security: In
+* Workshop
 
-    - Principles
-    - Opinions
-    - Hasura Demo
-    - Summary
+*** Log Into Heroku
 
-*** GraphQL Security: Out
+*** Log Into Hasura Cloud
 
-    - +Cybersecurity+
-      - See:  Certified Experts
-    - +REST Security+
-      - See:  [[https://owasp.org/www-project-api-security/][OWASP]]
-    - +Comprehensive Tooling Demo+
-      - See:  References
+*** Create New Hasura Cloud Project
 
-* Principles
+*** Create New Heroku Database
 
-*** Life is about trade-offs
+*** Create Data Model
 
-    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+[[file:init_model.sql]]
 
-    - Focus, engage, act.
-    - Conduct a frank self-assessment.
-    - Avoid [[https://en.wikipedia.org/wiki/Cargo_cult][Cargo Cults]].
+*** Insert Sample Data
 
-    #+BEGIN_QUOTE
-    "There Is No Such Thing As Absolute Security."
-    #+END_QUOTE
-    #+BEGIN_QUOTE
-    "Security = Risk Management."
-    #+END_QUOTE
+[[file:init_data.sql]]
 
-    #+REVEAL_HTML: </div>
+*** Secure your service
 
-    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
+- The "admin secret" and the role it plays
 
-    #+ATTR_HTML: :width 100%
-    #+ATTR_HTML: :height 100%
-    [[file:ShowCover.jpeg]]
+*** Add authentication
 
-    #+REVEAL_HTML: </div>
+- Remember "identity erasure"?
 
-*** Know Your Enemy
+*** Develop a secure data model
 
-    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+- Remember "defense in depth"?
+- Set up database roles.
+- (Hasura has insufficient support for these, but they're prudent anyway)
+- Do /not/ configure the Hasura database credentials with a database
+  superuser. What are you /Crazy/?
+- Understand the Hasura authorization model
+- We will have to revisit the interplay between data modeling and the
+  Hasura authorization model repeatedly.
+- Think carefully about what you need to expose.
+- Expose the bare minimum, and no more.
+- Consider organizing your data model with multiple schema, with
+  appropriate roles, with a core set of tables that are not tracked
+  and not even accessible, and with all operations going through
+  views.
+- Note: you lose the convenience of Hasura suggesting relationships
+  based on foreign key constraints.
+- Use all the data modeling tools at your disposal to develop a rich,
+  detailed, domain-specific data model.Your data model and especially
+  its types and constraints are foundational.They are your ultimate
+  line-of-defense against invalid operations.
+- core data types
+- custom data types
+- custom domains
+- constraints (unique, foreign, check)
+- triggers
+- functions
+- views
+- policies
 
-    - Disclosure (Confidentiality)
-    - Destruction (Integrity)
-    - Denial (Availability)
+*** Apply Hasura permissions
 
-    #+BEGIN_QUOTE
-    "The Three Security Goals Are Confidentiality, Integrity, and
-    Availability."
-    #+END_QUOTE
+- With and without custom checks
+- Column permissions
+- "Backend only" mutations
 
-    #+REVEAL_HTML: </div>
+*** Apply Hasura API Security
 
-    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
-
-    #+ATTR_HTML: :width 100%
-    #+ATTR_HTML: :height 100%
-    [[file:ShowCover.jpeg]]
-
-    #+REVEAL_HTML: </div>
-
-*** Bottom Up
-
-    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
-
-    - Build authorization into the data model.
-    - Apply redundant measures at every level (within reason).
-    - Avoid identity erasure.
-
-    #+BEGIN_QUOTE
-    "Defense in Depth as Strategy"
-    #+END_QUOTE
-
-    #+REVEAL_HTML: </div>
-
-    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
-
-    #+ATTR_HTML: :width 100%
-    #+ATTR_HTML: :height 100%
-    [[file:ShowCover.jpeg]]
-
-    #+REVEAL_HTML: </div>
-
-*** Keep It Simple [Stupid] (KISS)
-
-    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
-
-    - Adopt a small set of principles.
-    - Apply them ruthlessly and redundantly.
-    - Repeat, repeat, repeat.
-
-    #+BEGIN_QUOTE
-    "Complexity Is the Enemy of Security."
-    #+END_QUOTE
-
-    #+REVEAL_HTML: </div>
-
-    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
-
-    #+ATTR_HTML: :width 100%
-    #+ATTR_HTML: :height 100%
-    [[file:ShowCover.jpeg]]
-
-    #+REVEAL_HTML: </div>
-
-*** Least Privilege
-
-    #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
-
-    - The most secure API is the one that does nothing at all.
-    - Never trust anyone (within reason).
-    - Opt in.  Don't Opt out.
-
-    #+BEGIN_QUOTE
-    "When Left on Their Own, People Tend to Make the Worst Security
-    Decisions."
-    #+END_QUOTE
-
-    #+REVEAL_HTML: </div>
-
-    #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
-
-    #+ATTR_HTML: :width 100%
-    #+ATTR_HTML: :height 100%
-    [[file:ShowCover.jpeg]]
-
-    #+REVEAL_HTML: </div>
-
-* GraphQL Security Orthodoxy
-
-*** Disable Console Access
-
-    - GraphQL servers often host an "admin console".
-    - Disable it in production.
-
-*** Disable Schema Introspection
-
-    - Introspection is in the spec and in most (all?) servers.
-    - Disable it in production.
-
-*** Disable Query Suggestions
-
-    - /Some/ GraphQL servers try to be overly helpful.
-    - Disable it in production.
-
-*** Impose Limits
-
-    - Traditional rate limits are a start but are not enough.
-    - Limit rate.
-    - Limit time.
-    - Limit depth.
-    - Limit nodes.
-    - Limit complexity.
-
-*** Whitelist Operations
-
-    - Bless a fixed set of allowed queries.
-    - Be careful in general.
-    - Be careful with Automatic Persisted Queries (APQ) in particular.
-
-* GraphQL Security Heterodoxy
-
-*** Don't Confuse Public vs Private.
-
-    - If you don't /need/ to offer a public API, then don't provide one.
-    - If you're not providing a public API, then don't act like you are.
-
-*** Don't Disable Console Access
-
-    - If you applied the Bottom-Up and Least Privilege principles,
-      then the console can't do anything unauthorized anyway.
-
-*** Don't Disable Schema Introspection and Query Suggestions
-
-    - The public needs to know how to use your public API.
-    - The public shouldn't have access to your private API.
-    - The information will get out anyway.
-
-*** Don't Use GraphQL Security
-
-    - Or at least, don't rely on GraphQL security.
-    - Work diligently from the bottom up, and you (almost) won't need
-      it.
-
-*** Don't Use GraphQL
-
-    - For private APIs, that is.
-    - Use Allow Lists.
-    - And if you're using Allow Lists, turn them into REST endpoints
-      or RPCs.
-    - GraphQL is for people, not for machines.
-
-* Hasura Demo
-
-* Summary
-
-  - Cybersecurity is a vast topic.
-  - Take it seriously and consult with experts.
-  - Tame the vastness with a principled approach.
-  - Do the easy things for GraphQL, but only because they're easy.
-  - Focus, engage, and manage trade-offs.
-
-* References
-
-  - [[https://www.pearson.com/us/higher-education/program/Merkow-Information-Security-Principles-and-Practices-2nd-Edition/PGM91863.html][Information Security: Principles and Practices, 2nd Edition]]
-    by Mark S. Merkow and Jim Breithaupt
-  - [[https://spec.graphql.org/June2018/][GraphQL Specification]]
-
-* References
-
-  | [[https://www.sofa-api.com/][Sofa]]                  | REST endpoints                       |
-  | [[https://www.graphql-mesh.com/][Mesh]]                  | Whitelisting                         |
-  | [[https://www.graphql-shield.com/][Shield]]                | Authorization                        |
-  | [[https://github.com/pa-bru/graphql-cost-analysis][graphql-cost-analysis]] | Limit complexity                     |
-  | Hasura                | Everything (except query complexity) |
-
-* /Thank you!/
-
-[[file:sdtimes.png]]
-
+- Turning off introspection
+- Applying limits
+- Depth
+- Nodes
+- Rate
+- Time
+- +Complexity+
+
+*** Applying Hasura Allow Lists
+
+- Through the CLI
+- Through Console
+
+*** Miscellaneous
+
+- Disabling Console
+- Disallowing unauthenticated access
+- REST Endpoints
+- ???
+
+* Discussion
+
+*** GraphQL Security Orthodoxy
+
+AKA: rituals, cargo cults, security theater which you can get anywhere
+- Disable Console Access
+- Disable Schema Introspection
+- Disable Query Suggestions (unneccessary in Hasura)
+- Impose API Limits
+- Whitelist Operations
+
+*** GraphQL Security Heterodoxy
+
+AKA: possibly controversial opinions which you will get from me
+- Don't confuse public vs private:
+- If you don't /need/ to provide a public API, then don't.
+- If you're not providing a public API, then don't act like you are.
+- Don't disable console access
+- If you applied the security principles carefully, deliberately, thoughtfully, then the console can't do anything unauthorized anyway.
+- Don't disable schema introspection and query suggestions.
+- The public will need to know how to use your public API (which you almost certainly shouldn't have anyway)
+- The public shouldn't have access to your private API (you did secure your API, add authentication, disable unauthorized access, build a rich data model, and apply fine-graned authorization, didn't you?)
+- The information will get out anyway.
+- Don't use GraphQL security
+- Or at least, don't rely on it.
+- Work diligently from the bottom-up, applying the principles carefully, deliberately, thoughtfully, and you (almost) won't need it.
+- Remember "managing risk", "cargo cults", and "security theater".
+Life is about trade-offs.
+- Don't use GraphQL
+- For private APIs, that is.
+- Use Allow Lists.
+- And if you're using Allow Lists, you might as well use REST endpoints.
+- GraphQL is for /people/ (i.e. developers), not for machines.
+
+* Closing Remarks
+
+*** References
+
+*** How and where to get help
+
+white_check_mark
+100
+raised_hands
