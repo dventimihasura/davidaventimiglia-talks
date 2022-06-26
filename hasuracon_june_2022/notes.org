@@ -54,10 +54,11 @@
 
 *** Create Data Model
 
-#+begin_src sql
-#+end_src
+[[file:init_model.sql]]
 
 *** Insert Sample Data
+
+[[file:init_data.sql]]
 
 *** Secure your service
 
