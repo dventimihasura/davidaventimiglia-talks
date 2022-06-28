@@ -17,16 +17,16 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-background="./slide_background.png"><h1 class="title">Securing your GraphQL API with Hasura</h1><p class="subtitle"><a href="https://hasura.io/events/hasura-con-2022/">HasuraCon 2022</a></p>
+<section id="sec-title-slide" data-background="./assets/slide_background.png"><h1 class="title">Securing your GraphQL API with Hasura</h1><p class="subtitle"><a href="https://hasura.io/events/hasura-con-2022/">HasuraCon 2022</a></p>
 
 </section>
 
 <section>
-<section id="slide-org00d6f48" data-background="./slide_background.png">
-<h2 id="org00d6f48"></h2>
+<section id="slide-org5d15fe7" data-background="./assets/slide_background.png">
+<h2 id="org5d15fe7"></h2>
 
-<div id="orgc054298" class="figure">
-<p><img src="qr.png" alt="qr.png" height="50%" width="50%" />
+<div id="orge4133ef" class="figure">
+<p><img src="assets/qr.png" alt="qr.png" height="50%" width="50%" />
 </p>
 <p><span class="figure-number">Figure 1: </span><a href="https://tinyurl.com/43vxsdmj">https://tinyurl.com/43vxsdmj</a></p>
 </div>
@@ -34,13 +34,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org33ad73a" data-background="./slide_background.png">
-<h2 id="org33ad73a">Introduction</h2>
-<div class="outline-text-2" id="text-org33ad73a">
+<section id="slide-orgcc2b5c0" data-background="./assets/slide_background.png">
+<h2 id="orgcc2b5c0">Introduction</h2>
+<div class="outline-text-2" id="text-orgcc2b5c0">
 </div>
 </section>
-<section id="slide-orge87251a" data-background="./slide_background.png">
-<h3 id="orge87251a">Program</h3>
+<section id="slide-orgaed3aea" data-background="./assets/slide_background.png">
+<h3 id="orgaed3aea">Program</h3>
 <ul>
 <li><a href="https://hasura.io/docs/latest/graphql/cloud/security/api-limits/">Hasura API Limits</a></li>
 <li><a href="https://hasura.io/docs/latest/graphql/core/auth/authorization/permission-rules/">Hasura Permissions</a></li>
@@ -57,8 +57,8 @@ This is a note
 </aside>
 
 </section>
-<section id="slide-org8001e30" data-background="./slide_background.png">
-<h3 id="org8001e30">Principles</h3>
+<section id="slide-org8ff7098" data-background="./assets/slide_background.png">
+<h3 id="org8ff7098">Principles</h3>
 <dl>
 <dt>Risk Management</dt><dd><i>Life is about trade-offs.</i></dd>
 <dt>Goal Setting</dt><dd><i>Confidentiality, Integrity, Availability</i></dd>
@@ -69,8 +69,8 @@ This is a note
 </dl>
 
 </section>
-<section id="slide-orgb731692" data-background="./slide_background.png">
-<h3 id="orgb731692">Threats</h3>
+<section id="slide-org8a3d84b" data-background="./assets/slide_background.png">
+<h3 id="org8a3d84b">Threats</h3>
 <div class="column" style="float:left; width:75%">
 
 <dl>
@@ -86,16 +86,16 @@ This is a note
 <div class="column" style="float:right; width:25%;">
 
 
-<div id="org51b4e2d" class="figure">
-<p><img src="GraphQL Logo (Rhodamine).svg" alt="GraphQL Logo (Rhodamine).svg" class="org-svg" />
+<div id="orgd04f492" class="figure">
+<p><img src="assets/GraphQL Logo (Rhodamine).svg" alt="GraphQL Logo (Rhodamine).svg" class="org-svg" />
 </p>
 </div>
 
 </div>
 
 </section>
-<section id="slide-org1f6af9a" data-background="./slide_background.png">
-<h3 id="org1f6af9a">Application</h3>
+<section id="slide-org01b830d" data-background="./assets/slide_background.png">
+<h3 id="org01b830d">Application</h3>
 <ul>
 <li><a href="https://hasura.io/docs/latest/graphql/core/deployment/postgres-requirements/"><del>Secure the DB</del></a></li>
 <li><a href="https://hasura.io/docs/latest/graphql/core/deployment/securing-graphql-endpoint/">Secure the Service</a></li>
@@ -112,44 +112,44 @@ This is a note
 </section>
 </section>
 <section>
-<section id="slide-org0dca689" data-background="./slide_background.png">
-<h2 id="org0dca689">Workshop</h2>
-<div class="outline-text-2" id="text-org0dca689">
+<section id="slide-org15a299c" data-background="./assets/slide_background.png">
+<h2 id="org15a299c">Workshop</h2>
+<div class="outline-text-2" id="text-org15a299c">
 </div>
 </section>
-<section id="slide-org89e9013" data-background="./slide_background.png">
-<h3 id="org89e9013">Log into Heroku</h3>
+<section id="slide-org79695e7" data-background="./assets/slide_background.png">
+<h3 id="org79695e7">Log into Heroku</h3>
 
-<div id="orgcbfb2c5" class="figure">
-<p><img src="log_into_heroku.png" alt="log_into_heroku.png" height="40%" width="40%" />
+<div id="orgbf7616b" class="figure">
+<p><img src="assets/log_into_heroku.png" alt="log_into_heroku.png" height="40%" width="40%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org9e7928b" data-background="./slide_background.png">
-<h3 id="org9e7928b">Log into Hasura Cloud</h3>
+<section id="slide-org7e22e0e" data-background="./assets/slide_background.png">
+<h3 id="org7e22e0e">Log into Hasura Cloud</h3>
 
-<div id="org359b013" class="figure">
-<p><img src="log_into_hasura_cloud.png" alt="log_into_hasura_cloud.png" height="40%" width="40%" />
+<div id="org17205cd" class="figure">
+<p><img src="assets/log_into_hasura_cloud.png" alt="log_into_hasura_cloud.png" height="40%" width="40%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org57b63fb" data-background="./slide_background.png">
-<h3 id="org57b63fb">Create a new Hasura Cloud Project</h3>
+<section id="slide-orgb260023" data-background="./assets/slide_background.png">
+<h3 id="orgb260023">Create a new Hasura Cloud Project</h3>
 
-<div id="org3bcf4e9" class="figure">
-<p><img src="create_new_hasura_project.png" alt="create_new_hasura_project.png" height="40%" width="40%" />
+<div id="org9621c2b" class="figure">
+<p><img src="assets/create_new_hasura_project.png" alt="create_new_hasura_project.png" height="40%" width="40%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org57af340" data-background="./slide_background.png">
-<h3 id="org57af340">Create a new Heroku database</h3>
+<section id="slide-org1e88583" data-background="./assets/slide_background.png">
+<h3 id="org1e88583">Create a new Heroku database</h3>
 
 </section>
-<section id="slide-org0ed47a2" data-background="./slide_background.png">
-<h3 id="org0ed47a2"><del>Connect to the database</del></h3>
+<section id="slide-orgbe52136" data-background="./assets/slide_background.png">
+<h3 id="orgbe52136"><del>Connect to the database</del></h3>
 <div class="org-src-container">
 
 <pre  class="src src-shell"   ><code trim>psql -h &lt;hostname&gt; -p &lt;port&gt; -d &lt;db&gt; -U &lt;username&gt; psql
@@ -158,8 +158,8 @@ heroku psql -a &lt;app&gt;
 </div>
 
 </section>
-<section id="slide-org6863648" data-background="./slide_background.png">
-<h3 id="org6863648"><del>Secure the DB</del></h3>
+<section id="slide-org4fbb5e5" data-background="./assets/slide_background.png">
+<h3 id="org4fbb5e5"><del>Secure the DB</del></h3>
 <ul>
 <li>Create a dedicated DB user for PROD.</li>
 <li><code>REVOKE</code> DML (maybe).</li>
@@ -170,7 +170,7 @@ heroku psql -a &lt;app&gt;
 </ul>
 
 </section>
-<section id="slide-org6863648-split" data-background="./slide_background.png">
+<section id="slide-org4fbb5e5-split" data-background="./assets/slide_background.png">
 
 <div class="org-src-container">
 
@@ -184,16 +184,16 @@ GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA &lt;schema&gt; TO hasuraprod;
 </div>
 
 </section>
-<section id="slide-org312880d" data-background="./slide_background.png">
-<h3 id="org312880d">Secure the Service</h3>
+<section id="slide-org2ca375c" data-background="./assets/slide_background.png">
+<h3 id="org2ca375c">Secure the Service</h3>
 <ul>
 <li><code>HASURA_GRAPHQL_ADMIN_SECRET</code></li>
 
 </ul>
 
 </section>
-<section id="slide-org2ba7766" data-background="./slide_background.png">
-<h3 id="org2ba7766"><del>Add Authentication</del></h3>
+<section id="slide-orgc65b29b" data-background="./assets/slide_background.png">
+<h3 id="orgc65b29b"><del>Add Authentication</del></h3>
 <ul>
 <li><code>HASURA_GRAPHQL_AUTH_HOOK</code></li>
 <li><code>HASURA_GRAPHQL_AUTH_HOOK_MODE</code></li>
@@ -201,57 +201,57 @@ GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA &lt;schema&gt; TO hasuraprod;
 </ul>
 
 </section>
-<section id="slide-orgc14d4af" data-background="./slide_background.png">
-<h3 id="orgc14d4af"><del>Disable Hasura Console</del></h3>
+<section id="slide-orgefdf415" data-background="./assets/slide_background.png">
+<h3 id="orgefdf415"><del>Disable Hasura Console</del></h3>
 <ul>
 <li><code>HASURA_GRAPHQL_ENABLE_CONSOLE</code></li>
 
 </ul>
 
 </section>
-<section id="slide-orgf9236df" data-background="./slide_background.png">
-<h3 id="orgf9236df">Disable Schema Introspection</h3>
+<section id="slide-orgb843e47" data-background="./assets/slide_background.png">
+<h3 id="orgb843e47">Disable Schema Introspection</h3>
 
-<div id="orgecc1906" class="figure">
-<p><img src="disable_schema_introspection.png" alt="disable_schema_introspection.png" height="80%" width="80%" />
+<div id="org18fce38" class="figure">
+<p><img src="assets/disable_schema_introspection.png" alt="disable_schema_introspection.png" height="80%" width="80%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org244b7f0" data-background="./slide_background.png">
-<h3 id="org244b7f0">Create a Securable Data Model</h3>
+<section id="slide-orgff6b9ee" data-background="./assets/slide_background.png">
+<h3 id="orgff6b9ee">Create a Securable Data Model</h3>
 
 </section>
-<section id="slide-orgafa4e7b" data-background="./slide_background.png">
-<h3 id="orgafa4e7b">Set API Limits</h3>
+<section id="slide-org1f1b9df" data-background="./assets/slide_background.png">
+<h3 id="org1f1b9df">Set API Limits</h3>
 
-<div id="org11e91a8" class="figure">
-<p><img src="set_api_limits.png" alt="set_api_limits.png" height="80%" width="80%" />
+<div id="org8539c87" class="figure">
+<p><img src="assets/set_api_limits.png" alt="set_api_limits.png" height="80%" width="80%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgd6b28a7" data-background="./slide_background.png">
-<h3 id="orgd6b28a7">Apply Permissions</h3>
+<section id="slide-org4d33169" data-background="./assets/slide_background.png">
+<h3 id="org4d33169">Apply Permissions</h3>
 
 </section>
-<section id="slide-org0abaee2" data-background="./slide_background.png">
-<h3 id="org0abaee2">Use Allow Lists</h3>
+<section id="slide-orgd1f3c24" data-background="./assets/slide_background.png">
+<h3 id="orgd1f3c24">Use Allow Lists</h3>
 
 </section>
-<section id="slide-orgd68e21b" data-background="./slide_background.png">
-<h3 id="orgd68e21b">Create REST Endpoints</h3>
+<section id="slide-org9f7c124" data-background="./assets/slide_background.png">
+<h3 id="org9f7c124">Create REST Endpoints</h3>
 
 </section>
 </section>
 <section>
-<section id="slide-org33a4d60" data-background="./slide_background.png">
-<h2 id="org33a4d60">Discussion</h2>
-<div class="outline-text-2" id="text-org33a4d60">
+<section id="slide-orgcde2b43" data-background="./assets/slide_background.png">
+<h2 id="orgcde2b43">Discussion</h2>
+<div class="outline-text-2" id="text-orgcde2b43">
 </div>
 </section>
-<section id="slide-org15b2b3e" data-background="./slide_background.png">
-<h3 id="org15b2b3e">GraphQL Security Orthodoxy</h3>
+<section id="slide-org7cf80ca" data-background="./assets/slide_background.png">
+<h3 id="org7cf80ca">GraphQL Security Orthodoxy</h3>
 <p>
 AKA: rituals, cargo cults, security theater which you can get anywhere
 </p>
@@ -265,8 +265,8 @@ AKA: rituals, cargo cults, security theater which you can get anywhere
 </ul>
 
 </section>
-<section id="slide-org37b4e22" data-background="./slide_background.png">
-<h3 id="org37b4e22">GraphQL Security Heterodoxy</h3>
+<section id="slide-orga0e6272" data-background="./assets/slide_background.png">
+<h3 id="orga0e6272">GraphQL Security Heterodoxy</h3>
 <p>
 AKA: possibly controversial opinions which you will get from me
 </p>
@@ -301,17 +301,17 @@ Life is about trade-offs.
 </section>
 </section>
 <section>
-<section id="slide-org949d1b9" data-background="./slide_background.png">
-<h2 id="org949d1b9">Closing Remarks</h2>
-<div class="outline-text-2" id="text-org949d1b9">
+<section id="slide-orge4b355e" data-background="./assets/slide_background.png">
+<h2 id="orge4b355e">Closing Remarks</h2>
+<div class="outline-text-2" id="text-orge4b355e">
 </div>
 </section>
-<section id="slide-org62395ab" data-background="./slide_background.png">
-<h3 id="org62395ab">References</h3>
+<section id="slide-org5b190df" data-background="./assets/slide_background.png">
+<h3 id="org5b190df">References</h3>
 
 </section>
-<section id="slide-org758bcbc" data-background="./slide_background.png">
-<h3 id="org758bcbc">How and where to get help</h3>
+<section id="slide-org4803e49" data-background="./assets/slide_background.png">
+<h3 id="org4803e49">How and where to get help</h3>
 <p>
 white<sub>check</sub><sub>mark</sub>
 100

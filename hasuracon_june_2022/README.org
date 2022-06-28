@@ -5,16 +5,16 @@
 
 #+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
 
-#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./slide_background.png
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./assets/slide_background.png
 #+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
 #+REVEAL_THEME: black
-#+REVEAL_TITLE_SLIDE_BACKGROUND: ./slide_background.png
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./assets/slide_background.png
 
 * 
 #+CAPTION: https://tinyurl.com/43vxsdmj
 #+ATTR_HTML: :width 50%
 #+ATTR_HTML: :height 50%
-[[file:qr.png]]
+[[file:assets/qr.png]]
 
 * Introduction
 
@@ -50,7 +50,7 @@ This is a note
 
 #+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
 
-[[file:GraphQL Logo (Rhodamine).svg]]
+[[file:assets/GraphQL Logo (Rhodamine).svg]]
 
 #+REVEAL_HTML: </div>
 
@@ -72,19 +72,19 @@ This is a note
 
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
-[[file:log_into_heroku.png]]
+[[file:assets/log_into_heroku.png]]
 
 *** Log into Hasura Cloud
 
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
-[[file:log_into_hasura_cloud.png]]
+[[file:assets/log_into_hasura_cloud.png]]
 
 *** Create a new Hasura Cloud Project
 
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
-[[file:create_new_hasura_project.png]]
+[[file:assets/create_new_hasura_project.png]]
 
 *** Create a new Heroku database
 
@@ -131,15 +131,15 @@ This is a note
 
 #+ATTR_HTML: :width 80%
 #+ATTR_HTML: :height 80%
-[[file:disable_schema_introspection.png]]
+[[file:assets/disable_schema_introspection.png]]
 
-*** Create a Securable Data Model
+*** Create a Se curable Data Model
 
 *** Set API Limits
 
 #+ATTR_HTML: :width 80%
 #+ATTR_HTML: :height 80%
-[[file:set_api_limits.png]]
+[[file:assets/set_api_limits.png]]
 
 *** Apply Permissions
 
@@ -154,7 +154,7 @@ This is a note
 AKA: rituals, cargo cults, security theater which you can get anywhere
 - Disable Console Access
 - Disable Schema Introspection
-- Disable Query Suggestions (unneccessary in Hasura)
+- Disable Query Suggestions (unnecessary in Hasura)
 - Impose API Limits
 - Whitelist Operations
 
@@ -168,7 +168,7 @@ AKA: possibly controversial opinions which you will get from me
 - If you applied the security principles carefully, deliberately, thoughtfully, then the console can't do anything unauthorized anyway.
 - Don't disable schema introspection and query suggestions.
 - The public will need to know how to use your public API (which you almost certainly shouldn't have anyway)
-- The public shouldn't have access to your private API (you did secure your API, add authentication, disable unauthorized access, build a rich data model, and apply fine-graned authorization, didn't you?)
+- The public shouldn't have access to your private API (you did secure your API, add authentication, disable unauthorized access, build a rich data model, and apply fine-grained authorization, didn't you?)
 - The information will get out anyway.
 - Don't use GraphQL security
 - Or at least, don't rely on it.
@@ -190,3 +190,5 @@ Life is about trade-offs.
 white_check_mark
 100
 raised_hands
+
+#  LocalWords:  toc controlsLayout controlsTutorial ATTR hasuraprod
