@@ -1,23 +1,29 @@
 #+TITLE: Securing your GraphQL API with Hasura
-#+SUBTITLE: HasuraCon 2022
+#+SUBTITLE: [[https://hasura.io/events/hasura-con-2022/][HasuraCon 2022]]
 #+AUTHOR: David A. Ventimiglia
 #+EMAIL: davidaventimiglia@hasura.io
 
-#+options: timestamp:nil title:t toc:nil todo:t |:t num:t author:nil
+#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
 
 #+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./slide_background.png
 #+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
 #+REVEAL_THEME: black
 #+REVEAL_TITLE_SLIDE_BACKGROUND: ./slide_background.png
 
+* 
+#+CAPTION: https://tinyurl.com/43vxsdmj
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:qr.png]]
+
 * Introduction
 
 *** Program
 
-- Hasura API Limits
-- Hasura Permissions
-- Hasura Allow Lists
-- Hasura REST Endpoints
+- [[https://hasura.io/docs/latest/graphql/cloud/security/api-limits/][Hasura API Limits]]
+- [[https://hasura.io/docs/latest/graphql/core/auth/authorization/permission-rules/][Hasura Permissions]]
+- [[https://hasura.io/docs/latest/graphql/cloud/security/allow-lists/][Hasura Allow Lists]]
+- [[https://hasura.io/docs/latest/graphql/core/api-reference/restified/][Hasura REST Endpoints]]
 
 #+begin_NOTES
 This is a note
@@ -33,56 +39,71 @@ This is a note
 
 *** Threats
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+
 - Deep Queries :: /Confidentiality, Availability/
 - Recursive Queries :: /Availability/
 - Unbounded Queries :: /Confidentiality, Availability/
 - Batch Requests :: /Confidentiality, Availability/
 
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
+
+[[file:GraphQL Logo (Rhodamine).svg]]
+
+#+REVEAL_HTML: </div>
+
 *** Application
 
-- [ ] +Secure the DB+
-- [X] Secure the Service
-- [ ] +Add Authentication+
-- [ ] +Disable Hasura Console+
-- [X] Disable Schema Introspection
-- [X] Create a Securable Data Model
-- [X] Set API Limits
-- [X] Apply Permissions
-- [X] Use Allow Lists
-- [X] Create REST Endpoints
+- [[https://hasura.io/docs/latest/graphql/core/deployment/postgres-requirements/][+Secure the DB+]]
+- [[https://hasura.io/docs/latest/graphql/core/deployment/securing-graphql-endpoint/][Secure the Service]]
+- [[https://hasura.io/docs/latest/graphql/core/auth/authentication/index/][+Add Authentication+]]
+- [[https://hasura.io/docs/latest/graphql/core/deployment/graphql-engine-flags/reference/][+Disable Hasura Console+]]
+- [[https://hasura.io/docs/latest/graphql/cloud/security/disable-graphql-introspection/][Disable Schema Introspection]]
+- [[https://hasura.io/docs/latest/graphql/cloud/security/api-limits/][Set API Limits]]
+- [[https://hasura.io/docs/latest/graphql/core/auth/authorization/permission-rules/][Apply Permissions]]
+- [[https://hasura.io/docs/latest/graphql/core/deployment/allow-list/][Use Allow Lists]]
+- [[https://hasura.io/docs/latest/graphql/core/api-reference/restified/][Create REST Endpoints]]
 
 * Workshop
 
-*** Setup: Log into Heroku
+*** Log into Heroku
 
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
 [[file:log_into_heroku.png]]
 
-*** Setup: Log into Hasura Cloud
+*** Log into Hasura Cloud
 
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
 [[file:log_into_hasura_cloud.png]]
 
-*** Setup: Create a new Hasura Cloud Project
+*** Create a new Hasura Cloud Project
 
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
 [[file:create_new_hasura_project.png]]
 
-*** Setup: Create a new Heroku database
+*** Create a new Heroku database
 
-*** Setup: Connect to the database (OPTIONAL)
+*** +Connect to the database+
 
 #+begin_src shell :export both
-  PGHOST=<hostname> PGPORT=<port> PGDATABASE=<db> PGUSER=<username> PGPASSWORD=<password> psql
   psql -h <hostname> -p <port> -d <db> -U <username> psql
-  heroku pg:credentials:url -a <app>
   heroku psql -a <app>
 #+end_src
 
-*** Secure the DB (OPTIONAL)
+*** +Secure the DB+
 
 - Create a dedicated DB user for PROD.
 - ~REVOKE~ DML (maybe).
 - ~REVOKE~ DDL (definitely).
 - Use a [[https://hasura.io/docs/latest/graphql/core/getting-started/docker-simple/][separate dev instance]] with elevated permissions for data modeling.
 - Use an env var like ~PG_DATABASE_URL~ with your Hasuras.
+
+#+REVEAL: split
 
  #+begin_src sql
    -- Read-only? (not on Heroku hobby tier!)
@@ -97,23 +118,27 @@ This is a note
 
 - ~HASURA_GRAPHQL_ADMIN_SECRET~
 
-*** Add Authentication (OPTIONAL)
+*** +Add Authentication+
 
 - ~HASURA_GRAPHQL_AUTH_HOOK~
 - ~HASURA_GRAPHQL_AUTH_HOOK_MODE~
 
-*** Disable Hasura Console (OPTIONAL)
+*** +Disable Hasura Console+
 
 - ~HASURA_GRAPHQL_ENABLE_CONSOLE~
 
 *** Disable Schema Introspection
 
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
 [[file:disable_schema_introspection.png]]
 
 *** Create a Securable Data Model
 
 *** Set API Limits
 
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
 [[file:set_api_limits.png]]
 
 *** Apply Permissions

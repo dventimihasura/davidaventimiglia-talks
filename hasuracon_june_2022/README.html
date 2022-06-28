@@ -1,349 +1,276 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8"/>
 <title>Securing your GraphQL API with Hasura</title>
-<meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { }
+<meta name="author" content="David A. Ventimiglia"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
 </style>
+<link rel="stylesheet" href="./reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/black.css" id="theme"/>
+
 </head>
 <body>
-<div id="content" class="content">
-<h1 class="title">Securing your GraphQL API with Hasura
-<br />
-<span class="subtitle">HasuraCon 2022</span>
-</h1>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-background="./slide_background.png"><h1 class="title">Securing your GraphQL API with Hasura</h1><p class="subtitle"><a href="https://hasura.io/events/hasura-con-2022/">HasuraCon 2022</a></p>
 
-<div id="outline-container-org3f0cd49" class="outline-2">
-<h2 id="org3f0cd49"><span class="section-number-2">1.</span> Introduction</h2>
-<div class="outline-text-2" id="text-1">
+</section>
+
+<section>
+<section id="slide-org00d6f48" data-background="./slide_background.png">
+<h2 id="org00d6f48"></h2>
+
+<div id="orgc054298" class="figure">
+<p><img src="qr.png" alt="qr.png" height="50%" width="50%" />
+</p>
+<p><span class="figure-number">Figure 1: </span><a href="https://tinyurl.com/43vxsdmj">https://tinyurl.com/43vxsdmj</a></p>
 </div>
-<div id="outline-container-org0fa2a0b" class="outline-3">
-<h3 id="org0fa2a0b"><span class="section-number-3">1.1.</span> Principles</h3>
-<div class="outline-text-3" id="text-1-1">
-<dl class="org-dl">
+
+</section>
+</section>
+<section>
+<section id="slide-org33ad73a" data-background="./slide_background.png">
+<h2 id="org33ad73a">Introduction</h2>
+<div class="outline-text-2" id="text-org33ad73a">
+</div>
+</section>
+<section id="slide-orge87251a" data-background="./slide_background.png">
+<h3 id="orge87251a">Program</h3>
+<ul>
+<li><a href="https://hasura.io/docs/latest/graphql/cloud/security/api-limits/">Hasura API Limits</a></li>
+<li><a href="https://hasura.io/docs/latest/graphql/core/auth/authorization/permission-rules/">Hasura Permissions</a></li>
+<li><a href="https://hasura.io/docs/latest/graphql/cloud/security/allow-lists/">Hasura Allow Lists</a></li>
+<li><a href="https://hasura.io/docs/latest/graphql/core/api-reference/restified/">Hasura REST Endpoints</a></li>
+
+</ul>
+
+<aside class="notes">
+<p>
+This is a note
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org8001e30" data-background="./slide_background.png">
+<h3 id="org8001e30">Principles</h3>
+<dl>
 <dt>Risk Management</dt><dd><i>Life is about trade-offs.</i></dd>
 <dt>Goal Setting</dt><dd><i>Confidentiality, Integrity, Availability</i></dd>
 <dt>Defense in Depth</dt><dd><i>Bottom-Up</i></dd>
 <dt>Simplicity</dt><dd><i>Complexity is the Enemy of Security</i></dd>
 <dt>Least Privilege</dt><dd><i>The most secure API does nothing at all.</i></dd>
-</dl>
-</div>
-</div>
 
-<div id="outline-container-org78fa51f" class="outline-3">
-<h3 id="org78fa51f"><span class="section-number-3">1.2.</span> Threats</h3>
-<div class="outline-text-3" id="text-1-2">
-<dl class="org-dl">
+</dl>
+
+</section>
+<section id="slide-orgb731692" data-background="./slide_background.png">
+<h3 id="orgb731692">Threats</h3>
+<div class="column" style="float:left; width:75%">
+
+<dl>
 <dt>Deep Queries</dt><dd><i>Confidentiality, Availability</i></dd>
 <dt>Recursive Queries</dt><dd><i>Availability</i></dd>
 <dt>Unbounded Queries</dt><dd><i>Confidentiality, Availability</i></dd>
 <dt>Batch Requests</dt><dd><i>Confidentiality, Availability</i></dd>
+
 </dl>
-</div>
+
 </div>
 
-<div id="outline-container-orgf90ca4e" class="outline-3">
-<h3 id="orgf90ca4e"><span class="section-number-3">1.3.</span> Application</h3>
-<div class="outline-text-3" id="text-1-3">
-<ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> <del>Secure the DB</del></li>
-<li class="on"><code>[X]</code> Secure the Service</li>
-<li class="off"><code>[&#xa0;]</code> <del>Add Authentication</del></li>
-<li class="off"><code>[&#xa0;]</code> <del>Disable Hasura Console</del></li>
-<li class="on"><code>[X]</code> Disable Schema Introspection</li>
-<li class="on"><code>[X]</code> Create a Securable Data Model</li>
-<li class="on"><code>[X]</code> Set API Limits</li>
-<li class="on"><code>[X]</code> Apply Permissions</li>
-<li class="on"><code>[X]</code> Use Allow Lists</li>
-<li class="on"><code>[X]</code> Create REST Endpoints</li>
+<div class="column" style="float:right; width:25%;">
+
+
+<div id="org51b4e2d" class="figure">
+<p><img src="GraphQL Logo (Rhodamine).svg" alt="GraphQL Logo (Rhodamine).svg" class="org-svg" />
+</p>
+</div>
+
+</div>
+
+</section>
+<section id="slide-org1f6af9a" data-background="./slide_background.png">
+<h3 id="org1f6af9a">Application</h3>
+<ul>
+<li><a href="https://hasura.io/docs/latest/graphql/core/deployment/postgres-requirements/"><del>Secure the DB</del></a></li>
+<li><a href="https://hasura.io/docs/latest/graphql/core/deployment/securing-graphql-endpoint/">Secure the Service</a></li>
+<li><a href="https://hasura.io/docs/latest/graphql/core/auth/authentication/index/"><del>Add Authentication</del></a></li>
+<li><a href="https://hasura.io/docs/latest/graphql/core/deployment/graphql-engine-flags/reference/"><del>Disable Hasura Console</del></a></li>
+<li><a href="https://hasura.io/docs/latest/graphql/cloud/security/disable-graphql-introspection/">Disable Schema Introspection</a></li>
+<li><a href="https://hasura.io/docs/latest/graphql/cloud/security/api-limits/">Set API Limits</a></li>
+<li><a href="https://hasura.io/docs/latest/graphql/core/auth/authorization/permission-rules/">Apply Permissions</a></li>
+<li><a href="https://hasura.io/docs/latest/graphql/core/deployment/allow-list/">Use Allow Lists</a></li>
+<li><a href="https://hasura.io/docs/latest/graphql/core/api-reference/restified/">Create REST Endpoints</a></li>
+
 </ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org0dca689" data-background="./slide_background.png">
+<h2 id="org0dca689">Workshop</h2>
+<div class="outline-text-2" id="text-org0dca689">
 </div>
-</div>
+</section>
+<section id="slide-org89e9013" data-background="./slide_background.png">
+<h3 id="org89e9013">Log into Heroku</h3>
+
+<div id="orgcbfb2c5" class="figure">
+<p><img src="log_into_heroku.png" alt="log_into_heroku.png" height="40%" width="40%" />
+</p>
 </div>
 
-<div id="outline-container-orga01e987" class="outline-2">
-<h2 id="orga01e987"><span class="section-number-2">2.</span> Workshop</h2>
-<div class="outline-text-2" id="text-2">
-</div>
-<div id="outline-container-org0f269c4" class="outline-3">
-<h3 id="org0f269c4"><span class="section-number-3">2.1.</span> Setup: Log into Heroku</h3>
+</section>
+<section id="slide-org9e7928b" data-background="./slide_background.png">
+<h3 id="org9e7928b">Log into Hasura Cloud</h3>
+
+<div id="org359b013" class="figure">
+<p><img src="log_into_hasura_cloud.png" alt="log_into_hasura_cloud.png" height="40%" width="40%" />
+</p>
 </div>
 
-<div id="outline-container-org2d8a65d" class="outline-3">
-<h3 id="org2d8a65d"><span class="section-number-3">2.2.</span> Setup: Log into Hasura Cloud</h3>
+</section>
+<section id="slide-org57b63fb" data-background="./slide_background.png">
+<h3 id="org57b63fb">Create a new Hasura Cloud Project</h3>
+
+<div id="org3bcf4e9" class="figure">
+<p><img src="create_new_hasura_project.png" alt="create_new_hasura_project.png" height="40%" width="40%" />
+</p>
 </div>
 
-<div id="outline-container-org2fb297a" class="outline-3">
-<h3 id="org2fb297a"><span class="section-number-3">2.3.</span> Setup: Create a new Hasura Cloud Project</h3>
+</section>
+<section id="slide-org57af340" data-background="./slide_background.png">
+<h3 id="org57af340">Create a new Heroku database</h3>
+
+</section>
+<section id="slide-org0ed47a2" data-background="./slide_background.png">
+<h3 id="org0ed47a2"><del>Connect to the database</del></h3>
+<div class="org-src-container">
+
+<pre  class="src src-shell"   ><code trim>psql -h &lt;hostname&gt; -p &lt;port&gt; -d &lt;db&gt; -U &lt;username&gt; psql
+heroku psql -a &lt;app&gt;
+</code></pre>
 </div>
 
-<div id="outline-container-org1411ccd" class="outline-3">
-<h3 id="org1411ccd"><span class="section-number-3">2.4.</span> Setup: Create a new Heroku database</h3>
+</section>
+<section id="slide-org6863648" data-background="./slide_background.png">
+<h3 id="org6863648"><del>Secure the DB</del></h3>
+<ul>
+<li>Create a dedicated DB user for PROD.</li>
+<li><code>REVOKE</code> DML (maybe).</li>
+<li><code>REVOKE</code> DDL (definitely).</li>
+<li>Use a <a href="https://hasura.io/docs/latest/graphql/core/getting-started/docker-simple/">separate dev instance</a> with elevated permissions for data modeling.</li>
+<li>Use an env var like <code>PG_DATABASE_URL</code> with your Hasuras.</li>
+
+</ul>
+
+</section>
+<section id="slide-org6863648-split" data-background="./slide_background.png">
+
+<div class="org-src-container">
+
+<pre  class="src src-sql"   ><code trim>-- Read-only? (not on Heroku hobby tier!)
+CREATE USER hasuraprod WITH PASSWORD 'hasuraprod';
+GRANT CONNECT ON DATABASE &lt;db&gt; TO hasuraprod;
+GRANT USAGE ON SCHEMA &lt;schema&gt; TO hasuraprod;
+GRANT SELECT ON ALL TABLES IN SCHEMA &lt;schema&gt; TO hasuraprod;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA &lt;schema&gt; TO hasuraprod;
+</code></pre>
 </div>
 
-<div id="outline-container-orgd5eba35" class="outline-3">
-<h3 id="orgd5eba35"><span class="section-number-3">2.5.</span> Setup: Connect to the database (OPTIONAL)</h3>
+</section>
+<section id="slide-org312880d" data-background="./slide_background.png">
+<h3 id="org312880d">Secure the Service</h3>
+<ul>
+<li><code>HASURA_GRAPHQL_ADMIN_SECRET</code></li>
+
+</ul>
+
+</section>
+<section id="slide-org2ba7766" data-background="./slide_background.png">
+<h3 id="org2ba7766"><del>Add Authentication</del></h3>
+<ul>
+<li><code>HASURA_GRAPHQL_AUTH_HOOK</code></li>
+<li><code>HASURA_GRAPHQL_AUTH_HOOK_MODE</code></li>
+
+</ul>
+
+</section>
+<section id="slide-orgc14d4af" data-background="./slide_background.png">
+<h3 id="orgc14d4af"><del>Disable Hasura Console</del></h3>
+<ul>
+<li><code>HASURA_GRAPHQL_ENABLE_CONSOLE</code></li>
+
+</ul>
+
+</section>
+<section id="slide-orgf9236df" data-background="./slide_background.png">
+<h3 id="orgf9236df">Disable Schema Introspection</h3>
+
+<div id="orgecc1906" class="figure">
+<p><img src="disable_schema_introspection.png" alt="disable_schema_introspection.png" height="80%" width="80%" />
+</p>
 </div>
 
-<div id="outline-container-org6ad2877" class="outline-3">
-<h3 id="org6ad2877"><span class="section-number-3">2.6.</span> Secure the DB (OPTIONAL)</h3>
+</section>
+<section id="slide-org244b7f0" data-background="./slide_background.png">
+<h3 id="org244b7f0">Create a Securable Data Model</h3>
+
+</section>
+<section id="slide-orgafa4e7b" data-background="./slide_background.png">
+<h3 id="orgafa4e7b">Set API Limits</h3>
+
+<div id="org11e91a8" class="figure">
+<p><img src="set_api_limits.png" alt="set_api_limits.png" height="80%" width="80%" />
+</p>
 </div>
 
-<div id="outline-container-org591be3c" class="outline-3">
-<h3 id="org591be3c"><span class="section-number-3">2.7.</span> Secure the Service</h3>
-<div class="outline-text-3" id="text-2-7">
-<dl class="org-dl">
-<dt>Admin Secret</dt><dd><i>prevent public access</i></dd>
-</dl>
-</div>
-</div>
+</section>
+<section id="slide-orgd6b28a7" data-background="./slide_background.png">
+<h3 id="orgd6b28a7">Apply Permissions</h3>
 
-<div id="outline-container-orgbc411c0" class="outline-3">
-<h3 id="orgbc411c0"><span class="section-number-3">2.8.</span> Add Authentication (OPTIONAL)</h3>
-</div>
+</section>
+<section id="slide-org0abaee2" data-background="./slide_background.png">
+<h3 id="org0abaee2">Use Allow Lists</h3>
 
-<div id="outline-container-orged9855a" class="outline-3">
-<h3 id="orged9855a"><span class="section-number-3">2.9.</span> Disable Hasura Console (OPTIONAL)</h3>
-</div>
+</section>
+<section id="slide-orgd68e21b" data-background="./slide_background.png">
+<h3 id="orgd68e21b">Create REST Endpoints</h3>
 
-<div id="outline-container-orgd419aff" class="outline-3">
-<h3 id="orgd419aff"><span class="section-number-3">2.10.</span> Disable Schema Introspection</h3>
+</section>
+</section>
+<section>
+<section id="slide-org33a4d60" data-background="./slide_background.png">
+<h2 id="org33a4d60">Discussion</h2>
+<div class="outline-text-2" id="text-org33a4d60">
 </div>
-
-<div id="outline-container-org6847251" class="outline-3">
-<h3 id="org6847251"><span class="section-number-3">2.11.</span> Create a Securable Data Model</h3>
-</div>
-
-<div id="outline-container-org3ebe2e3" class="outline-3">
-<h3 id="org3ebe2e3"><span class="section-number-3">2.12.</span> Set API Limits</h3>
-</div>
-
-<div id="outline-container-orgba63141" class="outline-3">
-<h3 id="orgba63141"><span class="section-number-3">2.13.</span> Apply Permissions</h3>
-</div>
-
-<div id="outline-container-org9bc0109" class="outline-3">
-<h3 id="org9bc0109"><span class="section-number-3">2.14.</span> Use Allow Lists</h3>
-</div>
-
-<div id="outline-container-orgf3d64a3" class="outline-3">
-<h3 id="orgf3d64a3"><span class="section-number-3">2.15.</span> Create REST Endpoints</h3>
-</div>
-</div>
-
-<div id="outline-container-org554ce71" class="outline-2">
-<h2 id="org554ce71"><span class="section-number-2">3.</span> Discussion</h2>
-<div class="outline-text-2" id="text-3">
-</div>
-<div id="outline-container-orgaa305e2" class="outline-3">
-<h3 id="orgaa305e2"><span class="section-number-3">3.1.</span> GraphQL Security Orthodoxy</h3>
-<div class="outline-text-3" id="text-3-1">
+</section>
+<section id="slide-org15b2b3e" data-background="./slide_background.png">
+<h3 id="org15b2b3e">GraphQL Security Orthodoxy</h3>
 <p>
 AKA: rituals, cargo cults, security theater which you can get anywhere
 </p>
-<ul class="org-ul">
+<ul>
 <li>Disable Console Access</li>
 <li>Disable Schema Introspection</li>
 <li>Disable Query Suggestions (unneccessary in Hasura)</li>
 <li>Impose API Limits</li>
 <li>Whitelist Operations</li>
-</ul>
-</div>
-</div>
 
-<div id="outline-container-orgb59c080" class="outline-3">
-<h3 id="orgb59c080"><span class="section-number-3">3.2.</span> GraphQL Security Heterodoxy</h3>
-<div class="outline-text-3" id="text-3-2">
+</ul>
+
+</section>
+<section id="slide-org37b4e22" data-background="./slide_background.png">
+<h3 id="org37b4e22">GraphQL Security Heterodoxy</h3>
 <p>
 AKA: possibly controversial opinions which you will get from me
 </p>
-<ul class="org-ul">
+<ul>
 <li>Don't confuse public vs private:</li>
 <li>If you don't <i>need</i> to provide a public API, then don't.</li>
 <li>If you're not providing a public API, then don't act like you are.</li>
@@ -357,43 +284,57 @@ AKA: possibly controversial opinions which you will get from me
 <li>Or at least, don't rely on it.</li>
 <li>Work diligently from the bottom-up, applying the principles carefully, deliberately, thoughtfully, and you (almost) won't need it.</li>
 <li>Remember "managing risk", "cargo cults", and "security theater".</li>
+
 </ul>
 <p>
 Life is about trade-offs.
 </p>
-<ul class="org-ul">
+<ul>
 <li>Don't use GraphQL</li>
 <li>For private APIs, that is.</li>
 <li>Use Allow Lists.</li>
 <li>And if you're using Allow Lists, you might as well use REST endpoints.</li>
 <li>GraphQL is for <i>people</i> (i.e. developers), not for machines.</li>
+
 </ul>
-</div>
-</div>
-</div>
 
-<div id="outline-container-org437ebe6" class="outline-2">
-<h2 id="org437ebe6"><span class="section-number-2">4.</span> Closing Remarks</h2>
-<div class="outline-text-2" id="text-4">
+</section>
+</section>
+<section>
+<section id="slide-org949d1b9" data-background="./slide_background.png">
+<h2 id="org949d1b9">Closing Remarks</h2>
+<div class="outline-text-2" id="text-org949d1b9">
 </div>
-<div id="outline-container-org7af48f2" class="outline-3">
-<h3 id="org7af48f2"><span class="section-number-3">4.1.</span> References</h3>
-</div>
+</section>
+<section id="slide-org62395ab" data-background="./slide_background.png">
+<h3 id="org62395ab">References</h3>
 
-<div id="outline-container-org63e27d5" class="outline-3">
-<h3 id="org63e27d5"><span class="section-number-3">4.2.</span> How and where to get help</h3>
-<div class="outline-text-3" id="text-4-2">
+</section>
+<section id="slide-org758bcbc" data-background="./slide_background.png">
+<h3 id="org758bcbc">How and where to get help</h3>
 <p>
 white<sub>check</sub><sub>mark</sub>
 100
 raised<sub>hands</sub>
 </p>
+</section>
+</section>
 </div>
 </div>
-</div>
-</div>
-<div id="postamble" class="status">
-<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
-</div>
+<script src="./reveal.js/dist/reveal.js"></script>
+<script src="./reveal.js/plugin/markdown/markdown.js"></script>
+<script src="./reveal.js/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown, RevealZoom, RevealNotes],
+transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+});
+
+</script>
 </body>
 </html>
