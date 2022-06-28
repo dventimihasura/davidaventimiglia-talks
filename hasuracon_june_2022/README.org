@@ -12,6 +12,17 @@
 
 * Introduction
 
+*** Program
+
+- Hasura API Limits
+- Hasura Permissions
+- Hasura Allow Lists
+- Hasura REST Endpoints
+
+#+begin_NOTES
+This is a note
+#+end_NOTES
+
 *** Principles
 
 - Risk Management :: /Life is about trade-offs./
@@ -44,29 +55,66 @@
 
 *** Setup: Log into Heroku
 
+[[file:log_into_heroku.png]]
+
 *** Setup: Log into Hasura Cloud
 
+[[file:log_into_hasura_cloud.png]]
+
 *** Setup: Create a new Hasura Cloud Project
+
+[[file:create_new_hasura_project.png]]
 
 *** Setup: Create a new Heroku database
 
 *** Setup: Connect to the database (OPTIONAL)
 
+#+begin_src shell :export both
+  PGHOST=<hostname> PGPORT=<port> PGDATABASE=<db> PGUSER=<username> PGPASSWORD=<password> psql
+  psql -h <hostname> -p <port> -d <db> -U <username> psql
+  heroku pg:credentials:url -a <app>
+  heroku psql -a <app>
+#+end_src
+
 *** Secure the DB (OPTIONAL)
+
+- Create a dedicated DB user for PROD.
+- ~REVOKE~ DML (maybe).
+- ~REVOKE~ DDL (definitely).
+- Use a [[https://hasura.io/docs/latest/graphql/core/getting-started/docker-simple/][separate dev instance]] with elevated permissions for data modeling.
+- Use an env var like ~PG_DATABASE_URL~ with your Hasuras.
+
+ #+begin_src sql
+   -- Read-only? (not on Heroku hobby tier!)
+   CREATE USER hasuraprod WITH PASSWORD 'hasuraprod';
+   GRANT CONNECT ON DATABASE <db> TO hasuraprod;
+   GRANT USAGE ON SCHEMA <schema> TO hasuraprod;
+   GRANT SELECT ON ALL TABLES IN SCHEMA <schema> TO hasuraprod;
+   GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA <schema> TO hasuraprod;
+ #+end_src
 
 *** Secure the Service
 
-- Admin Secret :: /prevent public access/
+- ~HASURA_GRAPHQL_ADMIN_SECRET~
 
 *** Add Authentication (OPTIONAL)
 
+- ~HASURA_GRAPHQL_AUTH_HOOK~
+- ~HASURA_GRAPHQL_AUTH_HOOK_MODE~
+
 *** Disable Hasura Console (OPTIONAL)
 
+- ~HASURA_GRAPHQL_ENABLE_CONSOLE~
+
 *** Disable Schema Introspection
+
+[[file:disable_schema_introspection.png]]
 
 *** Create a Securable Data Model
 
 *** Set API Limits
+
+[[file:set_api_limits.png]]
 
 *** Apply Permissions
 
