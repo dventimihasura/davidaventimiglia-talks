@@ -1,8 +1,24 @@
 # -*- mode: restclient -*-
 
-# Account Order Details
-GET https://graphql-security-1.hasura.app/api/rest/rest-account-order-details
-Content-type: application/json
-x-hasura-role: admin
-x-hasura-user-id: 003701fe-0f29-41b7-94dc-b92073bb955a
+# Account
+GET https://emerging-quetzal-42.hasura.app/api/rest/account
+Content-Type: application/json
+x-hasura-admin-secret: 4bdXZ845yRafHd8IhMLKsWjGjN2r9tSIK5rO8aogrN0bNiLDfAvEQT7xAhnqhwEg
+x-hasura-role: user
+x-hasura-user-id: 00122179-78c1-4004-92e9-42f2451e3eef
+
+# Account Summary
+GET https://emerging-quetzal-42.hasura.app/api/rest/accountsummary
+Content-Type: application/json
+x-hasura-admin-secret: 4bdXZ845yRafHd8IhMLKsWjGjN2r9tSIK5rO8aogrN0bNiLDfAvEQT7xAhnqhwEg
+x-hasura-role: user
+x-hasura-user-id: 00122179-78c1-4004-92e9-42f2451e3eef
+
+# Product Search
+GET https://emerging-quetzal-42.hasura.app/api/rest/productsearch/apple
+Content-Type: application/json
+x-hasura-admin-secret: 4bdXZ845yRafHd8IhMLKsWjGjN2r9tSIK5rO8aogrN0bNiLDfAvEQT7xAhnqhwEg
+x-hasura-role: user
+x-hasura-user-id: 00122179-78c1-4004-92e9-42f2451e3eef
+
 

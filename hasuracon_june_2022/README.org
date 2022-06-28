@@ -1,9 +1,9 @@
-#+TITLE: GraphQL Security Workshop
-#+SUBTITLE: HasuraCon
+#+TITLE: Securing your GraphQL API with Hasura
+#+SUBTITLE: HasuraCon 2022
 #+AUTHOR: David A. Ventimiglia
 #+EMAIL: davidaventimiglia@hasura.io
 
-#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
+#+options: timestamp:nil title:t toc:nil todo:t |:t num:t author:nil
 
 #+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./slide_background.png
 #+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
@@ -12,120 +12,67 @@
 
 * Introduction
 
-*** Bio
+*** Principles
 
-*** Risk Management
+- Risk Management :: /Life is about trade-offs./
+- Goal Setting :: /Confidentiality, Integrity, Availability/
+- Defense in Depth :: /Bottom-Up/
+- Simplicity :: /Complexity is the Enemy of Security/
+- Least Privilege :: /The most secure API does nothing at all./
 
-*** Security Goals
+*** Threats
 
-- Confidentiality :: disclosure of sensitive information
-- Integrity :: destruction of sensitive information
-- Availability :: denial of service of an information provider
+- Deep Queries :: /Confidentiality, Availability/
+- Recursive Queries :: /Availability/
+- Unbounded Queries :: /Confidentiality, Availability/
+- Batch Requests :: /Confidentiality, Availability/
 
-*** Defense in Depth
+*** Application
 
-- Build authorization into the data model.
-- Apply redundant measures at every level (within reason).
-- Avoid identity erasure (i.e., preserve contextual information
-  especially about the caller, throughout the call-chain, in order to
-  enable authorization to be implemented properly).
-
-*** Simplicity
-
-- Complexity is the enemy of security.
-- Adopt a principled approach.
-
-*** Least privilege
-
-- The most secure API is the one that does nothing at all.
-- Never trust anyone (within reason).
-- Opt /in/ to functionality (i.e., "whitelist").Don't rely on Opt
-  /out/ (i.e. "blacklist").
+- [ ] +Secure the DB+
+- [X] Secure the Service
+- [ ] +Add Authentication+
+- [ ] +Disable Hasura Console+
+- [X] Disable Schema Introspection
+- [X] Create a Securable Data Model
+- [X] Set API Limits
+- [X] Apply Permissions
+- [X] Use Allow Lists
+- [X] Create REST Endpoints
 
 * Workshop
 
-*** Log Into Heroku
+*** Setup: Log into Heroku
 
-*** Log Into Hasura Cloud
+*** Setup: Log into Hasura Cloud
 
-*** Create New Hasura Cloud Project
+*** Setup: Create a new Hasura Cloud Project
 
-*** Create New Heroku Database
+*** Setup: Create a new Heroku database
 
-*** Create Data Model
+*** Setup: Connect to the database (OPTIONAL)
 
-[[file:init_model.sql]]
+*** Secure the DB (OPTIONAL)
 
-*** Insert Sample Data
+*** Secure the Service
 
-[[file:init_data.sql]]
+- Admin Secret :: /prevent public access/
 
-*** Secure your service
+*** Add Authentication (OPTIONAL)
 
-- The "admin secret" and the role it plays
+*** Disable Hasura Console (OPTIONAL)
 
-*** Add authentication
+*** Disable Schema Introspection
 
-- Remember "identity erasure"?
+*** Create a Securable Data Model
 
-*** Develop a secure data model
+*** Set API Limits
 
-- Remember "defense in depth"?
-- Set up database roles.
-- (Hasura has insufficient support for these, but they're prudent anyway)
-- Do /not/ configure the Hasura database credentials with a database
-  superuser. What are you /Crazy/?
-- Understand the Hasura authorization model
-- We will have to revisit the interplay between data modeling and the
-  Hasura authorization model repeatedly.
-- Think carefully about what you need to expose.
-- Expose the bare minimum, and no more.
-- Consider organizing your data model with multiple schema, with
-  appropriate roles, with a core set of tables that are not tracked
-  and not even accessible, and with all operations going through
-  views.
-- Note: you lose the convenience of Hasura suggesting relationships
-  based on foreign key constraints.
-- Use all the data modeling tools at your disposal to develop a rich,
-  detailed, domain-specific data model.Your data model and especially
-  its types and constraints are foundational.They are your ultimate
-  line-of-defense against invalid operations.
-- core data types
-- custom data types
-- custom domains
-- constraints (unique, foreign, check)
-- triggers
-- functions
-- views
-- policies
+*** Apply Permissions
 
-*** Apply Hasura permissions
+*** Use Allow Lists
 
-- With and without custom checks
-- Column permissions
-- "Backend only" mutations
-
-*** Apply Hasura API Security
-
-- Turning off introspection
-- Applying limits
-- Depth
-- Nodes
-- Rate
-- Time
-- +Complexity+
-
-*** Applying Hasura Allow Lists
-
-- Through the CLI
-- Through Console
-
-*** Miscellaneous
-
-- Disabling Console
-- Disallowing unauthenticated access
-- REST Endpoints
-- ???
+*** Create REST Endpoints
 
 * Discussion
 

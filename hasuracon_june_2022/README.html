@@ -1,507 +1,399 @@
-<!DOCTYPE html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<meta charset="utf-8"/>
-<title>GraphQL Security</title>
-<meta name="author" content="David A. Ventimiglia"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
-<style type="text/css">
-.underline { text-decoration: underline; }
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Securing your GraphQL API with Hasura</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
 </style>
-<link rel="stylesheet" href="./reveal.js/dist/reveal.css"/>
-
-<link rel="stylesheet" href="./reveal.js/dist/theme/black.css" id="theme"/>
-
-
-<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-<script>
-    if( window.location.search.match( /print-pdf/gi ) ) {
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = './reveal.js/css/print/pdf.css';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
-    }
-</script>
 </head>
 <body>
-<div class="reveal">
-<div class="slides">
-<section id="sec-title-slide" data-background="./slide_background.png"><h1 class="title">GraphQL Security</h1><p class="subtitle">Something Old, Something New</p>
+<div id="content" class="content">
+<h1 class="title">Securing your GraphQL API with Hasura
+<br />
+<span class="subtitle">HasuraCon 2022</span>
+</h1>
 
-</section>
-
-<section>
-<section id="slide-org032b30b" data-background="./slide_background.png">
-<h2 id="org032b30b">Who</h2>
-<div class="outline-text-2" id="text-org032b30b">
+<div id="outline-container-org3f0cd49" class="outline-2">
+<h2 id="org3f0cd49"><span class="section-number-2">1.</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
 </div>
-</section>
-<section id="slide-orgc895dc3" data-background="./slide_background.png">
-<h3 id="orgc895dc3">David A. Ventimiglia</h3>
-<blockquote >
+<div id="outline-container-org0fa2a0b" class="outline-3">
+<h3 id="org0fa2a0b"><span class="section-number-3">1.1.</span> Principles</h3>
+<div class="outline-text-3" id="text-1-1">
+<dl class="org-dl">
+<dt>Risk Management</dt><dd><i>Life is about trade-offs.</i></dd>
+<dt>Goal Setting</dt><dd><i>Confidentiality, Integrity, Availability</i></dd>
+<dt>Defense in Depth</dt><dd><i>Bottom-Up</i></dd>
+<dt>Simplicity</dt><dd><i>Complexity is the Enemy of Security</i></dd>
+<dt>Least Privilege</dt><dd><i>The most secure API does nothing at all.</i></dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org78fa51f" class="outline-3">
+<h3 id="org78fa51f"><span class="section-number-3">1.2.</span> Threats</h3>
+<div class="outline-text-3" id="text-1-2">
+<dl class="org-dl">
+<dt>Deep Queries</dt><dd><i>Confidentiality, Availability</i></dd>
+<dt>Recursive Queries</dt><dd><i>Availability</i></dd>
+<dt>Unbounded Queries</dt><dd><i>Confidentiality, Availability</i></dd>
+<dt>Batch Requests</dt><dd><i>Confidentiality, Availability</i></dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-orgf90ca4e" class="outline-3">
+<h3 id="orgf90ca4e"><span class="section-number-3">1.3.</span> Application</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> <del>Secure the DB</del></li>
+<li class="on"><code>[X]</code> Secure the Service</li>
+<li class="off"><code>[&#xa0;]</code> <del>Add Authentication</del></li>
+<li class="off"><code>[&#xa0;]</code> <del>Disable Hasura Console</del></li>
+<li class="on"><code>[X]</code> Disable Schema Introspection</li>
+<li class="on"><code>[X]</code> Create a Securable Data Model</li>
+<li class="on"><code>[X]</code> Set API Limits</li>
+<li class="on"><code>[X]</code> Apply Permissions</li>
+<li class="on"><code>[X]</code> Use Allow Lists</li>
+<li class="on"><code>[X]</code> Create REST Endpoints</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga01e987" class="outline-2">
+<h2 id="orga01e987"><span class="section-number-2">2.</span> Workshop</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org0f269c4" class="outline-3">
+<h3 id="org0f269c4"><span class="section-number-3">2.1.</span> Setup: Log into Heroku</h3>
+</div>
+
+<div id="outline-container-org2d8a65d" class="outline-3">
+<h3 id="org2d8a65d"><span class="section-number-3">2.2.</span> Setup: Log into Hasura Cloud</h3>
+</div>
+
+<div id="outline-container-org2fb297a" class="outline-3">
+<h3 id="org2fb297a"><span class="section-number-3">2.3.</span> Setup: Create a new Hasura Cloud Project</h3>
+</div>
+
+<div id="outline-container-org1411ccd" class="outline-3">
+<h3 id="org1411ccd"><span class="section-number-3">2.4.</span> Setup: Create a new Heroku database</h3>
+</div>
+
+<div id="outline-container-orgd5eba35" class="outline-3">
+<h3 id="orgd5eba35"><span class="section-number-3">2.5.</span> Setup: Connect to the database (OPTIONAL)</h3>
+</div>
+
+<div id="outline-container-org6ad2877" class="outline-3">
+<h3 id="org6ad2877"><span class="section-number-3">2.6.</span> Secure the DB (OPTIONAL)</h3>
+</div>
+
+<div id="outline-container-org591be3c" class="outline-3">
+<h3 id="org591be3c"><span class="section-number-3">2.7.</span> Secure the Service</h3>
+<div class="outline-text-3" id="text-2-7">
+<dl class="org-dl">
+<dt>Admin Secret</dt><dd><i>prevent public access</i></dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-orgbc411c0" class="outline-3">
+<h3 id="orgbc411c0"><span class="section-number-3">2.8.</span> Add Authentication (OPTIONAL)</h3>
+</div>
+
+<div id="outline-container-orged9855a" class="outline-3">
+<h3 id="orged9855a"><span class="section-number-3">2.9.</span> Disable Hasura Console (OPTIONAL)</h3>
+</div>
+
+<div id="outline-container-orgd419aff" class="outline-3">
+<h3 id="orgd419aff"><span class="section-number-3">2.10.</span> Disable Schema Introspection</h3>
+</div>
+
+<div id="outline-container-org6847251" class="outline-3">
+<h3 id="org6847251"><span class="section-number-3">2.11.</span> Create a Securable Data Model</h3>
+</div>
+
+<div id="outline-container-org3ebe2e3" class="outline-3">
+<h3 id="org3ebe2e3"><span class="section-number-3">2.12.</span> Set API Limits</h3>
+</div>
+
+<div id="outline-container-orgba63141" class="outline-3">
+<h3 id="orgba63141"><span class="section-number-3">2.13.</span> Apply Permissions</h3>
+</div>
+
+<div id="outline-container-org9bc0109" class="outline-3">
+<h3 id="org9bc0109"><span class="section-number-3">2.14.</span> Use Allow Lists</h3>
+</div>
+
+<div id="outline-container-orgf3d64a3" class="outline-3">
+<h3 id="orgf3d64a3"><span class="section-number-3">2.15.</span> Create REST Endpoints</h3>
+</div>
+</div>
+
+<div id="outline-container-org554ce71" class="outline-2">
+<h2 id="org554ce71"><span class="section-number-2">3.</span> Discussion</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgaa305e2" class="outline-3">
+<h3 id="orgaa305e2"><span class="section-number-3">3.1.</span> GraphQL Security Orthodoxy</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
-"I'm a physicist, data scientist, data engineer, and software
-engineer, and I work for <a href="https://hasura.io/"><b>Hasura</b></a>, a software technology company that
-provides developer-focused tooling products.  I am not, however, a
-cybersecurity expert nor a certified financial planner.  Always
-consult professionals for security and financial advice."
+AKA: rituals, cargo cults, security theater which you can get anywhere
 </p>
-</blockquote>
-
-</section>
-</section>
-<section>
-<section id="slide-org3805730" data-background="./slide_background.png">
-<h2 id="org3805730">What</h2>
-<div class="outline-text-2" id="text-org3805730">
-</div>
-</section>
-<section id="slide-orgafc3455" data-background="./slide_background.png">
-<h3 id="orgafc3455">GraphQL API</h3>
-<div class="column" style="float:left; width:50%">
-
-<ul>
-<li>Query Language</li>
-<li>Schema
-<ul>
-<li>Types
-<ul>
-<li>Fields</li>
-
-</ul></li>
-
-</ul></li>
-<li>Types relate to Types</li>
-<li>Sound familiar?</li>
-
+<ul class="org-ul">
+<li>Disable Console Access</li>
+<li>Disable Schema Introspection</li>
+<li>Disable Query Suggestions (unneccessary in Hasura)</li>
+<li>Impose API Limits</li>
+<li>Whitelist Operations</li>
 </ul>
-
+</div>
 </div>
 
-<div class="column" style="float:right; width:50%;">
-
-
-<div id="orgbc80af5" class="figure">
-<p><img src="GraphQL.png" alt="GraphQL.png" height="100%" width="100%" />
-</p>
-</div>
-
-</div>
-
-</section>
-<section id="slide-org8397bb0" data-background="./slide_background.png">
-<h3 id="org8397bb0">GraphQL Security: In</h3>
-<ul>
-<li>Principles</li>
-<li>Opinions</li>
-<li>Hasura Demo</li>
-<li>Summary</li>
-
-</ul>
-
-</section>
-<section id="slide-orgde9e606" data-background="./slide_background.png">
-<h3 id="orgde9e606">GraphQL Security: Out</h3>
-<ul>
-<li><del>Cybersecurity</del>
-<ul>
-<li>See:  Certified Experts</li>
-
-</ul></li>
-<li><del>REST Security</del>
-<ul>
-<li>See:  <a href="https://owasp.org/www-project-api-security/">OWASP</a></li>
-
-</ul></li>
-<li><del>Comprehensive Tooling Demo</del>
-<ul>
-<li>See:  References</li>
-
-</ul></li>
-
-</ul>
-
-</section>
-</section>
-<section>
-<section id="slide-org890da3b" data-background="./slide_background.png">
-<h2 id="org890da3b">Principles</h2>
-<div class="outline-text-2" id="text-org890da3b">
-</div>
-</section>
-<section id="slide-org032727a" data-background="./slide_background.png">
-<h3 id="org032727a">Life is about trade-offs</h3>
-<div class="column" style="float:left; width:75%">
-
-<ul>
-<li>Focus, engage, act.</li>
-<li>Conduct a frank self-assessment.</li>
-<li>Avoid <a href="https://en.wikipedia.org/wiki/Cargo_cult">Cargo Cults</a>.</li>
-
-</ul>
-
-<blockquote >
+<div id="outline-container-orgb59c080" class="outline-3">
+<h3 id="orgb59c080"><span class="section-number-3">3.2.</span> GraphQL Security Heterodoxy</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
-"There Is No Such Thing As Absolute Security."
+AKA: possibly controversial opinions which you will get from me
 </p>
-</blockquote>
-<blockquote >
-<p>
-"Security = Risk Management."
-</p>
-</blockquote>
-
-</div>
-
-<div class="column" style="float:right; width:25%;">
-
-
-<div id="orga62f863" class="figure">
-<p><img src="ShowCover.jpeg" alt="ShowCover.jpeg" height="100%" width="100%" />
-</p>
-</div>
-
-</div>
-
-</section>
-<section id="slide-orgdae6f14" data-background="./slide_background.png">
-<h3 id="orgdae6f14">Know Your Enemy</h3>
-<div class="column" style="float:left; width:75%">
-
-<ul>
-<li>Disclosure (Confidentiality)</li>
-<li>Destruction (Integrity)</li>
-<li>Denial (Availability)</li>
-
-</ul>
-
-<blockquote >
-<p>
-"The Three Security Goals Are Confidentiality, Integrity, and
-Availability."
-</p>
-</blockquote>
-
-</div>
-
-<div class="column" style="float:right; width:25%;">
-
-
-<div id="org71f05ce" class="figure">
-<p><img src="ShowCover.jpeg" alt="ShowCover.jpeg" height="100%" width="100%" />
-</p>
-</div>
-
-</div>
-
-</section>
-<section id="slide-org527c597" data-background="./slide_background.png">
-<h3 id="org527c597">Bottom Up</h3>
-<div class="column" style="float:left; width:75%">
-
-<ul>
-<li>Build authorization into the data model.</li>
-<li>Apply redundant measures at every level (within reason).</li>
-<li>Avoid identity erasure.</li>
-
-</ul>
-
-<blockquote >
-<p>
-"Defense in Depth as Strategy"
-</p>
-</blockquote>
-
-</div>
-
-<div class="column" style="float:right; width:25%;">
-
-
-<div id="orga2ff02e" class="figure">
-<p><img src="ShowCover.jpeg" alt="ShowCover.jpeg" height="100%" width="100%" />
-</p>
-</div>
-
-</div>
-
-</section>
-<section id="slide-orgc11036d" data-background="./slide_background.png">
-<h3 id="orgc11036d">Keep It Simple [Stupid] (KISS)</h3>
-<div class="column" style="float:left; width:75%">
-
-<ul>
-<li>Adopt a small set of principles.</li>
-<li>Apply them ruthlessly and redundantly.</li>
-<li>Repeat, repeat, repeat.</li>
-
-</ul>
-
-<blockquote >
-<p>
-"Complexity Is the Enemy of Security."
-</p>
-</blockquote>
-
-</div>
-
-<div class="column" style="float:right; width:25%;">
-
-
-<div id="org58d3f36" class="figure">
-<p><img src="ShowCover.jpeg" alt="ShowCover.jpeg" height="100%" width="100%" />
-</p>
-</div>
-
-</div>
-
-</section>
-<section id="slide-org71c51af" data-background="./slide_background.png">
-<h3 id="org71c51af">Least Privilege</h3>
-<div class="column" style="float:left; width:75%">
-
-<ul>
-<li>The most secure API is the one that does nothing at all.</li>
-<li>Never trust anyone (within reason).</li>
-<li>Opt in.  Don't Opt out.</li>
-
-</ul>
-
-<blockquote >
-<p>
-"When Left on Their Own, People Tend to Make the Worst Security
-Decisions."
-</p>
-</blockquote>
-
-</div>
-
-<div class="column" style="float:right; width:25%;">
-
-
-<div id="orga46731a" class="figure">
-<p><img src="ShowCover.jpeg" alt="ShowCover.jpeg" height="100%" width="100%" />
-</p>
-</div>
-
-</div>
-
-</section>
-</section>
-<section>
-<section id="slide-org231bcbf" data-background="./slide_background.png">
-<h2 id="org231bcbf">GraphQL Security Orthodoxy</h2>
-<div class="outline-text-2" id="text-org231bcbf">
-</div>
-</section>
-<section id="slide-org0b498ac" data-background="./slide_background.png">
-<h3 id="org0b498ac">Disable Console Access</h3>
-<ul>
-<li>GraphQL servers often host an "admin console".</li>
-<li>Disable it in production.</li>
-
-</ul>
-
-</section>
-<section id="slide-org17e5b3a" data-background="./slide_background.png">
-<h3 id="org17e5b3a">Disable Schema Introspection</h3>
-<ul>
-<li>Introspection is in the spec and in most (all?) servers.</li>
-<li>Disable it in production.</li>
-
-</ul>
-
-</section>
-<section id="slide-orgecf8eac" data-background="./slide_background.png">
-<h3 id="orgecf8eac">Disable Query Suggestions</h3>
-<ul>
-<li><i>Some</i> GraphQL servers try to be overly helpful.</li>
-<li>Disable it in production.</li>
-
-</ul>
-
-</section>
-<section id="slide-org3178fee" data-background="./slide_background.png">
-<h3 id="org3178fee">Impose Limits</h3>
-<ul>
-<li>Traditional rate limits are a start but are not enough.</li>
-<li>Limit rate.</li>
-<li>Limit time.</li>
-<li>Limit depth.</li>
-<li>Limit nodes.</li>
-<li>Limit complexity.</li>
-
-</ul>
-
-</section>
-<section id="slide-orgc3cee78" data-background="./slide_background.png">
-<h3 id="orgc3cee78">Whitelist Operations</h3>
-<ul>
-<li>Bless a fixed set of allowed queries.</li>
-<li>Be careful in general.</li>
-<li>Be careful with Automatic Persisted Queries (APQ) in particular.</li>
-
-</ul>
-
-</section>
-</section>
-<section>
-<section id="slide-orgf1a12ef" data-background="./slide_background.png">
-<h2 id="orgf1a12ef">GraphQL Security Heterodoxy</h2>
-<div class="outline-text-2" id="text-orgf1a12ef">
-</div>
-</section>
-<section id="slide-org0d4cbde" data-background="./slide_background.png">
-<h3 id="org0d4cbde">Don't Confuse Public vs Private.</h3>
-<ul>
-<li>If you don't <i>need</i> to offer a public API, then don't provide one.</li>
+<ul class="org-ul">
+<li>Don't confuse public vs private:</li>
+<li>If you don't <i>need</i> to provide a public API, then don't.</li>
 <li>If you're not providing a public API, then don't act like you are.</li>
-
-</ul>
-
-</section>
-<section id="slide-orga78b3d7" data-background="./slide_background.png">
-<h3 id="orga78b3d7">Don't Disable Console Access</h3>
-<ul>
-<li>If you applied the Bottom-Up and Least Privilege principles,
-then the console can't do anything unauthorized anyway.</li>
-
-</ul>
-
-</section>
-<section id="slide-org79ecd70" data-background="./slide_background.png">
-<h3 id="org79ecd70">Don't Disable Schema Introspection and Query Suggestions</h3>
-<ul>
-<li>The public needs to know how to use your public API.</li>
-<li>The public shouldn't have access to your private API.</li>
+<li>Don't disable console access</li>
+<li>If you applied the security principles carefully, deliberately, thoughtfully, then the console can't do anything unauthorized anyway.</li>
+<li>Don't disable schema introspection and query suggestions.</li>
+<li>The public will need to know how to use your public API (which you almost certainly shouldn't have anyway)</li>
+<li>The public shouldn't have access to your private API (you did secure your API, add authentication, disable unauthorized access, build a rich data model, and apply fine-graned authorization, didn't you?)</li>
 <li>The information will get out anyway.</li>
-
+<li>Don't use GraphQL security</li>
+<li>Or at least, don't rely on it.</li>
+<li>Work diligently from the bottom-up, applying the principles carefully, deliberately, thoughtfully, and you (almost) won't need it.</li>
+<li>Remember "managing risk", "cargo cults", and "security theater".</li>
 </ul>
-
-</section>
-<section id="slide-org90929d9" data-background="./slide_background.png">
-<h3 id="org90929d9">Don't Use GraphQL Security</h3>
-<ul>
-<li>Or at least, don't rely on GraphQL security.</li>
-<li>Work diligently from the bottom up, and you (almost) won't need
-it.</li>
-
-</ul>
-
-</section>
-<section id="slide-orgd927869" data-background="./slide_background.png">
-<h3 id="orgd927869">Don't Use GraphQL</h3>
-<ul>
+<p>
+Life is about trade-offs.
+</p>
+<ul class="org-ul">
+<li>Don't use GraphQL</li>
 <li>For private APIs, that is.</li>
 <li>Use Allow Lists.</li>
-<li>And if you're using Allow Lists, turn them into REST endpoints
-or RPCs.</li>
-<li>GraphQL is for people, not for machines.</li>
-
+<li>And if you're using Allow Lists, you might as well use REST endpoints.</li>
+<li>GraphQL is for <i>people</i> (i.e. developers), not for machines.</li>
 </ul>
+</div>
+</div>
+</div>
 
-</section>
-</section>
-<section>
-<section id="slide-orgbb22e65" data-background="./slide_background.png">
-<h2 id="orgbb22e65">Hasura Demo</h2>
+<div id="outline-container-org437ebe6" class="outline-2">
+<h2 id="org437ebe6"><span class="section-number-2">4.</span> Closing Remarks</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org7af48f2" class="outline-3">
+<h3 id="org7af48f2"><span class="section-number-3">4.1.</span> References</h3>
+</div>
 
-</section>
-</section>
-<section>
-<section id="slide-org13f09c1" data-background="./slide_background.png">
-<h2 id="org13f09c1">Summary</h2>
-<ul>
-<li>Cybersecurity is a vast topic.</li>
-<li>Take it seriously and consult with experts.</li>
-<li>Tame the vastness with a principled approach.</li>
-<li>Do the easy things for GraphQL, but only because they're easy.</li>
-<li>Focus, engage, and manage trade-offs.</li>
-
-</ul>
-
-</section>
-</section>
-<section>
-<section id="slide-org7f0bf2f" data-background="./slide_background.png">
-<h2 id="org7f0bf2f">References</h2>
-<ul>
-<li><a href="https://www.pearson.com/us/higher-education/program/Merkow-Information-Security-Principles-and-Practices-2nd-Edition/PGM91863.html">Information Security: Principles and Practices, 2nd Edition</a>
-by Mark S. Merkow and Jim Breithaupt</li>
-<li><a href="https://spec.graphql.org/June2018/">GraphQL Specification</a></li>
-
-</ul>
-
-</section>
-</section>
-<section>
-<section id="slide-org8f3dfcc" data-background="./slide_background.png">
-<h2 id="org8f3dfcc">References</h2>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left"><a href="https://www.sofa-api.com/">Sofa</a></td>
-<td class="org-left">REST endpoints</td>
-</tr>
-
-<tr>
-<td class="org-left"><a href="https://www.graphql-mesh.com/">Mesh</a></td>
-<td class="org-left">Whitelisting</td>
-</tr>
-
-<tr>
-<td class="org-left"><a href="https://www.graphql-shield.com/">Shield</a></td>
-<td class="org-left">Authorization</td>
-</tr>
-
-<tr>
-<td class="org-left"><a href="https://github.com/pa-bru/graphql-cost-analysis">graphql-cost-analysis</a></td>
-<td class="org-left">Limit complexity</td>
-</tr>
-
-<tr>
-<td class="org-left">Hasura</td>
-<td class="org-left">Everything (except query complexity)</td>
-</tr>
-</tbody>
-</table>
-
-</section>
-</section>
-<section>
-<section id="slide-org0ae9026" data-background="./slide_background.png">
-<h2 id="org0ae9026"><i>Thank you!</i></h2>
-
-<div id="orga134c6a" class="figure">
-<p><img src="sdtimes.png" alt="sdtimes.png" />
+<div id="outline-container-org63e27d5" class="outline-3">
+<h3 id="org63e27d5"><span class="section-number-3">4.2.</span> How and where to get help</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+white<sub>check</sub><sub>mark</sub>
+100
+raised<sub>hands</sub>
 </p>
 </div>
-</section>
-</section>
 </div>
 </div>
-<script src="./reveal.js/dist/reveal.js"></script>
-<script src="./reveal.js/plugin/markdown/markdown.js"></script>
-<script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/notes/notes.js"></script>
-
-
-<script>
-// Full list of configuration options available here:
-// https://github.com/hakimel/reveal.js#configuration
-Reveal.initialize({
-plugins: [RevealMarkdown, RevealZoom, RevealNotes],
-transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
-});
-
-</script>
+</div>
+<div id="postamble" class="status">
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
 </body>
 </html>
