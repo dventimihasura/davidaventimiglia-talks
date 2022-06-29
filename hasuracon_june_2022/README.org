@@ -288,38 +288,21 @@ create index on order_detail (product_id);
 
 create or replace function product_search(search text)
   returns setof product as $$
-  select *
+  select product.*
   from product
   where
   name ilike ('%' || search || '%')
 $$ language sql stable;
 
--- product fuzzy search function
+-- product_search_slow function
 
-create extension if not exists pg_trgm;
-
-create index if not exists product_gin_idx on product
-  using gin ((name) gin_trgm_ops);
-
-create or replace function product_fuzzy_search(search text)
+create or replace function product_search_slow(search text, wait real)
   returns setof product as $$
-  select *
-  from product
+  select product.*
+  from product, pg_sleep(wait)
   where
-  search <% (name)
-  order by
-  similarity(search, (name)) desc
-  limit 5;
-$$
-language sql stable;
-
--- product_sku function
-
-create or replace function product_sku(product_row product)
-  returns text as $$
-  select md5(product_row.name)
-$$
-language sql stable;
+  name ilike ('%' || search || '%')
+$$ language sql stable;
 
 -- non_negative_price constraint
 
