@@ -9,6 +9,7 @@
 #+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
 #+REVEAL_THEME: black
 #+REVEAL_TITLE_SLIDE_BACKGROUND: ./assets/slide_background.png
+#+REVEAL_PLUGINS: (highlight)
 
 * 
 #+CAPTION: https://tinyurl.com/43vxsdmj
@@ -20,13 +21,15 @@
 
 *** Program
 
+- [[https://hasura.io/docs/latest/graphql/core/auth/index/][+Hasura Authentication+]]
 - [[https://hasura.io/docs/latest/graphql/cloud/security/api-limits/][Hasura API Limits]]
-- [[https://hasura.io/docs/latest/graphql/core/auth/authorization/permission-rules/][Hasura Permissions]]
+- [[https://hasura.io/docs/latest/graphql/core/auth/authorization/permission-rules/][Hasura Authorization]]
 - [[https://hasura.io/docs/latest/graphql/cloud/security/allow-lists/][Hasura Allow Lists]]
 - [[https://hasura.io/docs/latest/graphql/core/api-reference/restified/][Hasura REST Endpoints]]
 
 #+begin_NOTES
-This is a note
+Note that we don't illustrate authentication in this talk, though we
+will touch on it briefly.
 #+end_NOTES
 
 *** Principles
@@ -44,6 +47,7 @@ This is a note
 - Deep Queries :: /Confidentiality, Availability/
 - Recursive Queries :: /Availability/
 - Unbounded Queries :: /Confidentiality, Availability/
+- Malicious Queries :: /Confidentiality/
 - Batch Requests :: /Confidentiality, Availability/
 
 #+REVEAL_HTML: </div>
@@ -54,17 +58,59 @@ This is a note
 
 #+REVEAL_HTML: </div>
 
-*** Application
+*** Deep Queries / Recursive Queries
 
-- [[https://hasura.io/docs/latest/graphql/core/deployment/postgres-requirements/][+Secure the DB+]]
-- [[https://hasura.io/docs/latest/graphql/core/deployment/securing-graphql-endpoint/][Secure the Service]]
-- [[https://hasura.io/docs/latest/graphql/core/auth/authentication/index/][+Add Authentication+]]
-- [[https://hasura.io/docs/latest/graphql/core/deployment/graphql-engine-flags/reference/][+Disable Hasura Console+]]
-- [[https://hasura.io/docs/latest/graphql/cloud/security/disable-graphql-introspection/][Disable Schema Introspection]]
-- [[https://hasura.io/docs/latest/graphql/cloud/security/api-limits/][Set API Limits]]
-- [[https://hasura.io/docs/latest/graphql/core/auth/authorization/permission-rules/][Apply Permissions]]
-- [[https://hasura.io/docs/latest/graphql/core/deployment/allow-list/][Use Allow Lists]]
-- [[https://hasura.io/docs/latest/graphql/core/api-reference/restified/][Create REST Endpoints]]
+#+begin_src graphql
+  query {
+    author(id: 42) {
+      posts {
+        author {...and so on...
+        }
+      }
+    }
+  }
+#+end_src
+
+*** Unbounded / Large Queries
+
+#+begin_src graphql
+  query {
+    authors(first: 1000) {
+      name
+      posts(last: 100) {
+        title
+        content
+      }
+    }
+  }
+#+end_src
+
+*** Malicious Queries
+
+#+begin_src graphql
+  query User {
+    user (id: "User*") {
+      email
+      id 
+    }
+  }
+#+end_src
+
+*** Batch Requests
+
+#+begin_src graphql
+  query MaliciousQuery {
+    alias1: fieldName { subField1 subField2 ...}
+    alias2: fieldName { subField1 subField2 ...}
+    ...
+    alias10: fieldName { subField1 subField2 ...}
+    ...
+    alias100: fieldName { subField1 subField2 ...
+    ...
+    alias1000: fieldName { subField1 subField2 ...}
+    ...
+  }
+#+end_src
 
 * Workshop
 
@@ -133,7 +179,9 @@ This is a note
 #+ATTR_HTML: :height 80%
 [[file:assets/disable_schema_introspection.png]]
 
-*** Create a Se curable Data Model
+*** Create the Data Model
+
+#+INCLUDE "./init_data.sql" src sql
 
 *** Set API Limits
 

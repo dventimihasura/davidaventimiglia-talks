@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="./reveal.js/dist/theme/black.css" id="theme"/>
 
-</head>
+<link rel="stylesheet" href="./reveal.js/lib/css/zenburn.css"/></head>
 <body>
 <div class="reveal">
 <div class="slides">
@@ -22,10 +22,10 @@
 </section>
 
 <section>
-<section id="slide-org5d15fe7" data-background="./assets/slide_background.png">
-<h2 id="org5d15fe7"></h2>
+<section id="slide-orge14f9e3" data-background="./assets/slide_background.png">
+<h2 id="orge14f9e3"></h2>
 
-<div id="orge4133ef" class="figure">
+<div id="org3b5c087" class="figure">
 <p><img src="assets/qr.png" alt="qr.png" height="50%" width="50%" />
 </p>
 <p><span class="figure-number">Figure 1: </span><a href="https://tinyurl.com/43vxsdmj">https://tinyurl.com/43vxsdmj</a></p>
@@ -34,16 +34,17 @@
 </section>
 </section>
 <section>
-<section id="slide-orgcc2b5c0" data-background="./assets/slide_background.png">
-<h2 id="orgcc2b5c0">Introduction</h2>
-<div class="outline-text-2" id="text-orgcc2b5c0">
+<section id="slide-org46fdf3c" data-background="./assets/slide_background.png">
+<h2 id="org46fdf3c">Introduction</h2>
+<div class="outline-text-2" id="text-org46fdf3c">
 </div>
 </section>
-<section id="slide-orgaed3aea" data-background="./assets/slide_background.png">
-<h3 id="orgaed3aea">Program</h3>
+<section id="slide-org6ffca60" data-background="./assets/slide_background.png">
+<h3 id="org6ffca60">Program</h3>
 <ul>
+<li><a href="https://hasura.io/docs/latest/graphql/core/auth/index/"><del>Hasura Authentication</del></a></li>
 <li><a href="https://hasura.io/docs/latest/graphql/cloud/security/api-limits/">Hasura API Limits</a></li>
-<li><a href="https://hasura.io/docs/latest/graphql/core/auth/authorization/permission-rules/">Hasura Permissions</a></li>
+<li><a href="https://hasura.io/docs/latest/graphql/core/auth/authorization/permission-rules/">Hasura Authorization</a></li>
 <li><a href="https://hasura.io/docs/latest/graphql/cloud/security/allow-lists/">Hasura Allow Lists</a></li>
 <li><a href="https://hasura.io/docs/latest/graphql/core/api-reference/restified/">Hasura REST Endpoints</a></li>
 
@@ -51,14 +52,15 @@
 
 <aside class="notes">
 <p>
-This is a note
+Note that we don't illustrate authentication in this talk, though we
+will touch on it briefly.
 </p>
 
 </aside>
 
 </section>
-<section id="slide-org8ff7098" data-background="./assets/slide_background.png">
-<h3 id="org8ff7098">Principles</h3>
+<section id="slide-org32b587c" data-background="./assets/slide_background.png">
+<h3 id="org32b587c">Principles</h3>
 <dl>
 <dt>Risk Management</dt><dd><i>Life is about trade-offs.</i></dd>
 <dt>Goal Setting</dt><dd><i>Confidentiality, Integrity, Availability</i></dd>
@@ -69,14 +71,15 @@ This is a note
 </dl>
 
 </section>
-<section id="slide-org8a3d84b" data-background="./assets/slide_background.png">
-<h3 id="org8a3d84b">Threats</h3>
+<section id="slide-org5bd2e17" data-background="./assets/slide_background.png">
+<h3 id="org5bd2e17">Threats</h3>
 <div class="column" style="float:left; width:75%">
 
 <dl>
 <dt>Deep Queries</dt><dd><i>Confidentiality, Availability</i></dd>
 <dt>Recursive Queries</dt><dd><i>Availability</i></dd>
 <dt>Unbounded Queries</dt><dd><i>Confidentiality, Availability</i></dd>
+<dt>Malicious Queries</dt><dd><i>Confidentiality</i></dd>
 <dt>Batch Requests</dt><dd><i>Confidentiality, Availability</i></dd>
 
 </dl>
@@ -86,7 +89,7 @@ This is a note
 <div class="column" style="float:right; width:25%;">
 
 
-<div id="orgd04f492" class="figure">
+<div id="org31f4a5f" class="figure">
 <p><img src="assets/GraphQL Logo (Rhodamine).svg" alt="GraphQL Logo (Rhodamine).svg" class="org-svg" />
 </p>
 </div>
@@ -94,72 +97,122 @@ This is a note
 </div>
 
 </section>
-<section id="slide-org01b830d" data-background="./assets/slide_background.png">
-<h3 id="org01b830d">Application</h3>
-<ul>
-<li><a href="https://hasura.io/docs/latest/graphql/core/deployment/postgres-requirements/"><del>Secure the DB</del></a></li>
-<li><a href="https://hasura.io/docs/latest/graphql/core/deployment/securing-graphql-endpoint/">Secure the Service</a></li>
-<li><a href="https://hasura.io/docs/latest/graphql/core/auth/authentication/index/"><del>Add Authentication</del></a></li>
-<li><a href="https://hasura.io/docs/latest/graphql/core/deployment/graphql-engine-flags/reference/"><del>Disable Hasura Console</del></a></li>
-<li><a href="https://hasura.io/docs/latest/graphql/cloud/security/disable-graphql-introspection/">Disable Schema Introspection</a></li>
-<li><a href="https://hasura.io/docs/latest/graphql/cloud/security/api-limits/">Set API Limits</a></li>
-<li><a href="https://hasura.io/docs/latest/graphql/core/auth/authorization/permission-rules/">Apply Permissions</a></li>
-<li><a href="https://hasura.io/docs/latest/graphql/core/deployment/allow-list/">Use Allow Lists</a></li>
-<li><a href="https://hasura.io/docs/latest/graphql/core/api-reference/restified/">Create REST Endpoints</a></li>
+<section id="slide-orgd3746aa" data-background="./assets/slide_background.png">
+<h3 id="orgd3746aa">Deep Queries / Recursive Queries</h3>
+<div class="org-src-container">
 
-</ul>
+<pre   ><code class="graphql" >query {
+  author(id: 42) {
+    posts {
+      author {...and so on...
+      }
+    }
+  }
+}
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orga308527" data-background="./assets/slide_background.png">
+<h3 id="orga308527">Unbounded / Large Queries</h3>
+<div class="org-src-container">
+
+<pre   ><code class="graphql" >query {
+  authors(first: 1000) {
+    name
+    posts(last: 100) {
+      title
+      content
+    }
+  }
+}
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org6d88259" data-background="./assets/slide_background.png">
+<h3 id="org6d88259">Malicious Queries</h3>
+<div class="org-src-container">
+
+<pre   ><code class="graphql" >query User {
+  user (id: "User*") {
+    email
+    id 
+  }
+}
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org81dfb3b" data-background="./assets/slide_background.png">
+<h3 id="org81dfb3b">Batch Requests</h3>
+<div class="org-src-container">
+
+<pre   ><code class="graphql" >query MaliciousQuery {
+  alias1: fieldName { subField1 subField2 ...}
+  alias2: fieldName { subField1 subField2 ...}
+  ...
+  alias10: fieldName { subField1 subField2 ...}
+  ...
+  alias100: fieldName { subField1 subField2 ...
+  ...
+  alias1000: fieldName { subField1 subField2 ...}
+  ...
+}
+</code></pre>
+</div>
 
 </section>
 </section>
 <section>
-<section id="slide-org15a299c" data-background="./assets/slide_background.png">
-<h2 id="org15a299c">Workshop</h2>
-<div class="outline-text-2" id="text-org15a299c">
+<section id="slide-org8556b45" data-background="./assets/slide_background.png">
+<h2 id="org8556b45">Workshop</h2>
+<div class="outline-text-2" id="text-org8556b45">
 </div>
 </section>
-<section id="slide-org79695e7" data-background="./assets/slide_background.png">
-<h3 id="org79695e7">Log into Heroku</h3>
+<section id="slide-org7720fae" data-background="./assets/slide_background.png">
+<h3 id="org7720fae">Log into Heroku</h3>
 
-<div id="orgbf7616b" class="figure">
+<div id="org9ef88f2" class="figure">
 <p><img src="assets/log_into_heroku.png" alt="log_into_heroku.png" height="40%" width="40%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org7e22e0e" data-background="./assets/slide_background.png">
-<h3 id="org7e22e0e">Log into Hasura Cloud</h3>
+<section id="slide-orge4ac883" data-background="./assets/slide_background.png">
+<h3 id="orge4ac883">Log into Hasura Cloud</h3>
 
-<div id="org17205cd" class="figure">
+<div id="org9c4733e" class="figure">
 <p><img src="assets/log_into_hasura_cloud.png" alt="log_into_hasura_cloud.png" height="40%" width="40%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgb260023" data-background="./assets/slide_background.png">
-<h3 id="orgb260023">Create a new Hasura Cloud Project</h3>
+<section id="slide-orgfaab6ce" data-background="./assets/slide_background.png">
+<h3 id="orgfaab6ce">Create a new Hasura Cloud Project</h3>
 
-<div id="org9621c2b" class="figure">
+<div id="orgc6d789e" class="figure">
 <p><img src="assets/create_new_hasura_project.png" alt="create_new_hasura_project.png" height="40%" width="40%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org1e88583" data-background="./assets/slide_background.png">
-<h3 id="org1e88583">Create a new Heroku database</h3>
+<section id="slide-orgef241e9" data-background="./assets/slide_background.png">
+<h3 id="orgef241e9">Create a new Heroku database</h3>
 
 </section>
-<section id="slide-orgbe52136" data-background="./assets/slide_background.png">
-<h3 id="orgbe52136"><del>Connect to the database</del></h3>
+<section id="slide-orgb7bdc53" data-background="./assets/slide_background.png">
+<h3 id="orgb7bdc53"><del>Connect to the database</del></h3>
 <div class="org-src-container">
 
-<pre  class="src src-shell"   ><code trim>psql -h &lt;hostname&gt; -p &lt;port&gt; -d &lt;db&gt; -U &lt;username&gt; psql
+<pre   ><code class="shell" >psql -h &lt;hostname&gt; -p &lt;port&gt; -d &lt;db&gt; -U &lt;username&gt; psql
 heroku psql -a &lt;app&gt;
 </code></pre>
 </div>
 
 </section>
-<section id="slide-org4fbb5e5" data-background="./assets/slide_background.png">
-<h3 id="org4fbb5e5"><del>Secure the DB</del></h3>
+<section id="slide-orga0e86d8" data-background="./assets/slide_background.png">
+<h3 id="orga0e86d8"><del>Secure the DB</del></h3>
 <ul>
 <li>Create a dedicated DB user for PROD.</li>
 <li><code>REVOKE</code> DML (maybe).</li>
@@ -170,11 +223,11 @@ heroku psql -a &lt;app&gt;
 </ul>
 
 </section>
-<section id="slide-org4fbb5e5-split" data-background="./assets/slide_background.png">
+<section id="slide-orga0e86d8-split" data-background="./assets/slide_background.png">
 
 <div class="org-src-container">
 
-<pre  class="src src-sql"   ><code trim>-- Read-only? (not on Heroku hobby tier!)
+<pre   ><code class="sql" >-- Read-only? (not on Heroku hobby tier!)
 CREATE USER hasuraprod WITH PASSWORD 'hasuraprod';
 GRANT CONNECT ON DATABASE &lt;db&gt; TO hasuraprod;
 GRANT USAGE ON SCHEMA &lt;schema&gt; TO hasuraprod;
@@ -184,16 +237,16 @@ GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA &lt;schema&gt; TO hasuraprod;
 </div>
 
 </section>
-<section id="slide-org2ca375c" data-background="./assets/slide_background.png">
-<h3 id="org2ca375c">Secure the Service</h3>
+<section id="slide-org8bff647" data-background="./assets/slide_background.png">
+<h3 id="org8bff647">Secure the Service</h3>
 <ul>
 <li><code>HASURA_GRAPHQL_ADMIN_SECRET</code></li>
 
 </ul>
 
 </section>
-<section id="slide-orgc65b29b" data-background="./assets/slide_background.png">
-<h3 id="orgc65b29b"><del>Add Authentication</del></h3>
+<section id="slide-orgf276c70" data-background="./assets/slide_background.png">
+<h3 id="orgf276c70"><del>Add Authentication</del></h3>
 <ul>
 <li><code>HASURA_GRAPHQL_AUTH_HOOK</code></li>
 <li><code>HASURA_GRAPHQL_AUTH_HOOK_MODE</code></li>
@@ -201,72 +254,75 @@ GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA &lt;schema&gt; TO hasuraprod;
 </ul>
 
 </section>
-<section id="slide-orgefdf415" data-background="./assets/slide_background.png">
-<h3 id="orgefdf415"><del>Disable Hasura Console</del></h3>
+<section id="slide-orgfdf463d" data-background="./assets/slide_background.png">
+<h3 id="orgfdf463d"><del>Disable Hasura Console</del></h3>
 <ul>
 <li><code>HASURA_GRAPHQL_ENABLE_CONSOLE</code></li>
 
 </ul>
 
 </section>
-<section id="slide-orgb843e47" data-background="./assets/slide_background.png">
-<h3 id="orgb843e47">Disable Schema Introspection</h3>
+<section id="slide-org159eb98" data-background="./assets/slide_background.png">
+<h3 id="org159eb98">Disable Schema Introspection</h3>
 
-<div id="org18fce38" class="figure">
+<div id="orgfc9c514" class="figure">
 <p><img src="assets/disable_schema_introspection.png" alt="disable_schema_introspection.png" height="80%" width="80%" />
 </p>
 </div>
 
 </section>
-<section id="slide-orgff6b9ee" data-background="./assets/slide_background.png">
-<h3 id="orgff6b9ee">Create a Securable Data Model</h3>
+<section id="slide-org0ffb8c9" data-background="./assets/slide_background.png">
+<h3 id="org0ffb8c9">Create the Data Model</h3>
+<p>
+#+INCLUDE "./init<sub>data.sql</sub>" src sql
+</p>
 
 </section>
-<section id="slide-org1f1b9df" data-background="./assets/slide_background.png">
-<h3 id="org1f1b9df">Set API Limits</h3>
+<section id="slide-orgd19b24e" data-background="./assets/slide_background.png">
+<h3 id="orgd19b24e">Set API Limits</h3>
 
-<div id="org8539c87" class="figure">
+<div id="orgc97ec2b" class="figure">
 <p><img src="assets/set_api_limits.png" alt="set_api_limits.png" height="80%" width="80%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org4d33169" data-background="./assets/slide_background.png">
-<h3 id="org4d33169">Apply Permissions</h3>
+<section id="slide-orgef416c7" data-background="./assets/slide_background.png">
+<h3 id="orgef416c7">Apply Permissions</h3>
 
 </section>
-<section id="slide-orgd1f3c24" data-background="./assets/slide_background.png">
-<h3 id="orgd1f3c24">Use Allow Lists</h3>
+<section id="slide-org3b1e429" data-background="./assets/slide_background.png">
+<h3 id="org3b1e429">Use Allow Lists</h3>
 
 </section>
-<section id="slide-org9f7c124" data-background="./assets/slide_background.png">
-<h3 id="org9f7c124">Create REST Endpoints</h3>
+<section id="slide-org7e08b0a" data-background="./assets/slide_background.png">
+<h3 id="org7e08b0a">Create REST Endpoints</h3>
 
 </section>
 </section>
 <section>
-<section id="slide-orgcde2b43" data-background="./assets/slide_background.png">
-<h2 id="orgcde2b43">Discussion</h2>
-<div class="outline-text-2" id="text-orgcde2b43">
+<section id="slide-org176e093" data-background="./assets/slide_background.png">
+<h2 id="org176e093">Discussion</h2>
+<div class="outline-text-2" id="text-org176e093">
 </div>
 </section>
-<section id="slide-org7cf80ca" data-background="./assets/slide_background.png">
-<h3 id="org7cf80ca">GraphQL Security Orthodoxy</h3>
+<section id="slide-org7f20fca" data-background="./assets/slide_background.png">
+<h3 id="org7f20fca">GraphQL Security Orthodoxy</h3>
 <p>
 AKA: rituals, cargo cults, security theater which you can get anywhere
 </p>
 <ul>
 <li>Disable Console Access</li>
 <li>Disable Schema Introspection</li>
-<li>Disable Query Suggestions (unneccessary in Hasura)</li>
+<li>Disable Query Suggestions (unnecessary in Hasura)</li>
 <li>Impose API Limits</li>
 <li>Whitelist Operations</li>
 
 </ul>
 
 </section>
-<section id="slide-orga0e6272" data-background="./assets/slide_background.png">
-<h3 id="orga0e6272">GraphQL Security Heterodoxy</h3>
+<section id="slide-org021b1a0" data-background="./assets/slide_background.png">
+<h3 id="org021b1a0">GraphQL Security Heterodoxy</h3>
 <p>
 AKA: possibly controversial opinions which you will get from me
 </p>
@@ -278,7 +334,7 @@ AKA: possibly controversial opinions which you will get from me
 <li>If you applied the security principles carefully, deliberately, thoughtfully, then the console can't do anything unauthorized anyway.</li>
 <li>Don't disable schema introspection and query suggestions.</li>
 <li>The public will need to know how to use your public API (which you almost certainly shouldn't have anyway)</li>
-<li>The public shouldn't have access to your private API (you did secure your API, add authentication, disable unauthorized access, build a rich data model, and apply fine-graned authorization, didn't you?)</li>
+<li>The public shouldn't have access to your private API (you did secure your API, add authentication, disable unauthorized access, build a rich data model, and apply fine-grained authorization, didn't you?)</li>
 <li>The information will get out anyway.</li>
 <li>Don't use GraphQL security</li>
 <li>Or at least, don't rely on it.</li>
@@ -301,17 +357,17 @@ Life is about trade-offs.
 </section>
 </section>
 <section>
-<section id="slide-orge4b355e" data-background="./assets/slide_background.png">
-<h2 id="orge4b355e">Closing Remarks</h2>
-<div class="outline-text-2" id="text-orge4b355e">
+<section id="slide-org7ae5d8b" data-background="./assets/slide_background.png">
+<h2 id="org7ae5d8b">Closing Remarks</h2>
+<div class="outline-text-2" id="text-org7ae5d8b">
 </div>
 </section>
-<section id="slide-org5b190df" data-background="./assets/slide_background.png">
-<h3 id="org5b190df">References</h3>
+<section id="slide-org1d6d991" data-background="./assets/slide_background.png">
+<h3 id="org1d6d991">References</h3>
 
 </section>
-<section id="slide-org4803e49" data-background="./assets/slide_background.png">
-<h3 id="org4803e49">How and where to get help</h3>
+<section id="slide-orga909027" data-background="./assets/slide_background.png">
+<h3 id="orga909027">How and where to get help</h3>
 <p>
 white<sub>check</sub><sub>mark</sub>
 100
@@ -322,16 +378,14 @@ raised<sub>hands</sub>
 </div>
 </div>
 <script src="./reveal.js/dist/reveal.js"></script>
-<script src="./reveal.js/plugin/markdown/markdown.js"></script>
-<script src="./reveal.js/plugin/zoom/zoom.js"></script>
-<script src="./reveal.js/plugin/notes/notes.js"></script>
+<script src="./reveal.js/plugin/highlight/highlight.js"></script>
 
 
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
 Reveal.initialize({
-plugins: [RevealMarkdown, RevealZoom, RevealNotes],
+plugins: [RevealHighlight],
 transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
 });
 
