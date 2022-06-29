@@ -11,7 +11,6 @@
 #+REVEAL_TITLE_SLIDE_BACKGROUND: ./assets/slide_background.png
 #+REVEAL_PLUGINS: (highlight)
 
-
 * 
 #+CAPTION: https://tinyurl.com/43vxsdmj
 #+ATTR_HTML: :width 50%
