@@ -19,7 +19,21 @@
 
 * Introduction
 
-*** Program
+*** What You Will Need
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+[[file:assets/log_into_hasura_cloud.png]]
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:40%;">
+
+[[file:assets/log_into_heroku.png]]
+
+#+REVEAL_HTML: </div>
+
+*** What We Will Cover
 
 - [[https://hasura.io/docs/latest/graphql/core/auth/index/][+Hasura Authentication+]]
 - [[https://hasura.io/docs/latest/graphql/cloud/security/api-limits/][Hasura API Limits]]
@@ -134,6 +148,10 @@ will touch on it briefly.
 
 *** Create a new Heroku database
 
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/create_database.png]]
+
 *** +Connect to the database+
 
 #+begin_src shell :export both
@@ -185,83 +203,93 @@ Recommended in production but inconvenient in a workshop.
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
+-- account table
+
 CREATE TABLE "public"."account" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "name" text NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") );
 CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
-RETURNS TRIGGER AS $$
-DECLARE
-  _new record;
-BEGIN
-  _new := NEW;
-  _new."updated_at" = NOW();
-  RETURN _new;
-END;
+  RETURNS TRIGGER AS $$
+  DECLARE
+    _new record;
+  BEGIN
+    _new := NEW;
+    _new."updated_at" = NOW();
+    RETURN _new;
+  END;
 $$ LANGUAGE plpgsql;
 CREATE TRIGGER "set_public_account_updated_at"
-BEFORE UPDATE ON "public"."account"
-FOR EACH ROW
-EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
+  BEFORE UPDATE ON "public"."account"
+  FOR EACH ROW
+  EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
 COMMENT ON TRIGGER "set_public_account_updated_at" ON "public"."account" 
-IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+  IS 'trigger to set value of column "updated_at" to current timestamp on row update';
 
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
+-- product table
 
 CREATE TABLE "public"."product" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), "name" text NOT NULL, "price" integer NOT NULL, PRIMARY KEY ("id") );
 CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
-RETURNS TRIGGER AS $$
-DECLARE
-  _new record;
-BEGIN
-  _new := NEW;
-  _new."updated_at" = NOW();
-  RETURN _new;
-END;
+  RETURNS TRIGGER AS $$
+  DECLARE
+    _new record;
+  BEGIN
+    _new := NEW;
+    _new."updated_at" = NOW();
+    RETURN _new;
+  END;
 $$ LANGUAGE plpgsql;
 CREATE TRIGGER "set_public_product_updated_at"
-BEFORE UPDATE ON "public"."product"
-FOR EACH ROW
-EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
+  BEFORE UPDATE ON "public"."product"
+  FOR EACH ROW
+  EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
 COMMENT ON TRIGGER "set_public_product_updated_at" ON "public"."product" 
-IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+  IS 'trigger to set value of column "updated_at" to current timestamp on row update';
 
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
+-- order table
 
 CREATE TABLE "public"."order" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), "account_id" uuid NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("account_id") REFERENCES "public"."account"("id") ON UPDATE restrict ON DELETE restrict);
 CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
-RETURNS TRIGGER AS $$
-DECLARE
-  _new record;
-BEGIN
-  _new := NEW;
-  _new."updated_at" = NOW();
-  RETURN _new;
-END;
+  RETURNS TRIGGER AS $$
+  DECLARE
+    _new record;
+  BEGIN
+    _new := NEW;
+    _new."updated_at" = NOW();
+    RETURN _new;
+  END;
 $$ LANGUAGE plpgsql;
 CREATE TRIGGER "set_public_order_updated_at"
-BEFORE UPDATE ON "public"."order"
-FOR EACH ROW
-EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
+  BEFORE UPDATE ON "public"."order"
+  FOR EACH ROW
+  EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
 COMMENT ON TRIGGER "set_public_order_updated_at" ON "public"."order" 
-IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+  IS 'trigger to set value of column "updated_at" to current timestamp on row update';
 
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
+create index on "order" (account_id);
+
+-- order_detail table
 
 CREATE TABLE "public"."order_detail" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), "units" integer NOT NULL, "order_id" uuid NOT NULL, "product_id" uuid NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("order_id") REFERENCES "public"."order"("id") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("product_id") REFERENCES "public"."product"("id") ON UPDATE restrict ON DELETE restrict);
 CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
-RETURNS TRIGGER AS $$
-DECLARE
-  _new record;
-BEGIN
-  _new := NEW;
-  _new."updated_at" = NOW();
-  RETURN _new;
-END;
+  RETURNS TRIGGER AS $$
+  DECLARE
+    _new record;
+  BEGIN
+    _new := NEW;
+    _new."updated_at" = NOW();
+    RETURN _new;
+  END;
 $$ LANGUAGE plpgsql;
 CREATE TRIGGER "set_public_order_detail_updated_at"
-BEFORE UPDATE ON "public"."order_detail"
-FOR EACH ROW
-EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
+  BEFORE UPDATE ON "public"."order_detail"
+  FOR EACH ROW
+  EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
 COMMENT ON TRIGGER "set_public_order_detail_updated_at" ON "public"."order_detail" 
-IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+  IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+
+create index on order_detail (order_id);
+
+create index on order_detail (product_id);
+
+-- product_search function
 
 create or replace function product_search(search text)
   returns setof product as $$
@@ -270,6 +298,8 @@ create or replace function product_search(search text)
   where
   name ilike ('%' || search || '%')
 $$ language sql stable;
+
+-- product fuzzy search function
 
 create extension if not exists pg_trgm;
 
@@ -288,24 +318,39 @@ create or replace function product_fuzzy_search(search text)
 $$
 language sql stable;
 
+-- product_sku function
+
 create or replace function product_sku(product_row product)
   returns text as $$
   select md5(product_row.name)
 $$
 language sql stable;
 
+-- non_negative_price constraint
+
 alter table "public"."product" add constraint "non_negative_price" check (price > 0);
+
+-- index account(name)
 
 create index if not exists account_name_idx on account (name);
 
+-- status enum
+
 CREATE TYPE status AS ENUM ('new', 'processing', 'fulfilled');
 
-alter table "public"."order" add column "status" status
- null;
+-- add status to order table
+
+alter table "public"."order" add column "status" status null;
+
+create index on "order" (status);
+
+-- region dictionary table
 
 create table if not exists region (
   value text primary key,
   description text);
+
+-- add region to order
 
 alter table "public"."order" add column "region" Text
  null;
@@ -315,6 +360,8 @@ alter table "public"."order"
   foreign key ("region")
   references "public"."region"
   ("value") on update restrict on delete restrict;
+
+create index on "order" (region);
 #+end_src
 
 *** Insert Sample Data
@@ -322,7 +369,6 @@ alter table "public"."order"
 [[https://tinyurl.com/2t32axzh]]
 
 #+begin_src sql
-
 -- -*- sql-product: postgres; -*-
 begin;
 
@@ -2394,6 +2440,18 @@ update "order" set region = ((array[
 
 commit;
 #+end_src
+
+*** Track Tables
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:assets/track_tables.png]]
+
+*** Track Relationships
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:assets/track_relationships.png]]
 
 *** Set API Limits
 
