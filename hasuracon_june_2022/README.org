@@ -41,11 +41,6 @@
 - [[https://hasura.io/docs/latest/graphql/cloud/security/allow-lists/][Hasura Allow Lists]]
 - [[https://hasura.io/docs/latest/graphql/core/api-reference/restified/][Hasura REST Endpoints]]
 
-#+begin_NOTES
-Note that we don't illustrate authentication in this talk, though we
-will touch on it briefly.
-#+end_NOTES
-
 *** Principles
 
 - Risk Management :: /Life is about trade-offs./
@@ -180,7 +175,7 @@ will touch on it briefly.
 
 *** Secure the Service
 
-~HASURA_GRAPHQL_ADMIN_SECRET~ is automatically in Hasura Cloud.
+~HASURA_GRAPHQL_ADMIN_SECRET~ is automatically set in Hasura Cloud.
 
 *** +Add Authentication+
 
