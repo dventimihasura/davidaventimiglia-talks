@@ -162,24 +162,23 @@ will touch on it briefly.
 
 *** Secure the Service
 
-- ~HASURA_GRAPHQL_ADMIN_SECRET~
+~HASURA_GRAPHQL_ADMIN_SECRET~ is automatically in Hasura Cloud.
 
 *** +Add Authentication+
 
-- ~HASURA_GRAPHQL_AUTH_HOOK~
-- ~HASURA_GRAPHQL_AUTH_HOOK_MODE~
+Not covered in this session.
 
 *** +Disable Hasura Console+
 
-- ~HASURA_GRAPHQL_ENABLE_CONSOLE~
+Recommended in production but inconvenient in a workshop.
 
-*** Disable Schema Introspection
+*** +Disable Schema Introspection+
 
-#+ATTR_HTML: :width 80%
-#+ATTR_HTML: :height 80%
-[[file:assets/disable_schema_introspection.png]]
+Recommended in production but inconvenient in a workshop.
 
 *** Create the Data Model
+
+[[https://tinyurl.com/4vvue9vk]]
 
 #+begin_src sql
 -- -*- sql-product: postgres; -*-
@@ -318,8 +317,9 @@ alter table "public"."order"
   ("value") on update restrict on delete restrict;
 #+end_src
 
-
 *** Insert Sample Data
+
+[[https://tinyurl.com/2t32axzh]]
 
 #+begin_src sql
 
