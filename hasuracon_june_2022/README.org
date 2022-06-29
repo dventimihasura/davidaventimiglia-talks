@@ -12,7 +12,7 @@
 #+REVEAL_PLUGINS: (highlight)
 
 * 
-#+CAPTION: https://tinyurl.com/43vxsdmj
+#+CAPTION: https://tinyurl.com/ynhbbrmy
 #+ATTR_HTML: :width 50%
 #+ATTR_HTML: :height 50%
 [[file:assets/qr.png]]
