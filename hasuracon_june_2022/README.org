@@ -13,8 +13,8 @@
 
 * 
 #+CAPTION: https://tinyurl.com/ynhbbrmy
-#+ATTR_HTML: :width 50%
-#+ATTR_HTML: :height 50%
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
 [[file:assets/qr.png]]
 
 * Introduction
@@ -179,7 +179,8 @@
 
 *** +Add Authentication+
 
-Not covered in this session.
+- ~HASURA_GRAPHQL_AUTH_HOOK~ :: webhook mode
+- ~HASURA_GRAPHQL_JWT_SECRET~ :: JWT mode
 
 *** +Disable Hasura Console+
 
@@ -2437,11 +2438,132 @@ commit;
 #+ATTR_HTML: :height 80%
 [[file:assets/set_api_limits.png]]
 
-*** Apply Permissions
+- Global
+  - Depth Limit: 4
+  - Node Limit: 10
+  - Rate Limit (RPM): 10
+  - Timeout (Seconds): 10
+
+*** Apply Permissions ~account~ Select
+
+#+ATTR_HTML: :width 70%
+#+ATTR_HTML: :height 70%
+[[file:assets/account_permissions.png]]
+
+*** Apply Permissions ~order~ Select
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/order_permissions.png]]
+
+*** Apply Permissions ~order~ Insert
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/order_permissions_insert.png]]
+
+*** Apply Permissions ~order_detail~ Select
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/order_detail_permissions.png]]
+
+*** Apply Permissions ~product~ Select
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/product_permissions.png]]
+
+*** Apply Permissions ~region~ Select
+
+#+ATTR_HTML: :width 70%
+#+ATTR_HTML: :height 70%
+[[file:assets/region_permissions.png]]
 
 *** Use Allow Lists
 
+- ~HASURA_GRAPHQL_ENABLE_ALLOWLIST~ :: default value is ~false~
+
+- Monitoring >> Allow Lists >> New Operations
+
+*** Use Allow Lists
+
+#+begin_src graphql
+  query MyAccount {
+    account {
+      name
+      id
+      created_at
+      updated_at
+    }
+  }
+#+end_src
+
+*** Use Allow Lists
+
+#+begin_src graphql
+  query ProductSearch {
+    product_search(args: {search: "bread"}) {
+      id
+      name
+      price
+    }
+  }
+#+end_src
+
+*** Use Allow Lists
+
+#+begin_src graphql
+  query MyOrdersSummary {
+    account(limit: 1) {
+      name
+      id
+      created_at
+      updated_at
+      orders {
+        status
+        region
+        created_at
+        id
+        order_details {
+          units
+          product {
+            name
+            price
+          }
+        }
+      }
+    }
+  }
+#+end_src
+
 *** Create REST Endpoints
+
+- API >> REST
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+[[file:assets/rest_account.png]]
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+[[file:assets/rest_order_summary.png]]
+
+#+REVEAL_HTML: </div>
+
+*** Create REST Endpoints
+
+#+begin_src shell
+  curl \
+      -X GET \
+      -H 'Content-type: application/json' \
+      -H 'x-hasura-role: ${ROLE}' \
+      -H 'x-hasura-user-id: ${USER_ID}' \
+      -H 'x-hasura-admin-secret: ${HASURA_GRAPHQL_ADMIN_SECRET}' \
+      ${HASURA_GRAPHQL_ENDPOINT}
+#+end_src
 
 * Discussion
 
@@ -2479,12 +2601,28 @@ Life is about trade-offs.
 
 * Closing Remarks
 
-*** References
+- How to secure your GraphQL API? :: By not having a GraphQL API
 
-*** How and where to get help
+* /Thank You!/
 
-white_check_mark
-100
-raised_hands
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+#+CAPTION: @TheRealDventimi
+[[file:assets/profile.jpg]]
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+
+#+CAPTION: https://tinyurl.com/ynhbbrmy
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:assets/qr.png]]
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:assets/hasura-logo-primary-light.png]]
+
+#+REVEAL_HTML: </div>
 
 #  LocalWords:  toc controlsLayout controlsTutorial ATTR hasuraprod
