@@ -577,40 +577,6 @@ commit;
       ${HASURA_GRAPHQL_ENDPOINT}
 #+end_src
 
-* Discussion
-
-*** GraphQL Security Orthodoxy
-
-AKA: rituals, cargo cults, security theater which you can get anywhere
-- Disable Console Access
-- Disable Schema Introspection
-- Disable Query Suggestions (unnecessary in Hasura)
-- Impose API Limits
-- Whitelist Operations
-
-*** GraphQL Security Heterodoxy
-
-AKA: possibly controversial opinions which you will get from me
-- Don't confuse public vs private:
-- If you don't /need/ to provide a public API, then don't.
-- If you're not providing a public API, then don't act like you are.
-- Don't disable console access
-- If you applied the security principles carefully, deliberately, thoughtfully, then the console can't do anything unauthorized anyway.
-- Don't disable schema introspection and query suggestions.
-- The public will need to know how to use your public API (which you almost certainly shouldn't have anyway)
-- The public shouldn't have access to your private API (you did secure your API, add authentication, disable unauthorized access, build a rich data model, and apply fine-grained authorization, didn't you?)
-- The information will get out anyway.
-- Don't use GraphQL security
-- Or at least, don't rely on it.
-- Work diligently from the bottom-up, applying the principles carefully, deliberately, thoughtfully, and you (almost) won't need it.
-- Remember "managing risk", "cargo cults", and "security theater".
-Life is about trade-offs.
-- Don't use GraphQL
-- For private APIs, that is.
-- Use Allow Lists.
-- And if you're using Allow Lists, you might as well use REST endpoints.
-- GraphQL is for /people/ (i.e. developers), not for machines.
-
 * Closing Remarks
 
 *** GraphQL Security Orthodoxy
