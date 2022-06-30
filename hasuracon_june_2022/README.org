@@ -23,13 +23,21 @@
 
 #+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 
+#+ATTR_HTML: :width 90%
+#+ATTR_HTML: :height 90%
 [[file:assets/log_into_hasura_cloud.png]]
+
+http://cloud.hasura.io
 
 #+REVEAL_HTML: </div>
 
 #+REVEAL_HTML: <div class="column" style="float:right; width:40%;">
 
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
 [[file:assets/log_into_heroku.png]]
+
+https://cloud.hasura.io/
 
 #+REVEAL_HTML: </div>
 
