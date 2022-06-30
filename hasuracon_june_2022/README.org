@@ -67,7 +67,7 @@
 
 #+REVEAL_HTML: </div>
 
-*** Deep Queries / Recursive Queries
+*** Deep / Recursive Queries
 
 #+begin_src graphql
   query {
@@ -134,6 +134,12 @@
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:assets/log_into_hasura_cloud.png]]
+
+*** Connect Heroku to Hasura Cloud
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/connect_heroku_hasura.png]]
 
 *** Create a new Hasura Cloud Project
 
@@ -2464,20 +2470,20 @@ commit;
 
 *** Apply Permissions ~order_detail~ Select
 
-#+ATTR_HTML: :width 80%
-#+ATTR_HTML: :height 80%
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
 [[file:assets/order_detail_permissions.png]]
 
 *** Apply Permissions ~product~ Select
 
-#+ATTR_HTML: :width 80%
-#+ATTR_HTML: :height 80%
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
 [[file:assets/product_permissions.png]]
 
 *** Apply Permissions ~region~ Select
 
-#+ATTR_HTML: :width 70%
-#+ATTR_HTML: :height 70%
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
 [[file:assets/region_permissions.png]]
 
 *** Use Allow Lists
@@ -2539,8 +2545,6 @@ commit;
 
 *** Create REST Endpoints
 
-- API >> REST
-
 #+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 
 [[file:assets/rest_account.png]]
@@ -2601,7 +2605,21 @@ Life is about trade-offs.
 
 * Closing Remarks
 
-- How to secure your GraphQL API? :: By not having a GraphQL API
+*** GraphQL Security Orthodoxy
+
+- Disable Console & Schema Introspection.
+- Don't generate your APIs.
+- Obsess over API Limits.
+
+*** GraphQL Security Herodoxy
+
+- Don't disable Console & Schema Introspection
+- DO generate your APIs.
+- Don't worry so much about API Limits.
+
+*** How to Secure Your GraphQL API?
+
+- Don't have a GraphQL API.
 
 * /Thank You!/
 
