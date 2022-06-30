@@ -460,8 +460,8 @@ commit;
 
 *** ~account~ Select Permissions
 
-#+ATTR_HTML: :width 60%
-#+ATTR_HTML: :height 60%
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
 [[file:assets/account_permissions.png]]
 
 *** ~order~ Select Permissions
@@ -561,6 +561,8 @@ commit;
 
 #+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
 [[file:assets/rest_order_summary.png]]
 
 #+REVEAL_HTML: </div>
@@ -593,28 +595,22 @@ commit;
 
 *** How to Secure Your GraphQL API?
 
-- Don't have a GraphQL API.
+Don't have a GraphQL API
 
 * /Thank You!/
 
 #+REVEAL_HTML: <div class="column" style="float:left; width:50%">
-
-#+CAPTION: @TheRealDventimi
+@TheRealDventimi
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
 [[file:assets/profile.jpg]]
-
 #+REVEAL_HTML: </div>
 
 #+REVEAL_HTML: <div class="column" style="float:right; width:50%">
-
-#+CAPTION: https://tinyurl.com/ynhbbrmy
+https://tinyurl.com/ynhbbrmy
 #+ATTR_HTML: :width 50%
 #+ATTR_HTML: :height 50%
 [[file:assets/qr.png]]
-
-#+ATTR_HTML: :width 50%
-#+ATTR_HTML: :height 50%
-[[file:assets/hasura-logo-primary-light.png]]
-
 #+REVEAL_HTML: </div>
 
 #  LocalWords:  toc controlsLayout controlsTutorial ATTR hasuraprod
