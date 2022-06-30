@@ -361,7 +361,6 @@ insert into account (name) values ('Arin Maker');
 insert into account (name) values ('Gregor Gwilliam');
 insert into account (name) values ('Calypso Meyer');
 
-insert into product (name, price) values ('Ecolab - Ster Bac', 227);
 insert into product (name, price) values ('Plastic Wrap', 71);
 insert into product (name, price) values ('Arizona - Green Tea', 377);
 insert into product (name, price) values ('Wine - Prosecco Valdobienne', 220);
@@ -459,37 +458,37 @@ commit;
   - Rate Limit (RPM): 10
   - Timeout (Seconds): 10
 
-*** Apply Permissions ~account~ Select
+*** ~account~ Select Permissions
 
-#+ATTR_HTML: :width 70%
-#+ATTR_HTML: :height 70%
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
 [[file:assets/account_permissions.png]]
 
-*** Apply Permissions ~order~ Select
+*** ~order~ Select Permissions
 
 #+ATTR_HTML: :width 80%
 #+ATTR_HTML: :height 80%
 [[file:assets/order_permissions.png]]
 
-*** Apply Permissions ~order~ Insert
+*** ~order~ Insert Permissions
 
 #+ATTR_HTML: :width 80%
 #+ATTR_HTML: :height 80%
 [[file:assets/order_permissions_insert.png]]
 
-*** Apply Permissions ~order_detail~ Select
+*** ~order_detail~ Select Permissions
 
 #+ATTR_HTML: :width 60%
 #+ATTR_HTML: :height 60%
 [[file:assets/order_detail_permissions.png]]
 
-*** Apply Permissions ~product~ Select
+*** ~product~ Select Permissions
 
 #+ATTR_HTML: :width 60%
 #+ATTR_HTML: :height 60%
 [[file:assets/product_permissions.png]]
 
-*** Apply Permissions ~region~ Select
+*** ~region~ Select Permissions
 
 #+ATTR_HTML: :width 60%
 #+ATTR_HTML: :height 60%
