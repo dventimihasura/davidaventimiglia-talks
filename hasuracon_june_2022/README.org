@@ -64,7 +64,7 @@ https://cloud.hasura.io/
 - Deep Queries :: /Confidentiality, Availability/
 - Recursive Queries :: /Availability/
 - Unbounded Queries :: /Confidentiality, Availability/
-- Malicious Queries :: /Confidentiality/
+- Malicious Queries :: /Confidentiality, Integrity/
 - Batch Requests :: /Confidentiality, Availability/
 
 #+REVEAL_HTML: </div>
