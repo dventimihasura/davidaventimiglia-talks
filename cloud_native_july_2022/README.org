@@ -1,0 +1,284 @@
+#+TITLE: Write Less Undifferentiated Code
+#+SUBTITLE: Cloud Native Data Access
+#+AUTHOR: David A. Ventimiglia
+#+EMAIL: davidaventimiglia@hasura.io
+
+#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
+
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./assets/slide_background.png
+#+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+#+REVEAL_THEME: black
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./assets/slide_background.png
+#+REVEAL_PLUGINS: (highlight)
+
+* Who
+
+[[mailto:davidaventimiglia@hasura.io][davidaventimiglia@hasura.io]]
+
+#+BEGIN_QUOTE
+"I'm a physicist, data scientist, data engineer, and software
+engineer.  I work for [[https://hasura.io/][*Hasura*]], a software technology company that
+provides developer-focused tooling products.  And, I believe that the
+best code is the code that you don't have to write."
+#+END_QUOTE
+
+* What
+
+#+REVEAL: split
+
+#+BEGIN_QUOTE
+The idea of “cloud-native” is to take advantage of cloud
+technologies in order to build applications quickly and adapt to
+circumstances along the way. But, writing undifferentiated code
+is a hindrance to that. Having instant APIs to securely interact
+with your database, with performance and security, baked in,
+makes it easy to adopt a cloud-native stack with minimal code and
+maximum agility.  In this webinar, learn how to build the core of
+your application faster and more reliably than you ever thought
+possible.
+#+END_QUOTE
+
+#+REVEAL: split
+
+#+begin_quote
+"From your databases to a unified GraphQL API in just one minute"
+#+end_quote
+
+* What?
+
+** GraphQL API
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- Query Language
+- Schema
+  - Types
+    - Fields
+- Types relate to Types
+- Sound familiar?
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
+
+#+ATTR_HTML: :width 100%
+#+ATTR_HTML: :height 100%
+[[file:GraphQL.png]]
+
+#+REVEAL_HTML: </div>
+
+** In Just One Minute
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:Hasura_Connections.png]]
+
+#+REVEAL: split
+
+[[file:what_is_hasura.png]]
+
+* Why?
+
+** Two-Tier
+
+- 1986-1996
+- Client + Server
+- Visual Basic + MSSQL + SQL
+
+** Three-Tier
+
+- 1996-1999
+- Presentation + Application + Data
+- JSPs + EJBs + ORM + Oracle (+ SQL)
+
+** N-Tier
+
+- 1999-2002
+- Client + WAF + Business Logic + Messaging + Loads of Caching + Data
+- HTML/Javascript + Nginx + Ruby + Rails + RabbitMQ + Redis + ActiveRecord + MySQL (+ SQL)
+
+** SOA
+
+- 2002-2012
+- UI + WSDL + SOAP + Event Bus + POJOs + ORM + Data
+- HTML/Javascript + JAX-WS + Java + Spring + Hibernate + Oracle (+ SQL)
+
+** Microservices
+
+- 2012-???
+- UI + REST
+- HTML/Javascript/TypeScript/Angular/React + AWS DynamoDB + Python + Flask + API Endpoints + SQLAlchemy + ECS + MySQL (+ SQL)
+
+** Containerization
+
+- 2013-???
+- Clients + Containers
+- Angular + Docker + AWS ECS/EKS + Linkerd + AWS RDS (+ SQL)
+
+** Serverless
+
+- 2014-???
+- UI + Functions
+- SPA / Mobile + API Gateway + AWS Lambda + AWS Aurora (+ SQL)
+
+** Low-Code
+
+- 2017-???
+- UI + Database
+- React / Flutter + Hasura + PostgreSQL + SQL!
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+[[file:clipart2825061.png]]
+
+** No-Code
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- 2018-???
+- UI + Spreadsheet
+- Glide + AirTable
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+[[file:Glide-symbol-white.png]]
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+[[file:pngwing.com.png]]
+
+#+REVEAL_HTML: </div>
+  
+* Demo
+
+*** Hasura
+
+*** Hasura Cloud
+
+*** Managed Database Providers
+
+***** Heroku
+
+***** DigitalOcean
+
+***** Railway
+
+***** Render
+
+***** Aiven
+
+* Hasura Product Features
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- +GraphQL API+
+- Relay API
+- +PostgreSQL+
+- MS SQL Server
+- BigQuery
+- Actions
+- +Remote Schemas+
+
+#+REVEAL_HTML: </div>
+  
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- Event Triggers
+- Scheduled Triggers
+- Authentication
+- +Authorization+
+- Database Migrations
+- CLI
+
+#+REVEAL_HTML: </div>
+
+* Hasura Cloud Product Features
+
+- Ease of Use
+- Caching
+- API Limits
+- Monitoring
+- Collaboration
+
+* Honorable Mentions
+
+#+REVEAL_HTML: <div class="row">
+
+- [[https://www.graphile.org/postgraphile/][PostGraphile]]
+- [[https://www.prisma.io/][Prisma]]
+- [[https://github.com/supabase/pg_graphql][=pg_graphql=]]
+- [[https://postgrest.org/en/stable/][PostgREST]]
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="row">
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+#+ATTR_HTML: :style float:left
+#+ATTR_HTML: :margin 10px
+[[file:postgraphile.png]]
+
+#+ATTR_HTML: :width 15%
+#+ATTR_HTML: :height 15%
+#+ATTR_HTML: :style float:left
+#+ATTR_HTML: :margin 10px
+[[file:prisma_logo-freelogovectors.net_.png]]
+
+#+ATTR_HTML: :width 15%
+#+ATTR_HTML: :height 15%
+#+ATTR_HTML: :style float:right
+#+ATTR_HTML: :margin 10px
+[[file:supabase.jpg]]
+
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+#+ATTR_HTML: :style float:right
+#+ATTR_HTML: :margin 10px
+[[file:postgrest.png]]
+
+#+REVEAL_HTML: </div>
+
+* Concluding Remarks
+
+- What have we accomplished?
+- Why don't we just write SQL?
+- Should we just be grateful?
+- How can we help other developers?
+- Are database professionals ready for the moment?
+
+* /Thank you!/
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+#+begin_verse
+If you had
+One shot
+Or one opportunity
+To seize everything you ever wanted
+In one moment
+Would you capture it
+Or just let it slip?
+
+   ---Eminem
+#+end_verse
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:frame.png]]
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:hasura-logo-primary-light.png]]
+
+#+REVEAL_HTML: </div>
+
+
