@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Relational Databases</title>
+<meta name="author" content="David A. Ventimiglia"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="./reveal.js/lib/css/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-background="./assets/slide_background.png"><h1 class="title">Relational Databases</h1><p class="subtitle">Principles</p>
+
+</section>
+
+<section>
+<section id="slide-org40ffe0c" data-background="./assets/slide_background.png">
+<h2 id="org40ffe0c">Principles</h2>
+<div class="outline-text-2" id="text-org40ffe0c">
+</div>
+</section>
+<section id="slide-org2e490e5" data-background="./assets/slide_background.png">
+<h3 id="org2e490e5">Data Independence</h3>
+<blockquote >
+<p>
+"Activities of users at terminals and most application programs should
+remain unaffected when the internal representation of data is changed
+and even when some aspects of the external representation are
+changed." &#x2013; E.F. Codd 1971
+</p>
+</blockquote>
+
+</section>
+<section id="slide-org1d25f7c" data-background="./assets/slide_background.png">
+<h3 id="org1d25f7c">Information Principle</h3>
+<p>
+<i>All</i> information is represented by the same model.
+</p>
+
+</section>
+<section id="slide-org99a2d10" data-background="./assets/slide_background.png">
+<h3 id="org99a2d10">Consistency</h3>
+<p>
+Data consistency is enforced not by imperative application rules but
+by declarative database constraints.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd2801d4" data-background="./assets/slide_background.png">
+<h2 id="orgd2801d4">Theory</h2>
+<div class="outline-text-2" id="text-orgd2801d4">
+</div>
+</section>
+<section id="slide-orge3cf117" data-background="./assets/slide_background.png">
+<h3 id="orge3cf117">Relational Model</h3>
+<div class="column" style="float:left; width:50%">
+
+<dl>
+<dt>relation</dt><dd>(heading, body)</dd>
+<dt>heading</dt><dd>{attributes}</dd>
+<dt>body</dt><dd>{tuple}</dd>
+<dt>attribute</dt><dd>(name, domain)</dd>
+<dt>name</dt><dd><i>text</i></dd>
+
+</dl>
+
+</div>
+
+<div class="column" style="float:right; width:50%">
+
+<dl>
+<dt>domain</dt><dd><i>text</i></dd>
+<dt>tuple</dt><dd>{value} where value ∈ domain</dd>
+<dt>predicate</dt><dd>{proposition}</dd>
+<dt>proposition</dt><dd><code>true</code> | <code>false</code></dd>
+
+</dl>
+
+</div>
+
+</section>
+<section id="slide-org8de3248" data-background="./assets/slide_background.png">
+<h3 id="org8de3248">Interrogating the Model</h3>
+<dl>
+<dt>relational calculus</dt><dd>declarative language for performing optimizations</dd>
+<dt>relational algebra</dt><dd>imperative language for performing transformations</dd>
+
+</dl>
+
+</section>
+<section id="slide-org71d6d5f" data-background="./assets/slide_background.png">
+<h3 id="org71d6d5f">Application</h3>
+<div class="column" style="float:left; width:50%">
+
+<dl>
+<dt>relation</dt><dd>table | view | query</dd>
+<dt>attribute</dt><dd>column</dd>
+<dt>tuple</dt><dd>row</dd>
+<dt>domain</dt><dd>type</dd>
+<dt>proposition</dt><dd>query</dd>
+
+</dl>
+
+</div>
+
+<div class="column" style="float:right; width:50%">
+
+<dl>
+<dt>relational algebra</dt><dd>Π σ ⨝</dd>
+<dt>projection Π</dt><dd>choose columns</dd>
+<dt>selection σ</dt><dd>choose rows</dd>
+<dt>join ⨝</dt><dd>product of relations</dd>
+
+</dl>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgc961f87" data-background="./assets/slide_background.png">
+<h2 id="orgc961f87">Reality</h2>
+<div class="outline-text-2" id="text-orgc961f87">
+</div>
+</section>
+<section id="slide-org58c2508" data-background="./assets/slide_background.png">
+<h3 id="org58c2508">Climbing Down from the Ivory Tower</h3>
+<p>
+The mathematical formalism is useful for reasoning, but all database
+implementations deviate from the strict mathematical model for
+practical purposes.
+</p>
+
+</section>
+<section id="slide-org0c8d3a9" data-background="./assets/slide_background.png">
+<h3 id="org0c8d3a9"></h3>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/dist/reveal.js"></script>
+<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight],
+transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+});
+
+</script>
+</body>
+</html>

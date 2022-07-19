@@ -1,0 +1,95 @@
+#+GIST_ID: 8cecc640eef01dee8d6d4b140b6a70ca
+#+TITLE: Relational Databases
+#+SUBTITLE: Principles
+#+AUTHOR: David A. Ventimiglia
+#+EMAIL: davidaventimiglia@hasura.io
+
+#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
+
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./assets/slide_background.png
+#+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+#+REVEAL_THEME: black
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./assets/slide_background.png
+#+REVEAL_PLUGINS: (highlight)
+
+* Principles
+
+*** Data Independence
+
+#+begin_quote
+"Activities of users at terminals and most application programs should
+remain unaffected when the internal representation of data is changed
+and even when some aspects of the external representation are
+changed." -- E.F. Codd 1971
+#+end_quote
+
+*** Information Principle
+
+/All/ information is represented by the same model.
+
+*** Consistency
+
+Data consistency is enforced not by imperative application rules but
+by declarative database constraints.
+
+* Theory
+
+*** Relational Model
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- relation :: (heading, body)
+- heading :: {attributes}
+- body :: {tuple}
+- attribute :: (name, domain)
+- name :: /text/
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+
+- domain :: /text/
+- tuple :: {value} where value ∈ domain
+- predicate :: {proposition}
+- proposition :: =true= | =false=
+
+#+REVEAL_HTML: </div>
+
+*** Interrogating the Model
+
+- relational calculus :: declarative language for performing optimizations
+- relational algebra :: imperative language for performing transformations
+
+*** Application
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- relation :: table | view | query
+- attribute :: column
+- tuple :: row
+- domain :: type
+- proposition :: query
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+
+- relational algebra :: Π σ ⨝
+- projection Π :: choose columns
+- selection σ :: choose rows
+- join ⨝ :: product of relations
+
+#+REVEAL_HTML: </div>
+
+* Reality
+
+*** Climbing Down from the Ivory Tower
+
+The mathematical formalism is useful for reasoning, but all database
+implementations deviate from the strict mathematical model for
+practical purposes.
+
+*** 
+
+
+
