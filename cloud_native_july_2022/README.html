@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>Write Less Undifferentiated Code</title>
+<title>Write Less Code</title>
 <meta name="author" content="David A. Ventimiglia"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -17,13 +17,13 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-background="./assets/slide_background.png"><h1 class="title">Write Less Undifferentiated Code</h1><p class="subtitle">Cloud Native Data Access</p>
+<section id="sec-title-slide" data-background="./assets/slide_background.png"><h1 class="title">Write Less Code</h1><p class="subtitle">Cloud Native Data Access</p>
 
 </section>
 
 <section>
-<section id="slide-org0959cfb" data-background="./assets/slide_background.png">
-<h2 id="org0959cfb">Who</h2>
+<section id="slide-org2c9280a" data-background="./assets/slide_background.png">
+<h2 id="org2c9280a">Who</h2>
 <p>
 <a href="mailto:davidaventimiglia@hasura.io">davidaventimiglia@hasura.io</a>
 </p>
@@ -40,27 +40,10 @@ best code is the code that you don't have to write."
 </section>
 </section>
 <section>
-<section id="slide-org4191f36" data-background="./assets/slide_background.png">
-<h2 id="org4191f36">What</h2>
+<section id="slide-orgadd30dc" data-background="./assets/slide_background.png">
+<h2 id="orgadd30dc">What</h2>
 </section>
-<section id="slide-org4191f36-split" data-background="./assets/slide_background.png">
-
-<blockquote >
-<p>
-The idea of “cloud-native” is to take advantage of cloud
-technologies in order to build applications quickly and adapt to
-circumstances along the way. But, writing undifferentiated code
-is a hindrance to that. Having instant APIs to securely interact
-with your database, with performance and security, baked in,
-makes it easy to adopt a cloud-native stack with minimal code and
-maximum agility.  In this webinar, learn how to build the core of
-your application faster and more reliably than you ever thought
-possible.
-</p>
-</blockquote>
-
-</section>
-<section id="slide-org4191f36-split" data-background="./assets/slide_background.png">
+<section id="slide-orgadd30dc-split" data-background="./assets/slide_background.png">
 
 <blockquote >
 <p>
@@ -68,16 +51,20 @@ possible.
 </p>
 </blockquote>
 
+<p class="fragment roll-in">
+Hasura marketing copy
+</p>
+
 </section>
 </section>
 <section>
-<section id="slide-org553e18a" data-background="./assets/slide_background.png">
-<h2 id="org553e18a">What?</h2>
-<div class="outline-text-2" id="text-org553e18a">
+<section id="slide-orge0aab19" data-background="./assets/slide_background.png">
+<h2 id="orge0aab19">What?</h2>
+<div class="outline-text-2" id="text-orge0aab19">
 </div>
 </section>
-<section id="slide-org30203ca" data-background="./assets/slide_background.png">
-<h3 id="org30203ca">GraphQL API</h3>
+<section id="slide-org4b908d8" data-background="./assets/slide_background.png">
+<h3 id="org4b908d8">GraphQL API</h3>
 <div class="column" style="float:left; width:50%">
 
 <ul>
@@ -101,133 +88,137 @@ possible.
 <div class="column" style="float:right; width:50%;">
 
 
-<div id="org8e0e8dc" class="figure">
-<p><img src="GraphQL.png" alt="GraphQL.png" height="100%" width="100%" />
+<div id="org7b065c5" class="figure">
+<p><img src="assets/GraphQL.png" alt="GraphQL.png" height="100%" width="100%" />
 </p>
 </div>
 
 </div>
 
 </section>
-<section id="slide-org8c4f1f1" data-background="./assets/slide_background.png">
-<h3 id="org8c4f1f1">In Just One Minute</h3>
+<section id="slide-org9adbbad" data-background="./assets/slide_background.png">
+<h3 id="org9adbbad">In Just One Minute</h3>
 
-<div id="org346787d" class="figure">
-<p><img src="Hasura_Connections.png" alt="Hasura_Connections.png" height="50%" width="50%" />
+<div id="org5fefc6c" class="figure">
+<p><img src="assets/Hasura_Connections.png" alt="Hasura_Connections.png" height="50%" width="50%" />
 </p>
 </div>
 
 </section>
-<section id="slide-org8c4f1f1-split" data-background="./assets/slide_background.png">
+<section id="slide-org9adbbad-split" data-background="./assets/slide_background.png">
 
 
-<div id="orgd871d2b" class="figure">
-<p><img src="what_is_hasura.png" alt="what_is_hasura.png" />
+<div id="org995eba8" class="figure">
+<p><img src="assets/what_is_hasura.png" alt="what_is_hasura.png" />
 </p>
 </div>
 
 </section>
 </section>
 <section>
-<section id="slide-org50e66f7" data-background="./assets/slide_background.png">
-<h2 id="org50e66f7">Why?</h2>
-<div class="outline-text-2" id="text-org50e66f7">
+<section id="slide-org6d4e0f9" data-background="./assets/slide_background.png">
+<h2 id="org6d4e0f9">Why?</h2>
+<div class="outline-text-2" id="text-org6d4e0f9">
 </div>
 </section>
-<section id="slide-orgf0b3af4" data-background="./assets/slide_background.png">
-<h3 id="orgf0b3af4">Two-Tier</h3>
+<section id="slide-orgef2d400" data-background="./assets/slide_background.png">
+<h3 id="orgef2d400"><a href="https://en.wikipedia.org/wiki/Client%E2%80%93server_model">Two-Tier</a></h3>
 <ul>
-<li>1986-1996</li>
-<li>Client + Server</li>
-<li>Visual Basic + MSSQL + SQL</li>
+<li class="fragment roll-in">1986-1996</li>
+<li class="fragment roll-in">Client + Server</li>
+<li class="fragment roll-in">Visual Basic + MSSQL + SQL</li>
 
 </ul>
 
 </section>
-<section id="slide-org33a5f96" data-background="./assets/slide_background.png">
-<h3 id="org33a5f96">Three-Tier</h3>
+<section id="slide-orgbd76df9" data-background="./assets/slide_background.png">
+<h3 id="orgbd76df9"><a href="https://www.ibm.com/cloud/learn/three-tier-architecture">Three-Tier</a></h3>
 <ul>
-<li>1996-1999</li>
-<li>Presentation + Application + Data</li>
-<li>JSPs + EJBs + ORM + Oracle (+ SQL)</li>
+<li class="fragment roll-in">1996-1999</li>
+<li class="fragment roll-in">Presentation + Application + Data</li>
+<li class="fragment roll-in">JSPs + EJBs + ORM + Oracle (+ SQL)</li>
 
 </ul>
 
 </section>
-<section id="slide-org615c21b" data-background="./assets/slide_background.png">
-<h3 id="org615c21b">N-Tier</h3>
+<section id="slide-org3aac042" data-background="./assets/slide_background.png">
+<h3 id="org3aac042"><a href="https://en.wikipedia.org/wiki/Multitier_architecture">N-Tier</a></h3>
 <ul>
-<li>1999-2002</li>
-<li>Client + WAF + Business Logic + Messaging + Loads of Caching + Data</li>
-<li>HTML/Javascript + Nginx + Ruby + Rails + RabbitMQ + Redis + ActiveRecord + MySQL (+ SQL)</li>
+<li class="fragment roll-in">1999-2002</li>
+<li class="fragment roll-in">Client + WAF + Business Logic + Messaging + Loads of Caching + Data</li>
+<li class="fragment roll-in">HTML/Javascript + Nginx + Ruby + Rails + RabbitMQ + Redis + ActiveRecord + MySQL (+ SQL)</li>
 
 </ul>
 
 </section>
-<section id="slide-orgd95b282" data-background="./assets/slide_background.png">
-<h3 id="orgd95b282">SOA</h3>
+<section id="slide-org8978118" data-background="./assets/slide_background.png">
+<h3 id="org8978118"><a href="https://en.wikipedia.org/wiki/Service-oriented_architecture">SOA</a></h3>
 <ul>
-<li>2002-2012</li>
-<li>UI + WSDL + SOAP + Event Bus + POJOs + ORM + Data</li>
-<li>HTML/Javascript + JAX-WS + Java + Spring + Hibernate + Oracle (+ SQL)</li>
+<li class="fragment roll-in">2002-2012</li>
+<li class="fragment roll-in">UI + WSDL + SOAP + Event Bus + POJOs + ORM + Data</li>
+<li class="fragment roll-in">HTML/Javascript + JAX-WS + Java + Spring + Hibernate + Oracle (+ SQL)</li>
 
 </ul>
 
 </section>
-<section id="slide-org48872c2" data-background="./assets/slide_background.png">
-<h3 id="org48872c2">Microservices</h3>
+<section id="slide-org4e47c29" data-background="./assets/slide_background.png">
+<h3 id="org4e47c29"><a href="https://en.wikipedia.org/wiki/Microservices">Microservices</a></h3>
 <ul>
-<li>2012-???</li>
-<li>UI + REST</li>
-<li>HTML/Javascript/TypeScript/Angular/React + AWS DynamoDB + Python + Flask + API Endpoints + SQLAlchemy + ECS + MySQL (+ SQL)</li>
+<li class="fragment roll-in">2012-???</li>
+<li class="fragment roll-in">UI + REST</li>
+<li class="fragment roll-in">HTML/Javascript/TypeScript/Angular/React + AWS DynamoDB + Python + Flask + API Endpoints + SQLAlchemy + ECS + MySQL (+ SQL)</li>
 
 </ul>
 
 </section>
-<section id="slide-orgd6be7d5" data-background="./assets/slide_background.png">
-<h3 id="orgd6be7d5">Containerization</h3>
+<section id="slide-orgc2d6fca" data-background="./assets/slide_background.png">
+<h3 id="orgc2d6fca"><a href="https://en.wikipedia.org/wiki/Containerization_(computing)">Containerization</a></h3>
 <ul>
-<li>2013-???</li>
-<li>Clients + Containers</li>
-<li>Angular + Docker + AWS ECS/EKS + Linkerd + AWS RDS (+ SQL)</li>
+<li class="fragment roll-in">2013-???</li>
+<li class="fragment roll-in">Clients + Containers</li>
+<li class="fragment roll-in">Angular + Docker + AWS ECS/EKS + Linkerd + AWS RDS (+ SQL)</li>
 
 </ul>
 
 </section>
-<section id="slide-org89cea14" data-background="./assets/slide_background.png">
-<h3 id="org89cea14">Serverless</h3>
+<section id="slide-org950e4b2" data-background="./assets/slide_background.png">
+<h3 id="org950e4b2"><a href="https://en.wikipedia.org/wiki/Serverless_computing">Serverless</a></h3>
 <ul>
-<li>2014-???</li>
-<li>UI + Functions</li>
-<li>SPA / Mobile + API Gateway + AWS Lambda + AWS Aurora (+ SQL)</li>
+<li class="fragment roll-in">2014-???</li>
+<li class="fragment roll-in">UI + Functions</li>
+<li class="fragment roll-in">SPA / Mobile + API Gateway + AWS Lambda + AWS Aurora (+ SQL)</li>
 
 </ul>
 
 </section>
-<section id="slide-org2054a77" data-background="./assets/slide_background.png">
-<h3 id="org2054a77">Low-Code</h3>
+<section id="slide-orgcbca194" data-background="./assets/slide_background.png">
+<h3 id="orgcbca194"><a href="https://www.thoughtworks.com/insights/decoder/l/low-code">Low-Code</a></h3>
+<div class="column" style="float:left; width:80%">
 <ul>
-<li>2017-???</li>
-<li>UI + Database</li>
-<li>React / Flutter + Hasura + PostgreSQL + SQL!</li>
+<li class="fragment roll-in">2017-???</li>
+<li class="fragment roll-in">UI + Database</li>
+<li class="fragment roll-in">React / Flutter + Hasura + PostgreSQL + SQL!</li>
 
 </ul>
+</div>
 
+<div class="column" style="float:right; width:20%">
 
-<div id="orgdd08186" class="figure">
-<p><img src="clipart2825061.png" alt="clipart2825061.png" height="25%" width="25%" />
+<div id="org9bc0e57" class="figure">
+<p><img src="assets/clipart2825061.png" alt="clipart2825061.png" class="fragment roll-in" />
 </p>
 </div>
+</div>
 
 </section>
-<section id="slide-orgf8299d6" data-background="./assets/slide_background.png">
-<h3 id="orgf8299d6">No-Code</h3>
+<section id="slide-org1edda58" data-background="./assets/slide_background.png">
+<h3 id="org1edda58"><a href="https://www.thoughtworks.com/insights/podcasts/pragmatism-in-practice/no-code-platforms">No-Code</a></h3>
 <div class="column" style="float:left; width:50%">
 
 <ul>
-<li>2018-???</li>
-<li>UI + Spreadsheet</li>
-<li>Glide + AirTable</li>
+<li class="fragment roll-in">2018-???</li>
+<li class="fragment roll-in">UI + Spreadsheet</li>
+<li class="fragment roll-in"><a href="https://www.glideapps.com/">Glide</a> + <a href="https://www.airtable.com/">AirTable</a></li>
 
 </ul>
 
@@ -235,41 +226,257 @@ possible.
 
 <div class="column" style="float:right; width:50%">
 
-
-<div id="org456ca10" class="figure">
-<p><img src="Glide-symbol-white.png" alt="Glide-symbol-white.png" height="25%" width="25%" />
+<div id="org2f4ff8e" class="figure">
+<p><img src="assets/Glide-symbol-white.png" alt="Glide-symbol-white.png" class="fragment roll-in" height="25%" width="25%" />
 </p>
 </div>
 
-
-<div id="orgeae4a9a" class="figure">
-<p><img src="pngwing.com.png" alt="pngwing.com.png" height="25%" width="25%" />
+<div id="orge0dfe95" class="figure">
+<p><img src="assets/pngwing.com.png" alt="pngwing.com.png" class="fragment roll-in" height="25%" width="25%" />
 </p>
 </div>
-
 </div>
 
 </section>
 </section>
 <section>
-<section id="slide-orgd7ba61d" data-background="./assets/slide_background.png">
-<h2 id="orgd7ba61d">Demo</h2>
+<section id="slide-orgeb335b8" data-background="./assets/slide_background.png">
+<h2 id="orgeb335b8">How</h2>
+</section>
+<section id="slide-orgeb335b8-split" data-background="./assets/slide_background.png">
+
+<div class="column" style="float:left; width:75%">
+<blockquote >
+<p>
+"Show me your flowcharts and conceal your tables, and I shall continue
+to be mystified. Show me your tables, and I won't usually need your
+flowcharts; they'll be obvious."
+</p>
+</blockquote>
+<p class="fragment roll-in">
+Fred Brooks in "The Mythical Man-Month" (1975)
+</p>
+</div>
+
+<div class="column" style="float:right; width:25%">
+
+<div id="org8a9c75a" class="figure">
+<p><img src="assets/Mythical_man-month_(book_cover).jpg" alt="Mythical_man-month_(book_cover).jpg" class="fragment roll-in" />
+</p>
+</div>
+</div>
 
 </section>
+<section id="slide-orgeb335b8-split" data-background="./assets/slide_background.png">
+
+<div class="column" style="float:left; width:75%">
+<blockquote >
+<p>
+"Any sufficiently complicated C or Fortran program contains an ad hoc,
+informally-specified, bug-ridden, slow implementation of half of
+Common Lisp."
+</p>
+</blockquote>
+<p class="fragment roll-in">
+Philip Greenspun in "Greenspun's 10th Rule of Programming" (1993)
+</p>
+</div>
+
+<div class="column" style="float:right; width:25%">
+
+<div id="org2a2dd65" class="figure">
+<p><img src="assets/greenspun.jpg" alt="greenspun.jpg" class="fragment roll-in" />
+</p>
+</div>
+</div>
 </section>
-<section>
-<section id="slide-org117f9f7" data-background="./assets/slide_background.png">
-<h2 id="org117f9f7">Product Features</h2>
+<section id="slide-orgeb335b8-split" data-background="./assets/slide_background.png">
+
+<div class="column" style="float:left; width:75%">
+<blockquote >
+<p>
+"What are you actually doing when you use a typical web application?"
+</p>
+</blockquote>
+<p class="fragment roll-in">
+Benoit Ranque at Hasura (the day he interviewed me)
+</p>
+</div>
+
+<div class="column" style="float:right; width:25%">
+
+<div id="orgc5a0306" class="figure">
+<p><img src="assets/benoit.jpg" alt="benoit.jpg" class="fragment roll-in" />
+</p>
+</div>
+</div>
+</section>
+<section id="slide-orgeb335b8-split" data-background="./assets/slide_background.png">
+
+</section>
+<section id="slide-orgeb335b8-split" data-background="./assets/slide_background.png">
+
+<div class="column" style="float:left; width:75%">
+<blockquote >
+<p>
+"What are you actually doing when you write a typical program?"
+</p>
+</blockquote>
+<p class="fragment roll-in">
+Me here (now)
+</p>
+</div>
+
+<div class="column" style="float:right; width:25%">
+
+<div id="org5d1b066" class="figure">
+<p><img src="assets/dventimi.jpg" alt="dventimi.jpg" class="fragment roll-in" />
+</p>
+</div>
+</div>
+
+</section>
+<section id="slide-orgeb335b8-split" data-background="./assets/slide_background.png">
+
+<div class="column" style="float:left; width:75%">
+<blockquote >
+<p>
+"PL/SQL isn't a <b>real</b> programming language"
+</p>
+</blockquote>
+<p class="fragment roll-in">
+<del>redacted</del> (2022)
+</p>
+</div>
+
+<div class="column" style="float:right; width:25%">
+
+<div id="orge371508" class="figure">
+<p><img src="assets/question_mark_profile.jpg" alt="question_mark_profile.jpg" class="fragment roll-in" />
+</p>
+</div>
+</div>
+
+</section>
+<section id="slide-org811c787" data-background="./assets/slide_background.png">
+<h3 id="org811c787">Typical Data Containers</h3>
+<ul>
+<li class="fragment roll-in">Variables</li>
+<li class="fragment roll-in">Arrays</li>
+<li class="fragment roll-in">Lists</li>
+<li class="fragment roll-in">Maps</li>
+
+</ul>
+
+</section>
+<section id="slide-orgd56bf87" data-background="./assets/slide_background.png">
+<h3 id="orgd56bf87">Typical Data Container</h3>
+<p class="fragment (roll-in)">
+Collections
+</p>
+
+</section>
+<section id="slide-orgdc88b55" data-background="./assets/slide_background.png">
+<h3 id="orgdc88b55">Typical Relational Database</h3>
 <div class="column" style="float:left; width:50%">
 
 <ul>
-<li><del>GraphQL API</del></li>
-<li>Relay API</li>
-<li><del>PostgreSQL</del></li>
-<li>MS SQL Server</li>
-<li>BigQuery</li>
-<li>Actions</li>
-<li><del>Remote Schemas</del></li>
+<li class="fragment roll-in">Efficient Storage</li>
+<li class="fragment roll-in">Huge Volumes</li>
+<li class="fragment roll-in">Fast Access</li>
+<li class="fragment roll-in">Indexes</li>
+<li class="fragment roll-in">Joins</li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:right; width:50%">
+
+<ul>
+<li class="fragment roll-in">Constraints</li>
+<li class="fragment roll-in">Flexible Language</li>
+<li class="fragment roll-in">Access Control</li>
+<li class="fragment roll-in">Unified Data Model</li>
+<li class="fragment roll-in">Concurrency</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-orgba0eb44" data-background="./assets/slide_background.png">
+<h3 id="orgba0eb44">Typical Business Logic</h3>
+<ul>
+<li class="fragment roll-in">Input Validation</li>
+<li class="fragment roll-in">Data Transformations</li>
+<li class="fragment roll-in">Side Effects</li>
+
+</ul>
+
+</section>
+<section id="slide-org2f81b99" data-background="./assets/slide_background.png">
+<h3 id="org2f81b99">Typical Business Logic</h3>
+<p class="fragment (roll-in)">
+State Machine
+</p>
+
+</section>
+<section id="slide-org0c6a5bc" data-background="./assets/slide_background.png">
+<h3 id="org0c6a5bc">Typical Business Logic</h3>
+<p class="fragment (roll-in)">
+Function Evaluation over data (after finding the data)
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org0c304d1" data-background="./assets/slide_background.png">
+<h2 id="org0c304d1">How?</h2>
+<div class="outline-text-2" id="text-org0c304d1">
+</div>
+</section>
+<section id="slide-orgd5908aa" data-background="./assets/slide_background.png">
+<h3 id="orgd5908aa"><a href="https://www.thoughtworks.com/en-us/radar"><code>ADOPT</code></a> Declarative Programming 🏁</h3>
+<ul>
+<li class="fragment roll-in">Tables, Schema, Views</li>
+<li class="fragment roll-in">Data types (Custom, Enumerated, Range, etc.)</li>
+<li class="fragment roll-in">Permissions</li>
+<li class="fragment roll-in">Constraints (Unique, Foreign, Check)</li>
+<li class="fragment roll-in">Row Security Policies</li>
+<li class="fragment roll-in">Defaults</li>
+<li class="fragment roll-in"><del>Assertions</del> Triggers</li>
+
+</ul>
+
+</section>
+<section id="slide-orge2a6edf" data-background="./assets/slide_background.png">
+<h3 id="orge2a6edf"><a href="https://www.thoughtworks.com/en-us/radar"><code>HOLD</code></a> Procedural Programming 🛑</h3>
+<p class="fragment (roll-in)">
+<del>Stored Procedures</del>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd0b13b3" data-background="./assets/slide_background.png">
+<h2 id="orgd0b13b3">Demo</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-orgdeb3885" data-background="./assets/slide_background.png">
+<h2 id="orgdeb3885">Hasura Product Features</h2>
+<div class="column" style="float:left; width:50%">
+
+<ul>
+<li class="fragment roll-in">GraphQL API</li>
+<li class="fragment roll-in"><del>Relay API</del></li>
+<li class="fragment roll-in">PostgreSQL</li>
+<li class="fragment roll-in"><del>MS SQL Server</del></li>
+<li class="fragment roll-in"><del>BigQuery</del></li>
+<li class="fragment roll-in">Actions</li>
+<li class="fragment roll-in"><del>Remote Schemas</del></li>
 
 </ul>
 
@@ -278,12 +485,12 @@ possible.
 <div class="column" style="float:left; width:50%">
 
 <ul>
-<li>Event Triggers</li>
-<li>Scheduled Triggers</li>
-<li>Authentication</li>
-<li><del>Authorization</del></li>
-<li>Database Migrations</li>
-<li>CLI</li>
+<li class="fragment roll-in">Event Triggers</li>
+<li class="fragment roll-in">Scheduled Triggers</li>
+<li class="fragment roll-in"><del>Authentication</del></li>
+<li class="fragment roll-in">Authorization</li>
+<li class="fragment roll-in"><del>Database Migrations</del></li>
+<li class="fragment roll-in"><del>CLI</del></li>
 
 </ul>
 
@@ -292,8 +499,8 @@ possible.
 </section>
 </section>
 <section>
-<section id="slide-orga8293c9" data-background="./assets/slide_background.png">
-<h2 id="orga8293c9">Honorable Mentions</h2>
+<section id="slide-org7cab7e0" data-background="./assets/slide_background.png">
+<h2 id="org7cab7e0">Honorable Mentions</h2>
 <div class="row">
 
 <ul>
@@ -309,26 +516,26 @@ possible.
 <div class="row">
 
 
-<div id="org083ebb4" class="figure">
-<p><img src="postgraphile.png" alt="postgraphile.png" margin="10px" style="float:left" height="25%" width="25%" />
+<div id="orgf6244ea" class="figure">
+<p><img src="assets/postgraphile.png" alt="postgraphile.png" margin="10px" style="float:left" height="25%" width="25%" />
 </p>
 </div>
 
 
-<div id="org5ed1719" class="figure">
-<p><img src="prisma_logo-freelogovectors.net_.png" alt="prisma_logo-freelogovectors.net_.png" margin="10px" style="float:left" height="15%" width="15%" />
+<div id="org26a5165" class="figure">
+<p><img src="assets/prisma_logo-freelogovectors.net_.png" alt="prisma_logo-freelogovectors.net_.png" margin="10px" style="float:left" height="15%" width="15%" />
 </p>
 </div>
 
 
-<div id="org1ff721f" class="figure">
-<p><img src="supabase.jpg" alt="supabase.jpg" margin="10px" style="float:right" height="15%" width="15%" />
+<div id="org8a4f40d" class="figure">
+<p><img src="assets/supabase.jpg" alt="supabase.jpg" margin="10px" style="float:right" height="15%" width="15%" />
 </p>
 </div>
 
 
-<div id="org51d626f" class="figure">
-<p><img src="postgrest.png" alt="postgrest.png" margin="10px" style="float:right" height="25%" width="25%" />
+<div id="orgc4c06a5" class="figure">
+<p><img src="assets/postgrest.png" alt="postgrest.png" margin="10px" style="float:right" height="25%" width="25%" />
 </p>
 </div>
 
@@ -337,49 +544,44 @@ possible.
 </section>
 </section>
 <section>
-<section id="slide-org3c5540c" data-background="./assets/slide_background.png">
-<h2 id="org3c5540c">Concluding Remarks</h2>
-<ul>
-<li>What have we accomplished?</li>
-<li>Why don't we just write SQL?</li>
-<li>Should we just be grateful?</li>
-<li>How can we help other developers?</li>
-<li>Are database professionals ready for the moment?</li>
+<section id="slide-org0dbb635" data-background="./assets/slide_background.png">
+<h2 id="org0dbb635">How to Write Less Code?</h2>
+<ol>
+<li class="fragment roll-in">Grant that SQL isn't a "real" programming language.</li>
+<li class="fragment roll-in">Write your application in SQL anyway.</li>
+<li class="fragment roll-in">Profit! 🤑</li>
 
-</ul>
+</ol>
 
 </section>
 </section>
 <section>
-<section id="slide-org34aa5bb" data-background="./assets/slide_background.png">
-<h2 id="org34aa5bb"><i>Thank you!</i></h2>
-<div class="column" style="float:left; width:50%">
+<section id="slide-orgef6aee3" data-background="./assets/slide_background.png">
+<h2 id="orgef6aee3"><i>Thank you!</i></h2>
+<div class="column" style="float:left; width:75%">
 
-<p class="verse">
-If you had<br />
-One shot<br />
-Or one opportunity<br />
-To seize everything you ever wanted<br />
-In one moment<br />
-Would you capture it<br />
-Or just let it slip?<br />
-<br />
-&#xa0;&#xa0;&#xa0;&#x2014;Eminem<br />
+<blockquote >
+<p>
+"Simplicity is a great virtue but it requires hard work to achieve it
+and education to appreciate it. And to make matters worse: complexity
+sells better." &#x2013; Edsger W. Dijkstra in "On the nature of Computing
+Science" (1984)
 </p>
+</blockquote>
 
 </div>
 
-<div class="column" style="float:right; width:50%">
+<div class="column" style="float:right; width:25%">
 
 
-<div id="org8acd8e0" class="figure">
-<p><img src="frame.png" alt="frame.png" height="50%" width="50%" />
+<div id="org048ea7e" class="figure">
+<p><img src="assets/frame.png" alt="frame.png" height="50%" width="50%" />
 </p>
 </div>
 
 
-<div id="orgf09c149" class="figure">
-<p><img src="hasura-logo-primary-light.png" alt="hasura-logo-primary-light.png" height="50%" width="50%" />
+<div id="org38b8d11" class="figure">
+<p><img src="assets/hasura-logo-primary-light.png" alt="hasura-logo-primary-light.png" height="50%" width="50%" />
 </p>
 </div>
 

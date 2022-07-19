@@ -1,4 +1,4 @@
-#+TITLE: Write Less Undifferentiated Code
+#+TITLE: Write Less Code
 #+SUBTITLE: Cloud Native Data Access
 #+AUTHOR: David A. Ventimiglia
 #+EMAIL: davidaventimiglia@hasura.io
@@ -26,23 +26,12 @@ best code is the code that you don't have to write."
 
 #+REVEAL: split
 
-#+BEGIN_QUOTE
-The idea of “cloud-native” is to take advantage of cloud
-technologies in order to build applications quickly and adapt to
-circumstances along the way. But, writing undifferentiated code
-is a hindrance to that. Having instant APIs to securely interact
-with your database, with performance and security, baked in,
-makes it easy to adopt a cloud-native stack with minimal code and
-maximum agility.  In this webinar, learn how to build the core of
-your application faster and more reliably than you ever thought
-possible.
-#+END_QUOTE
-
-#+REVEAL: split
-
 #+begin_quote
 "From your databases to a unified GraphQL API in just one minute"
 #+end_quote
+
+#+ATTR_REVEAL: :frag roll-in
+Hasura marketing copy
 
 * What?
 
@@ -63,7 +52,7 @@ possible.
 
 #+ATTR_HTML: :width 100%
 #+ATTR_HTML: :height 100%
-[[file:GraphQL.png]]
+[[file:assets/GraphQL.png]]
 
 #+REVEAL_HTML: </div>
 
@@ -71,115 +60,264 @@ possible.
 
 #+ATTR_HTML: :width 50%
 #+ATTR_HTML: :height 50%
-[[file:Hasura_Connections.png]]
+[[file:assets/Hasura_Connections.png]]
 
 #+REVEAL: split
 
-[[file:what_is_hasura.png]]
+[[file:assets/what_is_hasura.png]]
 
 * Why?
 
-** Two-Tier
+** [[https://en.wikipedia.org/wiki/Client%E2%80%93server_model][Two-Tier]]
 
+#+ATTR_REVEAL: :frag (roll-in)
 - 1986-1996
 - Client + Server
 - Visual Basic + MSSQL + SQL
 
-** Three-Tier
+** [[https://www.ibm.com/cloud/learn/three-tier-architecture][Three-Tier]]
 
+#+ATTR_REVEAL: :frag (roll-in)
 - 1996-1999
 - Presentation + Application + Data
 - JSPs + EJBs + ORM + Oracle (+ SQL)
 
-** N-Tier
+** [[https://en.wikipedia.org/wiki/Multitier_architecture][N-Tier]]
 
+#+ATTR_REVEAL: :frag (roll-in)
 - 1999-2002
 - Client + WAF + Business Logic + Messaging + Loads of Caching + Data
 - HTML/Javascript + Nginx + Ruby + Rails + RabbitMQ + Redis + ActiveRecord + MySQL (+ SQL)
 
-** SOA
+** [[https://en.wikipedia.org/wiki/Service-oriented_architecture][SOA]]
 
+#+ATTR_REVEAL: :frag (roll-in)
 - 2002-2012
 - UI + WSDL + SOAP + Event Bus + POJOs + ORM + Data
 - HTML/Javascript + JAX-WS + Java + Spring + Hibernate + Oracle (+ SQL)
 
-** Microservices
+** [[https://en.wikipedia.org/wiki/Microservices][Microservices]]
 
+#+ATTR_REVEAL: :frag (roll-in)
 - 2012-???
 - UI + REST
 - HTML/Javascript/TypeScript/Angular/React + AWS DynamoDB + Python + Flask + API Endpoints + SQLAlchemy + ECS + MySQL (+ SQL)
 
-** Containerization
+** [[https://en.wikipedia.org/wiki/Containerization_(computing)][Containerization]]
 
+#+ATTR_REVEAL: :frag (roll-in)
 - 2013-???
 - Clients + Containers
 - Angular + Docker + AWS ECS/EKS + Linkerd + AWS RDS (+ SQL)
 
-** Serverless
+** [[https://en.wikipedia.org/wiki/Serverless_computing][Serverless]]
 
+#+ATTR_REVEAL: :frag (roll-in)
 - 2014-???
 - UI + Functions
 - SPA / Mobile + API Gateway + AWS Lambda + AWS Aurora (+ SQL)
 
-** Low-Code
+** [[https://www.thoughtworks.com/insights/decoder/l/low-code][Low-Code]]
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:80%">
+#+ATTR_REVEAL: :frag (roll-in)
 - 2017-???
 - UI + Database
 - React / Flutter + Hasura + PostgreSQL + SQL!
+#+REVEAL_HTML: </div>
 
-#+ATTR_HTML: :width 25%
-#+ATTR_HTML: :height 25%
-[[file:clipart2825061.png]]
+#+REVEAL_HTML: <div class="column" style="float:right; width:20%">
+#+ATTR_REVEAL: :frag roll-in
+[[file:assets/clipart2825061.png]]
+#+REVEAL_HTML: </div>
 
-** No-Code
+** [[https://www.thoughtworks.com/insights/podcasts/pragmatism-in-practice/no-code-platforms][No-Code]]
 
 #+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 
+#+ATTR_REVEAL: :frag (roll-in)
 - 2018-???
 - UI + Spreadsheet
-- Glide + AirTable
+- [[https://www.glideapps.com/][Glide]] + [[https://www.airtable.com/][AirTable]]
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+#+ATTR_REVEAL: :frag roll-in
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+[[file:assets/Glide-symbol-white.png]]
+#+ATTR_REVEAL: :frag roll-in
+#+ATTR_HTML: :width 25%
+#+ATTR_HTML: :height 25%
+[[file:assets/pngwing.com.png]]
+#+REVEAL_HTML: </div>
+  
+* How
+
+#+REVEAL: split
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+#+BEGIN_QUOTE
+"Show me your flowcharts and conceal your tables, and I shall continue
+to be mystified. Show me your tables, and I won't usually need your
+flowcharts; they'll be obvious."
+#+END_QUOTE
+#+ATTR_REVEAL: :frag roll-in
+Fred Brooks in "The Mythical Man-Month" (1975)
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:25%">
+#+ATTR_REVEAL: :frag roll-in
+[[file:assets/Mythical_man-month_(book_cover).jpg]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL: split
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+#+BEGIN_QUOTE
+"Any sufficiently complicated C or Fortran program contains an ad hoc,
+informally-specified, bug-ridden, slow implementation of half of
+Common Lisp."
+#+END_QUOTE
+#+ATTR_REVEAL: :frag roll-in
+Philip Greenspun in "Greenspun's 10th Rule of Programming" (1993)
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:25%">
+#+ATTR_REVEAL: :frag roll-in
+[[file:assets/greenspun.jpg]]
+#+REVEAL_HTML: </div>
+#+REVEAL: split
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+#+BEGIN_QUOTE
+"What are you actually doing when you use a typical web application?"
+#+END_QUOTE
+#+ATTR_REVEAL: :frag roll-in
+Benoit Ranque at Hasura (the day he interviewed me)
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:25%">
+#+ATTR_REVEAL: :frag roll-in
+[[file:assets/benoit.jpg]]
+#+REVEAL_HTML: </div>
+#+REVEAL: split
+
+#+REVEAL: split
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+#+BEGIN_QUOTE
+"What are you actually doing when you write a typical program?"
+#+END_QUOTE
+#+ATTR_REVEAL: :frag roll-in
+Me here (now)
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:25%">
+#+ATTR_REVEAL: :frag roll-in
+[[file:assets/dventimi.jpg]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL: split
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+#+BEGIN_QUOTE
+"PL/SQL isn't a *real* programming language"
+#+END_QUOTE
+#+ATTR_REVEAL: :frag roll-in
++redacted+ (2022)
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:25%">
+#+ATTR_REVEAL: :frag roll-in
+[[file:assets/question_mark_profile.jpg]]
+#+REVEAL_HTML: </div>
+
+*** Typical Data Containers
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Variables
+- Arrays
+- Lists
+- Maps
+
+*** Typical Data Container
+
+#+ATTR_REVEAL: :frag (roll-in)
+Collections
+
+*** Typical Relational Database
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Efficient Storage
+- Huge Volumes
+- Fast Access
+- Indexes
+- Joins
 
 #+REVEAL_HTML: </div>
 
 #+REVEAL_HTML: <div class="column" style="float:right; width:50%">
 
-#+ATTR_HTML: :width 25%
-#+ATTR_HTML: :height 25%
-[[file:Glide-symbol-white.png]]
-
-#+ATTR_HTML: :width 25%
-#+ATTR_HTML: :height 25%
-[[file:pngwing.com.png]]
+#+ATTR_REVEAL: :frag (roll-in)
+- Constraints
+- Flexible Language
+- Access Control
+- Unified Data Model
+- Concurrency
 
 #+REVEAL_HTML: </div>
-  
+
+*** Typical Business Logic
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Input Validation
+- Data Transformations
+- Side Effects
+
+*** Typical Business Logic
+
+#+ATTR_REVEAL: :frag (roll-in)
+State Machine
+
+*** Typical Business Logic
+
+#+ATTR_REVEAL: :frag (roll-in)
+Function Evaluation over data (after finding the data)
+
+* How?
+
+*** [[https://www.thoughtworks.com/en-us/radar][=ADOPT=]] Declarative Programming 🏁
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Tables, Schema, Views
+- Data types (Custom, Enumerated, Range, etc.)
+- Permissions
+- Constraints (Unique, Foreign, Check)
+- Row Security Policies
+- Defaults
+- +Assertions+ Triggers
+
+*** [[https://www.thoughtworks.com/en-us/radar][=HOLD=]] Procedural Programming 🛑
+
+#+ATTR_REVEAL: :frag (roll-in)
++Stored Procedures+
+
 * Demo
-
-*** Hasura
-
-*** Hasura Cloud
-
-*** Managed Database Providers
-
-***** Heroku
-
-***** DigitalOcean
-
-***** Railway
-
-***** Render
-
-***** Aiven
 
 * Hasura Product Features
 
 #+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 
-- +GraphQL API+
-- Relay API
-- +PostgreSQL+
-- MS SQL Server
-- BigQuery
+#+ATTR_REVEAL: :frag (roll-in)
+- GraphQL API
+- +Relay API+
+- PostgreSQL
+- +MS SQL Server+
+- +BigQuery+
 - Actions
 - +Remote Schemas+
 
@@ -187,22 +325,15 @@ possible.
   
 #+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 
+#+ATTR_REVEAL: :frag (roll-in)
 - Event Triggers
 - Scheduled Triggers
-- Authentication
-- +Authorization+
-- Database Migrations
-- CLI
+- +Authentication+
+- Authorization
+- +Database Migrations+
+- +CLI+
 
 #+REVEAL_HTML: </div>
-
-* Hasura Cloud Product Features
-
-- Ease of Use
-- Caching
-- API Limits
-- Monitoring
-- Collaboration
 
 * Honorable Mentions
 
@@ -221,64 +352,56 @@ possible.
 #+ATTR_HTML: :height 25%
 #+ATTR_HTML: :style float:left
 #+ATTR_HTML: :margin 10px
-[[file:postgraphile.png]]
+[[file:assets/postgraphile.png]]
 
 #+ATTR_HTML: :width 15%
 #+ATTR_HTML: :height 15%
 #+ATTR_HTML: :style float:left
 #+ATTR_HTML: :margin 10px
-[[file:prisma_logo-freelogovectors.net_.png]]
+[[file:assets/prisma_logo-freelogovectors.net_.png]]
 
 #+ATTR_HTML: :width 15%
 #+ATTR_HTML: :height 15%
 #+ATTR_HTML: :style float:right
 #+ATTR_HTML: :margin 10px
-[[file:supabase.jpg]]
+[[file:assets/supabase.jpg]]
 
 #+ATTR_HTML: :width 25%
 #+ATTR_HTML: :height 25%
 #+ATTR_HTML: :style float:right
 #+ATTR_HTML: :margin 10px
-[[file:postgrest.png]]
+[[file:assets/postgrest.png]]
 
 #+REVEAL_HTML: </div>
 
-* Concluding Remarks
+* How to Write Less Code?
 
-- What have we accomplished?
-- Why don't we just write SQL?
-- Should we just be grateful?
-- How can we help other developers?
-- Are database professionals ready for the moment?
+#+ATTR_REVEAL: :frag (roll-in)
+1. Grant that SQL isn't a "real" programming language.
+2. Write your application in SQL anyway.
+3. Profit! 🤑
 
 * /Thank you!/
 
-#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+REVEAL_HTML: <div class="column" style="float:left; width:75%">
 
-#+begin_verse
-If you had
-One shot
-Or one opportunity
-To seize everything you ever wanted
-In one moment
-Would you capture it
-Or just let it slip?
-
-   ---Eminem
-#+end_verse
+#+begin_quote
+"Simplicity is a great virtue but it requires hard work to achieve it
+and education to appreciate it. And to make matters worse: complexity
+sells better." -- Edsger W. Dijkstra in "On the nature of Computing
+Science" (1984)
+#+end_quote
 
 #+REVEAL_HTML: </div>
 
-#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+#+REVEAL_HTML: <div class="column" style="float:right; width:25%">
 
 #+ATTR_HTML: :width 50%
 #+ATTR_HTML: :height 50%
-[[file:frame.png]]
+[[file:assets/frame.png]]
 
 #+ATTR_HTML: :width 50%
 #+ATTR_HTML: :height 50%
-[[file:hasura-logo-primary-light.png]]
+[[file:assets/hasura-logo-primary-light.png]]
 
 #+REVEAL_HTML: </div>
-
-
