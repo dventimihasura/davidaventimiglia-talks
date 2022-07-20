@@ -406,16 +406,24 @@ Science" (1984)
 
 *** Objections
 
+#+ATTR_REVEAL: :frag (roll-in)
 - Too many stored procedures :: don't use stored procedures
 - SQL isn't a real programming language :: so what?
 - Developers aren't trained to use SQL :: so train them
 - Code is spread all around :: it's confined to the database
-- Can't do TDD :: sure you can
-- Can't scale the DB horizontally :: code is not the bottleneck
+
+*** Objections
+
+#+ATTR_REVEAL: :frag (roll-in)
 - Can't scale the DB horizontally :: sure you can
-- Relational DBs are slow :: absolutely not
+- Can't scale the DB horizontally :: code is not the bottleneck
 - Hard to switch the DB :: no it isn't
 - Hard to switch the DB :: it's hard to switch programming languages
-- Low cohesion :: absolute rubbish
-- Stored procedure languages are horrible :: no they're not
 
+*** Objections
+
+#+ATTR_REVEAL: :frag (roll-in)
+- Relational DBs are slow :: absolutely not
+- Stored procedure languages are horrible :: no they're not
+- Stored procedure languages are horrible :: use Java, Python, or Javascript
+- Can't do TDD :: sure you can
