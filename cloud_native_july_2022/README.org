@@ -226,7 +226,7 @@ Me here (now)
 "PL/SQL isn't a *real* programming language"
 #+END_QUOTE
 #+ATTR_REVEAL: :frag roll-in
-+redacted+ (2022)
++redacted+ (last week)
 #+REVEAL_HTML: </div>
 
 #+REVEAL_HTML: <div class="column" style="float:right; width:25%">
@@ -318,7 +318,7 @@ Function Evaluation over data (after finding the data)
 - PostgreSQL
 - +MS SQL Server+
 - +BigQuery+
-- Actions
+- +Actions+
 - +Remote Schemas+
 
 #+REVEAL_HTML: </div>
@@ -327,7 +327,7 @@ Function Evaluation over data (after finding the data)
 
 #+ATTR_REVEAL: :frag (roll-in)
 - Event Triggers
-- Scheduled Triggers
+- +Scheduled Triggers+
 - +Authentication+
 - Authorization
 - +Database Migrations+
@@ -396,12 +396,26 @@ Science" (1984)
 
 #+REVEAL_HTML: <div class="column" style="float:right; width:25%">
 
-#+ATTR_HTML: :width 50%
-#+ATTR_HTML: :height 50%
-[[file:assets/frame.png]]
+[[file:qr.png]]
 
-#+ATTR_HTML: :width 50%
-#+ATTR_HTML: :height 50%
 [[file:assets/hasura-logo-primary-light.png]]
 
 #+REVEAL_HTML: </div>
+
+* Additional Slides
+
+*** Objections
+
+- Too many stored procedures :: don't use stored procedures
+- SQL isn't a real programming language :: so what?
+- Developers aren't trained to use SQL :: so train them
+- Code is spread all around :: it's confined to the database
+- Can't do TDD :: sure you can
+- Can't scale the DB horizontally :: code is not the bottleneck
+- Can't scale the DB horizontally :: sure you can
+- Relational DBs are slow :: absolutely not
+- Hard to switch the DB :: no it isn't
+- Hard to switch the DB :: it's hard to switch programming languages
+- Low cohesion :: absolute rubbish
+- Stored procedure languages are horrible :: no they're not
+
