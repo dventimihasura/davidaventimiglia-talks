@@ -381,7 +381,7 @@ Function Evaluation over data (after finding the data)
 2. Write your application in SQL anyway.
 3. Profit! 🤑
 
-* /Thank you!/
+* Concluding Remarks
 
 #+REVEAL_HTML: <div class="column" style="float:left; width:75%">
 
