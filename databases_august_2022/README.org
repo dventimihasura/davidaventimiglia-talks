@@ -20,7 +20,7 @@
 "Activities of users at terminals and most application programs should
 remain unaffected when the internal representation of data is changed
 and even when some aspects of the external representation are
-changed." -- E.F. Codd 1971
+changed." -- E.F. Codd 1970
 #+end_quote
 
 *** Information Principle
@@ -134,7 +134,6 @@ practical purposes.
 *** Constraints
 
 #+REVEAL_HTML: <div class="column" style="float:right; width:50%">
-- Primary
 - Foreign
 - Check
 #+REVEAL_HTML: </div>
@@ -201,28 +200,65 @@ practical purposes.
 
 *** 1970: E.F. "Ted" Codd
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+[[file:assets/Edgar_Codd.jpg]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+[[file:assets/codd_1981.png]]
+#+REVEAL_HTML: </div>
+
 *** 1971: Generation X
 
-- Born 1965 to 1980
+#+REVEAL_HTML: <div class="column" style="float:left; width:60%">
+[[file:assets/StrangerThingsDDScene-625x352.webp]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:40%">
+- 1965-1980
 - Latchkey kids
 - Tech-savvy
+[[file:assets/Stranger_Things_logo.png]]
+#+REVEAL_HTML: </div>
 
 *** 1976: IBM System R
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 - First relational database
 - Released academic papers...
 - ...but no commercial product
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+[[file:assets/ibm-sj-ad-1962.webp]]
+#+REVEAL_HTML: </div>
 
 *** 1976: INGRES
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :width 70%
+#+ATTR_HTML: :height 70%
+[[file:assets/CampanileMtTamalpiasSunset-original.jpg]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
 - Based off those papers
 - Berkeley research project
 - Later a commercial product
+#+REVEAL_HTML: </div>
 
 *** 1977: Oracle
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 - PDP-11 UNIX
 - Influence directly from Codd's 1970 paper
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+#+ATTR_HTML: :width 70%
+#+ATTR_HTML: :height 70%
+[[file:assets/Pdp-11-40.jpg]]
+#+REVEAL_HTML: </div>
 
 *** 1977: Apple
 
@@ -234,14 +270,26 @@ practical purposes.
 
 *** 1978: Space Invaders
 
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:assets/SpaceInvaders-Gameplay.gif]]
+
 *** 1982: Commodore
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :width 70%
+#+ATTR_HTML: :height 70%
+[[file:assets/Commodore64.jpg]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
 - VIC-20
 - Commodore 64
 - *BASIC*
 - 17M units sold worldwide
 - Sales peaked in 1984
 - No RDBMS :(
+#+REVEAL_HTML: </div>
   
 *** 1984: Sybase
 
@@ -249,28 +297,61 @@ practical purposes.
 
 *** 1989: Microsoft SQL Server
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 - Licensed from Sybase for IBM OS/2
+- Used to grind Sybase into the ground
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+[[file:assets/bill-gates-borg.jpg]]
+#+REVEAL_HTML: </div>
 
 *** 1990: The World Wide Web
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+[[file:assets/Lynx-wikipedia.png]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
 - Tim Berners-Lee at CERN
 - First web server and graphical browser
+#+REVEAL_HTML: </div>
 
 *** 1993: Mosaic
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+[[file:assets/NCSA_Mosaic_Browser_Screenshot.png]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
 - Marc Andreesen
 - NCSA
+#+REVEAL_HTML: </div>
 
 *** 1994: The Year of the Web
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 - Gen-Xers were 23 years old
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+[[file:assets/marc_andreesen.jpg]]
+#+REVEAL_HTML: </div>
 
 *** 1995: The Dot-com Bubble
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
+[[file:assets/Bill_Clinton.jpg]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
 - HTML
 - MySQL
 - Perl is used
 - But Java appears
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
 
 *** 1996: MySQL
 
@@ -282,9 +363,17 @@ practical purposes.
 
 *** 2000: The NASDAQ Peaks
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
+[[file:assets/Pets.com_sockpuppet.jpg]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
 - the party's over
 - From dog treats to the banks
 - ORMs, EJBs, oh my!
+#+REVEAL_HTML: </div>
 
 *** 2004: Object-Relational Mapping is the Vietnam of our industry
 
