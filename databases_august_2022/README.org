@@ -126,10 +126,10 @@ practical purposes.
 *** Keys
 
 - primary
-- simple
-- composite
-- "pseudo-keys"
-- +sequences+
+  - simple
+  - composite
+  - "pseudo-keys"
+  - +sequences+
 
 *** Constraints
 
@@ -262,11 +262,19 @@ practical purposes.
 
 *** 1977: Apple
 
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+[[file:assets/Apple_II_typical_configuration_1977.png]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+#+ATTR_HTML: :width 70%
+#+ATTR_HTML: :height 70%
 - Apple II
 - *BASIC*
 - 6M units sold worldwide
 - Sales peaked in 1983
 - No RDBMS :(
+#+REVEAL_HTML: </div>
 
 *** 1978: Space Invaders
 
@@ -319,19 +327,16 @@ practical purposes.
 
 *** 1993: Mosaic
 
-#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
 [[file:assets/NCSA_Mosaic_Browser_Screenshot.png]]
-#+REVEAL_HTML: </div>
-
-#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
-- Marc Andreesen
-- NCSA
-#+REVEAL_HTML: </div>
 
 *** 1994: The Year of the Web
 
 #+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 - Gen-Xers were 23 years old
+- were about to have too much money
+- and not enough shoes
 #+REVEAL_HTML: </div>
 
 #+REVEAL_HTML: <div class="column" style="float:right; width:50%">
@@ -425,6 +430,10 @@ practical purposes.
 
 *** 2017: Hasura
 
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
+[[file:assets/hasura.png]]
+
 *** 2022: Today
 
 - Gen-Xers are in their fifties.
@@ -443,4 +452,4 @@ practical purposes.
 
 #+ATTR_HTML: :width 60%
 #+ATTR_HTML: :height 60%
-[[file:assets/Apple_II_typical_configuration_1977.png]]
+[[file:assets/wargames.jpg]]
