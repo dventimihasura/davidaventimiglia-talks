@@ -4,7 +4,7 @@
 #+AUTHOR: David A. Ventimiglia
 #+EMAIL: davidaventimiglia@hasura.io
 
-#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
+#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil reveal_single_file:t
 
 #+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./assets/slide_background.png
 #+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
