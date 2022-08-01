@@ -1,6 +1,6 @@
 #+GIST_ID: 8cecc640eef01dee8d6d4b140b6a70ca
 #+TITLE: Relational Databases
-#+SUBTITLE: Principles
+#+SUBTITLE: Principles, Theory, History
 #+AUTHOR: David A. Ventimiglia
 #+EMAIL: davidaventimiglia@hasura.io
 
@@ -81,15 +81,276 @@ by declarative database constraints.
 
 #+REVEAL_HTML: </div>
 
+*** Normalization
+
+- UNF:  anything goes
+- 1NF:  atomic columns
+- 2NF:  no functional dependencies within table
+- 3NF:  no functional dependencies to other tables
+- 4NF, 5NF, 6NF:  refinements but don't worry about it
+
+*** Demo
+
+[[http://clotho.uom.gr/relax/calc.htm][RelaX - relational algebra calculator]]
+
+[[https://gist.github.com/dventimihasura/2c2bca3625f268a5c61f510b3f3cb3e8][gist:2c2bca3625f268a5c61f510b3f3cb3e8]]
+
 * Reality
 
-*** Climbing Down from the Ivory Tower
+*** Climbing Down the Ivory Tower
 
 The mathematical formalism is useful for reasoning, but all database
 implementations deviate from the strict mathematical model for
 practical purposes.
 
-*** 
+*** Real Databases
 
+- depart from set theory (hello duplicates)
+- depart from simple relational theory (hello ~GROUP BY~ AND ~ORDER BY~)
+- depart from first-order predicate logic (hello ~NULL~)
+- extend the basic model (hello ~OUTER JOIN~)
 
+*** Tables
 
+- not much to say, except
+- there are only "relations"
+- parent-child, one-to-many, many-to-many are not a thing
+
+*** Views
+
+- not much to say, except
+- they're saved queries
+- /not/ an performance barrier, except
+- when they do too much
+
+*** Keys
+
+- primary
+- simple
+- composite
+- "pseudo-keys"
+- +sequences+
+
+*** Constraints
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+- Primary
+- Foreign
+- Check
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+- Not-Null
+- Unique
+- Exclusion
+#+REVEAL_HTML: </div>
+
+*** Indexes
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+- Clustered (not really a thing in Postgres)
+- Non-Clustered
+- Implementation for constraints
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+- Expression Indexes
+- Partial Indexes
+- Covering Indexes
+#+REVEAL_HTML: </div>
+
+*** Data Dictionary
+
+- One of the hallmarks of a RDBMS
+
+*** Transactions
+
+- ACID: Atomic, Consistent, Isolated, Durable
+- A: all or nothing
+- C: satisfies constraints
+- I: visible or not
+- D: true committment
+
+*** Concurrency
+
+*** Implementation Details
+
+- Files or Volumes
+- Pages
+- Extents
+- Rows
+- Values
+- Read performance
+- Write performance
+- Page splitting
+
+* Summary
+
+*** Key Ideas
+
+- Mathematical Foundation
+- Deductive Reasoning
+- Powerful Optimizations
+- Sophisticated Code Generation
+
+* The End
+
+* Additional Slides
+
+* History
+
+*** 1970: E.F. "Ted" Codd
+
+*** 1971: Generation X
+
+- Born 1965 to 1980
+- Latchkey kids
+- Tech-savvy
+
+*** 1976: IBM System R
+
+- First relational database
+- Released academic papers...
+- ...but no commercial product
+
+*** 1976: INGRES
+
+- Based off those papers
+- Berkeley research project
+- Later a commercial product
+
+*** 1977: Oracle
+
+- PDP-11 UNIX
+- Influence directly from Codd's 1970 paper
+
+*** 1977: Apple
+
+- Apple II
+- *BASIC*
+- 6M units sold worldwide
+- Sales peaked in 1983
+- No RDBMS :(
+
+*** 1978: Space Invaders
+
+*** 1982: Commodore
+
+- VIC-20
+- Commodore 64
+- *BASIC*
+- 17M units sold worldwide
+- Sales peaked in 1984
+- No RDBMS :(
+  
+*** 1984: Sybase
+
+- More Berkeley academics
+
+*** 1989: Microsoft SQL Server
+
+- Licensed from Sybase for IBM OS/2
+
+*** 1990: The World Wide Web
+
+- Tim Berners-Lee at CERN
+- First web server and graphical browser
+
+*** 1993: Mosaic
+
+- Marc Andreesen
+- NCSA
+
+*** 1994: The Year of the Web
+
+- Gen-Xers were 23 years old
+
+*** 1995: The Dot-com Bubble
+
+- HTML
+- MySQL
+- Perl is used
+- But Java appears
+
+*** 1996: MySQL
+
+- MyISAM had severe limitations
+- Fast but no transactions
+- No relational integrity
+- No triggers
+- No functions
+
+*** 2000: The NASDAQ Peaks
+
+- the party's over
+- From dog treats to the banks
+- ORMs, EJBs, oh my!
+
+*** 2004: Object-Relational Mapping is the Vietnam of our industry
+
+- Ted Neward, architect and prolific author
+- Gen-Xers were 33
+
+*** 2004: The MapReduce Paper
+
+- Apache Hadoop released 2006
+
+*** 2005: CouchDB
+
+- No SQL
+
+*** 2005: GreenPlub
+
+- SQL?
+
+*** 2007: MongoDB
+
+- No SQL!
+
+*** 2007: The Dynamo Paper
+
+- No SQL!!
+
+*** 2010: Moore's Law Ends
+
+- Gordon Web, Intel co-founder
+
+*** 2010: Apache Hive
+
+- SQL on Hadoop
+
+*** 2010: CitusDB
+
+- SQL
+- MPP
+
+*** 2013: AWS Redshift
+
+- SQL!
+- MPP
+
+*** 2014: Apache Spark
+
+- Comes with SQL (more-or-less)
+
+*** 2017: Hasura
+
+*** 2022: Today
+
+- Gen-Xers are in their fifties.
+- No longer calling the shots on tech
+- Finally!
+
+* Why Don't We Build Applications in the Database?
+
+*** It's not what they tell you
+
+- +performance+
+- +not a real programming language+
+- +not object-oriented+
+
+*** It's never what they tell you
+
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
+[[file:assets/Apple_II_typical_configuration_1977.png]]

@@ -17,18 +17,18 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-background="./assets/slide_background.png"><h1 class="title">Relational Databases</h1><p class="subtitle">Principles</p>
+<section id="sec-title-slide" data-background="./assets/slide_background.png"><h1 class="title">Relational Databases</h1><p class="subtitle">Principles, Theory, History</p>
 
 </section>
 
 <section>
-<section id="slide-org40ffe0c" data-background="./assets/slide_background.png">
-<h2 id="org40ffe0c">Principles</h2>
-<div class="outline-text-2" id="text-org40ffe0c">
+<section id="slide-org8c3b26f" data-background="./assets/slide_background.png">
+<h2 id="org8c3b26f">Principles</h2>
+<div class="outline-text-2" id="text-org8c3b26f">
 </div>
 </section>
-<section id="slide-org2e490e5" data-background="./assets/slide_background.png">
-<h3 id="org2e490e5">Data Independence</h3>
+<section id="slide-org49bb7aa" data-background="./assets/slide_background.png">
+<h3 id="org49bb7aa">Data Independence</h3>
 <blockquote >
 <p>
 "Activities of users at terminals and most application programs should
@@ -39,15 +39,15 @@ changed." &#x2013; E.F. Codd 1971
 </blockquote>
 
 </section>
-<section id="slide-org1d25f7c" data-background="./assets/slide_background.png">
-<h3 id="org1d25f7c">Information Principle</h3>
+<section id="slide-org2c5d4ef" data-background="./assets/slide_background.png">
+<h3 id="org2c5d4ef">Information Principle</h3>
 <p>
 <i>All</i> information is represented by the same model.
 </p>
 
 </section>
-<section id="slide-org99a2d10" data-background="./assets/slide_background.png">
-<h3 id="org99a2d10">Consistency</h3>
+<section id="slide-org774d9ba" data-background="./assets/slide_background.png">
+<h3 id="org774d9ba">Consistency</h3>
 <p>
 Data consistency is enforced not by imperative application rules but
 by declarative database constraints.
@@ -56,13 +56,13 @@ by declarative database constraints.
 </section>
 </section>
 <section>
-<section id="slide-orgd2801d4" data-background="./assets/slide_background.png">
-<h2 id="orgd2801d4">Theory</h2>
-<div class="outline-text-2" id="text-orgd2801d4">
+<section id="slide-org058965f" data-background="./assets/slide_background.png">
+<h2 id="org058965f">Theory</h2>
+<div class="outline-text-2" id="text-org058965f">
 </div>
 </section>
-<section id="slide-orge3cf117" data-background="./assets/slide_background.png">
-<h3 id="orge3cf117">Relational Model</h3>
+<section id="slide-org57ec1da" data-background="./assets/slide_background.png">
+<h3 id="org57ec1da">Relational Model</h3>
 <div class="column" style="float:left; width:50%">
 
 <dl>
@@ -89,8 +89,8 @@ by declarative database constraints.
 </div>
 
 </section>
-<section id="slide-org8de3248" data-background="./assets/slide_background.png">
-<h3 id="org8de3248">Interrogating the Model</h3>
+<section id="slide-org304ef27" data-background="./assets/slide_background.png">
+<h3 id="org304ef27">Interrogating the Model</h3>
 <dl>
 <dt>relational calculus</dt><dd>declarative language for performing optimizations</dd>
 <dt>relational algebra</dt><dd>imperative language for performing transformations</dd>
@@ -98,8 +98,8 @@ by declarative database constraints.
 </dl>
 
 </section>
-<section id="slide-org71d6d5f" data-background="./assets/slide_background.png">
-<h3 id="org71d6d5f">Application</h3>
+<section id="slide-org2b7641a" data-background="./assets/slide_background.png">
+<h3 id="org2b7641a">Application</h3>
 <div class="column" style="float:left; width:50%">
 
 <dl>
@@ -126,15 +126,38 @@ by declarative database constraints.
 </div>
 
 </section>
+<section id="slide-orgc6e08af" data-background="./assets/slide_background.png">
+<h3 id="orgc6e08af">Normalization</h3>
+<ul>
+<li>UNF:  anything goes</li>
+<li>1NF:  atomic columns</li>
+<li>2NF:  no functional dependencies within table</li>
+<li>3NF:  no functional dependencies to other tables</li>
+<li>4NF, 5NF, 6NF:  refinements but don't worry about it</li>
+
+</ul>
+
+</section>
+<section id="slide-org05b8acb" data-background="./assets/slide_background.png">
+<h3 id="org05b8acb">Demo</h3>
+<p>
+<a href="http://clotho.uom.gr/relax/calc.htm">RelaX - relational algebra calculator</a>
+</p>
+
+<p>
+<a href="https://gist.github.com/dventimihasura/2c2bca3625f268a5c61f510b3f3cb3e8">gist:2c2bca3625f268a5c61f510b3f3cb3e8</a>
+</p>
+
+</section>
 </section>
 <section>
-<section id="slide-orgc961f87" data-background="./assets/slide_background.png">
-<h2 id="orgc961f87">Reality</h2>
-<div class="outline-text-2" id="text-orgc961f87">
+<section id="slide-orgb540158" data-background="./assets/slide_background.png">
+<h2 id="orgb540158">Reality</h2>
+<div class="outline-text-2" id="text-orgb540158">
 </div>
 </section>
-<section id="slide-org58c2508" data-background="./assets/slide_background.png">
-<h3 id="org58c2508">Climbing Down from the Ivory Tower</h3>
+<section id="slide-orgf1f94c9" data-background="./assets/slide_background.png">
+<h3 id="orgf1f94c9">Climbing Down the Ivory Tower</h3>
 <p>
 The mathematical formalism is useful for reasoning, but all database
 implementations deviate from the strict mathematical model for
@@ -142,8 +165,444 @@ practical purposes.
 </p>
 
 </section>
-<section id="slide-org0c8d3a9" data-background="./assets/slide_background.png">
-<h3 id="org0c8d3a9"></h3>
+<section id="slide-orgf75f432" data-background="./assets/slide_background.png">
+<h3 id="orgf75f432">Real Databases</h3>
+<ul>
+<li>depart from set theory (hello duplicates)</li>
+<li>depart from simple relational theory (hello <code>GROUP BY</code> AND <code>ORDER BY</code>)</li>
+<li>depart from first-order predicate logic (hello <code>NULL</code>)</li>
+<li>extend the basic model (hello <code>OUTER JOIN</code>)</li>
+
+</ul>
+
+</section>
+<section id="slide-org3df4ec0" data-background="./assets/slide_background.png">
+<h3 id="org3df4ec0">Tables</h3>
+<ul>
+<li>not much to say, except</li>
+<li>there are only "relations"</li>
+<li>parent-child, one-to-many, many-to-many are not a thing</li>
+
+</ul>
+
+</section>
+<section id="slide-orge0487fc" data-background="./assets/slide_background.png">
+<h3 id="orge0487fc">Views</h3>
+<ul>
+<li>not much to say, except</li>
+<li>they're saved queries</li>
+<li><i>not</i> an performance barrier, except</li>
+<li>when they do too much</li>
+
+</ul>
+
+</section>
+<section id="slide-org559bbc7" data-background="./assets/slide_background.png">
+<h3 id="org559bbc7">Keys</h3>
+<ul>
+<li>primary</li>
+<li>simple</li>
+<li>composite</li>
+<li>"pseudo-keys"</li>
+<li><del>sequences</del></li>
+
+</ul>
+
+</section>
+<section id="slide-orgf518bff" data-background="./assets/slide_background.png">
+<h3 id="orgf518bff">Constraints</h3>
+<div class="column" style="float:right; width:50%">
+<ul>
+<li>Primary</li>
+<li>Foreign</li>
+<li>Check</li>
+
+</ul>
+</div>
+
+<div class="column" style="float:right; width:50%">
+<ul>
+<li>Not-Null</li>
+<li>Unique</li>
+<li>Exclusion</li>
+
+</ul>
+</div>
+
+</section>
+<section id="slide-orge066db7" data-background="./assets/slide_background.png">
+<h3 id="orge066db7">Indexes</h3>
+<div class="column" style="float:right; width:50%">
+<ul>
+<li>Clustered (not really a thing in Postgres)</li>
+<li>Non-Clustered</li>
+<li>Implementation for constraints</li>
+
+</ul>
+</div>
+
+<div class="column" style="float:right; width:50%">
+<ul>
+<li>Expression Indexes</li>
+<li>Partial Indexes</li>
+<li>Covering Indexes</li>
+
+</ul>
+</div>
+
+</section>
+<section id="slide-org2373b58" data-background="./assets/slide_background.png">
+<h3 id="org2373b58">Data Dictionary</h3>
+<ul>
+<li>One of the hallmarks of a RDBMS</li>
+
+</ul>
+
+</section>
+<section id="slide-org88b4bb9" data-background="./assets/slide_background.png">
+<h3 id="org88b4bb9">Transactions</h3>
+<ul>
+<li>ACID: Atomic, Consistent, Isolated, Durable</li>
+<li>A: all or nothing</li>
+<li>C: satisfies constraints</li>
+<li>I: visible or not</li>
+<li>D: true committment</li>
+
+</ul>
+
+</section>
+<section id="slide-orgfba7c71" data-background="./assets/slide_background.png">
+<h3 id="orgfba7c71">Concurrency</h3>
+
+</section>
+<section id="slide-org5dda261" data-background="./assets/slide_background.png">
+<h3 id="org5dda261">Implementation Details</h3>
+<ul>
+<li>Files or Volumes</li>
+<li>Pages</li>
+<li>Extents</li>
+<li>Rows</li>
+<li>Values</li>
+<li>Read performance</li>
+<li>Write performance</li>
+<li>Page splitting</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org4b5bb90" data-background="./assets/slide_background.png">
+<h2 id="org4b5bb90">Summary</h2>
+<div class="outline-text-2" id="text-org4b5bb90">
+</div>
+</section>
+<section id="slide-org70df708" data-background="./assets/slide_background.png">
+<h3 id="org70df708">Key Ideas</h3>
+<ul>
+<li>Mathematical Foundation</li>
+<li>Deductive Reasoning</li>
+<li>Powerful Optimizations</li>
+<li>Sophisticated Code Generation</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org7d23d2f" data-background="./assets/slide_background.png">
+<h2 id="org7d23d2f">The End</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org7fe40c7" data-background="./assets/slide_background.png">
+<h2 id="org7fe40c7">Additional Slides</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org7aea40a" data-background="./assets/slide_background.png">
+<h2 id="org7aea40a">History</h2>
+<div class="outline-text-2" id="text-org7aea40a">
+</div>
+</section>
+<section id="slide-org420f941" data-background="./assets/slide_background.png">
+<h3 id="org420f941">1970: E.F. "Ted" Codd</h3>
+
+</section>
+<section id="slide-orgee6cdf4" data-background="./assets/slide_background.png">
+<h3 id="orgee6cdf4">1971: Generation X</h3>
+<ul>
+<li>Born 1965 to 1980</li>
+<li>Latchkey kids</li>
+<li>Tech-savvy</li>
+
+</ul>
+
+</section>
+<section id="slide-org7b25a40" data-background="./assets/slide_background.png">
+<h3 id="org7b25a40">1976: IBM System R</h3>
+<ul>
+<li>First relational database</li>
+<li>Released academic papers&#x2026;</li>
+<li>&#x2026;but no commercial product</li>
+
+</ul>
+
+</section>
+<section id="slide-orgd44ebc7" data-background="./assets/slide_background.png">
+<h3 id="orgd44ebc7">1976: INGRES</h3>
+<ul>
+<li>Based off those papers</li>
+<li>Berkeley research project</li>
+<li>Later a commercial product</li>
+
+</ul>
+
+</section>
+<section id="slide-org1957678" data-background="./assets/slide_background.png">
+<h3 id="org1957678">1977: Oracle</h3>
+<ul>
+<li>PDP-11 UNIX</li>
+<li>Influence directly from Codd's 1970 paper</li>
+
+</ul>
+
+</section>
+<section id="slide-org19a74ec" data-background="./assets/slide_background.png">
+<h3 id="org19a74ec">1977: Apple</h3>
+<ul>
+<li>Apple II</li>
+<li><b>BASIC</b></li>
+<li>6M units sold worldwide</li>
+<li>Sales peaked in 1983</li>
+<li>No RDBMS :(</li>
+
+</ul>
+
+</section>
+<section id="slide-org6fa5305" data-background="./assets/slide_background.png">
+<h3 id="org6fa5305">1978: Space Invaders</h3>
+
+</section>
+<section id="slide-org6320e29" data-background="./assets/slide_background.png">
+<h3 id="org6320e29">1982: Commodore</h3>
+<ul>
+<li>VIC-20</li>
+<li>Commodore 64</li>
+<li><b>BASIC</b></li>
+<li>17M units sold worldwide</li>
+<li>Sales peaked in 1984</li>
+<li>No RDBMS :(</li>
+
+</ul>
+
+</section>
+<section id="slide-orgc1138c3" data-background="./assets/slide_background.png">
+<h3 id="orgc1138c3">1984: Sybase</h3>
+<ul>
+<li>More Berkeley academics</li>
+
+</ul>
+
+</section>
+<section id="slide-org98f876b" data-background="./assets/slide_background.png">
+<h3 id="org98f876b">1989: Microsoft SQL Server</h3>
+<ul>
+<li>Licensed from Sybase for IBM OS/2</li>
+
+</ul>
+
+</section>
+<section id="slide-orga8ec127" data-background="./assets/slide_background.png">
+<h3 id="orga8ec127">1990: The World Wide Web</h3>
+<ul>
+<li>Tim Berners-Lee at CERN</li>
+<li>First web server and graphical browser</li>
+
+</ul>
+
+</section>
+<section id="slide-org7eb5909" data-background="./assets/slide_background.png">
+<h3 id="org7eb5909">1993: Mosaic</h3>
+<ul>
+<li>Marc Andreesen</li>
+<li>NCSA</li>
+
+</ul>
+
+</section>
+<section id="slide-org80387d5" data-background="./assets/slide_background.png">
+<h3 id="org80387d5">1994: The Year of the Web</h3>
+<ul>
+<li>Gen-Xers were 23 years old</li>
+
+</ul>
+
+</section>
+<section id="slide-org4649330" data-background="./assets/slide_background.png">
+<h3 id="org4649330">1995: The Dot-com Bubble</h3>
+<ul>
+<li>HTML</li>
+<li>MySQL</li>
+<li>Perl is used</li>
+<li>But Java appears</li>
+
+</ul>
+
+</section>
+<section id="slide-org40b71c7" data-background="./assets/slide_background.png">
+<h3 id="org40b71c7">1996: MySQL</h3>
+<ul>
+<li>MyISAM had severe limitations</li>
+<li>Fast but no transactions</li>
+<li>No relational integrity</li>
+<li>No triggers</li>
+<li>No functions</li>
+
+</ul>
+
+</section>
+<section id="slide-org8afc57f" data-background="./assets/slide_background.png">
+<h3 id="org8afc57f">2000: The NASDAQ Peaks</h3>
+<ul>
+<li>the party's over</li>
+<li>From dog treats to the banks</li>
+<li>ORMs, EJBs, oh my!</li>
+
+</ul>
+
+</section>
+<section id="slide-org39c87e8" data-background="./assets/slide_background.png">
+<h3 id="org39c87e8">2004: Object-Relational Mapping is the Vietnam of our industry</h3>
+<ul>
+<li>Ted Neward, architect and prolific author</li>
+<li>Gen-Xers were 33</li>
+
+</ul>
+
+</section>
+<section id="slide-orgcbde10a" data-background="./assets/slide_background.png">
+<h3 id="orgcbde10a">2004: The MapReduce Paper</h3>
+<ul>
+<li>Apache Hadoop released 2006</li>
+
+</ul>
+
+</section>
+<section id="slide-org2d6b414" data-background="./assets/slide_background.png">
+<h3 id="org2d6b414">2005: CouchDB</h3>
+<ul>
+<li>No SQL</li>
+
+</ul>
+
+</section>
+<section id="slide-org6fbc6fb" data-background="./assets/slide_background.png">
+<h3 id="org6fbc6fb">2005: GreenPlub</h3>
+<ul>
+<li>SQL?</li>
+
+</ul>
+
+</section>
+<section id="slide-org2ddaab7" data-background="./assets/slide_background.png">
+<h3 id="org2ddaab7">2007: MongoDB</h3>
+<ul>
+<li>No SQL!</li>
+
+</ul>
+
+</section>
+<section id="slide-org2a1a692" data-background="./assets/slide_background.png">
+<h3 id="org2a1a692">2007: The Dynamo Paper</h3>
+<ul>
+<li>No SQL!!</li>
+
+</ul>
+
+</section>
+<section id="slide-org5661b7b" data-background="./assets/slide_background.png">
+<h3 id="org5661b7b">2010: Moore's Law Ends</h3>
+<ul>
+<li>Gordon Web, Intel co-founder</li>
+
+</ul>
+
+</section>
+<section id="slide-org29e5f03" data-background="./assets/slide_background.png">
+<h3 id="org29e5f03">2010: Apache Hive</h3>
+<ul>
+<li>SQL on Hadoop</li>
+
+</ul>
+
+</section>
+<section id="slide-org0f91a5a" data-background="./assets/slide_background.png">
+<h3 id="org0f91a5a">2010: CitusDB</h3>
+<ul>
+<li>SQL</li>
+<li>MPP</li>
+
+</ul>
+
+</section>
+<section id="slide-org1b7857e" data-background="./assets/slide_background.png">
+<h3 id="org1b7857e">2013: AWS Redshift</h3>
+<ul>
+<li>SQL!</li>
+<li>MPP</li>
+
+</ul>
+
+</section>
+<section id="slide-orgad556b9" data-background="./assets/slide_background.png">
+<h3 id="orgad556b9">2014: Apache Spark</h3>
+<ul>
+<li>Comes with SQL (more-or-less)</li>
+
+</ul>
+
+</section>
+<section id="slide-orgbaa0f2d" data-background="./assets/slide_background.png">
+<h3 id="orgbaa0f2d">2017: Hasura</h3>
+
+</section>
+<section id="slide-org43be9f2" data-background="./assets/slide_background.png">
+<h3 id="org43be9f2">2022: Today</h3>
+<ul>
+<li>Gen-Xers are in their fifties.</li>
+<li>No longer calling the shots on tech</li>
+<li>Finally!</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org861dce2" data-background="./assets/slide_background.png">
+<h2 id="org861dce2">Why Don't We Build Applications in the Database?</h2>
+<div class="outline-text-2" id="text-org861dce2">
+</div>
+</section>
+<section id="slide-org2792673" data-background="./assets/slide_background.png">
+<h3 id="org2792673">It's not what they tell you</h3>
+<ul>
+<li><del>performance</del></li>
+<li><del>not a real programming language</del></li>
+<li><del>not object-oriented</del></li>
+
+</ul>
+
+</section>
+<section id="slide-orgfd64d3c" data-background="./assets/slide_background.png">
+<h3 id="orgfd64d3c">It's never what they tell you</h3>
+
+<div id="org0e0102b" class="figure">
+<p><img src="assets/Apple_II_typical_configuration_1977.png" alt="Apple_II_typical_configuration_1977.png" height="60%" width="60%" />
+</p>
+</div>
 </section>
 </section>
 </div>
