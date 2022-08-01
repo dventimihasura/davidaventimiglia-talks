@@ -87,7 +87,7 @@ by declarative database constraints.
 - 1NF:  atomic columns
 - 2NF:  no functional dependencies within table
 - 3NF:  no functional dependencies to other tables
-- 4NF, 5NF, 6NF:  refinements but don't worry about it
+- 4NF, 5NF, 6NF:  refinements but don't worry
 
 *** Demo
 
@@ -299,9 +299,10 @@ practical purposes.
 
 - No SQL
 
-*** 2005: GreenPlub
+*** 2005: GreenPlum
 
 - SQL?
+- MPP
 
 *** 2007: MongoDB
 
