@@ -9,3 +9,15 @@ array_relationships:
         table:
           name: order
           schema: public
+remote_relationships:
+  - definition:
+      hasura_fields:
+        - value
+      remote_field:
+        region_info:
+          arguments:
+            where:
+              name:
+                _eq: $value
+      remote_schema: aux
+    name: info
