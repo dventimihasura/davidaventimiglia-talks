@@ -1,1 +1,5 @@
-[]
+- "!include public_account.yaml"
+- "!include public_order.yaml"
+- "!include public_order_detail.yaml"
+- "!include public_product.yaml"
+- "!include public_region.yaml"
