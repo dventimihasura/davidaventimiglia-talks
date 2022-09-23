@@ -1,0 +1,3 @@
+table:
+  name: region_info
+  schema: public
