@@ -1,0 +1,12 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- insert into region_info (name, sales_director) values
+-- ('NORTHEAST', 'Bill'),
+-- ('MIDWEST', 'Ted'),
+-- ('SOUTH', 'Hong'),
+-- ('PLAINS', 'Yuki'),
+-- ('APPALACHIA', 'Uduok'),
+-- ('MOUNTAIN', 'Maria'),
+-- ('NORTHWEST', 'Benoit'),
+-- ('WEST', 'Harish'),
+-- ('SOUTHWEST', 'Akhil');
