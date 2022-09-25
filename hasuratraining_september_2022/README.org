@@ -1,0 +1,589 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:t title:t toc:t todo:t |:t
+#+title: EDB Test Plan
+#+date: <2022-06-03 Fri>
+#+author: David A. Ventimiglia
+#+email: davidaventimiglia@hasura.io
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.0.50 (Org mode 9.5.3)
+#+cite_export:
+
+* Hasura Training
+
+** Topics
+
+- What is Hasura?
+- What is GraphQL?
+- How do we use them?
+- How do we use them well?
+- What are the general principles?
+- What is the proper mental model?
+- How do we get there?
+
+** What is Hasura?
+
+- API Server
+- Development Environment
+
+** What is GraphQL?
+
+- Standard API
+- General Purpose query language
+- Built for humans
+
+** How do we use them?
+
+- Build GraphQL applications faster, more reliably, with less code and at less cost, with Hasura.
+- Build network applications faster, more reliably, with less code and at less cost, with GraphQL.
+- Learn the general principles with training from Hasura Developer Relations.
+- Apply the particular details with support from Hasura Developer Success.
+
+** How do we use them well?
+
+- Adopt a principled approach.
+- Develop a proper mental model.
+
+** What are the general principles?
+
+1. OLTP vs OLAP is a crucial distinction.
+2. Build for humans not for machines.
+3. Humans cannot process large amounts of data.
+4. The record is the fundamental datum for OLTP.
+5. The aggregate is the fundamental datum for OLAP.
+6. Ruthlessly limit both.
+7. Build /in/ the database.
+
+** What is the proper mental model?
+
+- Hasura graphql-engine is the API server, is on the data plane, and is on the critical path.
+- Hasura console is part of the development environment, is on the control plane, and is off the critical path.
+- Hasura CLI is part of the development environment, is on the control plane, and is far off the critical path.
+- The key functional concerns are: data modeling, API development, security, and integrations.
+- The key non-functional concerns are: deployment, caching, monitoring.
+
+** How do we get there?
+
+- Track 1: Development
+- Track 2: Deployment
+
+* Track 1: Development
+
+** Setup
+
+** Modeling
+
+** Security
+
+** Actions
+
+** Events
+
+** APIs
+
+** Remote Joins
+
+** Remote Schema
+
+* Track 2: Deployment
+
+** Self-Hosted vs Cloud
+
+** Development Environment
+
+** CI/CD
+
+* Databases
+** Postgres
+*** Schema
+**** DONE Table Basics
+- [X] Add database
+- [X] Add account and product tables
+- [X] Add account and product data
+- [X] Perform CRUD operations
+  - Read
+    #+begin_src graphql
+      query MyQuery {
+        account(order_by: {name: asc}, limit: 10) {
+          id
+          name
+          created_at
+          updated_at
+        }
+      }
+    #+end_src
+    #+begin_src graphql
+      query MyQuery {
+        product(order_by: {price: asc}, limit: 10) {
+          id
+          name
+          price
+          updated_at
+          created_at
+        }
+      }
+    #+end_src
+  - Insert
+    #+begin_src graphql
+      mutation MyMutation {
+        insert_account(objects: {name: "John Doe"}) {
+          affected_rows
+        }
+      }
+    #+end_src
+    #+begin_src graphql
+      mutation MyMutation {
+        insert_product(objects: {name: "Doughnut", price: 100}) {
+          returning {
+            id
+            name
+            price
+            updated_at
+            created_at
+          }
+        }
+      }
+    #+end_src
+  - Update
+    #+begin_src graphql
+      mutation MyMutation {
+        update_account(where: {name: {_eq: "John Doe"}}, _set: {name: "Jane Doe"}) {
+          affected_rows
+        }
+      }
+    #+end_src
+  - Delete
+    #+begin_src graphql
+    mutation MyMutation {
+        delete_product(where: {name: {_eq: "Doughnut"}}) {
+          affected_rows
+        }
+      }
+    #+end_src
+**** DONE Table Relationships
+- [X] Add the order and order detail tables
+- [X] Add relationships for account, order, order detail, and product
+- [X] Generate order and order detail data
+- [X] Perform queries across relationships
+  #+begin_src graphql
+    query MyQuery {
+      account(limit: 2) {
+        id
+        name
+        created_at
+        updated_at
+        orders {
+          id
+          created_at
+          updated_at
+          order_details {
+            id
+            created_at
+            updated_at
+            units
+            product {
+              id
+              name
+              created_at
+              updated_at
+              price
+            }
+          }
+        }
+      }
+    }
+  #+end_src
+**** DONE Remote Relationships                          :DOES_NOT_INVOLVE_DB:
+**** DONE Extend with Views
+- [X] Add account_summary view and relationships
+- [X] Query across table and view relationships
+  #+begin_src graphql
+    query MyQuery {
+      account_summary(limit: 10) {
+        id
+        sum
+        account {
+          name
+        }
+      }
+    }
+  #+end_src
+**** DONE Extend with SQL Functions
+- [X] Add search functions
+- [X] Query search functions
+  #+begin_src graphql
+    query MyQuery {
+      product_search(args: {search: "apple"}) {
+        name
+        price
+      }
+    }
+  #+end_src
+  #+begin_src graphql
+    query MyQuery {
+      product_fuzzy_search(args: {search: "apple"}) {
+        name
+        price
+      }
+    }
+  #+end_src
+**** DONE Default field values
+**** DONE Enum type fields
+- [X] Create a native Postgres enum type for order status.
+- [X] Create a enum table for region and track it as order sales_region.
+**** DONE Computed fields
+- [X] Add product_sku function and track it as a computed field
+- [X] Query product table with computed field
+#+begin_src graphql
+  query {
+    product(limit: 10) {
+      id
+      name
+      price
+      sku
+    }
+  }
+#+end_src
+
+**** DONE Customize auto-generated fields            :DOES_NOT_INVOLVE_DB:
+- [X] Change order.status to order.state for the GraphQL field name
+**** DONE Data validations
+- [X] Add non_negative_price check constraint
+- [X] Attempt mutations with and without negative prices
+  #+begin_src graphql
+    mutation MyMutation {
+      update_product(where: {name: {_eq: "Chilli Paste, Sambal Oelek"}}, _set: {price: 10}) {
+        affected_rows
+      }
+    }
+  #+end_src
+  #+begin_src graphql
+    mutation MyMutation {
+      update_product(where: {name: {_eq: "Pastry - Raisin Muffin - Mini"}}, _set: {price: -10}) {
+        affected_rows
+      }
+    }
+  #+end_src
+**** DONE Using an existing database
+**** DONE Relay Schema                               :DOES_NOT_INVOLVE_DB:
+- [X] Turn on the Relay API in the Console
+#+begin_src graphql
+  query MyQuery {
+    account_connection(first: 10) {
+      edges {
+        node {
+          name
+          orders {
+            id
+            region
+            order_details {
+              units
+              product {
+                name
+                price
+                sku
+              }
+            }
+          }
+        }
+        cursor
+      }
+    }
+  }
+#+end_src
+*** Queries
+**** DONE Simple object queries
+**** DONE Nested object queries
+**** DONE Aggregation queries
+#+begin_src graphql
+  query MyQuery {
+    account_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+#+end_src
+#+begin_src graphql
+  query MyQuery {
+    account(limit: 10) {
+      orders {
+        order_details_aggregate {
+          aggregate {
+            sum {
+              units
+            }
+          }
+        }
+      }
+    }
+  }
+#+end_src
+**** DONE Filter query results / search queries
+**** DONE Sort query results
+**** DONE Distinct query results
+**** TODO Using multiple arguments                   :DOES_NOT_INVOLVE_DB:
+**** TODO Multiple queries in a request              :DOES_NOT_INVOLVE_DB:
+**** TODO Using variables / aliases / fragments / directives :DOES_NOT_INVOLVE_DB:
+**** TODO Query performance
+*** Mutations
+**** DONE Insert
+**** TODO Upsert
+**** DONE Update
+**** TODO Delete
+**** TODO Multiple mutations in a request
+*** Subscriptions
+**** TODO Live queries
+*** Supported Postgres types
+***** DONE Perform inserts on the ~misc~ table.
+#+begin_src graphql
+  mutation {
+    insert_misc(objects: [
+        {
+          bigint_field: 1
+          bigserial_field: 1
+          boolean_field: true
+          box_field: "((0,0),(1,1))"
+          bytea_field: "\\xDEADBEEF"
+          character_field: "foo"
+          character_varying_field: "bar"
+          cidr_field: "192.168.100.128/25"
+          circle_field: "0,0,1"
+          date_field: "2022-01-01"
+          double_precision_field: 9673143120,
+          inet_field: "192.168.0.1/24"
+          integer_field: 1
+          interval_field: "'1 month ago'"
+          json_field: {}
+          jsonb_field: {}
+          line_field: "0,0,1,1"
+          lseg_field: "0,0,1,1"
+          macaddr_field: "08:00:2b:01:02:03"
+          macaddr8_field: "08:00:2b:01:02:03:04:05"
+          money_field: 52093.89
+          numeric_field: 10
+          path_field: "0,0,1,1,2,2,3,3,3,0,2,0,0,0"
+          pg_lsn_field: "FFFFFFFF/FFFFFFFF"
+          point_field: "0,0"
+          polygon_field: "0,0,1,0,1,1,0,1"
+          real_field: 3.14159
+          serial_field: 1
+          smallint_field: 1
+          smallserial_field: 1
+          text_field: "abc"
+          time_with_time_zone_field: "04:05:06 PST"
+          time_without_time_zone_field: "04:05:06"
+          timestamp_with_time_zone_field: "2022-01-01 04:05:06 PST"
+          timestamp_without_time_zone_field: "2022-01-01 04:05:06"
+          txid_snapshot_field: "566:566:"
+          uuid_field: "61a41be6-4eb4-45a5-bfb5-b68c20e9ccde"
+          xml_field: "<?xml version=\"1.0\"?><book><title>Manual</title><chapter>...</chapter></book>"
+        }
+      ]) {
+      returning {
+        bigint_field
+        bigserial_field
+        boolean_field
+        box_field
+        bytea_field
+        character_field
+        character_varying_field
+        cidr_field
+        circle_field
+        date_field
+        double_precision_field
+        inet_field
+        integer_field
+        interval_field
+        json_field
+        jsonb_field
+        line_field
+        lseg_field
+        macaddr_field
+        macaddr8_field
+        money_field
+        numeric_field
+        path_field
+        pg_lsn_field
+        point_field
+        polygon_field
+        real_field
+        serial_field
+        smallint_field
+        smallserial_field
+        text_field
+        time_with_time_zone_field
+        time_without_time_zone_field
+        timestamp_with_time_zone_field
+        timestamp_without_time_zone_field
+        txid_snapshot_field
+        uuid_field
+        xml_field
+      }
+    }
+  }
+#+end_src
+
+* Remote Schema
+*** Remote relationships
+***** TODO To remote database
+***** TODO To Remote Schema                         :DOES_NOT_INVOLVE_DB:
+*** Authorization in remote schema
+***** TODO Forwarding auth context to/from remote schema :DOES_NOT_INVOLVE_DB:
+***** TODO Remote schema permissions                :DOES_NOT_INVOLVE_DB:
+***** TODO Bypassing Hasura's auth for remote schema :DOES_NOT_INVOLVE_DB:
+* Event Triggers
+*** Creating an Event Trigger
+***** DONE Create an insert trigger
+***** DONE Create an update trigger
+- [ ] Perform a mutation to update an order
+- [ ] Update an order from the Console
+#+begin_src graphql
+  mutation MyMutation {
+    update_order_by_pk(pk_columns: {id: "1564344e-e528-43de-b88e-dab9c3efa44e"}, _set: {state: "fulfilled"}) {
+      id
+      state
+    }
+  }
+#+end_src
+- [ ] Check the events logs
+* Scheduled Triggers
+*** Creating a chron trigger
+***** TODO Create a chron trigger
+- [ ] Allow time to pass
+- [ ] Check the events logs
+*** Creating a one-off scheduled event
+***** TODO Create a one-off scheduled event
+*** Cleaning up scheduled triggers data
+***** TODO Clear Everything
+- [ ] Cron triggers
+
+  #+begin_src sql
+  DELETE FROM hdb_catalog.hdb_cron_events;
+  #+end_src
+
+- [ ] Scheduled events
+
+  #+begin_src sql
+  DELETE FROM hdb_catalog.hdb_scheduled_events;
+  #+end_src
+* Test Matrix
+|---------------------------------------------------------+------+---------+------------------------------------------|
+| Function                                                | Test | Outcome | Comments                                 |
+|---------------------------------------------------------+------+---------+------------------------------------------|
+| Remote Relationships                                    | NO   |         | Remote Schema connect to GraphQL servers |
+| Add Database                                            | YES  | SUCCESS |                                          |
+| Add tables and relationships in Console                 | YES  | SUCCESS |                                          |
+| Perform CRUD operations in API                          | YES  | SUCCESS |                                          |
+| Set up and use table relationships                      | YES  | SUCCESS |                                          |
+| Track views                                             | YES  | SUCCESS |                                          |
+| Manually add relationships to views                     | YES  | SUCCESS |                                          |
+| Query across view/table relationships                   | YES  | SUCCESS |                                          |
+| Track a function as a table and use                     | YES  | SUCCESS |                                          |
+| Track a function as a computed field and use            | YES  | SUCCESS |                                          |
+| Use defaults for field values                           | YES  | SUCCESS |                                          |
+| Use a native enum as a Hasura enum                      | YES  | SUCCESS |                                          |
+| Use a table as a Hasura enum                            | YES  | SUCCESS |                                          |
+| Customize field-names in API                            | YES  | SUCCESS | Doesn't actually involve the DB          |
+| Data validation with a database constraint              | YES  | SUCCESS |                                          |
+| Test using the Relay API                                | YES  | SUCCESS | Doesn't actually involve the DB          |
+| Simple object queries                                   | YES  | SUCCESS |                                          |
+| Nested object queries (involves JOINs)                  | YES  | SUCCESS |                                          |
+| Aggregation queries (count)                             | YES  | SUCCESS | We didn't test min, max, avg, etc.       |
+| Filter queries (involves WHERE)                         | YES  | SUCCESS |                                          |
+| Sort queries (involves ORDER BY)                        | YES  | SUCCESS |                                          |
+| Distinct queries (involves DISTINCT)                    | YES  | SUCCESS |                                          |
+| Limit queries (involves LIMIT)                          | YES  | SUCCESS |                                          |
+| Using multiple arguments                                | NO   |         | Doesn't actually involve the DB          |
+| Multiple queries in a request                           | NO   |         | Doesn't actually involve the DB          |
+| Multiple variables / aliases / fragments / directives   | NO   |         | Doesn't actually involve the DB          |
+| INSERT (see "Perform CRUD operations in API" above      | YES  | SUCCESS |                                          |
+| UPDATE (see "Perform CRUD operations in API" above      | YES  | SUCCESS |                                          |
+| DELETE (see "Perform CRUD operations in API" above      | TBD  |         | We forgot to test this!                  |
+| ON CONFLICT (an "upsert")                               | TBD  |         | We forgot to test this!                  |
+| Multiple mutations in a request                         | TBD  |         | We forgot to test this!                  |
+| Subscriptions (Live Queries)                            | TBD  | SUCCESS |                                          |
+| Test all Postgres/Hasura types (mutation, query)        | TBD  | SUCCESS |                                          |
+| Remote Database                                         | TBD  |         | We forgot to test this!                  |
+| Creating event triggers                                 | YES  | FAIL    | Needs a Hasura fix. See Notes below      |
+| Creating a chron trigger                                | TBD  | FAIL    | Needs a Hasura fix. See Notes below      |
+| Creating a one-off scheduled event                      | TBD  |         | Needs a Hasura fix                       |
+| Cleaning up scheduled trigger data                      | TBD  |         | Needs a Hasura fix                       |
+| CI/CD: hasura metadata (apply, clear, reload, status)   | YES  | SUCCESS |                                          |
+| CI/CD: hasura migrate (apply, apply --down all, delete) | YES  | SUCCESS |                                          |
+
+*** NOTES
+
+- Test :: do we test this (YES, NO, TBD)
+- YES :: we should test this (and have)
+- NO :: we may not need to test this
+- TBD :: we should test this (but have not yet, possibly because we
+  cannot)
+- SUCCESS :: we tested it and it passed
+- FAIL :: we tested it and it did not pass
+- "We forgot to test this!" :: either we forgot, or we suspect we may
+  not need to (e.g. "Remote Database")
+- "Doesn't actually involve the DB" :: a Hasura function which we
+  believe shouldn't work differently on BDR, since the function
+  doesn't actually interact with the database.
+- "Needs a Hasura fix" :: either we have a FAIL test or a TBD test,
+  because of an identified gap in Hasura that needs to be fixed.
+
+
+#  LocalWords:  xDEADBEEF lsn FFFFFFFF abc eb bfb ccde de efa hdb BDR
+#  LocalWords:  cron
+
+*** Additional Notes
+
+1. Event Trigger creation fails with the following error:
+
+#+begin_src json
+{
+    "internal": {
+        "statement": "\n  INSERT INTO hdb_catalog.hdb_source_catalog_version(version, upgraded_on)\n    VALUES ($1, NOW())\n   ON CONFLICT ((version IS NOT NULL))\n   DO UPDATE SET version = $1, upgraded_on = NOW()\n  ",
+        "prepared": false,
+        "error": {
+            "exec_status": "FatalError",
+            "hint": "To enable updating the table, set REPLICA IDENTITY using ALTER TABLE.",
+            "message": "cannot run INSERT ON CONFLICT DO UPDATE on table \"hdb_source_catalog_version\" because it does not have a replica identity and is part of replication set which publishes updates",
+            "status_code": "55000",
+            "description": null
+        },
+        "arguments": [
+            "(Oid 25,Just (\"2\",Binary))"
+        ]
+    },
+    "path": "$.args[0].args",
+    "error": "database query error",
+    "code": "unexpected"
+}
+#+end_src
+
+2. Cannot alter table with volatile function.  This error is the result of trying to add a UUID column to an existing table:
+
+#+begin_src json
+{
+    "internal": {
+        "statement": "CREATE EXTENSION IF NOT EXISTS pgcrypto;\nalter table \"public\"."\misc\" add colum \"id\" uuid\n not null unique default gen_random_uuid():\n",
+        "prepared": false,
+        "error": {
+            "exec_status": "FatalError",
+            "hint": "null.",
+            "message": "ALTER TABLE ... ADD COLUMN ... (mutable) DEFAULT may not affect replicated tables on a BDR node",
+            "status_code": "0A000",
+            "description": null
+        },
+        "arguments": []
+    },
+    "path": "$",
+    "error": "query execution failed",
+    "code": "postgres-error"
+}
+#+end_src
+
+Workaround is detailed in https://www.enterprisedb.com/docs/pgd/latest/bdr/ddl/#adding-a-column
+
