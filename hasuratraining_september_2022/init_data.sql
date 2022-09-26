@@ -2005,12 +2005,20 @@ insert into product (name, price) values ('Sproutsmustard Cress', 771);
 insert into product (name, price) values ('Spinach - Baby', 740);
 
 with
+  sample as (
+    select
+      *
+      from
+	account
+     order by random()
+     limit 200
+  ),
   account as (
     select
-      account.id,
+      id,
       name,
       (random()*5)::int orders
-      from account)
+      from sample)
     insert into "order" (account_id)
 select
   account_id
