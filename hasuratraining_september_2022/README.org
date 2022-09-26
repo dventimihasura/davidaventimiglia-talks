@@ -1,27 +1,105 @@
-#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
-#+options: author:t broken-links:nil c:nil creator:nil
-#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
-#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
-#+options: timestamp:t title:t toc:t todo:t |:t
-#+title: EDB Test Plan
-#+date: <2022-06-03 Fri>
+#+title: Hasura Training
+#+subtitle: Zen and the Art of Hasura
 #+author: David A. Ventimiglia
 #+email: davidaventimiglia@hasura.io
-#+language: en
-#+select_tags: export
-#+exclude_tags: noexport
-#+creator: Emacs 29.0.50 (Org mode 9.5.3)
-#+cite_export:
 
-* Hasura Training
+#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
 
-** Topics
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./assets/slide_background.png
+#+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+#+REVEAL_THEME: black
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./assets/slide_background.png
+#+REVEAL_PLUGINS: (highlight)
+
+* 
+#+CAPTION: https://tinyurl.com/ynhbbrmy
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
+[[file:assets/qr.png]]
+
+
+* Who
+
+#+BEGIN_QUOTE
+"I'm a physicist, data scientist, data engineer, and software
+engineer.  I work for [[https://hasura.io/][*Hasura*]], a software technology company that
+provides developer-focused tooling products.  And, I believe that the
+best code is the code that you don't have to write."
+#+END_QUOTE
+
+* What
+
+#+REVEAL: split
+
+#+begin_quote
+"From your databases to a unified GraphQL API in just one minute"
+#+end_quote
+
+* What?
+
+** GraphQL API
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- Query Language
+- Schema
+  - Types
+    - Fields
+- Types relate to Types
+- Sound familiar?
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
+
+#+ATTR_HTML: :width 100%
+#+ATTR_HTML: :height 100%
+[[file:GraphQL.png]]
+
+#+REVEAL_HTML: </div>
+
+** In Just One Minute
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:Hasura_Connections.png]]
+
+#+REVEAL: split
+
+[[file:what_is_hasura.png]]
+
+* How
+
+** What You Will Need
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+#+ATTR_HTML: :width 90%
+#+ATTR_HTML: :height 90%
+[[file:assets/log_into_hasura_cloud.png]]
+
+http://cloud.hasura.io
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:40%;">
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/log_into_heroku.png]]
+
+https://cloud.hasura.io/
+
+#+REVEAL_HTML: </div>
+
+** What We Will Cover
 
 - What is Hasura?
-- What is GraphQL?
 - How do we use them?
 - How do we use them well?
 - What are the general principles?
+- What are the particular details?
 - What is the proper mental model?
 - How do we get there?
 
@@ -30,18 +108,16 @@
 - API Server
 - Development Environment
 
-** What is GraphQL?
+** What is Hasura?
 
-- Standard API
-- General Purpose query language
-- Built for humans
+Magic
 
 ** How do we use them?
 
-- Build GraphQL applications faster, more reliably, with less code and at less cost, with Hasura.
-- Build network applications faster, more reliably, with less code and at less cost, with GraphQL.
-- Learn the general principles with training from Hasura Developer Relations.
-- Apply the particular details with support from Hasura Developer Success.
+- Build network applications /*faster*/, more /*reliably*/, and /*cheaper*/ with GraphQL.
+- Build GraphQL applications /*faster*/, more /*reliably*/, and /*cheaper*/ with Hasura.
+- Apply the general principles with training from /*Hasura Developer Relations*/.
+- Apply the particular details with support from /*Hasura Developer Success*/.
 
 ** How do we use them well?
 
@@ -50,22 +126,20 @@
 
 ** What are the general principles?
 
-1. OLTP vs OLAP is a crucial distinction.
-2. Build for humans not for machines.
-3. Humans cannot process large amounts of data.
-4. The record is the fundamental datum for OLTP.
-5. The aggregate is the fundamental datum for OLAP.
-6. Validation is the fundamental operation for OLTP.
-7. Transformation is the fundamental operation for OLAP.
-8. Ruthlessly prune the working set.
-9. Build applications with personas:  front-end developer, back-end modeler, system deployer
-10. Build applications /in/ the database.
+1. Build for humans.
+2. Build with personas.
+3. Build in the database.
+4. Build a data model.
+5. Remember OLTP vs OLAP.
 
 ** What is the proper mental model?
 
-- Hasura graphql-engine is the API server, is on the data plane, and is on the critical path.
-- Hasura console is part of the development environment, is on the control plane, and is off the critical path.
-- Hasura CLI is part of the development environment, is on the control plane, and is far off the critical path.
+- Hasura ~graphql-engine~ is the API server, is on the data plane, and is on the critical path.
+- Hasura ~console~ is part of the development environment, is on the control plane, and is off the critical path.
+- Hasura ~CLI~ is part of the development environment, is on the control plane, and is far off the critical path.
+
+** What is the proper mental model?
+
 - The key functional concerns are: data modeling, API development, security, and integrations.
 - The key non-functional concerns are: deployment, caching, monitoring.
 
