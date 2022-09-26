@@ -55,8 +55,11 @@
 3. Humans cannot process large amounts of data.
 4. The record is the fundamental datum for OLTP.
 5. The aggregate is the fundamental datum for OLAP.
-6. Ruthlessly limit both.
-7. Build /in/ the database.
+6. Validation is the fundamental operation for OLTP.
+7. Transformation is the fundamental operation for OLAP.
+8. Ruthlessly prune the working set.
+9. Build applications with personas:  front-end developer, back-end modeler, system deployer
+10. Build applications /in/ the database.
 
 ** What is the proper mental model?
 
