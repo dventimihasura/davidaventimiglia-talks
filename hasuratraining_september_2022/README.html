@@ -13,17 +13,28 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css" id="theme"/>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/lib/css/zenburn.css"/></head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/lib/css/zenburn.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide" data-background="./assets/slide_background.png"><h1 class="title">Hasura Training</h1><p class="subtitle">Zen and the Art of Hasura</p>
+<section id="sec-title-slide" data-background="./assets/slide_background.png"><h1 class="title">Hasura Training</h1><p class="subtitle"></p>
 
 </section>
 
 <section>
-<section id="slide-orgd9b15f5" data-background="./assets/slide_background.png">
-<h2 id="orgd9b15f5"></h2>
+<section id="slide-org9ae348e" data-background="./assets/slide_background.png">
+<h2 id="org9ae348e"></h2>
 
 <div class="figure">
 <p><img src="assets/qr.png" alt="qr.png" height="40%" width="40%" />
@@ -34,41 +45,73 @@
 </section>
 </section>
 <section>
-<section id="slide-org14e2dca" data-background="./assets/slide_background.png">
-<h2 id="org14e2dca">Who</h2>
-<blockquote >
-<p>
-"I'm a physicist, data scientist, data engineer, and software
-engineer.  I work for <a href="https://hasura.io/"><b>Hasura</b></a>, a software technology company that
-provides developer-focused tooling products.  And, I believe that the
-best code is the code that you don't have to write."
+<section id="slide-org44df360" data-background="./assets/slide_background.png">
+<h2 id="org44df360">What We Will Need</h2>
+<div class="column" style="float:left; width:50%">
+
+
+<div class="figure">
+<p><img src="assets/log_into_hasura_cloud.png" alt="log_into_hasura_cloud.png" height="90%" width="90%" />
 </p>
-</blockquote>
-
-</section>
-</section>
-<section>
-<section id="slide-org93bfac1" data-background="./assets/slide_background.png">
-<h2 id="org93bfac1">What</h2>
-</section>
-<section id="slide-org93bfac1-split" data-background="./assets/slide_background.png">
-
-<blockquote >
-<p>
-"From your databases to a unified GraphQL API in just one minute"
-</p>
-</blockquote>
-
-</section>
-</section>
-<section>
-<section id="slide-orgd8a3fac" data-background="./assets/slide_background.png">
-<h2 id="orgd8a3fac">What?</h2>
-<div class="outline-text-2" id="text-orgd8a3fac">
 </div>
+
+<p>
+<a href="http://cloud.hasura.io">http://cloud.hasura.io</a>
+</p>
+
+</div>
+
+<div class="column" style="float:right; width:40%;">
+
+
+<div class="figure">
+<p><img src="assets/log_into_heroku.png" alt="log_into_heroku.png" height="80%" width="80%" />
+</p>
+</div>
+
+<p>
+<a href="https://www.heroku.com/">https://www.heroku.com/</a>
+</p>
+
+</div>
+
 </section>
-<section id="slide-org327a418" data-background="./assets/slide_background.png">
-<h3 id="org327a418">GraphQL API</h3>
+</section>
+<section>
+<section id="slide-org037c1bc" data-background="./assets/slide_background.png">
+<h2 id="org037c1bc">What We Will Need (Optional)</h2>
+
+<div class="figure">
+<p><img src="assets/app-shot.png" alt="app-shot.png" height="80%" width="80%" />
+</p>
+</div>
+
+<p>
+<a href="https://altairgraphql.dev/">https://altairgraphql.dev/</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org690be75" data-background="./assets/slide_background.png">
+<h2 id="org690be75">What We Will Cover</h2>
+<ul>
+<li>What is GraphQL?</li>
+<li>What is Hasura?</li>
+<li>How do we use them?</li>
+<li>How do we use them well?</li>
+<li>What are the general principles?</li>
+<li>What are the particular details?</li>
+<li>What is the proper mental model?</li>
+<li>How do we get there?</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orga952d32" data-background="./assets/slide_background.png">
+<h2 id="orga952d32">What is GraphQL?</h2>
 <div class="column" style="float:left; width:50%">
 
 <ul>
@@ -100,78 +143,10 @@ best code is the code that you don't have to write."
 </div>
 
 </section>
-<section id="slide-org0689cce" data-background="./assets/slide_background.png">
-<h3 id="org0689cce">In Just One Minute</h3>
-
-<div class="figure">
-<p><img src="Hasura_Connections.png" alt="Hasura_Connections.png" height="50%" width="50%" />
-</p>
-</div>
-
-</section>
-<section id="slide-org0689cce-split" data-background="./assets/slide_background.png">
-
-
-<div class="figure">
-<p><img src="what_is_hasura.png" alt="what_is_hasura.png" />
-</p>
-</div>
-
-</section>
 </section>
 <section>
-<section id="slide-orgd2d4f27" data-background="./assets/slide_background.png">
-<h2 id="orgd2d4f27">How</h2>
-<div class="outline-text-2" id="text-orgd2d4f27">
-</div>
-</section>
-<section id="slide-org3ae93b4" data-background="./assets/slide_background.png">
-<h3 id="org3ae93b4">What You Will Need</h3>
-<div class="column" style="float:left; width:50%">
-
-
-<div class="figure">
-<p><img src="assets/log_into_hasura_cloud.png" alt="log_into_hasura_cloud.png" height="90%" width="90%" />
-</p>
-</div>
-
-<p>
-<a href="http://cloud.hasura.io">http://cloud.hasura.io</a>
-</p>
-
-</div>
-
-<div class="column" style="float:right; width:40%;">
-
-
-<div class="figure">
-<p><img src="assets/log_into_heroku.png" alt="log_into_heroku.png" height="80%" width="80%" />
-</p>
-</div>
-
-<p>
-<a href="https://cloud.hasura.io/">https://cloud.hasura.io/</a>
-</p>
-
-</div>
-
-</section>
-<section id="slide-org4a97b37" data-background="./assets/slide_background.png">
-<h3 id="org4a97b37">What We Will Cover</h3>
-<ul>
-<li>What is Hasura?</li>
-<li>How do we use them?</li>
-<li>How do we use them well?</li>
-<li>What are the general principles?</li>
-<li>What are the particular details?</li>
-<li>What is the proper mental model?</li>
-<li>How do we get there?</li>
-
-</ul>
-
-</section>
-<section id="slide-org8883f57" data-background="./assets/slide_background.png">
-<h3 id="org8883f57">What is Hasura?</h3>
+<section id="slide-org500a99c" data-background="./assets/slide_background.png">
+<h2 id="org500a99c">What is Hasura?</h2>
 <ul>
 <li>API Server</li>
 <li>Development Environment</li>
@@ -179,15 +154,10 @@ best code is the code that you don't have to write."
 </ul>
 
 </section>
-<section id="slide-org89f567f" data-background="./assets/slide_background.png">
-<h3 id="org89f567f">What is Hasura?</h3>
-<p>
-Magic
-</p>
-
 </section>
-<section id="slide-org5aabc9f" data-background="./assets/slide_background.png">
-<h3 id="org5aabc9f">How do we use them?</h3>
+<section>
+<section id="slide-orgbc65cb0" data-background="./assets/slide_background.png">
+<h2 id="orgbc65cb0">How do we use them?</h2>
 <ul>
 <li>Build network applications <i><b>faster</b></i>, more <i><b>reliably</b></i>, and <i><b>cheaper</b></i> with GraphQL.</li>
 <li>Build GraphQL applications <i><b>faster</b></i>, more <i><b>reliably</b></i>, and <i><b>cheaper</b></i> with Hasura.</li>
@@ -197,8 +167,10 @@ Magic
 </ul>
 
 </section>
-<section id="slide-org0e4d37a" data-background="./assets/slide_background.png">
-<h3 id="org0e4d37a">How do we use them well?</h3>
+</section>
+<section>
+<section id="slide-org0df41d4" data-background="./assets/slide_background.png">
+<h2 id="org0df41d4">How do we use them well?</h2>
 <ul>
 <li>Adopt a principled approach.</li>
 <li>Develop a proper mental model.</li>
@@ -206,20 +178,24 @@ Magic
 </ul>
 
 </section>
-<section id="slide-org4d9db07" data-background="./assets/slide_background.png">
-<h3 id="org4d9db07">What are the general principles?</h3>
+</section>
+<section>
+<section id="slide-org35a7bb8" data-background="./assets/slide_background.png">
+<h2 id="org35a7bb8">What are the general principles?</h2>
 <ol>
-<li>Build for humans.</li>
-<li>Build with personas.</li>
-<li>Build in the database.</li>
-<li>Build a data model.</li>
-<li>Remember OLTP vs OLAP.</li>
+<li>Build for <i>humans</i>.</li>
+<li>Build with <i>personas</i>.</li>
+<li>Build <i>in</i> the database.</li>
+<li>Build a <i>data model</i>.</li>
+<li><i>Remember</i> OLTP vs OLAP.</li>
 
 </ol>
 
 </section>
-<section id="slide-org512d30e" data-background="./assets/slide_background.png">
-<h3 id="org512d30e">What is the proper mental model?</h3>
+</section>
+<section>
+<section id="slide-org80a47ca" data-background="./assets/slide_background.png">
+<h2 id="org80a47ca">What is the proper mental model?</h2>
 <ul>
 <li>Hasura <code>graphql-engine</code> is the API server, is on the data plane, and is on the critical path.</li>
 <li>Hasura <code>console</code> is part of the development environment, is on the control plane, and is off the critical path.</li>
@@ -228,17 +204,21 @@ Magic
 </ul>
 
 </section>
-<section id="slide-org149b4f6" data-background="./assets/slide_background.png">
-<h3 id="org149b4f6">What is the proper mental model?</h3>
+</section>
+<section>
+<section id="slide-orgbdd96d9" data-background="./assets/slide_background.png">
+<h2 id="orgbdd96d9">What is the proper mental model?</h2>
 <ul>
-<li>The key functional concerns are: data modeling, API development, security, and integrations.</li>
-<li>The key non-functional concerns are: deployment, caching, monitoring.</li>
+<li>The key <i>functional</i> concerns are: data modeling, API development, security, and integrations.</li>
+<li>The key <i>non-functional</i> concerns are: deployment, caching, monitoring.</li>
 
 </ul>
 
 </section>
-<section id="slide-orgb50320f" data-background="./assets/slide_background.png">
-<h3 id="orgb50320f">How do we get there?</h3>
+</section>
+<section>
+<section id="slide-org0891057" data-background="./assets/slide_background.png">
+<h2 id="org0891057">How do we get there?</h2>
 <ul>
 <li>Track 1: Development</li>
 <li>Track 2: Deployment</li>
@@ -248,1050 +228,47 @@ Magic
 </section>
 </section>
 <section>
-<section id="slide-org7916267" data-background="./assets/slide_background.png">
-<h2 id="org7916267">Track 1: Development</h2>
-<div class="outline-text-2" id="text-org7916267">
-</div>
-</section>
-<section id="slide-orgbe83ee9" data-background="./assets/slide_background.png">
-<h3 id="orgbe83ee9">Setup</h3>
-
-</section>
-<section id="slide-orgc45d06c" data-background="./assets/slide_background.png">
-<h3 id="orgc45d06c">Modeling</h3>
-
-</section>
-<section id="slide-orga42548f" data-background="./assets/slide_background.png">
-<h3 id="orga42548f">Security</h3>
-
-</section>
-<section id="slide-orgd15c2cd" data-background="./assets/slide_background.png">
-<h3 id="orgd15c2cd">Actions</h3>
-
-</section>
-<section id="slide-org9da4163" data-background="./assets/slide_background.png">
-<h3 id="org9da4163">Events</h3>
-
-</section>
-<section id="slide-org8d25142" data-background="./assets/slide_background.png">
-<h3 id="org8d25142">APIs</h3>
-
-</section>
-<section id="slide-orgb6d6666" data-background="./assets/slide_background.png">
-<h3 id="orgb6d6666">Remote Joins</h3>
-
-</section>
-<section id="slide-org436d4ad" data-background="./assets/slide_background.png">
-<h3 id="org436d4ad">Remote Schema</h3>
-
-</section>
-</section>
-<section>
-<section id="slide-org9c9415e" data-background="./assets/slide_background.png">
-<h2 id="org9c9415e">Track 2: Deployment</h2>
-<div class="outline-text-2" id="text-org9c9415e">
-</div>
-</section>
-<section id="slide-orge40ceee" data-background="./assets/slide_background.png">
-<h3 id="orge40ceee">Self-Hosted vs Cloud</h3>
-
-</section>
-<section id="slide-orge149b78" data-background="./assets/slide_background.png">
-<h3 id="orge149b78">Development Environment</h3>
-
-</section>
-<section id="slide-orgbef06b6" data-background="./assets/slide_background.png">
-<h3 id="orgbef06b6">CI/CD</h3>
-
-</section>
-</section>
-<section>
-<section id="slide-orgd3c2f39" data-background="./assets/slide_background.png">
-<h2 id="orgd3c2f39">Databases</h2>
-<div class="outline-text-2" id="text-orgd3c2f39">
-</div>
-</section>
-<section id="slide-org1253178" data-background="./assets/slide_background.png">
-<h3 id="org1253178">Postgres</h3>
-<div class="outline-text-3" id="text-org1253178">
-</div>
-</section>
-<section id="slide-org19d0b28" data-background="./assets/slide_background.png">
-<h4 id="org19d0b28">Schema</h4>
-<div class="outline-text-4" id="text-org19d0b28">
-</div>
-<ul class="org-ul">
-<li><a id="orgcdd0ea6"></a><span class="done DONE">DONE</span> Table Basics<br />
+<section id="slide-orgbcec045" data-background="./assets/slide_background.png">
+<h2 id="orgbcec045">Track 1: Development</h2>
 <ul>
-<li class="on"><code>[X]</code> Add database</li>
-<li class="on"><code>[X]</code> Add account and product tables</li>
-<li class="on"><code>[X]</code> Add account and product data</li>
-<li class="on"><code>[X]</code> Perform CRUD operations
-<ul>
-<li><p>
-Read
-</p>
-<div class="org-src-container">
+<li>Setup</li>
+<li>Modeling</li>
+<li>Security</li>
+<li>Actions</li>
+<li>Events</li>
+<li>APIs</li>
+<li>Remote Joins</li>
+<li>Remote Schema</li>
 
-<pre   ><code class="graphql" >query MyQuery {
-  account(order_by: {name: asc}, limit: 10) {
-    id
-    name
-    created_at
-    updated_at
-  }
-}
-</code></pre>
-</div>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >query MyQuery {
-  product(order_by: {price: asc}, limit: 10) {
-    id
-    name
-    price
-    updated_at
-    created_at
-  }
-}
-</code></pre>
-</div></li>
-<li><p>
-Insert
-</p>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >mutation MyMutation {
-  insert_account(objects: {name: "John Doe"}) {
-    affected_rows
-  }
-}
-</code></pre>
-</div>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >mutation MyMutation {
-  insert_product(objects: {name: "Doughnut", price: 100}) {
-    returning {
-      id
-      name
-      price
-      updated_at
-      created_at
-    }
-  }
-}
-</code></pre>
-</div></li>
-<li><p>
-Update
-</p>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >mutation MyMutation {
-  update_account(where: {name: {_eq: "John Doe"}}, _set: {name: "Jane Doe"}) {
-    affected_rows
-  }
-}
-</code></pre>
-</div></li>
-<li><p>
-Delete
-</p>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >mutation MyMutation {
-    delete_product(where: {name: {_eq: "Doughnut"}}) {
-      affected_rows
-    }
-  }
-</code></pre>
-</div></li>
-
-</ul></li>
-
-</ul>
-</li>
-<li><a id="org0dfa2de"></a><span class="done DONE">DONE</span> Table Relationships<br />
-<ul>
-<li class="on"><code>[X]</code> Add the order and order detail tables</li>
-<li class="on"><code>[X]</code> Add relationships for account, order, order detail, and product</li>
-<li class="on"><code>[X]</code> Generate order and order detail data</li>
-<li class="on"><code>[X]</code> <p>
-Perform queries across relationships
-</p>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >query MyQuery {
-  account(limit: 2) {
-    id
-    name
-    created_at
-    updated_at
-    orders {
-      id
-      created_at
-      updated_at
-      order_details {
-	id
-	created_at
-	updated_at
-	units
-	product {
-	  id
-	  name
-	  created_at
-	  updated_at
-	  price
-	}
-      }
-    }
-  }
-}
-</code></pre>
-</div></li>
-
-</ul>
-</li>
-<li><a id="org9d31636"></a><span class="done DONE">DONE</span> Remote Relationships&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DOES_NOT_INVOLVE_DB">DOES_NOT_INVOLVE_DB</span></span><br /></li>
-<li><a id="org9370b61"></a><span class="done DONE">DONE</span> Extend with Views<br />
-<ul>
-<li class="on"><code>[X]</code> Add account<sub>summary</sub> view and relationships</li>
-<li class="on"><code>[X]</code> <p>
-Query across table and view relationships
-</p>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >query MyQuery {
-  account_summary(limit: 10) {
-    id
-    sum
-    account {
-      name
-    }
-  }
-}
-</code></pre>
-</div></li>
-
-</ul>
-</li>
-<li><a id="orgdc87997"></a><span class="done DONE">DONE</span> Extend with SQL Functions<br />
-<ul>
-<li class="on"><code>[X]</code> Add search functions</li>
-<li class="on"><code>[X]</code> <p>
-Query search functions
-</p>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >query MyQuery {
-  product_search(args: {search: "apple"}) {
-    name
-    price
-  }
-}
-</code></pre>
-</div>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >query MyQuery {
-  product_fuzzy_search(args: {search: "apple"}) {
-    name
-    price
-  }
-}
-</code></pre>
-</div></li>
-
-</ul>
-</li>
-<li><a id="org08a06bf"></a><span class="done DONE">DONE</span> Default field values<br /></li>
-<li><a id="org27374b9"></a><span class="done DONE">DONE</span> Enum type fields<br />
-<ul>
-<li class="on"><code>[X]</code> Create a native Postgres enum type for order status.</li>
-<li class="on"><code>[X]</code> Create a enum table for region and track it as order sales<sub>region</sub>.</li>
-
-</ul>
-</li>
-<li><a id="orgd0217b1"></a><span class="done DONE">DONE</span> Computed fields<br />
-<ul>
-<li class="on"><code>[X]</code> Add product<sub>sku</sub> function and track it as a computed field</li>
-<li class="on"><code>[X]</code> Query product table with computed field</li>
-
-</ul>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >query {
-  product(limit: 10) {
-    id
-    name
-    price
-    sku
-  }
-}
-</code></pre>
-</div>
-</li>
-
-<li><a id="orga81ae0f"></a><span class="done DONE">DONE</span> Customize auto-generated fields&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DOES_NOT_INVOLVE_DB">DOES_NOT_INVOLVE_DB</span></span><br />
-<ul>
-<li class="on"><code>[X]</code> Change order.status to order.state for the GraphQL field name</li>
-
-</ul>
-</li>
-<li><a id="orgd6a9647"></a><span class="done DONE">DONE</span> Data validations<br />
-<ul>
-<li class="on"><code>[X]</code> Add non<sub>negative</sub><sub>price</sub> check constraint</li>
-<li class="on"><code>[X]</code> <p>
-Attempt mutations with and without negative prices
-</p>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >mutation MyMutation {
-  update_product(where: {name: {_eq: "Chilli Paste, Sambal Oelek"}}, _set: {price: 10}) {
-    affected_rows
-  }
-}
-</code></pre>
-</div>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >mutation MyMutation {
-  update_product(where: {name: {_eq: "Pastry - Raisin Muffin - Mini"}}, _set: {price: -10}) {
-    affected_rows
-  }
-}
-</code></pre>
-</div></li>
-
-</ul>
-</li>
-<li><a id="org0321909"></a><span class="done DONE">DONE</span> Using an existing database<br /></li>
-<li><a id="org1c35249"></a><span class="done DONE">DONE</span> Relay Schema&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DOES_NOT_INVOLVE_DB">DOES_NOT_INVOLVE_DB</span></span><br />
-<ul>
-<li class="on"><code>[X]</code> Turn on the Relay API in the Console</li>
-
-</ul>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >query MyQuery {
-  account_connection(first: 10) {
-    edges {
-      node {
-	name
-	orders {
-	  id
-	  region
-	  order_details {
-	    units
-	    product {
-	      name
-	      price
-	      sku
-	    }
-	  }
-	}
-      }
-      cursor
-    }
-  }
-}
-</code></pre>
-</div>
-</li>
-</ul>
-</section>
-<section id="slide-orgaa1d1ad" data-background="./assets/slide_background.png">
-<h4 id="orgaa1d1ad">Queries</h4>
-<div class="outline-text-4" id="text-orgaa1d1ad">
-</div>
-<ul class="org-ul">
-<li><a id="orgbaa5fc1"></a><span class="done DONE">DONE</span> Simple object queries<br /></li>
-<li><a id="orga7b9680"></a><span class="done DONE">DONE</span> Nested object queries<br /></li>
-<li><a id="orgc09d246"></a><span class="done DONE">DONE</span> Aggregation queries<br />
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >query MyQuery {
-  account_aggregate {
-    aggregate {
-      count
-    }
-  }
-}
-</code></pre>
-</div>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >query MyQuery {
-  account(limit: 10) {
-    orders {
-      order_details_aggregate {
-	aggregate {
-	  sum {
-	    units
-	  }
-	}
-      }
-    }
-  }
-}
-</code></pre>
-</div>
-</li>
-<li><a id="org34baf5b"></a><span class="done DONE">DONE</span> Filter query results / search queries<br /></li>
-<li><a id="org3957658"></a><span class="done DONE">DONE</span> Sort query results<br /></li>
-<li><a id="orgdc3810c"></a><span class="done DONE">DONE</span> Distinct query results<br /></li>
-<li><a id="org09baf66"></a><span class="todo TODO">TODO</span> Using multiple arguments&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DOES_NOT_INVOLVE_DB">DOES_NOT_INVOLVE_DB</span></span><br /></li>
-<li><a id="orga3498aa"></a><span class="todo TODO">TODO</span> Multiple queries in a request&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DOES_NOT_INVOLVE_DB">DOES_NOT_INVOLVE_DB</span></span><br /></li>
-<li><a id="org82717cb"></a><span class="todo TODO">TODO</span> Using variables / aliases / fragments / directives&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DOES_NOT_INVOLVE_DB">DOES_NOT_INVOLVE_DB</span></span><br /></li>
-<li><a id="orgbc0b3ad"></a><span class="todo TODO">TODO</span> Query performance<br /></li>
-</ul>
-</section>
-<section id="slide-org39ac629" data-background="./assets/slide_background.png">
-<h4 id="org39ac629">Mutations</h4>
-<div class="outline-text-4" id="text-org39ac629">
-</div>
-<ul class="org-ul">
-<li><a id="org7daaf54"></a><span class="done DONE">DONE</span> Insert<br /></li>
-<li><a id="orge5cfa59"></a><span class="todo TODO">TODO</span> Upsert<br /></li>
-<li><a id="org8235a45"></a><span class="done DONE">DONE</span> Update<br /></li>
-<li><a id="org5f62247"></a><span class="todo TODO">TODO</span> Delete<br /></li>
-<li><a id="org64d2d8f"></a><span class="todo TODO">TODO</span> Multiple mutations in a request<br /></li>
-</ul>
-</section>
-<section id="slide-orgb494c29" data-background="./assets/slide_background.png">
-<h4 id="orgb494c29">Subscriptions</h4>
-<div class="outline-text-4" id="text-orgb494c29">
-</div>
-<ul class="org-ul">
-<li><a id="orge7f8b0d"></a><span class="todo TODO">TODO</span> Live queries<br /></li>
-</ul>
-</section>
-<section id="slide-org2e84558" data-background="./assets/slide_background.png">
-<h4 id="org2e84558">Supported Postgres types</h4>
-<div class="outline-text-4" id="text-org2e84558">
-</div>
-<ul class="org-ul">
-<li><a id="org841007e"></a><span class="done DONE">DONE</span> Perform inserts on the <code>misc</code> table.<br />
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >mutation {
-  insert_misc(objects: [
-      {
-	bigint_field: 1
-	bigserial_field: 1
-	boolean_field: true
-	box_field: "((0,0),(1,1))"
-	bytea_field: "\\xDEADBEEF"
-	character_field: "foo"
-	character_varying_field: "bar"
-	cidr_field: "192.168.100.128/25"
-	circle_field: "0,0,1"
-	date_field: "2022-01-01"
-	double_precision_field: 9673143120,
-	inet_field: "192.168.0.1/24"
-	integer_field: 1
-	interval_field: "'1 month ago'"
-	json_field: {}
-	jsonb_field: {}
-	line_field: "0,0,1,1"
-	lseg_field: "0,0,1,1"
-	macaddr_field: "08:00:2b:01:02:03"
-	macaddr8_field: "08:00:2b:01:02:03:04:05"
-	money_field: 52093.89
-	numeric_field: 10
-	path_field: "0,0,1,1,2,2,3,3,3,0,2,0,0,0"
-	pg_lsn_field: "FFFFFFFF/FFFFFFFF"
-	point_field: "0,0"
-	polygon_field: "0,0,1,0,1,1,0,1"
-	real_field: 3.14159
-	serial_field: 1
-	smallint_field: 1
-	smallserial_field: 1
-	text_field: "abc"
-	time_with_time_zone_field: "04:05:06 PST"
-	time_without_time_zone_field: "04:05:06"
-	timestamp_with_time_zone_field: "2022-01-01 04:05:06 PST"
-	timestamp_without_time_zone_field: "2022-01-01 04:05:06"
-	txid_snapshot_field: "566:566:"
-	uuid_field: "61a41be6-4eb4-45a5-bfb5-b68c20e9ccde"
-	xml_field: "&lt;?xml version=\"1.0\"?&gt;&lt;book&gt;&lt;title&gt;Manual&lt;/title&gt;&lt;chapter&gt;...&lt;/chapter&gt;&lt;/book&gt;"
-      }
-    ]) {
-    returning {
-      bigint_field
-      bigserial_field
-      boolean_field
-      box_field
-      bytea_field
-      character_field
-      character_varying_field
-      cidr_field
-      circle_field
-      date_field
-      double_precision_field
-      inet_field
-      integer_field
-      interval_field
-      json_field
-      jsonb_field
-      line_field
-      lseg_field
-      macaddr_field
-      macaddr8_field
-      money_field
-      numeric_field
-      path_field
-      pg_lsn_field
-      point_field
-      polygon_field
-      real_field
-      serial_field
-      smallint_field
-      smallserial_field
-      text_field
-      time_with_time_zone_field
-      time_without_time_zone_field
-      timestamp_with_time_zone_field
-      timestamp_without_time_zone_field
-      txid_snapshot_field
-      uuid_field
-      xml_field
-    }
-  }
-}
-</code></pre>
-</div>
-</li>
 </ul>
 
 </section>
 </section>
 <section>
-<section id="slide-org2beff6d" data-background="./assets/slide_background.png">
-<h2 id="org2beff6d">Remote Schema</h2>
-<div class="outline-text-2" id="text-org2beff6d">
-</div>
-</section>
-<section id="slide-org058396a" data-background="./assets/slide_background.png">
-<h4 id="org058396a">Remote relationships</h4>
-<div class="outline-text-4" id="text-org058396a">
-</div>
-<ul class="org-ul">
-<li><a id="org284f9cb"></a><span class="todo TODO">TODO</span> To remote database<br /></li>
-<li><a id="org7f375eb"></a><span class="todo TODO">TODO</span> To Remote Schema&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DOES_NOT_INVOLVE_DB">DOES_NOT_INVOLVE_DB</span></span><br /></li>
-</ul>
-</section>
-<section id="slide-org79d091a" data-background="./assets/slide_background.png">
-<h4 id="org79d091a">Authorization in remote schema</h4>
-<div class="outline-text-4" id="text-org79d091a">
-</div>
-<ul class="org-ul">
-<li><a id="org987a5e1"></a><span class="todo TODO">TODO</span> Forwarding auth context to/from remote schema&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DOES_NOT_INVOLVE_DB">DOES_NOT_INVOLVE_DB</span></span><br /></li>
-<li><a id="org4ccc0c9"></a><span class="todo TODO">TODO</span> Remote schema permissions&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DOES_NOT_INVOLVE_DB">DOES_NOT_INVOLVE_DB</span></span><br /></li>
-<li><a id="orgfa334c9"></a><span class="todo TODO">TODO</span> Bypassing Hasura's auth for remote schema&#xa0;&#xa0;&#xa0;<span class="tag"><span class="DOES_NOT_INVOLVE_DB">DOES_NOT_INVOLVE_DB</span></span><br /></li>
-</ul>
-</section>
-</section>
-<section>
-<section id="slide-orgb077035" data-background="./assets/slide_background.png">
-<h2 id="orgb077035">Event Triggers</h2>
-<div class="outline-text-2" id="text-orgb077035">
-</div>
-</section>
-<section id="slide-org782ab48" data-background="./assets/slide_background.png">
-<h4 id="org782ab48">Creating an Event Trigger</h4>
-<div class="outline-text-4" id="text-org782ab48">
-</div>
-<ul class="org-ul">
-<li><a id="orgff52f0e"></a><span class="done DONE">DONE</span> Create an insert trigger<br /></li>
-<li><a id="orge3cdcb1"></a><span class="done DONE">DONE</span> Create an update trigger<br />
+<section id="slide-org3f4a9fc" data-background="./assets/slide_background.png">
+<h2 id="org3f4a9fc">Track 2: Deployment</h2>
 <ul>
-<li class="off"><code>[&#xa0;]</code> Perform a mutation to update an order</li>
-<li class="off"><code>[&#xa0;]</code> Update an order from the Console</li>
+<li>Self-Hosted vs Cloud</li>
+<li>Development Environment</li>
+<li>CI/CD</li>
 
 </ul>
-<div class="org-src-container">
-
-<pre   ><code class="graphql" >mutation MyMutation {
-  update_order_by_pk(pk_columns: {id: "1564344e-e528-43de-b88e-dab9c3efa44e"}, _set: {state: "fulfilled"}) {
-    id
-    state
-  }
-}
-</code></pre>
-</div>
-<ul>
-<li class="off"><code>[&#xa0;]</code> Check the events logs</li>
-
-</ul>
-</li>
-</ul>
-</section>
-</section>
-<section>
-<section id="slide-orgd4b064f" data-background="./assets/slide_background.png">
-<h2 id="orgd4b064f">Scheduled Triggers</h2>
-<div class="outline-text-2" id="text-orgd4b064f">
-</div>
-</section>
-<section id="slide-org0c37d73" data-background="./assets/slide_background.png">
-<h4 id="org0c37d73">Creating a chron trigger</h4>
-<div class="outline-text-4" id="text-org0c37d73">
-</div>
-<ul class="org-ul">
-<li><a id="org53bbbfd"></a><span class="todo TODO">TODO</span> Create a chron trigger<br />
-<ul>
-<li class="off"><code>[&#xa0;]</code> Allow time to pass</li>
-<li class="off"><code>[&#xa0;]</code> Check the events logs</li>
-
-</ul>
-</li>
-</ul>
-</section>
-<section id="slide-orgcc3b30a" data-background="./assets/slide_background.png">
-<h4 id="orgcc3b30a">Creating a one-off scheduled event</h4>
-<div class="outline-text-4" id="text-orgcc3b30a">
-</div>
-<ul class="org-ul">
-<li><a id="org64ca0e2"></a><span class="todo TODO">TODO</span> Create a one-off scheduled event<br /></li>
-</ul>
-</section>
-<section id="slide-orgc8c8258" data-background="./assets/slide_background.png">
-<h4 id="orgc8c8258">Cleaning up scheduled triggers data</h4>
-<div class="outline-text-4" id="text-orgc8c8258">
-</div>
-<ul class="org-ul">
-<li><a id="orge5a04ba"></a><span class="todo TODO">TODO</span> Clear Everything<br />
-<ul>
-<li class="off"><code>[&#xa0;]</code> <p>
-Cron triggers
-</p>
-
-<div class="org-src-container">
-
-<pre   ><code class="sql" >DELETE FROM hdb_catalog.hdb_cron_events;
-</code></pre>
-</div></li>
-
-<li class="off"><code>[&#xa0;]</code> <p>
-Scheduled events
-</p>
-
-<div class="org-src-container">
-
-<pre   ><code class="sql" >DELETE FROM hdb_catalog.hdb_scheduled_events;
-</code></pre>
-</div></li>
-
-</ul>
-</li>
-</ul>
-</section>
-</section>
-<section>
-<section id="slide-orgfc2b172" data-background="./assets/slide_background.png">
-<h2 id="orgfc2b172">Test Matrix</h2>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Function</th>
-<th scope="col" class="org-left">Test</th>
-<th scope="col" class="org-left">Outcome</th>
-<th scope="col" class="org-left">Comments</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">Remote Relationships</td>
-<td class="org-left">NO</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">Remote Schema connect to GraphQL servers</td>
-</tr>
-
-<tr>
-<td class="org-left">Add Database</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Add tables and relationships in Console</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Perform CRUD operations in API</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Set up and use table relationships</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Track views</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Manually add relationships to views</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Query across view/table relationships</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Track a function as a table and use</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Track a function as a computed field and use</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Use defaults for field values</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Use a native enum as a Hasura enum</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Use a table as a Hasura enum</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Customize field-names in API</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">Doesn't actually involve the DB</td>
-</tr>
-
-<tr>
-<td class="org-left">Data validation with a database constraint</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Test using the Relay API</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">Doesn't actually involve the DB</td>
-</tr>
-
-<tr>
-<td class="org-left">Simple object queries</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Nested object queries (involves JOINs)</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Aggregation queries (count)</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">We didn't test min, max, avg, etc.</td>
-</tr>
-
-<tr>
-<td class="org-left">Filter queries (involves WHERE)</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Sort queries (involves ORDER BY)</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Distinct queries (involves DISTINCT)</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Limit queries (involves LIMIT)</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Using multiple arguments</td>
-<td class="org-left">NO</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">Doesn't actually involve the DB</td>
-</tr>
-
-<tr>
-<td class="org-left">Multiple queries in a request</td>
-<td class="org-left">NO</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">Doesn't actually involve the DB</td>
-</tr>
-
-<tr>
-<td class="org-left">Multiple variables / aliases / fragments / directives</td>
-<td class="org-left">NO</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">Doesn't actually involve the DB</td>
-</tr>
-
-<tr>
-<td class="org-left">INSERT (see "Perform CRUD operations in API" above</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">UPDATE (see "Perform CRUD operations in API" above</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">DELETE (see "Perform CRUD operations in API" above</td>
-<td class="org-left">TBD</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">We forgot to test this!</td>
-</tr>
-
-<tr>
-<td class="org-left">ON CONFLICT (an "upsert")</td>
-<td class="org-left">TBD</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">We forgot to test this!</td>
-</tr>
-
-<tr>
-<td class="org-left">Multiple mutations in a request</td>
-<td class="org-left">TBD</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">We forgot to test this!</td>
-</tr>
-
-<tr>
-<td class="org-left">Subscriptions (Live Queries)</td>
-<td class="org-left">TBD</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Test all Postgres/Hasura types (mutation, query)</td>
-<td class="org-left">TBD</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Remote Database</td>
-<td class="org-left">TBD</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">We forgot to test this!</td>
-</tr>
-
-<tr>
-<td class="org-left">Creating event triggers</td>
-<td class="org-left">YES</td>
-<td class="org-left">FAIL</td>
-<td class="org-left">Needs a Hasura fix. See Notes below</td>
-</tr>
-
-<tr>
-<td class="org-left">Creating a chron trigger</td>
-<td class="org-left">TBD</td>
-<td class="org-left">FAIL</td>
-<td class="org-left">Needs a Hasura fix. See Notes below</td>
-</tr>
-
-<tr>
-<td class="org-left">Creating a one-off scheduled event</td>
-<td class="org-left">TBD</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">Needs a Hasura fix</td>
-</tr>
-
-<tr>
-<td class="org-left">Cleaning up scheduled trigger data</td>
-<td class="org-left">TBD</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">Needs a Hasura fix</td>
-</tr>
-
-<tr>
-<td class="org-left">CI/CD: hasura metadata (apply, clear, reload, status)</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">CI/CD: hasura migrate (apply, apply &#x2013;down all, delete)</td>
-<td class="org-left">YES</td>
-<td class="org-left">SUCCESS</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
-
-</section>
-<section id="slide-orga858146" data-background="./assets/slide_background.png">
-<h4 id="orga858146">NOTES</h4>
-<dl>
-<dt>Test</dt><dd>do we test this (YES, NO, TBD)</dd>
-<dt>YES</dt><dd>we should test this (and have)</dd>
-<dt>NO</dt><dd>we may not need to test this</dd>
-<dt>TBD</dt><dd>we should test this (but have not yet, possibly because we
-cannot)</dd>
-<dt>SUCCESS</dt><dd>we tested it and it passed</dd>
-<dt>FAIL</dt><dd>we tested it and it did not pass</dd>
-<dt>"We forgot to test this!"</dt><dd>either we forgot, or we suspect we may
-not need to (e.g. "Remote Database")</dd>
-<dt>"Doesn't actually involve the DB"</dt><dd>a Hasura function which we
-believe shouldn't work differently on BDR, since the function
-doesn't actually interact with the database.</dd>
-<dt>"Needs a Hasura fix"</dt><dd>either we have a FAIL test or a TBD test,
-because of an identified gap in Hasura that needs to be fixed.</dd>
-
-</dl>
-
-</section>
-<section id="slide-orgea0f211" data-background="./assets/slide_background.png">
-<h4 id="orgea0f211">Additional Notes</h4>
-<ol>
-<li>Event Trigger creation fails with the following error:</li>
-
-</ol>
-
-<div class="org-src-container">
-
-<pre   ><code class="json" >{
-    "internal": {
-	"statement": "\n  INSERT INTO hdb_catalog.hdb_source_catalog_version(version, upgraded_on)\n    VALUES ($1, NOW())\n   ON CONFLICT ((version IS NOT NULL))\n   DO UPDATE SET version = $1, upgraded_on = NOW()\n  ",
-	"prepared": false,
-	"error": {
-	    "exec_status": "FatalError",
-	    "hint": "To enable updating the table, set REPLICA IDENTITY using ALTER TABLE.",
-	    "message": "cannot run INSERT ON CONFLICT DO UPDATE on table \"hdb_source_catalog_version\" because it does not have a replica identity and is part of replication set which publishes updates",
-	    "status_code": "55000",
-	    "description": null
-	},
-	"arguments": [
-	    "(Oid 25,Just (\"2\",Binary))"
-	]
-    },
-    "path": "$.args[0].args",
-    "error": "database query error",
-    "code": "unexpected"
-}
-</code></pre>
-</div>
-
-<ol>
-<li>Cannot alter table with volatile function.  This error is the result of trying to add a UUID column to an existing table:</li>
-
-</ol>
-
-<div class="org-src-container">
-
-<pre   ><code class="json" >{
-    "internal": {
-	"statement": "CREATE EXTENSION IF NOT EXISTS pgcrypto;\nalter table \"public\"."\misc\" add colum \"id\" uuid\n not null unique default gen_random_uuid():\n",
-	"prepared": false,
-	"error": {
-	    "exec_status": "FatalError",
-	    "hint": "null.",
-	    "message": "ALTER TABLE ... ADD COLUMN ... (mutable) DEFAULT may not affect replicated tables on a BDR node",
-	    "status_code": "0A000",
-	    "description": null
-	},
-	"arguments": []
-    },
-    "path": "$",
-    "error": "query execution failed",
-    "code": "postgres-error"
-}
-</code></pre>
-</div>
-
-<p>
-Workaround is detailed in <a href="https://www.enterprisedb.com/docs/pgd/latest/bdr/ddl/#adding-a-column">https://www.enterprisedb.com/docs/pgd/latest/bdr/ddl/#adding-a-column</a>
-</p>
 </section>
 </section>
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/highlight/highlight.js"></script>
-
 
 <script>
 // Full list of configuration options available here:
 // https://github.com/hakimel/reveal.js#configuration
 Reveal.initialize({
-plugins: [RevealHighlight],
-transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false,
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }]
+
 });
 
 </script>
