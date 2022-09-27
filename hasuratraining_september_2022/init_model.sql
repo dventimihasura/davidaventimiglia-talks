@@ -156,3 +156,10 @@ select
        join order_detail on order_detail.order_id = "order".id
        join product on product.id = order_detail.product_id
  group by account.id;
+
+-- sku function
+
+create or replace function product_sku(product_row product)
+returns text as $$
+  select md5(product_row.name)
+$$ language sql stable;
