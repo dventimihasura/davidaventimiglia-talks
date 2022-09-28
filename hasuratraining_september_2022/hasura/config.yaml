@@ -1,7 +1,0 @@
-version: 3
-endpoint: https://organic-tomcat-41.hasura.app
-admin_secret: Atm9AeU1CMbPie1lExeWp9VzgZcVZPo8JK75KNEK57y2JW0s764oz5CFshtB3Ch2
-metadata_directory: metadata
-actions:
-  kind: synchronous
-  handler_webhook_baseurl: http://localhost:3000
