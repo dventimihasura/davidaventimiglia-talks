@@ -1,0 +1,7 @@
+version: 3
+endpoint: https://smiling-macaque-38.hasura.app
+admin_secret: eDoUcHC2qj3KuWomzH8hzlGbW1e4Jl6G0vDZ81q9LDRZr231bNxjlrIg4hTnCgaO
+metadata_directory: metadata
+actions:
+  kind: synchronous
+  handler_webhook_baseurl: http://localhost:3000
