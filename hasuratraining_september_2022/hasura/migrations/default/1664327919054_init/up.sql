@@ -1,2 +1,2 @@
 SET check_function_bodies = false;
-CREATE SCHEMA heroku_ext;
+CREATE SCHEMA if not exists heroku_ext;
