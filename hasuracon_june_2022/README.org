@@ -5,6 +5,7 @@
 
 #+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
 
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 #+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./assets/slide_background.png
 #+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
 #+REVEAL_THEME: black
