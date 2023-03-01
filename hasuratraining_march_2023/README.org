@@ -84,8 +84,9 @@ https://altairgraphql.dev/
 
 * What is Hasura?
 
-- API Server
-- IDE
+- API Server :: run-time network server
+- Compiler :: run-time GQL to SQL
+- IDE :: dev-time authoring environment
 
 * How do we use them?
 
@@ -125,23 +126,23 @@ https://altairgraphql.dev/
 
 * Track 1: Development
 
-- Setup: data-sources
-- Tables and Relationships: data modeling
-- Customization: GraphQL API development
-- REST Endpoints: REST API development
-- Authorization: common area of business logic
-- Actions: integration for validation
-- Events: integration for side-effects
-- Remote Joins and Schema: integration for data
+- [X] Setup: data-sources
+- [X] Tables and Relationships: data modeling
+- [X] Customization: GraphQL API development
+- [X] REST Endpoints: REST API development
+- [X] Authorization: business logic
+- [ ] +Actions: integration for validation+
+- [ ] +Events: integration for side-effects+
+- [ ] +Remote Joins & Schema: integration for data+
 
 * Track 2: Deployment
 
-- Self-Hosted vs Cloud
-- Development Environment
-- Development Workflow (CI/CD)
-- Caching: Redis
-- Performance: Read-replicas
-- Security: API Limits
+- [X] Self-Hosted vs Cloud
+- [X] Development Environment
+- [X] Development Workflow (CI/CD)
+- [X] Caching: Redis
+- [X] Performance: Read-replicas
+- [X] Security: API Limits
 
 #  LocalWords:  toc num controlsLayout controlsTutorial PANDOC pdf
 #  LocalWords:  pdflatex ATTR
