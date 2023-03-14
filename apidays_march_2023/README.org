@@ -201,7 +201,7 @@ Recommended in production but inconvenient in a workshop.
 
 *** Create the Data Model
 
-[[https://tinyurl.com/4vvue9vk]]
+[[https://tinyurl.com/2uebv8wn]]
 
 #+begin_src sql
 -- -*- sql-product: postgres; -*-
@@ -354,7 +354,7 @@ create index on "order" (region);
 
 *** Insert Sample Data
 
-[[https://tinyurl.com/2t32axzh]]
+[[https://tinyurl.com/2p87j2uf]]
 
 #+begin_src sql
 -- -*- sql-product: postgres; -*-
