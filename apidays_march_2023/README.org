@@ -201,7 +201,7 @@ Recommended in production but inconvenient in a workshop.
 
 *** Create the Data Model
 
-[[https://tinyurl.com/59n4edpn]]
+[[https://tinyurl.com/4vvue9vk]]
 
 #+begin_src sql
 -- -*- sql-product: postgres; -*-
@@ -610,7 +610,7 @@ Don't have a GraphQL API
 #+REVEAL_HTML: </div>
 
 #+REVEAL_HTML: <div class="column" style="float:right; width:50%">
-https://tinyurl.com/ynhbbrmy
+[[https://tinyurl.com/59n4edpn]]
 #+ATTR_HTML: :width 50%
 #+ATTR_HTML: :height 50%
 [[file:assets/qr.png]]
