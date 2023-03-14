@@ -144,19 +144,13 @@ http://cloud.hasura.io
 #+ATTR_HTML: :height 40%
 [[file:assets/log_into_hasura_cloud.png]]
 
-*** Connect Heroku to Hasura Cloud
-
-#+ATTR_HTML: :width 80%
-#+ATTR_HTML: :height 80%
-[[file:assets/connect_heroku_hasura.png]]
-
 *** Create a new Hasura Cloud Project
 
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:assets/create_new_hasura_project.png]]
 
-*** Create a new Heroku database
+*** Create a new Neon database
 
 #+ATTR_HTML: :width 80%
 #+ATTR_HTML: :height 80%
