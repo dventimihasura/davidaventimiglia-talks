@@ -132,11 +132,11 @@ http://cloud.hasura.io
 
 * Workshop
 
-*** Log into Heroku
+*** Log into Neon
 
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
-[[file:assets/log_into_heroku.png]]
+[[file:assets/neon.png]]
 
 *** Log into Hasura Cloud
 
