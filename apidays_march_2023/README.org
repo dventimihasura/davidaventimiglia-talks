@@ -13,7 +13,7 @@
 #+REVEAL_PLUGINS: (highlight)
 
 * 
-#+CAPTION: https://tinyurl.com/ynhbbrmy
+#+CAPTION: https://tinyurl.com/59n4edpn
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:assets/qr.png]]
@@ -38,7 +38,7 @@ http://cloud.hasura.io
 #+ATTR_HTML: :height 80%
 [[file:assets/neon.png]]
 
-https://cloud.hasura.io/
+[[https://neon.tech/]]
 
 #+REVEAL_HTML: </div>
 

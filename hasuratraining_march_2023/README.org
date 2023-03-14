@@ -140,9 +140,11 @@ https://altairgraphql.dev/
 - [X] Self-Hosted vs Cloud
 - [X] Development Environment
 - [X] Development Workflow (CI/CD)
-- [X] Caching: Redis
-- [X] Performance: Read-replicas
 - [X] Security: API Limits
+- [ ] +Performance: Read-replicas+
+- [ ] +Caching: Redis+
+- [ ] +Authentication+
+- [ ] +Monitoring+
 
 #  LocalWords:  toc num controlsLayout controlsTutorial PANDOC pdf
 #  LocalWords:  pdflatex ATTR
