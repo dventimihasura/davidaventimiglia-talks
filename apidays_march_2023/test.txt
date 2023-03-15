@@ -1,7 +1,5 @@
 # -*- mode: restclient; -*-
 
-curl 'https://heroic-adder-63.hasura.app/v1/graphql' -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'Origin: chrome-extension://flnheeellpciglgpaodhkhmapeljopja' -H 'x-hasura-admin-secret: kpbIZeXGYodpAVKS0Z4HViBKcV0DrhDyz50Oqg8oMfU5uzen0Muvh3EgVptRKp4t' --data-binary '' --compressed
-
 #
 POST https://heroic-adder-63.hasura.app/v1/graphql
 Content-Type: application/json
