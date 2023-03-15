@@ -66,7 +66,6 @@ http://cloud.hasura.io
 - Recursive Queries :: /Availability/
 - Unbounded Queries :: /Confidentiality, Availability/
 - Malicious Queries :: /Confidentiality, Integrity/
-- Batch Requests :: /Confidentiality, Availability/
 
 #+REVEAL_HTML: </div>
 
@@ -114,22 +113,6 @@ http://cloud.hasura.io
   }
 #+end_src
 
-*** Batch Requests
-
-#+begin_src graphql
-  query MaliciousQuery {
-    alias1: fieldName { subField1 subField2 ...}
-    alias2: fieldName { subField1 subField2 ...}
-    ...
-    alias10: fieldName { subField1 subField2 ...}
-    ...
-    alias100: fieldName { subField1 subField2 ...
-    ...
-    alias1000: fieldName { subField1 subField2 ...}
-    ...
-  }
-#+end_src
-
 * Workshop
 
 *** Log into Neon
@@ -160,7 +143,7 @@ http://cloud.hasura.io
 
 #+begin_src shell :export both
   psql -h <hostname> -p <port> -d <db> -U <username> psql
-  heroku psql -a <app>
+  neon psql -a <app>
 #+end_src
 
 *** +Secure the DB+
@@ -169,12 +152,12 @@ http://cloud.hasura.io
 - ~REVOKE~ DML (maybe).
 - ~REVOKE~ DDL (definitely).
 - Use a [[https://hasura.io/docs/latest/graphql/core/getting-started/docker-simple/][separate dev instance]] with elevated permissions for data modeling.
-- Use an env var like ~PG_DATABASE_URL~ with your Hasuras.
+- Use an env var like ~PG_DATABASE_URL~.
 
 #+REVEAL: split
 
  #+begin_src sql
-   -- Read-only? (not on Heroku hobby tier!)
+   -- Read-only
    CREATE USER hasuraprod WITH PASSWORD 'hasuraprod';
    GRANT CONNECT ON DATABASE <db> TO hasuraprod;
    GRANT USAGE ON SCHEMA <schema> TO hasuraprod;
@@ -191,13 +174,53 @@ http://cloud.hasura.io
 - ~HASURA_GRAPHQL_AUTH_HOOK~ :: webhook mode
 - ~HASURA_GRAPHQL_JWT_SECRET~ :: JWT mode
 
-*** +Disable Hasura Console+
+*** +[[https://hasura.io/docs/latest/deployment/production-checklist/#disable-apis][Disable Management APIs]]+
 
-Recommended in production but inconvenient in a workshop.
+- Recommended in production but invonvenient in a workshop.
 
-*** +Disable Schema Introspection+
+#+begin_src shell
+  # set this env var to enable only the graphql api
+  HASURA_GRAPHQL_ENABLED_APIS=graphql
+#+end_src
 
-Recommended in production but inconvenient in a workshop.
+*** +[[https://hasura.io/docs/latest/deployment/production-checklist/#disable-the-console][Disable Hasura Console]]+
+
+- Recommended in production but inconvenient in a workshop.
+
+#+begin_src shell
+  # set the env var to false or do not set it at all to disable the Console
+  HASURA_GRAPHQL_ENABLE_CONSOLE=false
+#+end_src
+
+*** [[https://hasura.io/docs/latest/deployment/production-checklist/#disable-dev-mode][Disable DEV Mode]]
+
+- Debug info in the GraphQL response
+- Default is not to send for other roles 😀
+- Defailt /is/ to send for the admin role 😟
+
+#+begin_src shell
+  # set the env var to false to disable dev mode for admin
+  HASURA_GRAPHQL_ADMIN_INTERNAL_ERRORS=false
+#+end_src
+
+*** +[[https://hasura.io/docs/latest/deployment/production-checklist/#restrict-cors-domains][Restrict CORS Domains]]+
+
+- Recommended in production but inconvenient in a workshop.
+
+#+begin_src shell
+  # set the env var, accept cross-origin requests from https://my-ui.com
+  HASURA_GRAPHQL_CORS_DOMAIN=https://my-ui.com
+#+end_src
+
+*** [[https://hasura.info/3JlgZs7][Disable Schema Introspection]]
+
+- Recommended in production but inconvenient in a workshop.
+- Performed on a per-role basis.
+
+*** +[[https://hasura.io/docs/latest/deployment/enable-https/#setting-up-https][Use HTTPS]]+
+
+- Recommended in production but inconvenient in a workshop.
+- Requires a reverse proxy (e.g. Nginx)
 
 *** Create the Data Model
 
@@ -449,17 +472,73 @@ commit;
 #+ATTR_HTML: :height 50%
 [[file:assets/track_relationships.png]]
 
+*** Deep Query
+
+#+begin_src graphql
+  query MyQuery {
+    account(where: {name: {_eq: "Estevan Leeming"}}) {
+      id
+      name
+      orders {
+        region
+        status
+        order_details {
+          units
+          product {
+            name
+            price
+          }
+        }
+      }
+    }
+  }
+#+end_src
+
+*** Recursive Query
+
+#+begin_src graphql
+  query MyQuery {
+    account(where: {name: {_eq: "Estevan Leeming"}}) {
+      id
+      name
+      orders {
+        status
+        region
+        id
+        account {
+          id
+          name
+          orders {
+            id
+            region
+            status
+            account {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+#+end_src
+
+*** Unbounded Query
+
+#+begin_src graphql
+  query MyQuery {
+    account {
+      id
+      name
+    }
+  }
+#+end_src
+
 *** Set API Limits
 
 #+ATTR_HTML: :width 80%
 #+ATTR_HTML: :height 80%
 [[file:assets/set_api_limits.png]]
-
-- Global
-  - Depth Limit: 4
-  - Node Limit: 10
-  - Rate Limit (RPM): 10
-  - Timeout (Seconds): 10
 
 *** ~account~ Select Permissions
 
@@ -497,13 +576,21 @@ commit;
 #+ATTR_HTML: :height 60%
 [[file:assets/region_permissions.png]]
 
-*** Use Allow Lists
+*** Set API Limits
+
+- Global
+  - Depth Limit: 4
+  - Node Limit: 10
+  - Rate Limit (RPM): 10
+  - Timeout (Seconds): 10
+
+*** [[https://hasura.io/docs/latest/security/allow-list/#enable-allow-list][Use Allow Lists]]
 
 - ~HASURA_GRAPHQL_ENABLE_ALLOWLIST~ :: default value is ~false~
 
 - Monitoring >> Allow Lists >> New Operations
 
-*** Use Allow Lists
+*** [[https://hasura.io/docs/latest/security/allow-list/#enable-allow-list][Use Allow Lists]]
 
 #+begin_src graphql
   query MyAccount {
@@ -516,7 +603,7 @@ commit;
   }
 #+end_src
 
-*** Use Allow Lists
+*** [[https://hasura.io/docs/latest/security/allow-list/#enable-allow-list][Use Allow Lists]]
 
 #+begin_src graphql
   query ProductSearch {
@@ -528,7 +615,7 @@ commit;
   }
 #+end_src
 
-*** Use Allow Lists
+*** [[https://hasura.io/docs/latest/security/allow-list/#enable-allow-list][Use Allow Lists]]
 
 #+begin_src graphql
   query MyOrdersSummary {
@@ -589,16 +676,6 @@ commit;
 - Disable Console & Schema Introspection.
 - Don't generate your APIs.
 - Obsess over API Limits.
-
-*** GraphQL Security Heterodoxy
-
-- Don't disable Console & Schema Introspection
-- DO generate your APIs.
-- Don't worry so much about API Limits.
-
-*** How to Secure Your GraphQL API?
-
-Don't have a GraphQL API
 
 * /Thank You!/
 
