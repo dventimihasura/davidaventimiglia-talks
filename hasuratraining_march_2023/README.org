@@ -131,9 +131,9 @@ https://altairgraphql.dev/
 - [X] Customization: GraphQL API development
 - [X] REST Endpoints: REST API development
 - [X] Authorization: business logic
-- [ ] +Actions: integration for validation+
-- [ ] +Events: integration for side-effects+
-- [ ] +Remote Joins & Schema: integration for data+
+- [X] Actions: integration for validation
+- [X] Events: integration for side-effects
+- [X] Remote Joins & Schema: integration for data
 
 * Track 2: Deployment
 
@@ -144,6 +144,7 @@ https://altairgraphql.dev/
 - [X] Monitoring
 - [X] Performance: Read-replicas
 - [X] Caching: Redis
+- [X] GDC: Snowflake
 - [ ] +Authentication+
 
 ** Monitoring
