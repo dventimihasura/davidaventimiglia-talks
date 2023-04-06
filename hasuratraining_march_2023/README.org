@@ -129,21 +129,27 @@ https://altairgraphql.dev/
 - [X] Setup: data-sources
 - [X] Tables and Relationships: data modeling
 - [X] Customization: GraphQL API development
-- [X] REST Endpoints: REST API development
-- [X] Authorization: business logic
-- [X] Actions: integration for validation
-- [X] Events: integration for side-effects
-- [X] Remote Joins & Schema: integration for data
+
+* Track 1: Development
+
+- [ ] Events: async integration for side-effects
+- [ ] Actions: synced integration with REST
+- [ ] Remote Schema: integration with GraphQL
+- [ ] REST Endpoints: developing with REST
+- [ ] GDCs: connecting with Snowflake
+- [ ] Authorization: business logic
 
 ** Events
 
 - Algolia write endpoint :: =https://{{ALGOLIA_APPLICATION_ID}}.algolia.net/1/indexes/{{ALGOLIA_INDEX_NAME}}/=
-- =X-Algolia-Application-Id= :: =ALGOLIA_APPLICATION_ID= header from env-var credential
-- =X-Algolia-API-Key= :: =ALGOLIA_API_KEY= header from env-var credential
+- =X-Algolia-Application-Id= :: =ALGOLIA_APPLICATION_ID= header from env-var
+- =X-Algolia-API-Key= :: =ALGOLIA_API_KEY= header from env-var
 - Request URL template :: ={{$body.event.data.new.id}}=
 - Payload transform body :: ={"name": {{$body.event.data.new.name}}}=
 
 ** Actions
+
+Action Definition
 
 #+begin_src graphql
 type Query {
@@ -152,6 +158,8 @@ type Query {
 #+end_src
 
 ** Actions
+
+Declare New Types
 
 #+begin_src graphql
 type SearchProductsOutput {
@@ -198,13 +206,15 @@ type ProcessingTimingsMs {
 
 ** Actions
 
-- Algolia read enpoint :: =https://{{ALGOLIA_APPLICATION_ID}}-dsn.algolia.net/1/indexes/{{ALGOLIA_INDEX_NAME}}/=
-- =X-Algolia-Application-Id= :: =ALGOLIA_APPLICATION_ID= header from env-var credential
-- =X-Algolia-API-Key= :: =ALGOLIA_API_KEY= header from env-var credential
+Webhook & Headers
+
+- Algolia read endpoint :: =https://{{ALGOLIA_APPLICATION_ID}}-dsn.algolia.net/1/indexes/{{ALGOLIA_INDEX_NAME}}/=
+- =X-Algolia-Application-Id= :: =ALGOLIA_APPLICATION_ID= header from env-var
+- =X-Algolia-API-Key= :: =ALGOLIA_API_KEY= header from env-var
 
 ** Actions
 
-- Payload Transform
+Payload Transform
 
 #+begin_src js
 {
@@ -219,7 +229,7 @@ type ProcessingTimingsMs {
 
 ** Actions
 
-- Response Transform
+Response Transform
 
 #+begin_src js
 { 
@@ -229,7 +239,11 @@ type ProcessingTimingsMs {
 
 ** Snowflake GDC
 
-- =SNOWFLAKE_URL= :: =jdbc:snowflake://ak41499.us-east-2.aws.snowflakecomputing.com/?user=davidventimiglia&password=akv*KMP-nbe-qhv6zhq&CLIENT_SESSION_KEEP_ALIVE=true
+=SNOWFLAKE_URL=
+
+#+begin_src shell
+jdbc:snowflake://<REDACTED>/?user=<REDACTED>&password=<REDACTED>&CLIENT_SESSION_KEEP_ALIVE=true
+#+end_src
 
 * Track 2: Deployment
 
