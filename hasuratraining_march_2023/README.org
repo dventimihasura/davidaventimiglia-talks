@@ -135,6 +135,102 @@ https://altairgraphql.dev/
 - [X] Events: integration for side-effects
 - [X] Remote Joins & Schema: integration for data
 
+** Events
+
+- Algolia write endpoint :: =https://{{ALGOLIA_APPLICATION_ID}}.algolia.net/1/indexes/{{ALGOLIA_INDEX_NAME}}/=
+- =X-Algolia-Application-Id= :: =ALGOLIA_APPLICATION_ID= header from env-var credential
+- =X-Algolia-API-Key= :: =ALGOLIA_API_KEY= header from env-var credential
+- Request URL template :: ={{$body.event.data.new.id}}=
+- Payload transform body :: ={"name": {{$body.event.data.new.name}}}=
+
+** Actions
+
+#+begin_src graphql
+type Query {
+  search_product(query: String!): SearchProductsOutput
+}
+#+end_src
+
+** Actions
+
+#+begin_src graphql
+type SearchProductsOutput {
+  exhaustive: Exhaustive
+  exhaustiveNbHits: Boolean
+  exhaustiveTypo: Boolean
+  hits: [Hits]
+  hitsPerPage: Int
+  nbHits: Int
+  nbPages: Int
+  page: Int
+  params: String
+  processingTimeMS: Int
+  processingTimingsMS: ProcessingTimingsMs
+  query: String
+}
+
+type Exhaustive {
+  nbHits: Boolean
+  typo: Boolean
+}
+
+type Hits {
+  _highlightResult: HighlightResult
+  name: String
+  objectID: String
+}
+
+type HighlightResult {
+  name: Name
+}
+
+type Name {
+  fullyHighlighted: Boolean
+  matchedWords: [String]
+  matchLevel: String
+  value: String
+}
+
+type ProcessingTimingsMs {
+  total: Int
+}
+#+end_src
+
+** Actions
+
+- Algolia read enpoint :: =https://{{ALGOLIA_APPLICATION_ID}}-dsn.algolia.net/1/indexes/{{ALGOLIA_INDEX_NAME}}/=
+- =X-Algolia-Application-Id= :: =ALGOLIA_APPLICATION_ID= header from env-var credential
+- =X-Algolia-API-Key= :: =ALGOLIA_API_KEY= header from env-var credential
+
+** Actions
+
+- Payload Transform
+
+#+begin_src js
+{
+  "action": {
+    "name": "search_product"
+  },
+  "input": {
+    "query": "query"
+  }
+}
+#+end_src
+
+** Actions
+
+- Response Transform
+
+#+begin_src js
+{ 
+  "params": "query={{$body.input.query}}"
+}
+#+end_src
+
+** Snowflake GDC
+
+- =SNOWFLAKE_URL= :: =jdbc:snowflake://ak41499.us-east-2.aws.snowflakecomputing.com/?user=davidventimiglia&password=akv*KMP-nbe-qhv6zhq&CLIENT_SESSION_KEEP_ALIVE=true
+
 * Track 2: Deployment
 
 - [X] Self-Hosted vs Cloud
@@ -174,6 +270,8 @@ https://altairgraphql.dev/
 - =HASURA_GRAPHQL_READ_REPLICA_URLS= :: replica URLs
 
 ** Authentication
+
+
 
 #  LocalWords:  toc num controlsLayout controlsTutorial PANDOC pdf
 #  LocalWords:  pdflatex ATTR
