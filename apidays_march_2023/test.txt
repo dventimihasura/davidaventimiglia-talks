@@ -1,0 +1,25 @@
+# -*- mode: restclient; -*-
+
+#
+POST https://heroic-adder-63.hasura.app/v1/graphql
+Content-Type: application/json
+Accept: application/json
+x-hasura-admin-secret: kpbIZeXGYodpAVKS0Z4HViBKcV0DrhDyz50Oqg8oMfU5uzen0Muvh3EgVptRKp4t
+x-hasura-role: user
+
+[
+{"query":"  query MyQuery1 {\n    alias1: account(where: {name: {_eq: \"Estevan Leeming\"}}) {\n      id\n      name\n    }\n  }\n","variables":{}},
+{"query":"  query MyQuery1 {\n    alias1: account(where: {name: {_eq: \"Estevan Leeming\"}}) {\n      id\n      name\n    }\n  }\n","variables":{}},
+{"query":"  query MyQuery1 {\n    alias1: account(where: {name: {_eq: \"Estevan Leeming\"}}) {\n      id\n      name\n    }\n  }\n","variables":{}}
+]
+
+#
+POST https://heroic-adder-63.hasura.app/v1/graphql
+Content-Type: application/json
+Accept: application/json
+x-hasura-admin-secret: kpbIZeXGYodpAVKS0Z4HViBKcV0DrhDyz50Oqg8oMfU5uzen0Muvh3EgVptRKp4t
+x-hasura-role: user
+
+[
+{"query":"  query MyQuery1 {\n    alias1: account(where: {name: {_eq: \"Estevan Leeming\"}}) {\n      id\n      name\n    }\n  }\n","variables":{}}
+]

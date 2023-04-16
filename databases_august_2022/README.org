@@ -1,0 +1,648 @@
+#+GIST_ID: 8cecc640eef01dee8d6d4b140b6a70ca
+#+TITLE: Relational Databases
+#+SUBTITLE: Principles, Theory, History
+#+AUTHOR: David A. Ventimiglia
+#+EMAIL: davidaventimiglia@hasura.io
+
+#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil reveal_single_file:t
+
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./assets/slide_background.png
+#+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+#+REVEAL_THEME: black
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./assets/slide_background.png
+#+REVEAL_PLUGINS: (highlight)
+
+* Principles
+
+*** Data Independence
+
+#+begin_quote
+"Activities of users at terminals and most application programs should
+remain unaffected when the internal representation of data is changed
+and even when some aspects of the external representation are
+changed." -- E.F. Codd 1970
+#+end_quote
+
+*** Information Principle
+
+/All/ information is represented by the same model.
+
+*** Consistency
+
+Data consistency is enforced not by imperative application rules but
+by declarative database constraints.
+
+* Theory
+
+*** Relational Model
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- relation :: (heading, body)
+- heading :: {attributes}
+- body :: {tuple}
+- attribute :: (name, domain)
+- name :: /text/
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+
+- domain :: /text/
+- tuple :: {value} where value ∈ domain
+- predicate :: {proposition}
+- proposition :: =true= | =false=
+
+#+REVEAL_HTML: </div>
+
+*** Interrogating the Model
+
+- relational calculus :: declarative language for performing optimizations
+- relational algebra :: imperative language for performing transformations
+
+*** Application
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- relation :: table | view | query
+- attribute :: column
+- tuple :: row
+- domain :: type
+- proposition :: query
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+
+- relational algebra :: Π σ ⨝
+- projection Π :: choose columns
+- selection σ :: choose rows
+- join ⨝ :: product of relations
+
+#+REVEAL_HTML: </div>
+
+*** Normalization
+
+- UNF:  anything goes
+- 1NF:  atomic columns
+- 2NF:  no functional dependencies within table
+- 3NF:  no functional dependencies to other tables
+- 4NF, 5NF, 6NF:  refinements but don't worry
+
+*** Demo
+
+[[http://clotho.uom.gr/relax/calc.htm][RelaX - relational algebra calculator]]
+
+[[https://gist.github.com/dventimihasura/2c2bca3625f268a5c61f510b3f3cb3e8][gist:2c2bca3625f268a5c61f510b3f3cb3e8]]
+
+* Reality
+
+*** Climbing Down the Ivory Tower
+
+The mathematical formalism is useful for reasoning, but all database
+implementations deviate from the strict mathematical model for
+practical purposes.
+
+*** Real Databases
+
+- depart from set theory (hello duplicates)
+- depart from simple relational theory (hello ~GROUP BY~ AND ~ORDER BY~)
+- depart from first-order predicate logic (hello ~NULL~)
+- extend the basic model (hello ~OUTER JOIN~)
+
+*** Tables
+
+- not much to say, except
+- there are only "relations"
+- parent-child, one-to-many, many-to-many are not a thing
+
+*** Views
+
+- not much to say, except
+- they're saved queries
+- /not/ an performance barrier, except
+- when they do too much
+
+*** Keys
+
+- primary
+  - simple
+  - composite
+  - "pseudo-keys"
+  - +sequences+
+
+*** Constraints
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+- Foreign
+- Check
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+- Not-Null
+- Unique
+- Exclusion
+#+REVEAL_HTML: </div>
+
+*** Indexes
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+- Clustered (not really a thing in Postgres)
+- Non-Clustered
+- Implementation for constraints
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+- Expression Indexes
+- Partial Indexes
+- Covering Indexes
+#+REVEAL_HTML: </div>
+
+*** Data Dictionary
+
+- One of the hallmarks of a RDBMS
+
+*** Transactions
+
+- ACID: Atomic, Consistent, Isolated, Durable
+- A: all or nothing
+- C: satisfies constraints
+- I: visible or not
+- D: true committment
+
+*** Concurrency
+
+*** Implementation Details
+
+- Files or Volumes
+- Pages
+- Extents
+- Rows
+- Values
+- Read performance
+- Write performance
+- Page splitting
+
+* Summary
+
+*** Key Ideas
+
+- Mathematical Foundation
+- Deductive Reasoning
+- Powerful Optimizations
+- Sophisticated Code Generation
+
+* The End
+
+* Additional Slides
+
+* History
+
+*** 1970: E.F. "Ted" Codd
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+[[file:assets/Edgar_Codd.jpg]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+[[file:assets/codd_1981.png]]
+#+REVEAL_HTML: </div>
+
+*** 1971: Generation X
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:60%">
+[[file:assets/StrangerThingsDDScene-625x352.webp]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:40%">
+- 1965-1980
+- Latchkey kids
+- Tech-savvy
+[[file:assets/Stranger_Things_logo.png]]
+#+REVEAL_HTML: </div>
+
+*** 1976: IBM System R
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+- First relational database
+- Released academic papers...
+- ...but no commercial product
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+[[file:assets/ibm-sj-ad-1962.webp]]
+#+REVEAL_HTML: </div>
+
+*** 1976: INGRES
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :width 70%
+#+ATTR_HTML: :height 70%
+[[file:assets/CampanileMtTamalpiasSunset-original.jpg]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+- Based off those papers
+- Berkeley research project
+- Later a commercial product
+#+REVEAL_HTML: </div>
+
+*** 1977: Oracle
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+- PDP-11 UNIX
+- Influence directly from Codd's 1970 paper
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+#+ATTR_HTML: :width 70%
+#+ATTR_HTML: :height 70%
+[[file:assets/Pdp-11-40.jpg]]
+#+REVEAL_HTML: </div>
+
+*** 1977: Apple
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+[[file:assets/Apple_II_typical_configuration_1977.png]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+#+ATTR_HTML: :width 70%
+#+ATTR_HTML: :height 70%
+- Apple II
+- *BASIC*
+- 6M units sold worldwide
+- Sales peaked in 1983
+- No RDBMS :(
+#+REVEAL_HTML: </div>
+
+*** 1978: Space Invaders
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:assets/SpaceInvaders-Gameplay.gif]]
+
+*** 1982: Commodore
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :width 70%
+#+ATTR_HTML: :height 70%
+[[file:assets/Commodore64.jpg]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+- VIC-20
+- Commodore 64
+- *BASIC*
+- 17M units sold worldwide
+- Sales peaked in 1984
+- No RDBMS :(
+#+REVEAL_HTML: </div>
+  
+*** 1984: Sybase
+
+- More Berkeley academics
+
+*** 1989: Microsoft SQL Server
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+- Licensed from Sybase for IBM OS/2
+- Used to grind Sybase into the ground
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+[[file:assets/bill-gates-borg.jpg]]
+#+REVEAL_HTML: </div>
+
+*** 1990: The World Wide Web
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+[[file:assets/Lynx-wikipedia.png]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+- Tim Berners-Lee at CERN
+- First web server and graphical browser
+#+REVEAL_HTML: </div>
+
+*** 1993: Mosaic
+
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
+[[file:assets/NCSA_Mosaic_Browser_Screenshot.png]]
+
+*** 1994: The Year of the Web
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+- Gen-Xers were 23 years old
+- were about to have too much money
+- and not enough shoes
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+[[file:assets/marc_andreesen.jpg]]
+#+REVEAL_HTML: </div>
+
+*** 1995: The Dot-com Bubble
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
+[[file:assets/Bill_Clinton.jpg]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+- HTML
+- MySQL
+- Perl is used
+- But Java appears
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+
+*** 1996: MySQL
+
+- MyISAM had severe limitations
+- Fast but no transactions
+- No relational integrity
+- No triggers
+- No functions
+
+*** 2000: The NASDAQ Peaks
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
+[[file:assets/Pets.com_sockpuppet.jpg]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+- the party's over
+- From dog treats to the banks
+- ORMs, EJBs, oh my!
+#+REVEAL_HTML: </div>
+
+*** 2004: Object-Relational Mapping is the Vietnam of our industry
+
+- Ted Neward, architect and prolific author
+- Gen-Xers were 33
+
+*** 2004: The MapReduce Paper
+
+- Apache Hadoop released 2006
+
+*** 2005: CouchDB
+
+- No SQL
+
+*** 2005: GreenPlum
+
+- SQL?
+- MPP
+
+*** 2007: MongoDB
+
+- No SQL!
+
+*** 2007: The Dynamo Paper
+
+- No SQL!!
+
+*** 2010: Moore's Law Ends
+
+- Gordon Web, Intel co-founder
+
+*** 2010: Apache Hive
+
+- SQL on Hadoop
+
+*** 2010: CitusDB
+
+- SQL
+- MPP
+
+*** 2013: AWS Redshift
+
+- SQL!
+- MPP
+
+*** 2014: Apache Spark
+
+- Comes with SQL (more-or-less)
+
+*** 2017: Hasura
+
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
+[[file:assets/hasura.png]]
+
+*** 2022: Today
+
+- Gen-Xers are in their fifties.
+- No longer calling the shots on tech
+- Finally!
+
+* Why Don't We Build Applications in the Database?
+
+*** It's not what they tell you
+
+- +performance+
+- +not a real programming language+
+- +not object-oriented+
+
+*** It's never what they tell you
+
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
+[[file:assets/wargames.jpg]]
+
+* Performance
+
+*** Reactive
+
+~pg_stat_activity~ returns information about ongoing connections.
+
+What states are connections currently in?
+
+#+begin_src sql :engine postgres :dbconnection render :results output :exports both
+  select distinct state from pg_stat_activity;
+#+end_src
+
+#+RESULTS:
+: state
+: 
+: active
+
+#+REVEAL: split
+
+Show active queries.
+
+#+begin_src sql :engine postgres :dbconnection render :results output :exports both
+  select distinct application_name from pg_stat_activity;
+#+end_src
+
+#+RESULTS:
+: application_name
+: psql
+: 
+: TimescaleDB Background Worker Launcher
+
+#+REVEAL: split
+
+Show long-running active queries.
+
+#+begin_src sql :engine postgres :dbconnection render :results output :exports both
+  select query from pg_stat_activity where state = 'active' and application_name != 'psql';
+#+end_src
+
+#+RESULTS:
+: query
+
+#+REVEAL: split
+
+~pg_stat_database~
+
+#+begin_src sql :engine postgres :dbconnection render :results output :exports both
+  select * from pg_stat_database
+#+end_src
+
+#+RESULTS:
+: datid	datname	numbackends	xact_commit	xact_rollback	blks_read	blks_hit	tup_returned	tup_fetched	tup_inserted	tup_updated	tup_deleted	conflicts	temp_files	temp_bytes	deadlocks	checksum_failures	checksum_last_failure	blk_read_time	blk_write_time	session_time	active_time	idle_in_transaction_time	sessions	sessions_abandoned	sessions_fatal	sessions_killed	stats_reset
+: 0		0	0	0	61	291468	123527	73880	74	1	8	0	1	185726	0	0		0	0	0	0	0	0	0	0	0	2022-08-21 15:25:17.282621+00
+: 13569	postgres	1	44370	0	353	667660	2425233	221271	14	8	0	0	0	0	0	0		0	0	114675174.911	35397.274	0	10710	1	0	0	2022-08-21 15:25:17.282588+00
+: 16389	scratch_vj09	1	4154	23	1340	828978	3396259	242759	19247	5171	189	0	8	112984064	0	0		0	0	41960862.506	120010.41	109377.063	70	5	0	0	2022-08-21 15:25:18.188982+00
+: 1	template1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	
+: 13568	template0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	
+
+#+REVEAL: split
+
+~pg_stat_all_tables~ / ~pg_stat_user_tables~
+
+#+begin_src sql :engine postgres :dbconnection render :results output :exports both
+  select * from pg_stat_user_tables;
+#+end_src
+
+#+RESULTS:
+: relid	schemaname	relname	seq_scan	seq_tup_read	idx_scan	idx_tup_fetch	n_tup_ins	n_tup_upd	n_tup_del	n_tup_hot_upd	n_live_tup	n_dead_tup	n_mod_since_analyze	n_ins_since_vacuum	last_vacuum	last_autovacuum	last_analyze	last_autoanalyze	vacuum_count	autovacuum_count	analyze_count	autoanalyze_count
+: 16431	public	account	36	16120	7993	7993	1000	0	0	0	1000	0	0	1000				2022-08-21 15:40:50.860189+00	0	0	0	1
+: 16502	public	region	1	0	2585	2585	9	0	0	0	9	0	9	9					0	0	0	0
+: 16454	public	order	27	38403	14500	14038	2557	5114	0	0	2557	0	0	0		2022-08-21 15:40:51.27909+00		2022-08-21 15:40:51.286956+00	0	1	0	1
+: 16469	public	order_detail	31	362053	368	738	13929	0	0	0	13929	0	31	31		2022-08-21 15:40:50.895152+00		2022-08-21 15:40:51.080334+00	0	1	0	1
+: 16443	public	product	27	25000	14507	14507	1000	0	0	0	1000	0	0	1000				2022-08-21 15:40:51.100328+00	0	0	0	1
+
+#+REVEAL: split
+
+~pg_stat_all_indexes~ / ~pg_stat_user_indexes~
+
+#+begin_src sql :engine postgres :dbconnection render :results output :exports both
+  select * from pg_stat_user_indexes
+#+end_src
+
+#+RESULTS:
+#+begin_example
+relid	indexrelid	schemaname	relname	indexrelname	idx_scan	idx_tup_read	idx_tup_fetch
+16431	16439	public	account	account_pkey	7993	7993	7993
+16443	16451	public	product	product_pkey	14507	14507	14507
+16454	16460	public	order	order_pkey	14113	14113	13929
+16454	16468	public	order	order_account_id_idx	386	18354	109
+16469	16475	public	order_detail	order_detail_pkey	0	0	0
+16469	16488	public	order_detail	order_detail_order_id_idx	265	662	514
+16469	16489	public	order_detail	order_detail_product_id_idx	103	41877	224
+16431	16493	public	account	account_name_idx	0	0	0
+16454	16501	public	order	order_status_idx	1	2557	0
+16502	16507	public	region	region_pkey	2585	2585	2585
+16454	16516	public	order	order_region_idx	0	0	0
+16469	16570	public	order_detail	order_detail_created_at	0	0	0
+#+end_example
+
+#+REVEAL: split
+
+~pg_stat_statements~
+
+#+begin_src sql :engine postgres :dbconnection render :results output :exports code
+  create extension if not exists pg_stat_statements;
+#+end_src
+
+#+RESULTS:
+: CREATE EXTENSION
+
+#+begin_src sql :engine postgres :dbconnection render :results output :exports both
+  select query from pg_stat_statements where mean_exec_time > 1000;
+#+end_src
+
+#+RESULTS:
+: query
+: SELECT  coalesce(json_agg("root" ), $4 ) AS "root" FROM  (SELECT  row_to_json((SELECT  "_e"  FROM  (SELECT  "_root.base"."id" AS "id", "_root.base"."name" AS "name", "_root.base"."price" AS "price"       ) AS "_e"      ) ) AS "root" FROM  (SELECT  *  FROM "public"."product_search_slow"(($2)::text, ($3)::real) AS "_product_search_slow" WHERE ($5)     ) AS "_root.base"      ) AS "_root"       /* request_id=fe8fb21ea47cc5cb04bdb98782b06fe0, field_name=product_search_slow, parameterized_query_hash=6ba76bca56c84ed85759fa3d85d50b79c031b790, operation_name=MyQuery */
+
+#+begin_src sql :engine postgres :dbconnection render :results output :exports both
+  select pg_stat_statements_reset();
+#+end_src
+
+#+REVEAL: split
+
+#+RESULTS:
+: pg_stat_statements_reset
+:
+
+#+REVEAL: split
+
+~pg_stats~
+
+#+begin_src sql :engine postgres :dbconnection render :results output :exports both
+  select * from pg_stats where tablename = 'product';
+#+end_src
+
+#+RESULTS:
+: schemaname	tablename	attname	inherited	null_frac	avg_width	n_distinct	most_common_vals	most_common_freqs	histogram_bounds	correlation	most_common_elems	most_common_elem_freqs	elem_count_histogram
+: public	product	updated_at	f	0	8	1	{"2022-08-21 15:37:24.693476+00"}	{1}		1			
+: public	product	name	f	0	21	-0.83	{"Bamboo Shoots - Sliced","Beef - Cooked, Corned","Bread - Roll, Whole Wheat","Chicken Breast Halal","Miso Paste White","Mushroom - Chantrelle, Fresh","Mustard - Dijon","Pails With Lids","Sage Ground Wiberg","Soup - Campbells Beef Noodle","Star Fruit","Truffle Shells - White Chocolate","Wine - Merlot Vina Carmen","Appetizer - Asian Shrimp Roll","Appetizer - Chicken Satay","Assorted Desserts","Bacon Strip Precooked","Beans - Black Bean, Dry","Beans - Fava Fresh","Beef - Inside Round","Beer - Heinekin","Beets - Candy Cane, Organic","Bread Base - Gold Formel","Bread - Granary Small Pull","Bread - Kimel Stick Poly","Bread - Mini Hamburger Bun","Bread - Olive Dinner Roll","Bread - Rolls, Rye","Broccoli - Fresh","Broom - Corn","Buffalo - Short Rib Fresh","Butcher Twine 4r","Cake - Pancake","Cakes Assorted","Cattail Hearts","Cheese - Taleggio D.o.p.","Chicken - Livers","Chick Peas - Canned","Chilli Paste, Sambal Oelek","Chips - Miss Vickies","Chives - Fresh","Chocolate - Chips Compound","Chocolate - Liqueur Cups With Foil","Chocolate - Sugar Free Semi Choc","Chocolate - White","Cinnamon - Ground","Coconut - Creamed, Pure","Coconut Milk - Unsweetened","Coffee - Colombian, Portioned","Cookie Dough - Double","Corn Shoots","Creme De Banane - Marie","Curry Paste - Green Masala","Dc - Frozen Momji","Dill Weed - Fresh","Doilies - 10, Paper","Dried Figs","Ecolab Crystal Fusion","Ecolab - Hobart Washarm End Cap","Eggplant - Baby","External Supplier","Flour Dark Rye","Flour - Whole Wheat","Flower - Daisies","Fond - Chocolate","Garbag Bags - Black","Gelatine Powder",Glycerine,"Grapefruit - Pink","Guinea Fowl","Hipnotiq Liquor","Ice Cream Bar - Oreo Cone","Ice Cream - Super Sandwich","Island Oasis - Mango Daiquiri","Jello - Assorted","Juice - Lemon","Kale - Red",Kolrabi,"Lamb - Leg, Bone In","Lid - 16 Oz And 32 Oz","Longos - Burritos","Longos - Chicken Wings","Longos - Lasagna Veg",Madeira,"Milk - 2% 250 Ml","Muffin - Bran Ind Wrpd","Muffin Mix - Corn Harvest","Muffin - Mix - Mango Sour Cherry","Muffin - Mix - Strawberry Rhubarb","Muffins - Assorted","Munchies Honey Sweet Trail Mix","Nantucket Apple Juice","Napkin White","Nut - Pecan, Pieces","Oil - Margarine","Oil - Olive","Oil - Sunflower","Onions - Vidalia","Orange - Blood","Orange Roughy 4/6 Oz"}	{0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002}	{"Alize Gold Passion","Appetizer - Lobster Phyllo Roll","Artichoke - Fresh","Bagelers - Cinn / Brown Sugar","Bar Mix - Lemon","Beans - Green","Beef - Diced","Beef - Salted","Beer - Sleeman Fine Porter","Bok Choy - Baby","Bread - Crumbs, Bulk","Bread - Pullman, Sliced","Brocolinni - Gaylan, Chinese","Cabbage - Nappa","Cape Capensis - Fillet","Cheese - Asiago","Cheese - Manchego, Spanish","Chestnuts - Whole,canned","Chinese Foods - Thick Noodles","Chocolate - Compound Coating","Cleaner - Comet","Coffee Decaf Colombian","Cookie Choc","Corn Syrup","Cream - 18%",Dasheen,"Durian Fruit","Eel Fresh","Extract - Lemon","Fish - Soup Base, Bouillon","Flower - Potmums","Gherkin - Sour",Goldschalger,"Hot Choc Vending","Ice Cream - Turtles Stick Bar","Jameson - Irish Whiskey","Juice - Apple, 341 Ml","Juice - Prune","Lamb Leg - Bone - In Nz","Lemonade - Island Tea, 591 Ml","Lettuce - Boston Bib - Organic","Liquid Aminios Acid - Braggs","Lotus Rootlets - Canned","Milk - Buttermilk","Muffin Batt - Blueberry Passion","Mushroom - Morels, Dry","Napkin - Beverge, White 2 - Ply","Nut - Pumpkin Seeds","Oil - Pumpkinseed","Oven Mitts - 15 Inch","Pasta - Detalini, White, Fresh","Pasta - Penne, Rigate, Dry","Pastry - Cheese Baked Scones","Pate - Liver","Pepper - Chili Powder","Pepperoni Slices","Pickerel - Fillets","Pie Shells 10","Plastic Wrap","Pork - Back, Short Cut, Boneless","Pork - Smoked Back Bacon","Puree - Guava","Red Cod Fillets - 225g","Rum - Cream, Amarula","Salt - Kosher","Sauce - Chili","Sauce - Soya, Dark","Sesame Seed","Shrimp - Baby, Cold Water","Snapple Raspberry Tea","Soup - Campbells","Soup - Campbellschix Stew","Soup - Chicken And Wild Rice","Sour Cream","Sping Loaded Cup Dispenser","Squash - Pepper","Stock - Fish","Sunflower Seed Raw","Table Cloth 81x81 White","Tart Shells - Savory, 4","Tea - Herbal I Love Lemon","Thyme - Dried","Tomato - Tricolor Cherry","Tray - 16in Rnd Blk","Tuna - Salad Premix","Uniform Linen Charge","Veal - Chops, Split, Frenched","Venison - Liver","Water - Aquafina Vitamin","Wine - Barolo Fontanafredda","Wine - Casillero Deldiablo","Wine - Cotes Du Rhone","Wine - Hardys Bankside Shiraz","Wine - Magnotta, Merlot Sr Vqa","Wine - Pinot Noir Pond Haddock","Wine - Red, Cabernet Sauvignon","Wine - Red, Metus Rose","Wine - Trimbach Pinot Blanc","Wine - Winzer Krems Gruner","Yogurt - Blueberry, 175 Gr","Zucchini - Mini, Green"}	-0.0134486295			
+: public	product	id	f	0	16	-1			{00984ab8-c100-4959-8ec3-8c13de79e27f,0235ee72-e674-4b36-ae08-e8a5d821c213,03cd5348-ab4d-4aad-a685-8ff02cf1d050,05b24834-1a0f-493f-9843-40dd7aa29da3,098e807e-a7b0-43c4-98dd-209b3d9e575d,0c604b5f-b025-4e29-8b4c-4ba73bb6ef08,0eefbcc4-a02c-4c95-a4d4-58ca20021498,1126758c-f66d-45d4-a51a-dbde7ee823b0,14735948-dd06-4f9b-b3c0-4c7d583849e2,16831c89-e1f8-4bdf-be8b-503f6d0b7ef1,187caa53-eddf-41d8-bed3-3475cd1d50b4,1a852324-ac94-4f79-8509-1e2ce07de9a0,1cec01a8-10b9-433e-ab2e-ccfbd096ca68,1e816626-9427-4f54-b743-4afee1a1ff62,20708099-08c3-478d-9806-77215d99b880,244d4e87-0297-41c0-8708-5698b145e875,26a31866-c220-47cd-a6f3-971160b91a97,29e06a2a-d5a7-4097-a2be-e1268abe7113,2e073397-b574-442c-bb8c-4dc615808538,31673096-3e70-420c-946b-551a2f7c130e,34826abf-86e2-4209-ab75-d3d2d81ae8b0,386148af-428b-42e2-a364-32d8c9ef60c4,3bf491a1-b784-402d-857b-f91e1939fb07,3e13b958-558e-404e-9ac7-1c75d6bf948a,41814c38-13e3-4773-b5d0-965ccfba6c49,44e279c8-5a0a-4d63-8691-178a626d2687,466c08ec-bb08-4d64-9a08-8064be1a429a,498c8d2a-5869-492a-9a07-ccdcfea59cdc,4b9436d4-1de2-458e-86df-991e5b5b652f,4e880a85-2ee4-4210-a4cd-cea336587b30,4fb59518-e0f4-45a6-aa0f-dbb2780b6b40,5122f8d1-a135-4205-9b8b-bceefc5754b7,529cae36-d838-4bcd-b8d8-d630d97b6f9a,556f1c26-bea0-4bb6-8782-219ac4218173,57eca081-bee9-4771-8db9-e6057183015a,59d14656-cbaf-4210-8ab6-09b3f483bb0a,5c8d325b-66a9-42e1-8ffe-4299108c141c,5f1480eb-4c35-4bf9-abf2-269bf1e53976,621a8e47-c0a7-4de8-b39b-7a023c033aab,65990e2b-3ebf-44bd-a3dc-a61a279bc494,69dba1e1-a1c5-4f23-96d4-aea1f22d8024,6d08fee1-5df1-4a69-a6c8-36b8ddc793a6,6eb3ae8d-b315-43d9-8e9e-52a441b6e18b,7038b944-ede7-4e3a-96c3-82817f1cfd1e,72540abb-0246-47cb-8abe-00ba7b498096,7455476b-a4ac-495e-b544-2f1a3b28a20a,768fc317-ec72-4c1b-ae75-deacac82bc75,7964d984-ad77-48c0-a699-d7299b007af8,7b39adbc-0baa-48a7-8ed4-fb2de02f9690,7e2f40b5-bd3d-4f8b-8f02-be06a9a6a680,7ffe0d1a-1fa5-4621-9a79-ffbf84fd5def,81d5e442-c129-469b-a31d-c6abf79cd479,84a5ac5a-5846-492a-af10-0e2bff711f3a,8988c0f1-5c7c-48df-afb3-c1f8a6d6f402,8aee9f5c-8398-4e48-98c1-29c87cba8f3e,8d15ef30-8b76-4316-a4d8-5e4aa1072dff,8fea159e-aa99-4216-8b02-cb975cbad177,936c7421-8305-4ab4-9842-4c9989c6042a,94b4b136-3d1c-475f-a2a4-1c982fa8455d,9732e7cc-dfa6-4f29-ab3b-d6c16b7fe854,9a5de353-761a-47d8-84d5-ae23ff1dd588,9cb0efe4-3bab-4b92-89e0-0629a1c1d68d,9f7450be-6594-47f0-8a7e-a7d91193a14a,a2f39b1e-d176-4203-9ecd-5ec06625767a,a589039d-4042-4062-a91a-5644063b1d09,a7114c66-741e-4acf-b00b-a49b72ca3777,aa1c48eb-89b7-4a3a-b036-622154bd1a5d,acb0f7c1-cd94-4077-ab4c-c2c608de7618,b02690aa-de8e-434a-b2bf-b7ab49a52ba9,b26f73c1-ec32-4cfd-8610-f853c594c1ca,b3b113ba-a619-44b1-a70f-ccc6df5811bc,b62afe6b-04c2-40e3-a752-e3cffc18a7be,b7ffb3c1-9563-4d91-a5a8-1f3a63e71cfa,ba9c7d52-73d5-49fa-91d2-128e5f7b6877,bd53f449-796e-4527-8733-f1b2252b25b6,c02ca11d-e160-4236-b35e-614b53cf4f48,c2013857-874f-4fe9-b2bd-28b9cbb5d5e3,c4a24c70-aac0-4710-b6b0-2f707912fa82,c7ae0c50-32d5-4311-9aa2-a4bbf1b9ea29,caedbc01-4c95-4164-9230-0c95e20e5c44,ccdb1836-5188-4d1e-b499-2bf34aebfe8b,ce9b233d-baaa-4346-9eda-b1f442441ae3,d11034ac-e315-4df9-af74-8395e267ce02,d41c2eb4-f760-4e26-83b8-976be28782ef,d62acbbc-4f82-43b4-83f8-a4fd2c12ece0,d994052d-9781-43a2-95b1-bc4c28a46ac9,dbe65ab9-81a6-4368-b3d7-8d50c2e53e9d,de3f3f1b-2a19-4139-8343-497ccd4490a5,e121dd58-cdaa-4401-9b81-f17a0d47ce9d,e21198cd-d642-427c-911c-805aa0bd99d5,e54c7ff4-8c0a-4fc4-9168-79517f134164,e7db6815-95e1-4827-93ae-17b2786b352b,eaac58c5-39a4-4f7f-be8a-31068b335cc5,ed089e49-2242-418b-bb01-825b90a62b2f,f0f1a7c8-e857-4ba3-9c12-61ce9c1c6ebe,f2c69f0e-90c2-4373-8d26-52ef4a3bccfc,f6296e85-246c-44dc-b016-65f73612c39d,f83780e9-ad1c-4a52-b3e3-3ca26e9f9539,fa6c0485-8bf8-4b54-b72a-85c0347de318,fce91191-1908-4dcb-a8d2-1fa29f045a0e,ff91eb4c-b96b-4593-857e-118f19dca9f3}	0.015744207			
+: public	product	created_at	f	0	8	1	{"2022-08-21 15:37:24.693476+00"}	{1}		1			
+: public	product	price	f	0	4	-0.623	{177,308,670,158,294,339,409,426,456,457,461,498,536,756,762,766,812,992,3,7,20,41,60,79,82,91,97,106,113,138,159,166,172,199,201,225,272,274,290,298,313,332,335,364,374,377,386,398,428,434,439,459,489,490,500,507,513,520,528,544,571,572,604,613,615,646,659,669,695,709,719,737,765,769,788,797,799,813,849,869,874,896,909,917,933,959,960,963,964,987,988,6,8,21,23,30,33,44,49,53}	{0.006,0.005,0.005,0.004,0.004,0.004,0.004,0.004,0.004,0.004,0.004,0.004,0.004,0.004,0.004,0.004,0.004,0.004,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.003,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002,0.002}	{1,16,31,42,63,68,75,87,99,105,116,120,126,132,142,149,162,173,183,196,208,216,222,232,239,250,256,265,278,283,292,302,306,317,325,331,340,346,353,368,381,391,403,414,422,437,448,463,469,483,495,508,521,527,541,549,554,569,579,588,600,610,621,628,637,643,652,662,672,683,693,707,714,723,734,746,753,763,771,778,794,805,814,827,842,850,854,866,882,887,897,906,915,925,932,941,949,965,980,991,999}	-0.013059793			
+
+#+REVEAL: split
+
+Explain Plans
+
+#+begin_src sql :engine postgres :dbconnection render :results output :exports both
+  explain
+    select
+    account.id,
+    account.name,
+    "order".status,
+    "order".region,
+    "order".id,
+    units,
+    price,
+    product.name
+    from
+    account
+    join "order" on account_id = account.id
+    join order_detail on order_id = "order".id
+    join product on product_id = product.id
+    where
+    account.id in (select account_id as id from "order" order by random() limit 1);
+#+end_src
+
+#+RESULTS:
+#+begin_example
+QUERY PLAN
+Nested Loop  (cost=118.94..128.74 rows=5 width=88)
+  ->  Nested Loop  (cost=118.67..127.25 rows=5 width=79)
+        ->  Nested Loop  (cost=118.38..126.52 rows=1 width=59)
+              ->  Nested Loop  (cost=118.11..126.20 rows=1 width=60)
+                    ->  HashAggregate  (cost=117.83..117.84 rows=1 width=16)
+                          Group Key: order_1.account_id
+                          ->  Limit  (cost=117.81..117.81 rows=1 width=24)
+                                ->  Sort  (cost=117.81..124.20 rows=2557 width=24)
+                                      Sort Key: (random())
+                                      ->  Index Only Scan using order_account_id_idx on "order" order_1  (cost=0.28..105.03 rows=2557 width=24)
+                    ->  Index Scan using order_account_id_idx on "order"  (cost=0.28..8.33 rows=3 width=44)
+                          Index Cond: (account_id = order_1.account_id)
+              ->  Index Scan using account_pkey on account  (cost=0.28..0.32 rows=1 width=31)
+                    Index Cond: (id = "order".account_id)
+        ->  Index Scan using order_detail_order_id_idx on order_detail  (cost=0.29..0.68 rows=5 width=36)
+              Index Cond: (order_id = "order".id)
+  ->  Index Scan using product_pkey on product  (cost=0.28..0.30 rows=1 width=41)
+        Index Cond: (id = order_detail.product_id)
+#+end_example
+
+*** Proactive

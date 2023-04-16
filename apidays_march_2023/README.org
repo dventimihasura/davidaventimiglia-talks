@@ -1,0 +1,696 @@
+#+TITLE: Securing your GraphQL API with Hasura
+#+SUBTITLE: [[https://hasura.io/events/][Hasura Events]]
+#+AUTHOR: David A. Ventimiglia
+#+EMAIL: davidaventimiglia@hasura.io
+
+#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./assets/slide_background.png
+#+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+#+REVEAL_THEME: black
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./assets/slide_background.png
+#+REVEAL_PLUGINS: (highlight)
+
+* 
+#+CAPTION: https://tinyurl.com/59n4edpn
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
+[[file:assets/qr.png]]
+
+* Introduction
+
+*** What You Will Need
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+#+ATTR_HTML: :width 90%
+#+ATTR_HTML: :height 90%
+[[file:assets/log_into_hasura_cloud.png]]
+
+http://cloud.hasura.io
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:40%;">
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/neon.png]]
+
+[[https://neon.tech/]]
+
+#+REVEAL_HTML: </div>
+
+*** What We Will Cover
+
+- [[https://hasura.io/docs/latest/graphql/core/auth/index/][+Hasura Authentication+]]
+- [[https://hasura.io/docs/latest/graphql/cloud/security/api-limits/][Hasura API Limits]]
+- [[https://hasura.io/docs/latest/graphql/core/auth/authorization/permission-rules/][Hasura Authorization]]
+- [[https://hasura.io/docs/latest/graphql/cloud/security/allow-lists/][Hasura Allow Lists]]
+- [[https://hasura.io/docs/latest/graphql/core/api-reference/restified/][Hasura REST Endpoints]]
+
+*** Principles
+
+- Risk Management :: /Life is about trade-offs./
+- Goal Setting :: /Confidentiality, Integrity, Availability/
+- Defense in Depth :: /Bottom-Up/
+- Simplicity :: /Complexity is the Enemy of Security/
+- Least Privilege :: /The most secure API does nothing at all./
+
+*** Threats
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:75%">
+
+- Deep Queries :: /Confidentiality, Availability/
+- Recursive Queries :: /Availability/
+- Unbounded Queries :: /Confidentiality, Availability/
+- Malicious Queries :: /Confidentiality, Integrity/
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:25%;">
+
+[[file:assets/GraphQL Logo (Rhodamine).svg]]
+
+#+REVEAL_HTML: </div>
+
+*** Deep / Recursive Queries
+
+#+begin_src graphql
+  query {
+    author(id: 42) {
+      posts {
+        author {...and so on...
+        }
+      }
+    }
+  }
+#+end_src
+
+*** Unbounded / Large Queries
+
+#+begin_src graphql
+  query {
+    authors(first: 1000) {
+      name
+      posts(last: 100) {
+        title
+        content
+      }
+    }
+  }
+#+end_src
+
+*** Malicious Queries
+
+#+begin_src graphql
+  query User {
+    user (id: "User*") {
+      email
+      id 
+    }
+  }
+#+end_src
+
+* Workshop
+
+*** Log into Neon
+
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
+[[file:assets/neon.png]]
+
+*** Log into Hasura Cloud
+
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
+[[file:assets/log_into_hasura_cloud.png]]
+
+*** Create a new Hasura Cloud Project
+
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
+[[file:assets/create_new_hasura_project.png]]
+
+*** Create a new Neon database
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/create_database.png]]
+
+*** +Connect to the database+
+
+#+begin_src shell :export both
+  psql -h <hostname> -p <port> -d <db> -U <username> psql
+  neon psql -a <app>
+#+end_src
+
+*** +Secure the DB+
+
+- Create a dedicated DB user for PROD.
+- ~REVOKE~ DML (maybe).
+- ~REVOKE~ DDL (definitely).
+- Use a [[https://hasura.io/docs/latest/graphql/core/getting-started/docker-simple/][separate dev instance]] with elevated permissions for data modeling.
+- Use an env var like ~PG_DATABASE_URL~.
+
+#+REVEAL: split
+
+ #+begin_src sql
+   -- Read-only
+   CREATE USER hasuraprod WITH PASSWORD 'hasuraprod';
+   GRANT CONNECT ON DATABASE <db> TO hasuraprod;
+   GRANT USAGE ON SCHEMA <schema> TO hasuraprod;
+   GRANT SELECT ON ALL TABLES IN SCHEMA <schema> TO hasuraprod;
+   GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA <schema> TO hasuraprod;
+ #+end_src
+
+*** Secure the Service
+
+~HASURA_GRAPHQL_ADMIN_SECRET~ is automatically set in Hasura Cloud.
+
+*** +Add Authentication+
+
+- ~HASURA_GRAPHQL_AUTH_HOOK~ :: webhook mode
+- ~HASURA_GRAPHQL_JWT_SECRET~ :: JWT mode
+
+*** +[[https://hasura.io/docs/latest/deployment/production-checklist/#disable-apis][Disable Management APIs]]+
+
+- Recommended in production but invonvenient in a workshop.
+
+#+begin_src shell
+  # set this env var to enable only the graphql api
+  HASURA_GRAPHQL_ENABLED_APIS=graphql
+#+end_src
+
+*** +[[https://hasura.io/docs/latest/deployment/production-checklist/#disable-the-console][Disable Hasura Console]]+
+
+- Recommended in production but inconvenient in a workshop.
+
+#+begin_src shell
+  # set the env var to false or do not set it at all to disable the Console
+  HASURA_GRAPHQL_ENABLE_CONSOLE=false
+#+end_src
+
+*** [[https://hasura.io/docs/latest/deployment/production-checklist/#disable-dev-mode][Disable DEV Mode]]
+
+- Debug info in the GraphQL response
+- Default is not to send for other roles 😀
+- Defailt /is/ to send for the admin role 😟
+
+#+begin_src shell
+  # set the env var to false to disable dev mode for admin
+  HASURA_GRAPHQL_ADMIN_INTERNAL_ERRORS=false
+#+end_src
+
+*** +[[https://hasura.io/docs/latest/deployment/production-checklist/#restrict-cors-domains][Restrict CORS Domains]]+
+
+- Recommended in production but inconvenient in a workshop.
+
+#+begin_src shell
+  # set the env var, accept cross-origin requests from https://my-ui.com
+  HASURA_GRAPHQL_CORS_DOMAIN=https://my-ui.com
+#+end_src
+
+*** [[https://hasura.info/3JlgZs7][Disable Schema Introspection]]
+
+- Recommended in production but inconvenient in a workshop.
+- Performed on a per-role basis.
+
+*** +[[https://hasura.io/docs/latest/deployment/enable-https/#setting-up-https][Use HTTPS]]+
+
+- Recommended in production but inconvenient in a workshop.
+- Requires a reverse proxy (e.g. Nginx)
+
+*** Create the Data Model
+
+[[https://tinyurl.com/2uebv8wn]]
+
+#+begin_src sql
+-- -*- sql-product: postgres; -*-
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- account table
+
+CREATE TABLE "public"."account" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "name" text NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") );
+CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
+  RETURNS TRIGGER AS $$
+  DECLARE
+    _new record;
+  BEGIN
+    _new := NEW;
+    _new."updated_at" = NOW();
+    RETURN _new;
+  END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER "set_public_account_updated_at"
+  BEFORE UPDATE ON "public"."account"
+  FOR EACH ROW
+  EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
+COMMENT ON TRIGGER "set_public_account_updated_at" ON "public"."account" 
+  IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+
+-- product table
+
+CREATE TABLE "public"."product" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), "name" text NOT NULL, "price" integer NOT NULL, PRIMARY KEY ("id") );
+CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
+  RETURNS TRIGGER AS $$
+  DECLARE
+    _new record;
+  BEGIN
+    _new := NEW;
+    _new."updated_at" = NOW();
+    RETURN _new;
+  END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER "set_public_product_updated_at"
+  BEFORE UPDATE ON "public"."product"
+  FOR EACH ROW
+  EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
+COMMENT ON TRIGGER "set_public_product_updated_at" ON "public"."product" 
+  IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+
+-- order table
+
+CREATE TABLE "public"."order" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), "account_id" uuid NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("account_id") REFERENCES "public"."account"("id") ON UPDATE restrict ON DELETE restrict);
+CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
+  RETURNS TRIGGER AS $$
+  DECLARE
+    _new record;
+  BEGIN
+    _new := NEW;
+    _new."updated_at" = NOW();
+    RETURN _new;
+  END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER "set_public_order_updated_at"
+  BEFORE UPDATE ON "public"."order"
+  FOR EACH ROW
+  EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
+COMMENT ON TRIGGER "set_public_order_updated_at" ON "public"."order" 
+  IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+
+create index on "order" (account_id);
+
+-- order_detail table
+
+CREATE TABLE "public"."order_detail" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), "units" integer NOT NULL, "order_id" uuid NOT NULL, "product_id" uuid NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("order_id") REFERENCES "public"."order"("id") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("product_id") REFERENCES "public"."product"("id") ON UPDATE restrict ON DELETE restrict);
+CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()
+  RETURNS TRIGGER AS $$
+  DECLARE
+    _new record;
+  BEGIN
+    _new := NEW;
+    _new."updated_at" = NOW();
+    RETURN _new;
+  END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER "set_public_order_detail_updated_at"
+  BEFORE UPDATE ON "public"."order_detail"
+  FOR EACH ROW
+  EXECUTE PROCEDURE "public"."set_current_timestamp_updated_at"();
+COMMENT ON TRIGGER "set_public_order_detail_updated_at" ON "public"."order_detail" 
+  IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+
+create index on order_detail (order_id);
+
+create index on order_detail (product_id);
+
+-- product_search function
+
+create or replace function product_search(search text)
+  returns setof product as $$
+  select product.*
+  from product
+  where
+  name ilike ('%' || search || '%')
+$$ language sql stable;
+
+-- product_search_slow function
+
+create or replace function product_search_slow(search text, wait real)
+  returns setof product as $$
+  select product.*
+  from product, pg_sleep(wait)
+  where
+  name ilike ('%' || search || '%')
+$$ language sql stable;
+
+-- non_negative_price constraint
+
+alter table "public"."product" add constraint "non_negative_price" check (price > 0);
+
+-- index account(name)
+
+create index if not exists account_name_idx on account (name);
+
+-- status enum
+
+CREATE TYPE status AS ENUM ('new', 'processing', 'fulfilled');
+
+-- add status to order table
+
+alter table "public"."order" add column "status" status null;
+
+create index on "order" (status);
+
+-- region dictionary table
+
+create table if not exists region (
+  value text primary key,
+  description text);
+
+-- add region to order
+
+alter table "public"."order" add column "region" Text
+ null;
+
+alter table "public"."order"
+  add constraint "order_region_fkey"
+  foreign key ("region")
+  references "public"."region"
+  ("value") on update restrict on delete restrict;
+
+create index on "order" (region);
+#+end_src
+
+*** Insert Sample Data
+
+[[https://tinyurl.com/2p87j2uf]]
+
+#+begin_src sql
+-- -*- sql-product: postgres; -*-
+insert into account (name) values ('Christel Seaborn');
+insert into account (name) values ('Emalia Oliveras');
+insert into account (name) values ('Arin Maker');
+insert into account (name) values ('Gregor Gwilliam');
+insert into account (name) values ('Calypso Meyer');
+
+insert into product (name, price) values ('Plastic Wrap', 71);
+insert into product (name, price) values ('Arizona - Green Tea', 377);
+insert into product (name, price) values ('Wine - Prosecco Valdobienne', 220);
+insert into product (name, price) values ('Sproutsmustard Cress', 771);
+insert into product (name, price) values ('Spinach - Baby', 740);
+
+with
+  account as (
+    select
+      account.id,
+      name,
+      (random()*5)::int orders
+      from account)
+    insert into "order" (account_id)
+select
+  account_id
+  from (
+    select
+      account.id account_id,
+      row_number() over (partition by account.id order by account.name) ordinal
+      from account, generate_series(1, 5)) orders
+       join account on account.id = orders.account_id
+	   and orders.ordinal <= account.orders;
+
+with
+  "order" as (
+    select
+      "order".id,
+      (random()*9 + 1)::int items
+      from "order")
+    insert into order_detail (order_id, product_id, units)
+select
+  order_id,
+  product_id,
+  (random()*9 + 1)::int units
+  from (
+    select
+      "order".id order_id,
+      product.id product_id,
+      row_number() over (partition by "order".id) ordinal
+      from "order", product) user_item
+       join "order" on "order".id = user_item.order_id
+	   and user_item.ordinal <= "order".items;
+
+update "order" set status = ((array['new', 'processing', 'fulfilled'])[floor(random()*3+1)])::status;
+
+insert into region (value, description)
+values
+  ('NORTHEAST', 'New England'),
+  ('MIDWEST', 'Great Lakes'),
+  ('SOUTH', 'Dixie'),
+  ('PLAINS', 'Great Plains'),
+  ('APPALACHIA', 'Pennsylvania and West Virginia'),
+  ('MOUNTAIN', 'Rocky Mountains'),
+  ('NORTHWEST', 'Rainy'),
+  ('WEST', 'California'),
+  ('SOUTHWEST', 'Cacti');
+
+update "order" set region = ((array[
+  'NORTHEAST',
+  'MIDWEST',
+  'SOUTH',
+  'PLAINS',
+  'APPALACHIA',
+  'MOUNTAIN',
+  'NORTHWEST',
+  'WEST',
+  'SOUTHWEST'
+  ])[floor(random()*9+1)])::text;
+
+commit;
+#+end_src
+
+*** Track Tables
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:assets/track_tables.png]]
+
+*** Track Relationships
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:assets/track_relationships.png]]
+
+*** Deep Query
+
+#+begin_src graphql
+  query MyQuery {
+    account(where: {name: {_eq: "Estevan Leeming"}}) {
+      id
+      name
+      orders {
+        region
+        status
+        order_details {
+          units
+          product {
+            name
+            price
+          }
+        }
+      }
+    }
+  }
+#+end_src
+
+*** Recursive Query
+
+#+begin_src graphql
+  query MyQuery {
+    account(where: {name: {_eq: "Estevan Leeming"}}) {
+      id
+      name
+      orders {
+        status
+        region
+        id
+        account {
+          id
+          name
+          orders {
+            id
+            region
+            status
+            account {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+#+end_src
+
+*** Unbounded Query
+
+#+begin_src graphql
+  query MyQuery {
+    account {
+      id
+      name
+    }
+  }
+#+end_src
+
+*** Set API Limits
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/set_api_limits.png]]
+
+*** ~account~ Select Permissions
+
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:assets/account_permissions.png]]
+
+*** ~order~ Select Permissions
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/order_permissions.png]]
+
+*** ~order~ Insert Permissions
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/order_permissions_insert.png]]
+
+*** ~order_detail~ Select Permissions
+
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
+[[file:assets/order_detail_permissions.png]]
+
+*** ~product~ Select Permissions
+
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
+[[file:assets/product_permissions.png]]
+
+*** ~region~ Select Permissions
+
+#+ATTR_HTML: :width 60%
+#+ATTR_HTML: :height 60%
+[[file:assets/region_permissions.png]]
+
+*** Set API Limits
+
+- Global
+  - Depth Limit: 4
+  - Node Limit: 10
+  - Rate Limit (RPM): 10
+  - Timeout (Seconds): 10
+
+*** [[https://hasura.io/docs/latest/security/allow-list/#enable-allow-list][Use Allow Lists]]
+
+- ~HASURA_GRAPHQL_ENABLE_ALLOWLIST~ :: default value is ~false~
+
+- Monitoring >> Allow Lists >> New Operations
+
+*** [[https://hasura.io/docs/latest/security/allow-list/#enable-allow-list][Use Allow Lists]]
+
+#+begin_src graphql
+  query MyAccount {
+    account {
+      name
+      id
+      created_at
+      updated_at
+    }
+  }
+#+end_src
+
+*** [[https://hasura.io/docs/latest/security/allow-list/#enable-allow-list][Use Allow Lists]]
+
+#+begin_src graphql
+  query ProductSearch {
+    product_search(args: {search: "bread"}) {
+      id
+      name
+      price
+    }
+  }
+#+end_src
+
+*** [[https://hasura.io/docs/latest/security/allow-list/#enable-allow-list][Use Allow Lists]]
+
+#+begin_src graphql
+  query MyOrdersSummary {
+    account(limit: 1) {
+      name
+      id
+      created_at
+      updated_at
+      orders {
+        status
+        region
+        created_at
+        id
+        order_details {
+          units
+          product {
+            name
+            price
+          }
+        }
+      }
+    }
+  }
+#+end_src
+
+*** Create REST Endpoints
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+[[file:assets/rest_account.png]]
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/rest_order_summary.png]]
+
+#+REVEAL_HTML: </div>
+
+*** Create REST Endpoints
+
+#+begin_src shell
+  curl \
+      -X GET \
+      -H 'Content-type: application/json' \
+      -H 'x-hasura-role: ${ROLE}' \
+      -H 'x-hasura-user-id: ${USER_ID}' \
+      -H 'x-hasura-admin-secret: ${HASURA_GRAPHQL_ADMIN_SECRET}' \
+      ${HASURA_GRAPHQL_ENDPOINT}
+#+end_src
+
+* Closing Remarks
+
+*** GraphQL Security Orthodoxy
+
+- Disable Console & Schema Introspection.
+- Don't generate your APIs.
+- Obsess over API Limits.
+
+* /Thank You!/
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+@TheRealDventimi
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:assets/profile.jpg]]
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%">
+[[https://tinyurl.com/59n4edpn]]
+#+ATTR_HTML: :width 50%
+#+ATTR_HTML: :height 50%
+[[file:assets/qr.png]]
+#+REVEAL_HTML: </div>
+
+#  LocalWords:  toc controlsLayout controlsTutorial ATTR hasuraprod

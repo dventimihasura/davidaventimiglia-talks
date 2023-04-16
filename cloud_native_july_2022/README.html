@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Write Less Code</title>
+<meta name="author" content="David A. Ventimiglia"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/dist/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="./reveal.js/lib/css/zenburn.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-background="./assets/slide_background.png"><h1 class="title">Write Less Code</h1><p class="subtitle">Cloud Native Data Access</p>
+
+</section>
+
+<section>
+<section id="slide-org36ffc32" data-background="./assets/slide_background.png">
+<h2 id="org36ffc32">Who</h2>
+<p>
+<a href="mailto:davidaventimiglia@hasura.io">davidaventimiglia@hasura.io</a>
+</p>
+
+<blockquote >
+<p>
+"I'm a physicist, data scientist, data engineer, and software
+engineer.  I work for <a href="https://hasura.io/"><b>Hasura</b></a>, a software technology company that
+provides developer-focused tooling products.  And, I believe that the
+best code is the code that you don't have to write."
+</p>
+</blockquote>
+
+</section>
+</section>
+<section>
+<section id="slide-org19f1273" data-background="./assets/slide_background.png">
+<h2 id="org19f1273">What</h2>
+</section>
+<section id="slide-org19f1273-split" data-background="./assets/slide_background.png">
+
+<blockquote >
+<p>
+"From your databases to a unified GraphQL API in just one minute"
+</p>
+</blockquote>
+
+<p class="fragment roll-in">
+Hasura marketing copy
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org9802b5e" data-background="./assets/slide_background.png">
+<h2 id="org9802b5e">What?</h2>
+<div class="outline-text-2" id="text-org9802b5e">
+</div>
+</section>
+<section id="slide-org392cb0b" data-background="./assets/slide_background.png">
+<h3 id="org392cb0b">GraphQL API</h3>
+<div class="column" style="float:left; width:50%">
+
+<ul>
+<li>Query Language</li>
+<li>Schema
+<ul>
+<li>Types
+<ul>
+<li>Fields</li>
+
+</ul></li>
+
+</ul></li>
+<li>Types relate to Types</li>
+<li>Sound familiar?</li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:right; width:50%;">
+
+
+<div id="orga2b4962" class="figure">
+<p><img src="assets/GraphQL.png" alt="GraphQL.png" height="100%" width="100%" />
+</p>
+</div>
+
+</div>
+
+</section>
+<section id="slide-org5785438" data-background="./assets/slide_background.png">
+<h3 id="org5785438">In Just One Minute</h3>
+
+<div id="orgc7766c2" class="figure">
+<p><img src="assets/Hasura_Connections.png" alt="Hasura_Connections.png" height="50%" width="50%" />
+</p>
+</div>
+
+</section>
+<section id="slide-org5785438-split" data-background="./assets/slide_background.png">
+
+
+<div id="org0364880" class="figure">
+<p><img src="assets/what_is_hasura.png" alt="what_is_hasura.png" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org8b5f154" data-background="./assets/slide_background.png">
+<h2 id="org8b5f154">Why?</h2>
+<div class="outline-text-2" id="text-org8b5f154">
+</div>
+</section>
+<section id="slide-orgf4f4297" data-background="./assets/slide_background.png">
+<h3 id="orgf4f4297"><a href="https://en.wikipedia.org/wiki/Client%E2%80%93server_model">Two-Tier</a></h3>
+<ul>
+<li class="fragment roll-in">1986-1996</li>
+<li class="fragment roll-in">Client + Server</li>
+<li class="fragment roll-in">Visual Basic + MSSQL + SQL</li>
+
+</ul>
+
+</section>
+<section id="slide-org0da4707" data-background="./assets/slide_background.png">
+<h3 id="org0da4707"><a href="https://www.ibm.com/cloud/learn/three-tier-architecture">Three-Tier</a></h3>
+<ul>
+<li class="fragment roll-in">1996-1999</li>
+<li class="fragment roll-in">Presentation + Application + Data</li>
+<li class="fragment roll-in">JSPs + EJBs + ORM + Oracle (+ SQL)</li>
+
+</ul>
+
+</section>
+<section id="slide-org41943d0" data-background="./assets/slide_background.png">
+<h3 id="org41943d0"><a href="https://en.wikipedia.org/wiki/Multitier_architecture">N-Tier</a></h3>
+<ul>
+<li class="fragment roll-in">1999-2002</li>
+<li class="fragment roll-in">Client + WAF + Business Logic + Messaging + Loads of Caching + Data</li>
+<li class="fragment roll-in">HTML/Javascript + Nginx + Ruby + Rails + RabbitMQ + Redis + ActiveRecord + MySQL (+ SQL)</li>
+
+</ul>
+
+</section>
+<section id="slide-orgb369057" data-background="./assets/slide_background.png">
+<h3 id="orgb369057"><a href="https://en.wikipedia.org/wiki/Service-oriented_architecture">SOA</a></h3>
+<ul>
+<li class="fragment roll-in">2002-2012</li>
+<li class="fragment roll-in">UI + WSDL + SOAP + Event Bus + POJOs + ORM + Data</li>
+<li class="fragment roll-in">HTML/Javascript + JAX-WS + Java + Spring + Hibernate + Oracle (+ SQL)</li>
+
+</ul>
+
+</section>
+<section id="slide-orga8f81b5" data-background="./assets/slide_background.png">
+<h3 id="orga8f81b5"><a href="https://en.wikipedia.org/wiki/Microservices">Microservices</a></h3>
+<ul>
+<li class="fragment roll-in">2012-???</li>
+<li class="fragment roll-in">UI + REST</li>
+<li class="fragment roll-in">HTML/Javascript/TypeScript/Angular/React + AWS DynamoDB + Python + Flask + API Endpoints + SQLAlchemy + ECS + MySQL (+ SQL)</li>
+
+</ul>
+
+</section>
+<section id="slide-org500d912" data-background="./assets/slide_background.png">
+<h3 id="org500d912"><a href="https://en.wikipedia.org/wiki/Containerization_(computing)">Containerization</a></h3>
+<ul>
+<li class="fragment roll-in">2013-???</li>
+<li class="fragment roll-in">Clients + Containers</li>
+<li class="fragment roll-in">Angular + Docker + AWS ECS/EKS + Linkerd + AWS RDS (+ SQL)</li>
+
+</ul>
+
+</section>
+<section id="slide-orge658516" data-background="./assets/slide_background.png">
+<h3 id="orge658516"><a href="https://en.wikipedia.org/wiki/Serverless_computing">Serverless</a></h3>
+<ul>
+<li class="fragment roll-in">2014-???</li>
+<li class="fragment roll-in">UI + Functions</li>
+<li class="fragment roll-in">SPA / Mobile + API Gateway + AWS Lambda + AWS Aurora (+ SQL)</li>
+
+</ul>
+
+</section>
+<section id="slide-org79ac33c" data-background="./assets/slide_background.png">
+<h3 id="org79ac33c"><a href="https://www.thoughtworks.com/insights/decoder/l/low-code">Low-Code</a></h3>
+<div class="column" style="float:left; width:80%">
+<ul>
+<li class="fragment roll-in">2017-???</li>
+<li class="fragment roll-in">UI + Database</li>
+<li class="fragment roll-in">React / Flutter + Hasura + PostgreSQL + SQL!</li>
+
+</ul>
+</div>
+
+<div class="column" style="float:right; width:20%">
+
+<div id="orgaf2b0a7" class="figure">
+<p><img src="assets/clipart2825061.png" alt="clipart2825061.png" class="fragment roll-in" />
+</p>
+</div>
+</div>
+
+</section>
+<section id="slide-org8cabfe2" data-background="./assets/slide_background.png">
+<h3 id="org8cabfe2"><a href="https://www.thoughtworks.com/insights/podcasts/pragmatism-in-practice/no-code-platforms">No-Code</a></h3>
+<div class="column" style="float:left; width:50%">
+
+<ul>
+<li class="fragment roll-in">2018-???</li>
+<li class="fragment roll-in">UI + Spreadsheet</li>
+<li class="fragment roll-in"><a href="https://www.glideapps.com/">Glide</a> + <a href="https://www.airtable.com/">AirTable</a></li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:right; width:50%">
+
+<div id="org3f2c9ea" class="figure">
+<p><img src="assets/Glide-symbol-white.png" alt="Glide-symbol-white.png" class="fragment roll-in" height="25%" width="25%" />
+</p>
+</div>
+
+<div id="org96139fd" class="figure">
+<p><img src="assets/pngwing.com.png" alt="pngwing.com.png" class="fragment roll-in" height="25%" width="25%" />
+</p>
+</div>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org1c833ad" data-background="./assets/slide_background.png">
+<h2 id="org1c833ad">How</h2>
+</section>
+<section id="slide-org1c833ad-split" data-background="./assets/slide_background.png">
+
+<div class="column" style="float:left; width:75%">
+<blockquote >
+<p>
+"Show me your flowcharts and conceal your tables, and I shall continue
+to be mystified. Show me your tables, and I won't usually need your
+flowcharts; they'll be obvious."
+</p>
+</blockquote>
+<p class="fragment roll-in">
+Fred Brooks in "The Mythical Man-Month" (1975)
+</p>
+</div>
+
+<div class="column" style="float:right; width:25%">
+
+<div id="org7dc0985" class="figure">
+<p><img src="assets/Mythical_man-month_(book_cover).jpg" alt="Mythical_man-month_(book_cover).jpg" class="fragment roll-in" />
+</p>
+</div>
+</div>
+
+</section>
+<section id="slide-org1c833ad-split" data-background="./assets/slide_background.png">
+
+<div class="column" style="float:left; width:75%">
+<blockquote >
+<p>
+"Any sufficiently complicated C or Fortran program contains an ad hoc,
+informally-specified, bug-ridden, slow implementation of half of
+Common Lisp."
+</p>
+</blockquote>
+<p class="fragment roll-in">
+Philip Greenspun in "Greenspun's 10th Rule of Programming" (1993)
+</p>
+</div>
+
+<div class="column" style="float:right; width:25%">
+
+<div id="orge43823a" class="figure">
+<p><img src="assets/greenspun.jpg" alt="greenspun.jpg" class="fragment roll-in" />
+</p>
+</div>
+</div>
+</section>
+<section id="slide-org1c833ad-split" data-background="./assets/slide_background.png">
+
+<div class="column" style="float:left; width:75%">
+<blockquote >
+<p>
+"What are you actually doing when you use a typical web application?"
+</p>
+</blockquote>
+<p class="fragment roll-in">
+Benoit Ranque at Hasura (the day he interviewed me)
+</p>
+</div>
+
+<div class="column" style="float:right; width:25%">
+
+<div id="org67d5f38" class="figure">
+<p><img src="assets/benoit.jpg" alt="benoit.jpg" class="fragment roll-in" />
+</p>
+</div>
+</div>
+</section>
+<section id="slide-org1c833ad-split" data-background="./assets/slide_background.png">
+
+</section>
+<section id="slide-org1c833ad-split" data-background="./assets/slide_background.png">
+
+<div class="column" style="float:left; width:75%">
+<blockquote >
+<p>
+"What are you actually doing when you write a typical program?"
+</p>
+</blockquote>
+<p class="fragment roll-in">
+Me here (now)
+</p>
+</div>
+
+<div class="column" style="float:right; width:25%">
+
+<div id="org6f32c42" class="figure">
+<p><img src="assets/dventimi.jpg" alt="dventimi.jpg" class="fragment roll-in" />
+</p>
+</div>
+</div>
+
+</section>
+<section id="slide-org1c833ad-split" data-background="./assets/slide_background.png">
+
+<div class="column" style="float:left; width:75%">
+<blockquote >
+<p>
+"PL/SQL isn't a <b>real</b> programming language"
+</p>
+</blockquote>
+<p class="fragment roll-in">
+<del>redacted</del> (last week)
+</p>
+</div>
+
+<div class="column" style="float:right; width:25%">
+
+<div id="orgeb65db8" class="figure">
+<p><img src="assets/question_mark_profile.jpg" alt="question_mark_profile.jpg" class="fragment roll-in" />
+</p>
+</div>
+</div>
+
+</section>
+<section id="slide-orgb304f5e" data-background="./assets/slide_background.png">
+<h4 id="orgb304f5e">Typical Data Containers</h4>
+<ul>
+<li class="fragment roll-in">Variables</li>
+<li class="fragment roll-in">Arrays</li>
+<li class="fragment roll-in">Lists</li>
+<li class="fragment roll-in">Maps</li>
+
+</ul>
+
+</section>
+<section id="slide-org3c9a87d" data-background="./assets/slide_background.png">
+<h4 id="org3c9a87d">Typical Data Container</h4>
+<p class="fragment (roll-in)">
+Collections
+</p>
+
+</section>
+<section id="slide-orgee95699" data-background="./assets/slide_background.png">
+<h4 id="orgee95699">Typical Relational Database</h4>
+<div class="column" style="float:left; width:50%">
+
+<ul>
+<li class="fragment roll-in">Efficient Storage</li>
+<li class="fragment roll-in">Huge Volumes</li>
+<li class="fragment roll-in">Fast Access</li>
+<li class="fragment roll-in">Indexes</li>
+<li class="fragment roll-in">Joins</li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:right; width:50%">
+
+<ul>
+<li class="fragment roll-in">Constraints</li>
+<li class="fragment roll-in">Flexible Language</li>
+<li class="fragment roll-in">Access Control</li>
+<li class="fragment roll-in">Unified Data Model</li>
+<li class="fragment roll-in">Concurrency</li>
+
+</ul>
+
+</div>
+
+</section>
+<section id="slide-org695c549" data-background="./assets/slide_background.png">
+<h4 id="org695c549">Typical Business Logic</h4>
+<ul>
+<li class="fragment roll-in">Input Validation</li>
+<li class="fragment roll-in">Data Transformations</li>
+<li class="fragment roll-in">Side Effects</li>
+
+</ul>
+
+</section>
+<section id="slide-org7f9ff69" data-background="./assets/slide_background.png">
+<h4 id="org7f9ff69">Typical Business Logic</h4>
+<p class="fragment (roll-in)">
+State Machine
+</p>
+
+</section>
+<section id="slide-org8f60f7a" data-background="./assets/slide_background.png">
+<h4 id="org8f60f7a">Typical Business Logic</h4>
+<p class="fragment (roll-in)">
+Function Evaluation over data (after finding the data)
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org9958dd2" data-background="./assets/slide_background.png">
+<h2 id="org9958dd2">How?</h2>
+<div class="outline-text-2" id="text-org9958dd2">
+</div>
+</section>
+<section id="slide-org2b52c3f" data-background="./assets/slide_background.png">
+<h4 id="org2b52c3f"><a href="https://www.thoughtworks.com/en-us/radar"><code>ADOPT</code></a> Declarative Programming 🏁</h4>
+<ul>
+<li class="fragment roll-in">Tables, Schema, Views</li>
+<li class="fragment roll-in">Data types (Custom, Enumerated, Range, etc.)</li>
+<li class="fragment roll-in">Permissions</li>
+<li class="fragment roll-in">Constraints (Unique, Foreign, Check)</li>
+<li class="fragment roll-in">Row Security Policies</li>
+<li class="fragment roll-in">Defaults</li>
+<li class="fragment roll-in"><del>Assertions</del> Triggers</li>
+
+</ul>
+
+</section>
+<section id="slide-org7a71dbb" data-background="./assets/slide_background.png">
+<h4 id="org7a71dbb"><a href="https://www.thoughtworks.com/en-us/radar"><code>HOLD</code></a> Procedural Programming 🛑</h4>
+<p class="fragment (roll-in)">
+<del>Stored Procedures</del>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org958235d" data-background="./assets/slide_background.png">
+<h2 id="org958235d">Demo</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org068a78f" data-background="./assets/slide_background.png">
+<h2 id="org068a78f">Hasura Product Features</h2>
+<div class="column" style="float:left; width:50%">
+
+<ul>
+<li class="fragment roll-in">GraphQL API</li>
+<li class="fragment roll-in"><del>Relay API</del></li>
+<li class="fragment roll-in">PostgreSQL</li>
+<li class="fragment roll-in"><del>MS SQL Server</del></li>
+<li class="fragment roll-in"><del>BigQuery</del></li>
+<li class="fragment roll-in"><del>Actions</del></li>
+<li class="fragment roll-in"><del>Remote Schemas</del></li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:left; width:50%">
+
+<ul>
+<li class="fragment roll-in">Event Triggers</li>
+<li class="fragment roll-in"><del>Scheduled Triggers</del></li>
+<li class="fragment roll-in"><del>Authentication</del></li>
+<li class="fragment roll-in">Authorization</li>
+<li class="fragment roll-in"><del>Database Migrations</del></li>
+<li class="fragment roll-in"><del>CLI</del></li>
+
+</ul>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org33f4738" data-background="./assets/slide_background.png">
+<h2 id="org33f4738">Honorable Mentions</h2>
+<div class="row">
+
+<ul>
+<li><a href="https://www.graphile.org/postgraphile/">PostGraphile</a></li>
+<li><a href="https://www.prisma.io/">Prisma</a></li>
+<li><a href="https://github.com/supabase/pg_graphql"><code>pg_graphql</code></a></li>
+<li><a href="https://postgrest.org/en/stable/">PostgREST</a></li>
+
+</ul>
+
+</div>
+
+<div class="row">
+
+
+<div id="orgf92b6b6" class="figure">
+<p><img src="assets/postgraphile.png" alt="postgraphile.png" margin="10px" style="float:left" height="25%" width="25%" />
+</p>
+</div>
+
+
+<div id="orga3f62fe" class="figure">
+<p><img src="assets/prisma_logo-freelogovectors.net_.png" alt="prisma_logo-freelogovectors.net_.png" margin="10px" style="float:left" height="15%" width="15%" />
+</p>
+</div>
+
+
+<div id="org5309217" class="figure">
+<p><img src="assets/supabase.jpg" alt="supabase.jpg" margin="10px" style="float:right" height="15%" width="15%" />
+</p>
+</div>
+
+
+<div id="org692fe54" class="figure">
+<p><img src="assets/postgrest.png" alt="postgrest.png" margin="10px" style="float:right" height="25%" width="25%" />
+</p>
+</div>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgacb1cec" data-background="./assets/slide_background.png">
+<h2 id="orgacb1cec">How to Write Less Code?</h2>
+<ol>
+<li class="fragment roll-in">Grant that SQL isn't a "real" programming language.</li>
+<li class="fragment roll-in">Write your application in SQL anyway.</li>
+<li class="fragment roll-in">Profit! 🤑</li>
+
+</ol>
+
+</section>
+</section>
+<section>
+<section id="slide-org8523d58" data-background="./assets/slide_background.png">
+<h2 id="org8523d58"><i>Thank you!</i></h2>
+<div class="column" style="float:left; width:75%">
+
+<blockquote >
+<p>
+"Simplicity is a great virtue but it requires hard work to achieve it
+and education to appreciate it. And to make matters worse: complexity
+sells better." &#x2013; Edsger W. Dijkstra in "On the nature of Computing
+Science" (1984)
+</p>
+</blockquote>
+
+</div>
+
+<div class="column" style="float:right; width:25%">
+
+
+<div id="orgb37633c" class="figure">
+<p><img src="qr.png" alt="qr.png" />
+</p>
+</div>
+
+
+<div id="orgaf2a5ba" class="figure">
+<p><img src="assets/hasura-logo-primary-light.png" alt="hasura-logo-primary-light.png" />
+</p>
+</div>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgfcc6a10" data-background="./assets/slide_background.png">
+<h2 id="orgfcc6a10">Additional Slides</h2>
+<div class="outline-text-2" id="text-orgfcc6a10">
+</div>
+</section>
+<section id="slide-org744067d" data-background="./assets/slide_background.png">
+<h4 id="org744067d">Objections</h4>
+<dl>
+<dt class="fragment roll-in">Too many stored procedures</dt><dd class="fragment roll-in">don't use stored procedures</dd>
+<dt class="fragment roll-in">SQL isn't a real programming language</dt><dd class="fragment roll-in">so what?</dd>
+<dt class="fragment roll-in">Developers aren't trained to use SQL</dt><dd class="fragment roll-in">so train them</dd>
+<dt class="fragment roll-in">Code is spread all around</dt><dd class="fragment roll-in">it's confined to the database</dd>
+
+</dl>
+
+</section>
+<section id="slide-org35357cc" data-background="./assets/slide_background.png">
+<h4 id="org35357cc">Objections</h4>
+<dl>
+<dt class="fragment roll-in">Can't scale the DB horizontally</dt><dd class="fragment roll-in">sure you can</dd>
+<dt class="fragment roll-in">Can't scale the DB horizontally</dt><dd class="fragment roll-in">code is not the bottleneck</dd>
+<dt class="fragment roll-in">Hard to switch the DB</dt><dd class="fragment roll-in">no it isn't</dd>
+<dt class="fragment roll-in">Hard to switch the DB</dt><dd class="fragment roll-in">it's hard to switch programming languages</dd>
+
+</dl>
+
+</section>
+<section id="slide-orga5b12a2" data-background="./assets/slide_background.png">
+<h4 id="orga5b12a2">Objections</h4>
+<dl>
+<dt class="fragment roll-in">Relational DBs are slow</dt><dd class="fragment roll-in">absolutely not</dd>
+<dt class="fragment roll-in">Stored procedure languages are horrible</dt><dd class="fragment roll-in">no they're not</dd>
+<dt class="fragment roll-in">Stored procedure languages are horrible</dt><dd class="fragment roll-in">use Java, Python, or Javascript</dd>
+<dt class="fragment roll-in">Can't do TDD</dt><dd class="fragment roll-in">sure you can</dd>
+
+</dl>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/dist/reveal.js"></script>
+<script src="./reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight],
+transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+});
+
+</script>
+</body>
+</html>

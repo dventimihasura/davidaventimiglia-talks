@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Hasura Training</title>
+<meta name="author" content="David A. Ventimiglia"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/lib/css/zenburn.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide" data-background="./assets/slide_background.png"><h1 class="title">Hasura Training</h1><p class="subtitle"></p>
+
+</section>
+
+<section>
+<section id="slide-org5142eab" data-background="./assets/slide_background.png">
+<h2 id="org5142eab"></h2>
+
+<div class="figure">
+<p><img src="assets/qr.png" alt="qr.png" height="40%" width="40%" />
+</p>
+<p><span class="figure-number">Figure 1: </span><a href="https://tinyurl.com/mvf2ecee">https://tinyurl.com/mvf2ecee</a></p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orga78ef5c" data-background="./assets/slide_background.png">
+<h2 id="orga78ef5c">What We Will Need</h2>
+<div class="column" style="float:left; width:50%">
+
+
+<div class="figure">
+<p><img src="assets/log_into_hasura_cloud.png" alt="log_into_hasura_cloud.png" height="90%" width="90%" />
+</p>
+</div>
+
+<p>
+<a href="http://cloud.hasura.io">http://cloud.hasura.io</a>
+</p>
+
+</div>
+
+<div class="column" style="float:right; width:40%;">
+
+
+<div class="figure">
+<p><img src="assets/log_into_heroku.png" alt="log_into_heroku.png" height="80%" width="80%" />
+</p>
+</div>
+
+<p>
+<a href="https://www.heroku.com/">https://www.heroku.com/</a>
+</p>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf9823a2" data-background="./assets/slide_background.png">
+<h2 id="orgf9823a2">What We Will Need (Optional)</h2>
+
+<div class="figure">
+<p><img src="assets/app-shot.png" alt="app-shot.png" height="80%" width="80%" />
+</p>
+</div>
+
+<p>
+<a href="https://altairgraphql.dev/">https://altairgraphql.dev/</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org4eed3da" data-background="./assets/slide_background.png">
+<h2 id="org4eed3da">What We Will Cover</h2>
+<ul>
+<li>What is GraphQL?</li>
+<li>What is Hasura?</li>
+<li>How do we use them?</li>
+<li>How do we use them well?</li>
+<li>What are the general principles?</li>
+<li>What are the particular details?</li>
+<li>What is the proper mental model?</li>
+<li>How do we get there?</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org672b88a" data-background="./assets/slide_background.png">
+<h2 id="org672b88a">What is GraphQL?</h2>
+<div class="column" style="float:left; width:50%">
+
+<ul>
+<li>Query Language</li>
+<li>Schema
+<ul>
+<li>Types
+<ul>
+<li>Fields</li>
+
+</ul></li>
+
+</ul></li>
+<li>Types relate to Types</li>
+<li>Sound familiar?</li>
+
+</ul>
+
+</div>
+
+<div class="column" style="float:right; width:50%;">
+
+
+<div class="figure">
+<p><img src="GraphQL.png" alt="GraphQL.png" height="100%" width="100%" />
+</p>
+</div>
+
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org723f3b6" data-background="./assets/slide_background.png">
+<h2 id="org723f3b6">What is Hasura?</h2>
+<ul>
+<li>API Server</li>
+<li>Development Environment</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgc85ba2e" data-background="./assets/slide_background.png">
+<h2 id="orgc85ba2e">How do we use them?</h2>
+<ul>
+<li>Build network applications <i><b>faster</b></i>, more <i><b>reliably</b></i>, and <i><b>cheaper</b></i> with GraphQL.</li>
+<li>Build GraphQL applications <i><b>faster</b></i>, more <i><b>reliably</b></i>, and <i><b>cheaper</b></i> with Hasura.</li>
+<li>Apply the general principles with training from <i><b>Hasura Developer Relations</b></i>.</li>
+<li>Apply the particular details with support from <i><b>Hasura Developer Success</b></i>.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb29203c" data-background="./assets/slide_background.png">
+<h2 id="orgb29203c">How do we use them well?</h2>
+<ul>
+<li>Adopt a principled approach.</li>
+<li>Develop a proper mental model.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org562abcd" data-background="./assets/slide_background.png">
+<h2 id="org562abcd">What are the general principles?</h2>
+<ol>
+<li>Build for <i>humans</i>.</li>
+<li>Build with <i>personas</i>.</li>
+<li>Build <i>in</i> the database.</li>
+<li>Build a <i>data model</i>.</li>
+<li><i>Remember</i> OLTP vs OLAP.</li>
+
+</ol>
+
+</section>
+</section>
+<section>
+<section id="slide-org2e32595" data-background="./assets/slide_background.png">
+<h2 id="org2e32595">What is the proper mental model?</h2>
+<ul>
+<li>Hasura <code>graphql-engine</code> is the API server, is on the data plane, and is on the critical path.</li>
+<li>Hasura <code>console</code> is part of the development environment, is on the control plane, and is off the critical path.</li>
+<li>Hasura <code>CLI</code> is part of the development environment, is on the control plane, and is far off the critical path.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org6ad34a3" data-background="./assets/slide_background.png">
+<h2 id="org6ad34a3">What is the proper mental model?</h2>
+<ul>
+<li>The key <i>functional</i> concerns are: data modeling, API development, security, and integrations.</li>
+<li>The key <i>non-functional</i> concerns are: deployment, caching, monitoring.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org42050c0" data-background="./assets/slide_background.png">
+<h2 id="org42050c0">How do we get there?</h2>
+<ul>
+<li>Track 1: Development</li>
+<li>Track 2: Deployment</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgdbba560" data-background="./assets/slide_background.png">
+<h2 id="orgdbba560">Track 1: Development</h2>
+<ul>
+<li>Setup</li>
+<li>Modeling</li>
+<li>Security</li>
+<li>Actions</li>
+<li>Events</li>
+<li>APIs</li>
+<li>Remote Joins</li>
+<li>Remote Schema</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org6c814dc" data-background="./assets/slide_background.png">
+<h2 id="org6c814dc">Track 2: Deployment</h2>
+<ul>
+<li>Self-Hosted vs Cloud</li>
+<li>Development Environment</li>
+<li>CI/CD</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false,
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }]
+
+});
+
+</script>
+</body>
+</html>
