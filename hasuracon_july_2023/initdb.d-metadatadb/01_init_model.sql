@@ -1,9 +1,7 @@
 -- -*- sql-product: postgres; -*-
 
-create database catalog;
+create database subgraph1;
 
-create database marketplace;
+create database subgraph2;
 
-create database mdm;
-
-create database gateway;
+create database supergraph;
