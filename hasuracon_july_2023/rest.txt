@@ -1,13 +1,14 @@
 # -*- mode: restclient; -*-
 
 # Get the OpenAPI spec for the Catalog REST API directly.
-GET http://localhost:8081
+GET http://localhost:8082
 
 # Get the OpenAPI spec for the Catalog REST API via nginx.
 GET http://localhost:18080
 
 # Get the list of products from the Catalog REST API via nginx.
-GET http://localhost:8081/product?limit=2&offset=1
+GET http://localhost:8081/product
+Range: 0-2
 
 #
 GET http://localhost:8081/product?id=eq.1855300d-ae3a-4905-b2a2-d8636bd1465a

@@ -64,7 +64,6 @@ docker compose up -d
 
 Visit these addresses in a browser to continue the configuration.
 
-  * http://localhost:8081 :: PostgREST port
   * http://localhost:8082 :: OpenAPI endpoint for **catalogdb** data
   * http://localhost:8083 :: Swagger UI for **catalogdb** data (for reference purposes)
   * http://localhost:8084 :: Hasura subgraph1 for **marketplacedb** data using direct DB connection
