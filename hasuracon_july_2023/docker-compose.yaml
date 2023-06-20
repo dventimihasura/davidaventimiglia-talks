@@ -95,7 +95,7 @@ services:
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log, action-handler-log
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_LOG_LEVEL: info
-      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgres@metadatadb:5432/subgraph1
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgres@metadatadb:5432/subgraph2
   supergraph:
     image: hasura/graphql-engine:v2.26.0
     depends_on:
