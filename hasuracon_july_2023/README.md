@@ -47,11 +47,12 @@ as needed.
 cat > .env << EOL
 CATALOGDB_PORT=5434
 MARKETPLACEDB_PORT=5435
-RESTAPI_PORT=8081
-SUBGRAPH1_PORT=8083
-SUBGRAPH2_PORT=8084
-SUPERGRAPH_PORT=8085
-SWAGGER_PORT=8082
+POSTGREST_PORT=8081
+RESTAPI_PORT=8082
+SUBGRAPH1_PORT=8084
+SUBGRAPH2_PORT=8085
+SUPERGRAPH_PORT=8086
+SWAGGER_PORT=8083
 EOL
 ```
 
@@ -63,19 +64,20 @@ docker compose up -d
 
 Visit these addresses in a browser to continue the configuration.
 
-  * http://localhost:8081 :: OpenAPI endpoint for **catalogdb** data
-  * http://localhost:8082 :: Swagger UI for **catalogdb** data (for reference purposes)
-  * http://localhost:8083 :: Hasura subgraph1 for **marketplacedb** data using direct DB connection
-  * http://localhost:8084 :: Hasura subgraph2 for **catalogdb** data using Remote Actions
-  * http://localhost:8085 :: Hasura supergraph composing **subgraph1** and **subgraph2**
+  * http://localhost:8081 :: PostgREST port
+  * http://localhost:8082 :: OpenAPI endpoint for **catalogdb** data
+  * http://localhost:8083 :: Swagger UI for **catalogdb** data (for reference purposes)
+  * http://localhost:8084 :: Hasura subgraph1 for **marketplacedb** data using direct DB connection
+  * http://localhost:8085 :: Hasura subgraph2 for **catalogdb** data using Remote Actions
+  * http://localhost:8086 :: Hasura supergraph composing **subgraph1** and **subgraph2**
   
 On Linux this can be down from the command line in the following way.
 
 ```bash
-xdg-open http://localhost:8081 # OpenAPI endpoint
-xdg-open http://localhost:8082 # Swagger UI
-xdg-open http://localhost:8083 # Hasura subgraph1 (marketplace)
-xdg-open http://localhost:8084 # Hasura subgraph2 (catalog)
-xdg-open http://localhost:8085 # Hasura supergraph
+xdg-open http://localhost:8082 # OpenAPI endpoint
+xdg-open http://localhost:8083 # Swagger UI
+xdg-open http://localhost:8084 # Hasura subgraph1 (marketplace)
+xdg-open http://localhost:8085 # Hasura subgraph2 (catalog)
+xdg-open http://localhost:8086 # Hasura supergraph
 ```
 

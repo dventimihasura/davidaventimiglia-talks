@@ -22,3 +22,4 @@ scratch.*
 hasuratraining_september_2022/README.html
 hasuratraining_march_2023/README.org
 *.env
+.env
