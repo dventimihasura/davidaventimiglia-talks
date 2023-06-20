@@ -70,7 +70,7 @@ Visit these addresses in a browser to continue the configuration.
   * http://localhost:8085 :: Hasura subgraph2 for **catalogdb** data using Remote Actions
   * http://localhost:8086 :: Hasura supergraph composing **subgraph1** and **subgraph2**
   
-On Linux this can be down from the command line in the following way.
+On Linux this can be done from the command line in the following way.
 
 ```bash
 xdg-open http://localhost:8082 # OpenAPI endpoint
@@ -80,3 +80,12 @@ xdg-open http://localhost:8085 # Hasura subgraph2 (catalog)
 xdg-open http://localhost:8086 # Hasura supergraph
 ```
 
+On Mac this can be done from the command line in a slightly different way.
+
+```bash
+open http://localhost:8082 # OpenAPI endpoint
+open http://localhost:8083 # Swagger UI
+open http://localhost:8084 # Hasura subgraph1 (marketplace)
+open http://localhost:8085 # Hasura subgraph2 (catalog)
+open http://localhost:8086 # Hasura supergraph
+```
