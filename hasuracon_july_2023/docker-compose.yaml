@@ -48,6 +48,7 @@ services:
       PGRST_DB_SCHEMAS: api
       PGRST_DB_URI: postgres://postgres:postgres@catalogdb/postgres
       PGRST_OPENAPI_SERVER_PROXY_URI: http://127.0.0.1:3000
+      PGRST_SERVER_TRACE_HEADER: Range
   restapi:
     image: fabiocicerchia/nginx-lua:1.25.0-ubuntu22.04-amd64
     depends_on:
