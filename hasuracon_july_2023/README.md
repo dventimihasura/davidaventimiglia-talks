@@ -73,19 +73,19 @@ Visit these addresses in a browser to continue the configuration.
 On Linux this can be done from the command line in the following way.
 
 ```bash
-xdg-open http://localhost:8082 # OpenAPI endpoint
-xdg-open http://localhost:8083 # Swagger UI
-xdg-open http://localhost:8084 # Hasura subgraph1 (marketplace)
-xdg-open http://localhost:8085 # Hasura subgraph2 (catalog)
-xdg-open http://localhost:8086 # Hasura supergraph
+xdg-open http://localhost:8081 # OpenAPI endpoint
+xdg-open http://localhost:8082 # Swagger UI
+xdg-open http://localhost:8083 # Hasura subgraph1 (marketplace)
+xdg-open http://localhost:8084 # Hasura subgraph2 (catalog)
+xdg-open http://localhost:8085 # Hasura supergraph
 ```
 
 On Mac this can be done from the command line in a slightly different way.
 
 ```bash
-open http://localhost:8082 # OpenAPI endpoint
-open http://localhost:8083 # Swagger UI
-open http://localhost:8084 # Hasura subgraph1 (marketplace)
-open http://localhost:8085 # Hasura subgraph2 (catalog)
-open http://localhost:8086 # Hasura supergraph
+open http://localhost:8081 # OpenAPI endpoint
+open http://localhost:8082 # Swagger UI
+open http://localhost:8083 # Hasura subgraph1 (marketplace)
+open http://localhost:8084 # Hasura subgraph2 (catalog)
+open http://localhost:8085 # Hasura supergraph
 ```
