@@ -14,7 +14,7 @@
 #+PANDOC_VARIABLES: background-image:./assets/slide_background.png
 
 * 
-#+CAPTION: https://tinyurl.com/22fvnrbu
+#+CAPTION: https://github.com/dventimiglia/davidaventimiglia-talks/tree/master/cloud_native_july_2022
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:assets/qr.png]]
