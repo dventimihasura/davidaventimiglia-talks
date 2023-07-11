@@ -7,8 +7,8 @@ GET http://localhost:8082
 GET http://localhost:18080
 
 # Get the list of products from the Catalog REST API via nginx.
-GET http://localhost:8081/product
-Range: 0-2
+GET http://localhost:8082/product
+Range: 1-2
 
 #
 GET http://localhost:8081/product?id=eq.1855300d-ae3a-4905-b2a2-d8636bd1465a
