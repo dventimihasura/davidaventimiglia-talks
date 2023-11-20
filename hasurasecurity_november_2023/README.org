@@ -1,3 +1,78 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:t title:t toc:nil todo:t |:t
+#+title: Hasura Security
+#+date: <2023-11-20 Mon>
+#+author: David A. Ventimiglia
+#+email: davidaventimiglia@hasura.io
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.1 (Org mode 9.6.6)
+#+cite_export:
+
+# #+options: reveal_center:nil reveal_control:nil
+# #+options: reveal_global_footer:nil reveal_global_header:nil
+# #+options: reveal_height:nil reveal_history:nil reveal_keyboard:nil
+# #+options: reveal_overview:nil reveal_progress:nil
+# #+options: reveal_rolling_links:nil reveal_single_file:nil
+# #+options: reveal_slide_number:nil reveal_width:nil
+# #+reveal_margin:
+# #+reveal_min_scale:
+# #+reveal_max_scale:
+#+reveal_root: https://cdn.jsdelivr.net/npm/reveal.js
+# #+reveal_trans:
+# #+reveal_speed:
+# #+reveal_theme: moon
+# #+reveal_extra_css:
+# #+reveal_extra_js:
+# #+reveal_extra_initial_js:
+# #+reveal_hlevel:
+# #+reveal_title_slide:
+# #+reveal_title_slide_background:
+# #+reveal_title_slide_background_size:
+# #+reveal_title_slide_background_position:
+# #+reveal_title_slide_background_repeat:
+# #+reveal_title_slide_background_transition:
+# #+reveal_title_slide_background_opacity:
+# #+reveal_title_slide_state:
+# #+reveal_toc_slide_background:
+# #+reveal_toc_slide_background_size:
+# #+reveal_toc_slide_background_position:
+# #+reveal_toc_slide_background_repeat:
+# #+reveal_toc_slide_background_transition:
+# #+reveal_toc_slide_background_opacity:
+# #+reveal_default_slide_background:
+# #+reveal_default_slide_background_size:
+# #+reveal_default_slide_background_position:
+# #+reveal_default_slide_background_repeat:
+# #+reveal_default_slide_background_opacity:
+# #+reveal_default_slide_background_transition:
+# #+reveal_mathjax_url: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+# #+reveal_preamble:
+# #+reveal_head_preamble:
+# #+reveal_postamble:
+# #+reveal_prologue:
+# #+reveal_epilogue:
+# #+reveal_multiplex_id:
+# #+reveal_multiplex_secret:
+# #+reveal_multiplex_url:
+# #+reveal_multiplex_socketio_url:
+# #+reveal_slide_header:
+# #+reveal_slide_footer:
+# #+reveal_plugins:
+# #+reveal_external_plugins:
+# #+reveal_default_frag_style:
+# #+reveal_extra_script:
+# #+reveal_extra_script_src:
+# #+reveal_extra_script_before_src:
+# #+reveal_init_options:
+# #+reveal_highlight_css: %r/plugin/highlight/zenburn.css
+# #+reveal_reveal_js_version:
+
+
 * Hasura
 ** TODO SHOULD review the Hasura [[https://hasura.io/docs/latest/deployment/production-checklist/][Production Checklist]].
 - good but incomplete
@@ -26,7 +101,7 @@
 - but necessitates some workarounds for CI/CD
 *** TODO SHOULD audit [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#enabled-log-types][Enabled Log Types]].
 - be wary of leaking information in side-channels (APMs)
-*** TODO MAY enable [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#enable-allow-list][Allow Lists]].  See:  [[*MAY configure \[\[https://hasura.io/docs/latest/security/allow-list/\]\[Allow Lists\]\]. See: \[\[*MAY enable \\\[\\\[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#enable-allow-list\\\]\\\[Allow Lists\\\]\\\].\]\[MAY enable Allow Lists.\]\]][MAY configure Allow Lists.]]
+*** TODO MAY enable [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#enable-allow-list][Allow Lists]].
 - Hasura says "should" and that's prudent, but not always possible for public or semi-public APIs
 - have to be enabled /and then/ configured
 *** TODO MAY enable an [[https://hasura.io/docs/latest/auth/authentication/unauthenticated-access/#enabling-unauthenticated-access-with-a-unauthorized-role][Unauthorized Role]].
@@ -57,13 +132,14 @@
 - [[https://hasura.io/docs/latest/security/api-limits/#rate-limits][Rate Limits]] :: requests per interval, requires Redis
 - [[https://hasura.io/docs/latest/security/api-limits/#depth-limits][Depth Limits]] :: limits depth and /especially/ recursion
 - [[https://hasura.io/docs/latest/security/api-limits/#node-limits][Node Limits]] :: limits "internal modes" only, quite limited
+**** TODO SHOULD review how [[https://hasura.io/docs/latest/security/api-limits/#manage-api-limits][API Limits]] work.
 - [[https://hasura.io/docs/latest/security/api-limits/#time-limits][Time Limits]] :: be wary of database interaction
 - [[https://hasura.io/docs/latest/security/api-limits/#batch-limits][Batch Limits]] :: pretty straightforward
 *** Schema Introspection
 **** TODO MAY [[https://hasura.io/docs/latest/security/disable-graphql-introspection/][Disable Schema Introspection]] by role.
 - consider [[https://github.com/anvilco/spectaql][generating documentation]] in CI/CD instead
 ** Allow List Tab
-*** TODO MAY configure [[https://hasura.io/docs/latest/security/allow-list/][Allow Lists]].  See: [[*MAY enable \[\[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#enable-allow-list\]\[Allow Lists\]\].][MAY enable Allow Lists.]]
+*** TODO MAY configure [[https://hasura.io/docs/latest/security/allow-list/][Allow Lists]].
 - have to be enabled first
 *** TODO MAY use [[https://hasura.io/docs/latest/security/allow-list/#role-based-allow-list][Role-based Allow Lists]].
 - be proactive in thinking about roles and security
@@ -82,9 +158,9 @@
 *** TODO SHOULD set a connection limit [[https://www.postgresql.org/docs/current/sql-alteruser.html][configuration parameter]] for roles.
 *** TODO MAY set a connection limit on the [[https://www.postgresql.org/docs/current/sql-createdatabase.html][database]].
 *** TODO SHOULD set [[https://www.postgresql.org/docs/current/runtime-config-client.html#RUNTIME-CONFIG-CLIENT-STATEMENT][statement timeouts]].
-- [[statement_timeout][~statement_timeout~]] no-brainer
-- [[https://www.postgresql.org/docs/current/runtime-config-client.html#GUC-IDLE-SESSION-TIMEOUT][~idle_session_timeout~]] test its interaction with Hasura's connection pool
-- [[https://www.postgresql.org/docs/current/runtime-config-client.html#GUC-IDLE-IN-TRANSACTION-SESSION-TIMEOUT][~idle_in_transaction_session_timeout~]] almost a no-brainer
+- ~statement_timeout~ no-brainer
+- ~idle_session_timeout~ test its interaction with Hasura's connection pool
+- ~idle_in_transaction_session_timeout~ almost a no-brainer
 *** TODO MAY use [[https://www.postgresql.org/docs/current/ddl-rowsecurity.html][Row Security Polices]]
 - see [[https://github.com/dventimihasura/hasura-projects/tree/master/row-security-policies-1][demo]]
 - unfortunately only works with mutations, but not queries or subscriptions
