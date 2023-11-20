@@ -120,6 +120,8 @@
 ** Authorization
 *** TODO MAY use [[https://hasura.io/docs/latest/auth/authorization/permissions/][Permisson Rules]] with custom checks.
 - heavily dependent on use case and problem domain
+*** TODO MAY model complex Permissions systems.
+- see [[https://github.com/dventimihasura/hasura-projects/tree/master/permissions-builder-1][demo]]
 *** TODO SHOULD use [[https://hasura.io/docs/latest/auth/authorization/permissions/row-fetch-limit/][Row Limits]].
 - important backstop
 ** Security Tab
