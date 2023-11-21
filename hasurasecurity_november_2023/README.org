@@ -12,66 +12,7 @@
 #+exclude_tags: noexport
 #+creator: Emacs 29.1 (Org mode 9.6.6)
 #+cite_export:
-
-# #+options: reveal_center:nil reveal_control:nil
-# #+options: reveal_global_footer:nil reveal_global_header:nil
-# #+options: reveal_height:nil reveal_history:nil reveal_keyboard:nil
-# #+options: reveal_overview:nil reveal_progress:nil
-# #+options: reveal_rolling_links:nil reveal_single_file:nil
-# #+options: reveal_slide_number:nil reveal_width:nil
-# #+reveal_margin:
-# #+reveal_min_scale:
-# #+reveal_max_scale:
 #+reveal_root: https://cdn.jsdelivr.net/npm/reveal.js
-# #+reveal_trans:
-# #+reveal_speed:
-# #+reveal_theme: moon
-# #+reveal_extra_css:
-# #+reveal_extra_js:
-# #+reveal_extra_initial_js:
-# #+reveal_hlevel:
-# #+reveal_title_slide:
-# #+reveal_title_slide_background:
-# #+reveal_title_slide_background_size:
-# #+reveal_title_slide_background_position:
-# #+reveal_title_slide_background_repeat:
-# #+reveal_title_slide_background_transition:
-# #+reveal_title_slide_background_opacity:
-# #+reveal_title_slide_state:
-# #+reveal_toc_slide_background:
-# #+reveal_toc_slide_background_size:
-# #+reveal_toc_slide_background_position:
-# #+reveal_toc_slide_background_repeat:
-# #+reveal_toc_slide_background_transition:
-# #+reveal_toc_slide_background_opacity:
-# #+reveal_default_slide_background:
-# #+reveal_default_slide_background_size:
-# #+reveal_default_slide_background_position:
-# #+reveal_default_slide_background_repeat:
-# #+reveal_default_slide_background_opacity:
-# #+reveal_default_slide_background_transition:
-# #+reveal_mathjax_url: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML
-# #+reveal_preamble:
-# #+reveal_head_preamble:
-# #+reveal_postamble:
-# #+reveal_prologue:
-# #+reveal_epilogue:
-# #+reveal_multiplex_id:
-# #+reveal_multiplex_secret:
-# #+reveal_multiplex_url:
-# #+reveal_multiplex_socketio_url:
-# #+reveal_slide_header:
-# #+reveal_slide_footer:
-# #+reveal_plugins:
-# #+reveal_external_plugins:
-# #+reveal_default_frag_style:
-# #+reveal_extra_script:
-# #+reveal_extra_script_src:
-# #+reveal_extra_script_before_src:
-# #+reveal_init_options:
-# #+reveal_highlight_css: %r/plugin/highlight/zenburn.css
-# #+reveal_reveal_js_version:
-
 
 * Hasura
 ** TODO SHOULD review the Hasura [[https://hasura.io/docs/latest/deployment/production-checklist/][Production Checklist]].
