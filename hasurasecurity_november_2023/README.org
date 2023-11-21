@@ -36,10 +36,11 @@
 - on prod there's just never a good reason to allow Console access
 - unfortunately, can't be disabled on Cloud
 - disabling the metadata API is even better
+- but that warrants attention to CI/CD
 *** TODO SHOULD use a separate [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#metadata-database-url][Metadata Database]].
 - separation of concerns, bulkheading, etc.
 *** TODO SHOULD enable /ONLY/ the [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#enabled-apis][graphql API]].
-- but necessitates some workarounds for CI/CD
+- but that warrants attention to CI/CD
 *** TODO SHOULD audit [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#enabled-log-types][Enabled Log Types]].
 - be wary of leaking information in side-channels (APMs)
 *** TODO MAY enable [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#enable-allow-list][Allow Lists]].
@@ -75,7 +76,6 @@
 - [[https://hasura.io/docs/latest/security/api-limits/#rate-limits][Rate Limits]] :: requests per interval, requires Redis
 - [[https://hasura.io/docs/latest/security/api-limits/#depth-limits][Depth Limits]] :: limits depth and /especially/ recursion
 - [[https://hasura.io/docs/latest/security/api-limits/#node-limits][Node Limits]] :: limits "internal modes" only, quite limited
-**** TODO SHOULD review how [[https://hasura.io/docs/latest/security/api-limits/#manage-api-limits][API Limits]] work.
 - [[https://hasura.io/docs/latest/security/api-limits/#time-limits][Time Limits]] :: be wary of database interaction
 - [[https://hasura.io/docs/latest/security/api-limits/#batch-limits][Batch Limits]] :: pretty straightforward
 *** Schema Introspection
@@ -96,7 +96,7 @@
 * Database
 ** PostgreSQL
 *** TODO MAY hide core tables behind views and functions.
-*** TODO MAY use multipe roles and Role-Based Access Controls (RBAC).
+*** TODO MAY use multiple roles and Role-Based Access Controls (RBAC).
 - See [[*Dynamic Routing for Databases][Dynamic Routing for Databases]]
 *** TODO SHOULD set a connection limit [[https://www.postgresql.org/docs/current/sql-alteruser.html][configuration parameter]] for roles.
 *** TODO MAY set a connection limit on the [[https://www.postgresql.org/docs/current/sql-createdatabase.html][database]].
@@ -104,6 +104,7 @@
 - ~statement_timeout~ no-brainer
 - ~idle_session_timeout~ test its interaction with Hasura's connection pool
 - ~idle_in_transaction_session_timeout~ almost a no-brainer
+- ~transaction_timeout~ coming in PG17
 *** TODO MAY use [[https://www.postgresql.org/docs/current/ddl-rowsecurity.html][Row Security Polices]]
 - see [[https://github.com/dventimihasura/hasura-projects/tree/master/row-security-policies-1][demo]]
 - unfortunately only works with mutations, but not queries or subscriptions
