@@ -1,0 +1,3259 @@
+schema
+  @link(url: "https://specs.apollo.dev/link/v1.0")
+  @link(url: "https://specs.apollo.dev/join/v0.3", for: EXECUTION)
+{
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+directive @join__enumValue(graph: join__Graph!) repeatable on ENUM_VALUE
+
+directive @join__field(graph: join__Graph, requires: join__FieldSet, provides: join__FieldSet, type: String, external: Boolean, override: String, usedOverridden: Boolean) repeatable on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @join__graph(name: String!, url: String!) on ENUM_VALUE
+
+directive @join__implements(graph: join__Graph!, interface: String!) repeatable on OBJECT | INTERFACE
+
+directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boolean! = false, resolvable: Boolean! = true, isInterfaceObject: Boolean! = false) repeatable on OBJECT | INTERFACE | UNION | ENUM | INPUT_OBJECT | SCALAR
+
+directive @join__unionMember(graph: join__Graph!, member: String!) repeatable on UNION
+
+directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
+
+"""
+columns and relationships of "account"
+"""
+type account
+  @join__type(graph: PRODUCTS, key: "id")
+{
+  created_at: timestamptz!
+  id: uuid!
+  name: String!
+  updated_at: timestamptz!
+
+  """An aggregate relationship"""
+  orders_aggregate(
+    """filter the rows returned"""
+    where: order_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_select_column!]
+  ): order_aggregate!
+
+  """An array relationship"""
+  orders(
+    """filter the rows returned"""
+    where: order_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_select_column!]
+  ): [order!]!
+}
+
+"""
+aggregated selection of "account"
+"""
+type account_aggregate
+  @join__type(graph: PRODUCTS)
+{
+  aggregate: account_aggregate_fields
+  nodes: [account!]!
+}
+
+"""
+aggregate fields of "account"
+"""
+type account_aggregate_fields
+  @join__type(graph: PRODUCTS)
+{
+  count(distinct: Boolean, columns: [account_select_column!]): Int!
+  max: account_max_fields
+  min: account_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "account". All fields are combined with a logical 'AND'.
+"""
+input account_bool_exp
+  @join__type(graph: PRODUCTS)
+{
+  _and: [account_bool_exp!]
+  _not: account_bool_exp
+  _or: [account_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  name: String_comparison_exp
+  orders: order_bool_exp
+  orders_aggregate: order_aggregate_bool_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "account"
+"""
+enum account_constraint
+  @join__type(graph: PRODUCTS)
+{
+  """
+  unique or primary key constraint on columns "id"
+  """
+  account_pkey @join__enumValue(graph: PRODUCTS)
+}
+
+"""
+input type for inserting data into table "account"
+"""
+input account_insert_input
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  name: String
+  orders: order_arr_rel_insert_input
+  updated_at: timestamptz
+}
+
+"""aggregate max on columns"""
+type account_max_fields
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  name: String
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type account_min_fields
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  name: String
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "account"
+"""
+type account_mutation_response
+  @join__type(graph: PRODUCTS)
+{
+  """data from the rows affected by the mutation"""
+  returning: [account!]!
+
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+}
+
+"""
+input type for inserting object relation for remote table "account"
+"""
+input account_obj_rel_insert_input
+  @join__type(graph: PRODUCTS)
+{
+  data: account_insert_input!
+
+  """upsert condition"""
+  on_conflict: account_on_conflict
+}
+
+"""
+on_conflict condition type for table "account"
+"""
+input account_on_conflict
+  @join__type(graph: PRODUCTS)
+{
+  constraint: account_constraint!
+  update_columns: [account_update_column!]! = []
+  where: account_bool_exp
+}
+
+"""Ordering options when selecting data from "account"."""
+input account_order_by
+  @join__type(graph: PRODUCTS)
+{
+  created_at: order_by
+  id: order_by
+  name: order_by
+  orders_aggregate: order_aggregate_order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: account"""
+input account_pk_columns_input
+  @join__type(graph: PRODUCTS)
+{
+  id: uuid!
+}
+
+"""
+select columns of table "account"
+"""
+enum account_select_column
+  @join__type(graph: PRODUCTS)
+{
+  """column name"""
+  created_at @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  name @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  updated_at @join__enumValue(graph: PRODUCTS)
+}
+
+"""
+input type for updating data in table "account"
+"""
+input account_set_input
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  name: String
+  updated_at: timestamptz
+}
+
+"""
+Streaming cursor of the table "account"
+"""
+input account_stream_cursor_input
+  @join__type(graph: PRODUCTS)
+{
+  """Stream column input with initial value"""
+  initial_value: account_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input account_stream_cursor_value_input
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  name: String
+  updated_at: timestamptz
+}
+
+"""
+columns and relationships of "account_summary"
+"""
+type account_summary
+  @join__type(graph: PRODUCTS)
+{
+  id: uuid
+  sum: bigint
+}
+
+"""
+aggregated selection of "account_summary"
+"""
+type account_summary_aggregate
+  @join__type(graph: PRODUCTS)
+{
+  aggregate: account_summary_aggregate_fields
+  nodes: [account_summary!]!
+}
+
+"""
+aggregate fields of "account_summary"
+"""
+type account_summary_aggregate_fields
+  @join__type(graph: PRODUCTS)
+{
+  avg: account_summary_avg_fields
+  count(distinct: Boolean, columns: [account_summary_select_column!]): Int!
+  max: account_summary_max_fields
+  min: account_summary_min_fields
+  stddev: account_summary_stddev_fields
+  stddev_pop: account_summary_stddev_pop_fields
+  stddev_samp: account_summary_stddev_samp_fields
+  sum: account_summary_sum_fields
+  var_pop: account_summary_var_pop_fields
+  var_samp: account_summary_var_samp_fields
+  variance: account_summary_variance_fields
+}
+
+"""aggregate avg on columns"""
+type account_summary_avg_fields
+  @join__type(graph: PRODUCTS)
+{
+  sum: Float
+}
+
+"""
+Boolean expression to filter rows from the table "account_summary". All fields are combined with a logical 'AND'.
+"""
+input account_summary_bool_exp
+  @join__type(graph: PRODUCTS)
+{
+  _and: [account_summary_bool_exp!]
+  _not: account_summary_bool_exp
+  _or: [account_summary_bool_exp!]
+  id: uuid_comparison_exp
+  sum: bigint_comparison_exp
+}
+
+"""aggregate max on columns"""
+type account_summary_max_fields
+  @join__type(graph: PRODUCTS)
+{
+  id: uuid
+  sum: bigint
+}
+
+"""aggregate min on columns"""
+type account_summary_min_fields
+  @join__type(graph: PRODUCTS)
+{
+  id: uuid
+  sum: bigint
+}
+
+"""Ordering options when selecting data from "account_summary"."""
+input account_summary_order_by
+  @join__type(graph: PRODUCTS)
+{
+  id: order_by
+  sum: order_by
+}
+
+"""
+select columns of table "account_summary"
+"""
+enum account_summary_select_column
+  @join__type(graph: PRODUCTS)
+{
+  """column name"""
+  id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  sum @join__enumValue(graph: PRODUCTS)
+}
+
+"""aggregate stddev on columns"""
+type account_summary_stddev_fields
+  @join__type(graph: PRODUCTS)
+{
+  sum: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type account_summary_stddev_pop_fields
+  @join__type(graph: PRODUCTS)
+{
+  sum: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type account_summary_stddev_samp_fields
+  @join__type(graph: PRODUCTS)
+{
+  sum: Float
+}
+
+"""
+Streaming cursor of the table "account_summary"
+"""
+input account_summary_stream_cursor_input
+  @join__type(graph: PRODUCTS)
+{
+  """Stream column input with initial value"""
+  initial_value: account_summary_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input account_summary_stream_cursor_value_input
+  @join__type(graph: PRODUCTS)
+{
+  id: uuid
+  sum: bigint
+}
+
+"""aggregate sum on columns"""
+type account_summary_sum_fields
+  @join__type(graph: PRODUCTS)
+{
+  sum: bigint
+}
+
+"""aggregate var_pop on columns"""
+type account_summary_var_pop_fields
+  @join__type(graph: PRODUCTS)
+{
+  sum: Float
+}
+
+"""aggregate var_samp on columns"""
+type account_summary_var_samp_fields
+  @join__type(graph: PRODUCTS)
+{
+  sum: Float
+}
+
+"""aggregate variance on columns"""
+type account_summary_variance_fields
+  @join__type(graph: PRODUCTS)
+{
+  sum: Float
+}
+
+"""
+update columns of table "account"
+"""
+enum account_update_column
+  @join__type(graph: PRODUCTS)
+{
+  """column name"""
+  created_at @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  name @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  updated_at @join__enumValue(graph: PRODUCTS)
+}
+
+input account_updates
+  @join__type(graph: PRODUCTS)
+{
+  """filter the rows which have to be updated"""
+  where: account_bool_exp!
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: account_set_input
+}
+
+scalar bigint
+  @join__type(graph: PRODUCTS)
+
+"""
+Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'.
+"""
+input bigint_comparison_exp
+  @join__type(graph: PRODUCTS)
+{
+  _eq: bigint
+  _gt: bigint
+  _gte: bigint
+  _in: [bigint!]
+  _is_null: Boolean
+  _lt: bigint
+  _lte: bigint
+  _neq: bigint
+  _nin: [bigint!]
+}
+
+"""ordering argument of a cursor"""
+enum cursor_ordering
+  @join__type(graph: PRODUCTS)
+{
+  """ascending ordering of the cursor"""
+  ASC @join__enumValue(graph: PRODUCTS)
+
+  """descending ordering of the cursor"""
+  DESC @join__enumValue(graph: PRODUCTS)
+}
+
+"""
+Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
+"""
+input Int_comparison_exp
+  @join__type(graph: PRODUCTS)
+{
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+scalar join__FieldSet
+
+enum join__Graph {
+  PRODUCTS @join__graph(name: "products", url: "http://localhost:8081/v1/graphql")
+}
+
+scalar link__Import
+
+enum link__Purpose {
+  """
+  `SECURITY` features provide metadata necessary to securely resolve fields.
+  """
+  SECURITY
+
+  """
+  `EXECUTION` features provide metadata necessary for operation execution.
+  """
+  EXECUTION
+}
+
+"""mutation root"""
+type Mutation
+  @join__type(graph: PRODUCTS)
+{
+  """
+  delete data from the table: "account"
+  """
+  delete_account(
+    """filter the rows which have to be deleted"""
+    where: account_bool_exp!
+  ): account_mutation_response
+
+  """
+  delete data from the table: "order"
+  """
+  delete_order(
+    """filter the rows which have to be deleted"""
+    where: order_bool_exp!
+  ): order_mutation_response
+
+  """
+  delete data from the table: "order_detail"
+  """
+  delete_order_detail(
+    """filter the rows which have to be deleted"""
+    where: order_detail_bool_exp!
+  ): order_detail_mutation_response
+
+  """
+  delete data from the table: "product"
+  """
+  delete_product(
+    """filter the rows which have to be deleted"""
+    where: product_bool_exp!
+  ): product_mutation_response
+
+  """
+  delete data from the table: "region"
+  """
+  delete_region(
+    """filter the rows which have to be deleted"""
+    where: region_bool_exp!
+  ): region_mutation_response
+
+  """
+  delete single row from the table: "account"
+  """
+  delete_account_by_pk(id: uuid!): account
+
+  """
+  delete single row from the table: "order"
+  """
+  delete_order_by_pk(id: uuid!): order
+
+  """
+  delete single row from the table: "order_detail"
+  """
+  delete_order_detail_by_pk(id: uuid!): order_detail
+
+  """
+  delete single row from the table: "product"
+  """
+  delete_product_by_pk(id: uuid!): product
+
+  """
+  delete single row from the table: "region"
+  """
+  delete_region_by_pk(value: String!): region
+
+  """
+  insert a single row into the table: "account"
+  """
+  insert_account_one(
+    """upsert condition"""
+    on_conflict: account_on_conflict
+
+    """the row to be inserted"""
+    object: account_insert_input!
+  ): account
+
+  """
+  insert a single row into the table: "order"
+  """
+  insert_order_one(
+    """upsert condition"""
+    on_conflict: order_on_conflict
+
+    """the row to be inserted"""
+    object: order_insert_input!
+  ): order
+
+  """
+  insert a single row into the table: "order_detail"
+  """
+  insert_order_detail_one(
+    """upsert condition"""
+    on_conflict: order_detail_on_conflict
+
+    """the row to be inserted"""
+    object: order_detail_insert_input!
+  ): order_detail
+
+  """
+  insert a single row into the table: "product"
+  """
+  insert_product_one(
+    """upsert condition"""
+    on_conflict: product_on_conflict
+
+    """the row to be inserted"""
+    object: product_insert_input!
+  ): product
+
+  """
+  insert a single row into the table: "region"
+  """
+  insert_region_one(
+    """upsert condition"""
+    on_conflict: region_on_conflict
+
+    """the row to be inserted"""
+    object: region_insert_input!
+  ): region
+
+  """
+  insert data into the table: "account"
+  """
+  insert_account(
+    """upsert condition"""
+    on_conflict: account_on_conflict
+
+    """the rows to be inserted"""
+    objects: [account_insert_input!]!
+  ): account_mutation_response
+
+  """
+  insert data into the table: "order"
+  """
+  insert_order(
+    """upsert condition"""
+    on_conflict: order_on_conflict
+
+    """the rows to be inserted"""
+    objects: [order_insert_input!]!
+  ): order_mutation_response
+
+  """
+  insert data into the table: "order_detail"
+  """
+  insert_order_detail(
+    """upsert condition"""
+    on_conflict: order_detail_on_conflict
+
+    """the rows to be inserted"""
+    objects: [order_detail_insert_input!]!
+  ): order_detail_mutation_response
+
+  """
+  insert data into the table: "product"
+  """
+  insert_product(
+    """upsert condition"""
+    on_conflict: product_on_conflict
+
+    """the rows to be inserted"""
+    objects: [product_insert_input!]!
+  ): product_mutation_response
+
+  """
+  insert data into the table: "region"
+  """
+  insert_region(
+    """upsert condition"""
+    on_conflict: region_on_conflict
+
+    """the rows to be inserted"""
+    objects: [region_insert_input!]!
+  ): region_mutation_response
+
+  """
+  update data of the table: "account"
+  """
+  update_account(
+    """sets the columns of the filtered rows to the given values"""
+    _set: account_set_input
+
+    """filter the rows which have to be updated"""
+    where: account_bool_exp!
+  ): account_mutation_response
+
+  """
+  update data of the table: "order"
+  """
+  update_order(
+    """sets the columns of the filtered rows to the given values"""
+    _set: order_set_input
+
+    """filter the rows which have to be updated"""
+    where: order_bool_exp!
+  ): order_mutation_response
+
+  """
+  update data of the table: "order_detail"
+  """
+  update_order_detail(
+    """sets the columns of the filtered rows to the given values"""
+    _set: order_detail_set_input
+
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: order_detail_inc_input
+
+    """filter the rows which have to be updated"""
+    where: order_detail_bool_exp!
+  ): order_detail_mutation_response
+
+  """
+  update data of the table: "product"
+  """
+  update_product(
+    """sets the columns of the filtered rows to the given values"""
+    _set: product_set_input
+
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: product_inc_input
+
+    """filter the rows which have to be updated"""
+    where: product_bool_exp!
+  ): product_mutation_response
+
+  """
+  update data of the table: "region"
+  """
+  update_region(
+    """sets the columns of the filtered rows to the given values"""
+    _set: region_set_input
+
+    """filter the rows which have to be updated"""
+    where: region_bool_exp!
+  ): region_mutation_response
+
+  """
+  update multiples rows of table: "account"
+  """
+  update_account_many(
+    """updates to execute, in order"""
+    updates: [account_updates!]!
+  ): [account_mutation_response]
+
+  """
+  update multiples rows of table: "order"
+  """
+  update_order_many(
+    """updates to execute, in order"""
+    updates: [order_updates!]!
+  ): [order_mutation_response]
+
+  """
+  update multiples rows of table: "order_detail"
+  """
+  update_order_detail_many(
+    """updates to execute, in order"""
+    updates: [order_detail_updates!]!
+  ): [order_detail_mutation_response]
+
+  """
+  update multiples rows of table: "product"
+  """
+  update_product_many(
+    """updates to execute, in order"""
+    updates: [product_updates!]!
+  ): [product_mutation_response]
+
+  """
+  update multiples rows of table: "region"
+  """
+  update_region_many(
+    """updates to execute, in order"""
+    updates: [region_updates!]!
+  ): [region_mutation_response]
+
+  """
+  update single row of the table: "account"
+  """
+  update_account_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: account_set_input
+    pk_columns: account_pk_columns_input!
+  ): account
+
+  """
+  update single row of the table: "order"
+  """
+  update_order_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: order_set_input
+    pk_columns: order_pk_columns_input!
+  ): order
+
+  """
+  update single row of the table: "order_detail"
+  """
+  update_order_detail_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: order_detail_set_input
+
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: order_detail_inc_input
+    pk_columns: order_detail_pk_columns_input!
+  ): order_detail
+
+  """
+  update single row of the table: "product"
+  """
+  update_product_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: product_set_input
+
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: product_inc_input
+    pk_columns: product_pk_columns_input!
+  ): product
+
+  """
+  update single row of the table: "region"
+  """
+  update_region_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: region_set_input
+    pk_columns: region_pk_columns_input!
+  ): region
+}
+
+"""
+columns and relationships of "order"
+"""
+type order
+  @join__type(graph: PRODUCTS, key: "id")
+{
+  account_id: uuid!
+  created_at: timestamptz!
+  id: uuid!
+  region: String
+  status: status
+  updated_at: timestamptz!
+
+  """An aggregate relationship"""
+  order_details_aggregate(
+    """filter the rows returned"""
+    where: order_detail_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_detail_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_detail_select_column!]
+  ): order_detail_aggregate!
+
+  """An array relationship"""
+  order_details(
+    """filter the rows returned"""
+    where: order_detail_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_detail_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_detail_select_column!]
+  ): [order_detail!]!
+
+  """An object relationship"""
+  account: account!
+
+  """An object relationship"""
+  regionByRegion: region
+}
+
+"""
+aggregated selection of "order"
+"""
+type order_aggregate
+  @join__type(graph: PRODUCTS)
+{
+  aggregate: order_aggregate_fields
+  nodes: [order!]!
+}
+
+input order_aggregate_bool_exp
+  @join__type(graph: PRODUCTS)
+{
+  count: order_aggregate_bool_exp_count
+}
+
+input order_aggregate_bool_exp_count
+  @join__type(graph: PRODUCTS)
+{
+  arguments: [order_select_column!]
+  distinct: Boolean
+  filter: order_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "order"
+"""
+type order_aggregate_fields
+  @join__type(graph: PRODUCTS)
+{
+  count(distinct: Boolean, columns: [order_select_column!]): Int!
+  max: order_max_fields
+  min: order_min_fields
+}
+
+"""
+order by aggregate values of table "order"
+"""
+input order_aggregate_order_by
+  @join__type(graph: PRODUCTS)
+{
+  count: order_by
+  max: order_max_order_by
+  min: order_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "order"
+"""
+input order_arr_rel_insert_input
+  @join__type(graph: PRODUCTS)
+{
+  data: [order_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: order_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "order". All fields are combined with a logical 'AND'.
+"""
+input order_bool_exp
+  @join__type(graph: PRODUCTS)
+{
+  _and: [order_bool_exp!]
+  _not: order_bool_exp
+  _or: [order_bool_exp!]
+  account: account_bool_exp
+  account_id: uuid_comparison_exp
+  created_at: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  order_details: order_detail_bool_exp
+  order_details_aggregate: order_detail_aggregate_bool_exp
+  region: String_comparison_exp
+  regionByRegion: region_bool_exp
+  status: status_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""column ordering options"""
+enum order_by
+  @join__type(graph: PRODUCTS)
+{
+  """in ascending order, nulls first"""
+  asc_nulls_first @join__enumValue(graph: PRODUCTS)
+
+  """in ascending order, nulls last"""
+  asc @join__enumValue(graph: PRODUCTS)
+
+  """in ascending order, nulls last"""
+  asc_nulls_last @join__enumValue(graph: PRODUCTS)
+
+  """in descending order, nulls first"""
+  desc @join__enumValue(graph: PRODUCTS)
+
+  """in descending order, nulls first"""
+  desc_nulls_first @join__enumValue(graph: PRODUCTS)
+
+  """in descending order, nulls last"""
+  desc_nulls_last @join__enumValue(graph: PRODUCTS)
+}
+
+"""
+unique or primary key constraints on table "order"
+"""
+enum order_constraint
+  @join__type(graph: PRODUCTS)
+{
+  """
+  unique or primary key constraint on columns "id"
+  """
+  order_pkey @join__enumValue(graph: PRODUCTS)
+}
+
+"""
+columns and relationships of "order_detail"
+"""
+type order_detail
+  @join__type(graph: PRODUCTS, key: "id")
+{
+  created_at: timestamptz!
+  id: uuid!
+  order_id: uuid!
+  product_id: uuid!
+  units: Int!
+  updated_at: timestamptz!
+
+  """An object relationship"""
+  order: order!
+
+  """An object relationship"""
+  product: product!
+}
+
+"""
+aggregated selection of "order_detail"
+"""
+type order_detail_aggregate
+  @join__type(graph: PRODUCTS)
+{
+  aggregate: order_detail_aggregate_fields
+  nodes: [order_detail!]!
+}
+
+input order_detail_aggregate_bool_exp
+  @join__type(graph: PRODUCTS)
+{
+  count: order_detail_aggregate_bool_exp_count
+}
+
+input order_detail_aggregate_bool_exp_count
+  @join__type(graph: PRODUCTS)
+{
+  arguments: [order_detail_select_column!]
+  distinct: Boolean
+  filter: order_detail_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "order_detail"
+"""
+type order_detail_aggregate_fields
+  @join__type(graph: PRODUCTS)
+{
+  avg: order_detail_avg_fields
+  count(distinct: Boolean, columns: [order_detail_select_column!]): Int!
+  max: order_detail_max_fields
+  min: order_detail_min_fields
+  stddev: order_detail_stddev_fields
+  stddev_pop: order_detail_stddev_pop_fields
+  stddev_samp: order_detail_stddev_samp_fields
+  sum: order_detail_sum_fields
+  var_pop: order_detail_var_pop_fields
+  var_samp: order_detail_var_samp_fields
+  variance: order_detail_variance_fields
+}
+
+"""
+order by aggregate values of table "order_detail"
+"""
+input order_detail_aggregate_order_by
+  @join__type(graph: PRODUCTS)
+{
+  avg: order_detail_avg_order_by
+  count: order_by
+  max: order_detail_max_order_by
+  min: order_detail_min_order_by
+  stddev: order_detail_stddev_order_by
+  stddev_pop: order_detail_stddev_pop_order_by
+  stddev_samp: order_detail_stddev_samp_order_by
+  sum: order_detail_sum_order_by
+  var_pop: order_detail_var_pop_order_by
+  var_samp: order_detail_var_samp_order_by
+  variance: order_detail_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "order_detail"
+"""
+input order_detail_arr_rel_insert_input
+  @join__type(graph: PRODUCTS)
+{
+  data: [order_detail_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: order_detail_on_conflict
+}
+
+"""aggregate avg on columns"""
+type order_detail_avg_fields
+  @join__type(graph: PRODUCTS)
+{
+  units: Float
+}
+
+"""
+order by avg() on columns of table "order_detail"
+"""
+input order_detail_avg_order_by
+  @join__type(graph: PRODUCTS)
+{
+  units: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "order_detail". All fields are combined with a logical 'AND'.
+"""
+input order_detail_bool_exp
+  @join__type(graph: PRODUCTS)
+{
+  _and: [order_detail_bool_exp!]
+  _not: order_detail_bool_exp
+  _or: [order_detail_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  order: order_bool_exp
+  order_id: uuid_comparison_exp
+  product: product_bool_exp
+  product_id: uuid_comparison_exp
+  units: Int_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "order_detail"
+"""
+enum order_detail_constraint
+  @join__type(graph: PRODUCTS)
+{
+  """
+  unique or primary key constraint on columns "id"
+  """
+  order_detail_pkey @join__enumValue(graph: PRODUCTS)
+}
+
+"""
+input type for incrementing numeric columns in table "order_detail"
+"""
+input order_detail_inc_input
+  @join__type(graph: PRODUCTS)
+{
+  units: Int
+}
+
+"""
+input type for inserting data into table "order_detail"
+"""
+input order_detail_insert_input
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  order: order_obj_rel_insert_input
+  order_id: uuid
+  product: product_obj_rel_insert_input
+  product_id: uuid
+  units: Int
+  updated_at: timestamptz
+}
+
+"""aggregate max on columns"""
+type order_detail_max_fields
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  order_id: uuid
+  product_id: uuid
+  units: Int
+  updated_at: timestamptz
+}
+
+"""
+order by max() on columns of table "order_detail"
+"""
+input order_detail_max_order_by
+  @join__type(graph: PRODUCTS)
+{
+  created_at: order_by
+  id: order_by
+  order_id: order_by
+  product_id: order_by
+  units: order_by
+  updated_at: order_by
+}
+
+"""aggregate min on columns"""
+type order_detail_min_fields
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  order_id: uuid
+  product_id: uuid
+  units: Int
+  updated_at: timestamptz
+}
+
+"""
+order by min() on columns of table "order_detail"
+"""
+input order_detail_min_order_by
+  @join__type(graph: PRODUCTS)
+{
+  created_at: order_by
+  id: order_by
+  order_id: order_by
+  product_id: order_by
+  units: order_by
+  updated_at: order_by
+}
+
+"""
+response of any mutation on the table "order_detail"
+"""
+type order_detail_mutation_response
+  @join__type(graph: PRODUCTS)
+{
+  """data from the rows affected by the mutation"""
+  returning: [order_detail!]!
+
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+}
+
+"""
+on_conflict condition type for table "order_detail"
+"""
+input order_detail_on_conflict
+  @join__type(graph: PRODUCTS)
+{
+  constraint: order_detail_constraint!
+  update_columns: [order_detail_update_column!]! = []
+  where: order_detail_bool_exp
+}
+
+"""Ordering options when selecting data from "order_detail"."""
+input order_detail_order_by
+  @join__type(graph: PRODUCTS)
+{
+  created_at: order_by
+  id: order_by
+  order: order_order_by
+  order_id: order_by
+  product: product_order_by
+  product_id: order_by
+  units: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: order_detail"""
+input order_detail_pk_columns_input
+  @join__type(graph: PRODUCTS)
+{
+  id: uuid!
+}
+
+"""
+select columns of table "order_detail"
+"""
+enum order_detail_select_column
+  @join__type(graph: PRODUCTS)
+{
+  """column name"""
+  created_at @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  order_id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  product_id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  units @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  updated_at @join__enumValue(graph: PRODUCTS)
+}
+
+"""
+input type for updating data in table "order_detail"
+"""
+input order_detail_set_input
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  order_id: uuid
+  product_id: uuid
+  units: Int
+  updated_at: timestamptz
+}
+
+"""aggregate stddev on columns"""
+type order_detail_stddev_fields
+  @join__type(graph: PRODUCTS)
+{
+  units: Float
+}
+
+"""
+order by stddev() on columns of table "order_detail"
+"""
+input order_detail_stddev_order_by
+  @join__type(graph: PRODUCTS)
+{
+  units: order_by
+}
+
+"""aggregate stddev_pop on columns"""
+type order_detail_stddev_pop_fields
+  @join__type(graph: PRODUCTS)
+{
+  units: Float
+}
+
+"""
+order by stddev_pop() on columns of table "order_detail"
+"""
+input order_detail_stddev_pop_order_by
+  @join__type(graph: PRODUCTS)
+{
+  units: order_by
+}
+
+"""aggregate stddev_samp on columns"""
+type order_detail_stddev_samp_fields
+  @join__type(graph: PRODUCTS)
+{
+  units: Float
+}
+
+"""
+order by stddev_samp() on columns of table "order_detail"
+"""
+input order_detail_stddev_samp_order_by
+  @join__type(graph: PRODUCTS)
+{
+  units: order_by
+}
+
+"""
+Streaming cursor of the table "order_detail"
+"""
+input order_detail_stream_cursor_input
+  @join__type(graph: PRODUCTS)
+{
+  """Stream column input with initial value"""
+  initial_value: order_detail_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input order_detail_stream_cursor_value_input
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  order_id: uuid
+  product_id: uuid
+  units: Int
+  updated_at: timestamptz
+}
+
+"""aggregate sum on columns"""
+type order_detail_sum_fields
+  @join__type(graph: PRODUCTS)
+{
+  units: Int
+}
+
+"""
+order by sum() on columns of table "order_detail"
+"""
+input order_detail_sum_order_by
+  @join__type(graph: PRODUCTS)
+{
+  units: order_by
+}
+
+"""
+update columns of table "order_detail"
+"""
+enum order_detail_update_column
+  @join__type(graph: PRODUCTS)
+{
+  """column name"""
+  created_at @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  order_id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  product_id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  units @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  updated_at @join__enumValue(graph: PRODUCTS)
+}
+
+input order_detail_updates
+  @join__type(graph: PRODUCTS)
+{
+  """filter the rows which have to be updated"""
+  where: order_detail_bool_exp!
+
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: order_detail_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: order_detail_set_input
+}
+
+"""aggregate var_pop on columns"""
+type order_detail_var_pop_fields
+  @join__type(graph: PRODUCTS)
+{
+  units: Float
+}
+
+"""
+order by var_pop() on columns of table "order_detail"
+"""
+input order_detail_var_pop_order_by
+  @join__type(graph: PRODUCTS)
+{
+  units: order_by
+}
+
+"""aggregate var_samp on columns"""
+type order_detail_var_samp_fields
+  @join__type(graph: PRODUCTS)
+{
+  units: Float
+}
+
+"""
+order by var_samp() on columns of table "order_detail"
+"""
+input order_detail_var_samp_order_by
+  @join__type(graph: PRODUCTS)
+{
+  units: order_by
+}
+
+"""aggregate variance on columns"""
+type order_detail_variance_fields
+  @join__type(graph: PRODUCTS)
+{
+  units: Float
+}
+
+"""
+order by variance() on columns of table "order_detail"
+"""
+input order_detail_variance_order_by
+  @join__type(graph: PRODUCTS)
+{
+  units: order_by
+}
+
+"""
+input type for inserting data into table "order"
+"""
+input order_insert_input
+  @join__type(graph: PRODUCTS)
+{
+  account: account_obj_rel_insert_input
+  account_id: uuid
+  created_at: timestamptz
+  id: uuid
+  order_details: order_detail_arr_rel_insert_input
+  region: String
+  regionByRegion: region_obj_rel_insert_input
+  status: status
+  updated_at: timestamptz
+}
+
+"""aggregate max on columns"""
+type order_max_fields
+  @join__type(graph: PRODUCTS)
+{
+  account_id: uuid
+  created_at: timestamptz
+  id: uuid
+  region: String
+  status: status
+  updated_at: timestamptz
+}
+
+"""
+order by max() on columns of table "order"
+"""
+input order_max_order_by
+  @join__type(graph: PRODUCTS)
+{
+  account_id: order_by
+  created_at: order_by
+  id: order_by
+  region: order_by
+  status: order_by
+  updated_at: order_by
+}
+
+"""aggregate min on columns"""
+type order_min_fields
+  @join__type(graph: PRODUCTS)
+{
+  account_id: uuid
+  created_at: timestamptz
+  id: uuid
+  region: String
+  status: status
+  updated_at: timestamptz
+}
+
+"""
+order by min() on columns of table "order"
+"""
+input order_min_order_by
+  @join__type(graph: PRODUCTS)
+{
+  account_id: order_by
+  created_at: order_by
+  id: order_by
+  region: order_by
+  status: order_by
+  updated_at: order_by
+}
+
+"""
+response of any mutation on the table "order"
+"""
+type order_mutation_response
+  @join__type(graph: PRODUCTS)
+{
+  """data from the rows affected by the mutation"""
+  returning: [order!]!
+
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+}
+
+"""
+input type for inserting object relation for remote table "order"
+"""
+input order_obj_rel_insert_input
+  @join__type(graph: PRODUCTS)
+{
+  data: order_insert_input!
+
+  """upsert condition"""
+  on_conflict: order_on_conflict
+}
+
+"""
+on_conflict condition type for table "order"
+"""
+input order_on_conflict
+  @join__type(graph: PRODUCTS)
+{
+  constraint: order_constraint!
+  update_columns: [order_update_column!]! = []
+  where: order_bool_exp
+}
+
+"""Ordering options when selecting data from "order"."""
+input order_order_by
+  @join__type(graph: PRODUCTS)
+{
+  account: account_order_by
+  account_id: order_by
+  created_at: order_by
+  id: order_by
+  order_details_aggregate: order_detail_aggregate_order_by
+  region: order_by
+  regionByRegion: region_order_by
+  status: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: order"""
+input order_pk_columns_input
+  @join__type(graph: PRODUCTS)
+{
+  id: uuid!
+}
+
+"""
+select columns of table "order"
+"""
+enum order_select_column
+  @join__type(graph: PRODUCTS)
+{
+  """column name"""
+  account_id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  created_at @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  region @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  status @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  updated_at @join__enumValue(graph: PRODUCTS)
+}
+
+"""
+input type for updating data in table "order"
+"""
+input order_set_input
+  @join__type(graph: PRODUCTS)
+{
+  account_id: uuid
+  created_at: timestamptz
+  id: uuid
+  region: String
+  status: status
+  updated_at: timestamptz
+}
+
+"""
+Streaming cursor of the table "order"
+"""
+input order_stream_cursor_input
+  @join__type(graph: PRODUCTS)
+{
+  """Stream column input with initial value"""
+  initial_value: order_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input order_stream_cursor_value_input
+  @join__type(graph: PRODUCTS)
+{
+  account_id: uuid
+  created_at: timestamptz
+  id: uuid
+  region: String
+  status: status
+  updated_at: timestamptz
+}
+
+"""
+update columns of table "order"
+"""
+enum order_update_column
+  @join__type(graph: PRODUCTS)
+{
+  """column name"""
+  account_id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  created_at @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  region @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  status @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  updated_at @join__enumValue(graph: PRODUCTS)
+}
+
+input order_updates
+  @join__type(graph: PRODUCTS)
+{
+  """filter the rows which have to be updated"""
+  where: order_bool_exp!
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: order_set_input
+}
+
+"""
+columns and relationships of "product"
+"""
+type product
+  @join__type(graph: PRODUCTS, key: "id")
+{
+  created_at: timestamptz!
+  id: uuid!
+  name: String!
+  price: Int!
+  updated_at: timestamptz!
+
+  """An aggregate relationship"""
+  order_details_aggregate(
+    """filter the rows returned"""
+    where: order_detail_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_detail_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_detail_select_column!]
+  ): order_detail_aggregate!
+
+  """An array relationship"""
+  order_details(
+    """filter the rows returned"""
+    where: order_detail_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_detail_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_detail_select_column!]
+  ): [order_detail!]!
+}
+
+"""
+aggregated selection of "product"
+"""
+type product_aggregate
+  @join__type(graph: PRODUCTS)
+{
+  aggregate: product_aggregate_fields
+  nodes: [product!]!
+}
+
+"""
+aggregate fields of "product"
+"""
+type product_aggregate_fields
+  @join__type(graph: PRODUCTS)
+{
+  avg: product_avg_fields
+  count(distinct: Boolean, columns: [product_select_column!]): Int!
+  max: product_max_fields
+  min: product_min_fields
+  stddev: product_stddev_fields
+  stddev_pop: product_stddev_pop_fields
+  stddev_samp: product_stddev_samp_fields
+  sum: product_sum_fields
+  var_pop: product_var_pop_fields
+  var_samp: product_var_samp_fields
+  variance: product_variance_fields
+}
+
+"""aggregate avg on columns"""
+type product_avg_fields
+  @join__type(graph: PRODUCTS)
+{
+  price: Float
+}
+
+"""
+Boolean expression to filter rows from the table "product". All fields are combined with a logical 'AND'.
+"""
+input product_bool_exp
+  @join__type(graph: PRODUCTS)
+{
+  _and: [product_bool_exp!]
+  _not: product_bool_exp
+  _or: [product_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  name: String_comparison_exp
+  order_details: order_detail_bool_exp
+  order_details_aggregate: order_detail_aggregate_bool_exp
+  price: Int_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "product"
+"""
+enum product_constraint
+  @join__type(graph: PRODUCTS)
+{
+  """
+  unique or primary key constraint on columns "id"
+  """
+  product_pkey @join__enumValue(graph: PRODUCTS)
+}
+
+"""
+input type for incrementing numeric columns in table "product"
+"""
+input product_inc_input
+  @join__type(graph: PRODUCTS)
+{
+  price: Int
+}
+
+"""
+input type for inserting data into table "product"
+"""
+input product_insert_input
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  name: String
+  order_details: order_detail_arr_rel_insert_input
+  price: Int
+  updated_at: timestamptz
+}
+
+"""aggregate max on columns"""
+type product_max_fields
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  name: String
+  price: Int
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type product_min_fields
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  name: String
+  price: Int
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "product"
+"""
+type product_mutation_response
+  @join__type(graph: PRODUCTS)
+{
+  """data from the rows affected by the mutation"""
+  returning: [product!]!
+
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+}
+
+"""
+input type for inserting object relation for remote table "product"
+"""
+input product_obj_rel_insert_input
+  @join__type(graph: PRODUCTS)
+{
+  data: product_insert_input!
+
+  """upsert condition"""
+  on_conflict: product_on_conflict
+}
+
+"""
+on_conflict condition type for table "product"
+"""
+input product_on_conflict
+  @join__type(graph: PRODUCTS)
+{
+  constraint: product_constraint!
+  update_columns: [product_update_column!]! = []
+  where: product_bool_exp
+}
+
+"""Ordering options when selecting data from "product"."""
+input product_order_by
+  @join__type(graph: PRODUCTS)
+{
+  created_at: order_by
+  id: order_by
+  name: order_by
+  order_details_aggregate: order_detail_aggregate_order_by
+  price: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: product"""
+input product_pk_columns_input
+  @join__type(graph: PRODUCTS)
+{
+  id: uuid!
+}
+
+input product_search_args
+  @join__type(graph: PRODUCTS)
+{
+  search: String
+}
+
+input product_search_slow_args
+  @join__type(graph: PRODUCTS)
+{
+  search: String
+  wait: Float
+}
+
+"""
+select columns of table "product"
+"""
+enum product_select_column
+  @join__type(graph: PRODUCTS)
+{
+  """column name"""
+  created_at @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  name @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  price @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  updated_at @join__enumValue(graph: PRODUCTS)
+}
+
+"""
+input type for updating data in table "product"
+"""
+input product_set_input
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  name: String
+  price: Int
+  updated_at: timestamptz
+}
+
+"""aggregate stddev on columns"""
+type product_stddev_fields
+  @join__type(graph: PRODUCTS)
+{
+  price: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type product_stddev_pop_fields
+  @join__type(graph: PRODUCTS)
+{
+  price: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type product_stddev_samp_fields
+  @join__type(graph: PRODUCTS)
+{
+  price: Float
+}
+
+"""
+Streaming cursor of the table "product"
+"""
+input product_stream_cursor_input
+  @join__type(graph: PRODUCTS)
+{
+  """Stream column input with initial value"""
+  initial_value: product_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input product_stream_cursor_value_input
+  @join__type(graph: PRODUCTS)
+{
+  created_at: timestamptz
+  id: uuid
+  name: String
+  price: Int
+  updated_at: timestamptz
+}
+
+"""aggregate sum on columns"""
+type product_sum_fields
+  @join__type(graph: PRODUCTS)
+{
+  price: Int
+}
+
+"""
+update columns of table "product"
+"""
+enum product_update_column
+  @join__type(graph: PRODUCTS)
+{
+  """column name"""
+  created_at @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  id @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  name @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  price @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  updated_at @join__enumValue(graph: PRODUCTS)
+}
+
+input product_updates
+  @join__type(graph: PRODUCTS)
+{
+  """filter the rows which have to be updated"""
+  where: product_bool_exp!
+
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: product_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: product_set_input
+}
+
+"""aggregate var_pop on columns"""
+type product_var_pop_fields
+  @join__type(graph: PRODUCTS)
+{
+  price: Float
+}
+
+"""aggregate var_samp on columns"""
+type product_var_samp_fields
+  @join__type(graph: PRODUCTS)
+{
+  price: Float
+}
+
+"""aggregate variance on columns"""
+type product_variance_fields
+  @join__type(graph: PRODUCTS)
+{
+  price: Float
+}
+
+type Query
+  @join__type(graph: PRODUCTS)
+{
+  """
+  execute function "product_search" and query aggregates on result of table type "product"
+  """
+  product_search_aggregate(
+    """
+    input parameters for function "product_search_aggregate"
+    """
+    args: product_search_args!
+
+    """filter the rows returned"""
+    where: product_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [product_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [product_select_column!]
+  ): product_aggregate!
+
+  """
+  execute function "product_search" which returns "product"
+  """
+  product_search(
+    """
+    input parameters for function "product_search"
+    """
+    args: product_search_args!
+
+    """filter the rows returned"""
+    where: product_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [product_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [product_select_column!]
+  ): [product!]!
+
+  """
+  execute function "product_search_slow" and query aggregates on result of table type "product"
+  """
+  product_search_slow_aggregate(
+    """
+    input parameters for function "product_search_slow_aggregate"
+    """
+    args: product_search_slow_args!
+
+    """filter the rows returned"""
+    where: product_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [product_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [product_select_column!]
+  ): product_aggregate!
+
+  """
+  execute function "product_search_slow" which returns "product"
+  """
+  product_search_slow(
+    """
+    input parameters for function "product_search_slow"
+    """
+    args: product_search_slow_args!
+
+    """filter the rows returned"""
+    where: product_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [product_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [product_select_column!]
+  ): [product!]!
+
+  """
+  fetch aggregated fields from the table: "account"
+  """
+  account_aggregate(
+    """filter the rows returned"""
+    where: account_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [account_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [account_select_column!]
+  ): account_aggregate!
+
+  """
+  fetch aggregated fields from the table: "account_summary"
+  """
+  account_summary_aggregate(
+    """filter the rows returned"""
+    where: account_summary_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [account_summary_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [account_summary_select_column!]
+  ): account_summary_aggregate!
+
+  """
+  fetch aggregated fields from the table: "order"
+  """
+  order_aggregate(
+    """filter the rows returned"""
+    where: order_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_select_column!]
+  ): order_aggregate!
+
+  """
+  fetch aggregated fields from the table: "order_detail"
+  """
+  order_detail_aggregate(
+    """filter the rows returned"""
+    where: order_detail_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_detail_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_detail_select_column!]
+  ): order_detail_aggregate!
+
+  """
+  fetch aggregated fields from the table: "product"
+  """
+  product_aggregate(
+    """filter the rows returned"""
+    where: product_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [product_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [product_select_column!]
+  ): product_aggregate!
+
+  """
+  fetch aggregated fields from the table: "region"
+  """
+  region_aggregate(
+    """filter the rows returned"""
+    where: region_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [region_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [region_select_column!]
+  ): region_aggregate!
+
+  """
+  fetch data from the table: "account"
+  """
+  account(
+    """filter the rows returned"""
+    where: account_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [account_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [account_select_column!]
+  ): [account!]!
+
+  """fetch data from the table: "account" using primary key columns"""
+  account_by_pk(id: uuid!): account
+
+  """
+  fetch data from the table: "account_summary"
+  """
+  account_summary(
+    """filter the rows returned"""
+    where: account_summary_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [account_summary_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [account_summary_select_column!]
+  ): [account_summary!]!
+
+  """
+  fetch data from the table: "order"
+  """
+  order(
+    """filter the rows returned"""
+    where: order_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_select_column!]
+  ): [order!]!
+
+  """fetch data from the table: "order" using primary key columns"""
+  order_by_pk(id: uuid!): order
+
+  """
+  fetch data from the table: "order_detail"
+  """
+  order_detail(
+    """filter the rows returned"""
+    where: order_detail_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_detail_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_detail_select_column!]
+  ): [order_detail!]!
+
+  """fetch data from the table: "order_detail" using primary key columns"""
+  order_detail_by_pk(id: uuid!): order_detail
+
+  """
+  fetch data from the table: "product"
+  """
+  product(
+    """filter the rows returned"""
+    where: product_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [product_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [product_select_column!]
+  ): [product!]!
+
+  """fetch data from the table: "product" using primary key columns"""
+  product_by_pk(id: uuid!): product
+
+  """
+  fetch data from the table: "region"
+  """
+  region(
+    """filter the rows returned"""
+    where: region_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [region_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [region_select_column!]
+  ): [region!]!
+
+  """fetch data from the table: "region" using primary key columns"""
+  region_by_pk(value: String!): region
+}
+
+"""
+columns and relationships of "region"
+"""
+type region
+  @join__type(graph: PRODUCTS, key: "value")
+{
+  description: String
+  value: String!
+
+  """An aggregate relationship"""
+  orders_aggregate(
+    """filter the rows returned"""
+    where: order_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_select_column!]
+  ): order_aggregate!
+
+  """An array relationship"""
+  orders(
+    """filter the rows returned"""
+    where: order_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_select_column!]
+  ): [order!]!
+}
+
+"""
+aggregated selection of "region"
+"""
+type region_aggregate
+  @join__type(graph: PRODUCTS)
+{
+  aggregate: region_aggregate_fields
+  nodes: [region!]!
+}
+
+"""
+aggregate fields of "region"
+"""
+type region_aggregate_fields
+  @join__type(graph: PRODUCTS)
+{
+  count(distinct: Boolean, columns: [region_select_column!]): Int!
+  max: region_max_fields
+  min: region_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "region". All fields are combined with a logical 'AND'.
+"""
+input region_bool_exp
+  @join__type(graph: PRODUCTS)
+{
+  _and: [region_bool_exp!]
+  _not: region_bool_exp
+  _or: [region_bool_exp!]
+  description: String_comparison_exp
+  orders: order_bool_exp
+  orders_aggregate: order_aggregate_bool_exp
+  value: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "region"
+"""
+enum region_constraint
+  @join__type(graph: PRODUCTS)
+{
+  """
+  unique or primary key constraint on columns "value"
+  """
+  region_pkey @join__enumValue(graph: PRODUCTS)
+}
+
+"""
+input type for inserting data into table "region"
+"""
+input region_insert_input
+  @join__type(graph: PRODUCTS)
+{
+  description: String
+  orders: order_arr_rel_insert_input
+  value: String
+}
+
+"""aggregate max on columns"""
+type region_max_fields
+  @join__type(graph: PRODUCTS)
+{
+  description: String
+  value: String
+}
+
+"""aggregate min on columns"""
+type region_min_fields
+  @join__type(graph: PRODUCTS)
+{
+  description: String
+  value: String
+}
+
+"""
+response of any mutation on the table "region"
+"""
+type region_mutation_response
+  @join__type(graph: PRODUCTS)
+{
+  """data from the rows affected by the mutation"""
+  returning: [region!]!
+
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+}
+
+"""
+input type for inserting object relation for remote table "region"
+"""
+input region_obj_rel_insert_input
+  @join__type(graph: PRODUCTS)
+{
+  data: region_insert_input!
+
+  """upsert condition"""
+  on_conflict: region_on_conflict
+}
+
+"""
+on_conflict condition type for table "region"
+"""
+input region_on_conflict
+  @join__type(graph: PRODUCTS)
+{
+  constraint: region_constraint!
+  update_columns: [region_update_column!]! = []
+  where: region_bool_exp
+}
+
+"""Ordering options when selecting data from "region"."""
+input region_order_by
+  @join__type(graph: PRODUCTS)
+{
+  description: order_by
+  orders_aggregate: order_aggregate_order_by
+  value: order_by
+}
+
+"""primary key columns input for table: region"""
+input region_pk_columns_input
+  @join__type(graph: PRODUCTS)
+{
+  value: String!
+}
+
+"""
+select columns of table "region"
+"""
+enum region_select_column
+  @join__type(graph: PRODUCTS)
+{
+  """column name"""
+  description @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  value @join__enumValue(graph: PRODUCTS)
+}
+
+"""
+input type for updating data in table "region"
+"""
+input region_set_input
+  @join__type(graph: PRODUCTS)
+{
+  description: String
+  value: String
+}
+
+"""
+Streaming cursor of the table "region"
+"""
+input region_stream_cursor_input
+  @join__type(graph: PRODUCTS)
+{
+  """Stream column input with initial value"""
+  initial_value: region_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input region_stream_cursor_value_input
+  @join__type(graph: PRODUCTS)
+{
+  description: String
+  value: String
+}
+
+"""
+update columns of table "region"
+"""
+enum region_update_column
+  @join__type(graph: PRODUCTS)
+{
+  """column name"""
+  description @join__enumValue(graph: PRODUCTS)
+
+  """column name"""
+  value @join__enumValue(graph: PRODUCTS)
+}
+
+input region_updates
+  @join__type(graph: PRODUCTS)
+{
+  """filter the rows which have to be updated"""
+  where: region_bool_exp!
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: region_set_input
+}
+
+scalar status
+  @join__type(graph: PRODUCTS)
+
+"""
+Boolean expression to compare columns of type "status". All fields are combined with logical 'AND'.
+"""
+input status_comparison_exp
+  @join__type(graph: PRODUCTS)
+{
+  _eq: status
+  _gt: status
+  _gte: status
+  _in: [status!]
+  _is_null: Boolean
+  _lt: status
+  _lte: status
+  _neq: status
+  _nin: [status!]
+}
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input String_comparison_exp
+  @join__type(graph: PRODUCTS)
+{
+  _eq: String
+  _gt: String
+  _gte: String
+  _in: [String!]
+  _is_null: Boolean
+  _lt: String
+  _lte: String
+  _neq: String
+  _nin: [String!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: String
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: String
+
+  """does the column NOT match the given SQL regular expression"""
+  _nsimilar: String
+
+  """does the column NOT match the given case-insensitive pattern"""
+  _nilike: String
+
+  """does the column NOT match the given pattern"""
+  _nlike: String
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: String
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: String
+
+  """does the column match the given SQL regular expression"""
+  _similar: String
+
+  """does the column match the given case-insensitive pattern"""
+  _ilike: String
+
+  """does the column match the given pattern"""
+  _like: String
+}
+
+type Subscription
+  @join__type(graph: PRODUCTS)
+{
+  """
+  execute function "product_search" and query aggregates on result of table type "product"
+  """
+  product_search_aggregate(
+    """
+    input parameters for function "product_search_aggregate"
+    """
+    args: product_search_args!
+
+    """filter the rows returned"""
+    where: product_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [product_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [product_select_column!]
+  ): product_aggregate!
+
+  """
+  execute function "product_search" which returns "product"
+  """
+  product_search(
+    """
+    input parameters for function "product_search"
+    """
+    args: product_search_args!
+
+    """filter the rows returned"""
+    where: product_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [product_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [product_select_column!]
+  ): [product!]!
+
+  """
+  execute function "product_search_slow" and query aggregates on result of table type "product"
+  """
+  product_search_slow_aggregate(
+    """
+    input parameters for function "product_search_slow_aggregate"
+    """
+    args: product_search_slow_args!
+
+    """filter the rows returned"""
+    where: product_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [product_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [product_select_column!]
+  ): product_aggregate!
+
+  """
+  execute function "product_search_slow" which returns "product"
+  """
+  product_search_slow(
+    """
+    input parameters for function "product_search_slow"
+    """
+    args: product_search_slow_args!
+
+    """filter the rows returned"""
+    where: product_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [product_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [product_select_column!]
+  ): [product!]!
+
+  """
+  fetch aggregated fields from the table: "account"
+  """
+  account_aggregate(
+    """filter the rows returned"""
+    where: account_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [account_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [account_select_column!]
+  ): account_aggregate!
+
+  """
+  fetch aggregated fields from the table: "account_summary"
+  """
+  account_summary_aggregate(
+    """filter the rows returned"""
+    where: account_summary_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [account_summary_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [account_summary_select_column!]
+  ): account_summary_aggregate!
+
+  """
+  fetch aggregated fields from the table: "order"
+  """
+  order_aggregate(
+    """filter the rows returned"""
+    where: order_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_select_column!]
+  ): order_aggregate!
+
+  """
+  fetch aggregated fields from the table: "order_detail"
+  """
+  order_detail_aggregate(
+    """filter the rows returned"""
+    where: order_detail_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_detail_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_detail_select_column!]
+  ): order_detail_aggregate!
+
+  """
+  fetch aggregated fields from the table: "product"
+  """
+  product_aggregate(
+    """filter the rows returned"""
+    where: product_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [product_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [product_select_column!]
+  ): product_aggregate!
+
+  """
+  fetch aggregated fields from the table: "region"
+  """
+  region_aggregate(
+    """filter the rows returned"""
+    where: region_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [region_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [region_select_column!]
+  ): region_aggregate!
+
+  """
+  fetch data from the table in a streaming manner: "account"
+  """
+  account_stream(
+    """filter the rows returned"""
+    where: account_bool_exp
+
+    """cursor to stream the results returned by the query"""
+    cursor: [account_stream_cursor_input]!
+
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+  ): [account!]!
+
+  """
+  fetch data from the table in a streaming manner: "account_summary"
+  """
+  account_summary_stream(
+    """filter the rows returned"""
+    where: account_summary_bool_exp
+
+    """cursor to stream the results returned by the query"""
+    cursor: [account_summary_stream_cursor_input]!
+
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+  ): [account_summary!]!
+
+  """
+  fetch data from the table in a streaming manner: "order"
+  """
+  order_stream(
+    """filter the rows returned"""
+    where: order_bool_exp
+
+    """cursor to stream the results returned by the query"""
+    cursor: [order_stream_cursor_input]!
+
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+  ): [order!]!
+
+  """
+  fetch data from the table in a streaming manner: "order_detail"
+  """
+  order_detail_stream(
+    """filter the rows returned"""
+    where: order_detail_bool_exp
+
+    """cursor to stream the results returned by the query"""
+    cursor: [order_detail_stream_cursor_input]!
+
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+  ): [order_detail!]!
+
+  """
+  fetch data from the table in a streaming manner: "product"
+  """
+  product_stream(
+    """filter the rows returned"""
+    where: product_bool_exp
+
+    """cursor to stream the results returned by the query"""
+    cursor: [product_stream_cursor_input]!
+
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+  ): [product!]!
+
+  """
+  fetch data from the table in a streaming manner: "region"
+  """
+  region_stream(
+    """filter the rows returned"""
+    where: region_bool_exp
+
+    """cursor to stream the results returned by the query"""
+    cursor: [region_stream_cursor_input]!
+
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+  ): [region!]!
+
+  """
+  fetch data from the table: "account"
+  """
+  account(
+    """filter the rows returned"""
+    where: account_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [account_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [account_select_column!]
+  ): [account!]!
+
+  """fetch data from the table: "account" using primary key columns"""
+  account_by_pk(id: uuid!): account
+
+  """
+  fetch data from the table: "account_summary"
+  """
+  account_summary(
+    """filter the rows returned"""
+    where: account_summary_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [account_summary_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [account_summary_select_column!]
+  ): [account_summary!]!
+
+  """
+  fetch data from the table: "order"
+  """
+  order(
+    """filter the rows returned"""
+    where: order_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_select_column!]
+  ): [order!]!
+
+  """fetch data from the table: "order" using primary key columns"""
+  order_by_pk(id: uuid!): order
+
+  """
+  fetch data from the table: "order_detail"
+  """
+  order_detail(
+    """filter the rows returned"""
+    where: order_detail_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [order_detail_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [order_detail_select_column!]
+  ): [order_detail!]!
+
+  """fetch data from the table: "order_detail" using primary key columns"""
+  order_detail_by_pk(id: uuid!): order_detail
+
+  """
+  fetch data from the table: "product"
+  """
+  product(
+    """filter the rows returned"""
+    where: product_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [product_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [product_select_column!]
+  ): [product!]!
+
+  """fetch data from the table: "product" using primary key columns"""
+  product_by_pk(id: uuid!): product
+
+  """
+  fetch data from the table: "region"
+  """
+  region(
+    """filter the rows returned"""
+    where: region_bool_exp
+
+    """sort the rows by one or more columns"""
+    order_by: [region_order_by!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """distinct select on columns"""
+    distinct_on: [region_select_column!]
+  ): [region!]!
+
+  """fetch data from the table: "region" using primary key columns"""
+  region_by_pk(value: String!): region
+}
+
+scalar timestamptz
+  @join__type(graph: PRODUCTS)
+
+"""
+Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'.
+"""
+input timestamptz_comparison_exp
+  @join__type(graph: PRODUCTS)
+{
+  _eq: timestamptz
+  _gt: timestamptz
+  _gte: timestamptz
+  _in: [timestamptz!]
+  _is_null: Boolean
+  _lt: timestamptz
+  _lte: timestamptz
+  _neq: timestamptz
+  _nin: [timestamptz!]
+}
+
+scalar uuid
+  @join__type(graph: PRODUCTS)
+
+"""
+Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'.
+"""
+input uuid_comparison_exp
+  @join__type(graph: PRODUCTS)
+{
+  _eq: uuid
+  _gt: uuid
+  _gte: uuid
+  _in: [uuid!]
+  _is_null: Boolean
+  _lt: uuid
+  _lte: uuid
+  _neq: uuid
+  _nin: [uuid!]
+}
