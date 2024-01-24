@@ -1,0 +1,58 @@
+#+cite_export:
+#+creator: Emacs 29.1 (Org mode 9.6.6)
+#+exclude_tags: noexport
+#+language: en
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:nil broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:nil title:t toc:nil todo:t |:t
+#+reveal_mathjax_url: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+#+reveal_root: https://cdn.jsdelivr.net/npm/reveal.js
+#+select_tags: export
+
+#+title: Stop Writing Code
+#+subtitle: Accelerate GraphQL Federation With Rapid Subgraph Development
+#+date: <2024-01-24 Wed>
+#+author: David A. Ventimiglia
+#+email: davidaventimiglia@gmail.com
+
+* Theory
+
+** Concepts
+
+- supergraph ::
+- _subgraph_ ::
+- monolith ::
+- micro-service :: 
+
+** Implementations
+
+- Hasura Remote Schema ::
+- _Apollo Federation_ ::
+- _GraphQL Mesh_ :: 
+
+** Subgraphs
+
+- micro-services ::
+- APIs ::
+- code ::
+- _no code_ ::
+
+** Code
+
+- functional concerns :: data, business logic, authorization
+- non-functional concerns :: caching, security, observability
+- emotional concerns :: habit, peer pressure
+
+** No Code
+
+- functional concerns :: data, +business logic+, authorization
+- non-functional concerns :: caching, security, observability
+- emotional concerns :: you're on your own
+
+* Practice
+
+** Rapid Subgraph Development
+
+** Rapid Supergraph Deployment
