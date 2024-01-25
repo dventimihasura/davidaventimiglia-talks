@@ -1,0 +1,10 @@
+- name: catalog
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url:
+        from_env: DB_URL
+      isolation_level: read-committed
+      use_prepared_statements: false
+  tables: "!include catalog/tables/tables.yaml"
+  functions: "!include catalog/functions/functions.yaml"
