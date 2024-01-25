@@ -1,6 +1,10 @@
-federation_version: 2
+federation_version: =2.0.0
 subgraphs:
-  products:
+  catalog:
     routing_url: http://localhost:8081/v1/graphql
     schema:
       subgraph_url: http://localhost:8081/v1/graphql
+  fulfillment:
+    routing_url: http://localhost:8082/v1/graphql
+    schema:
+      subgraph_url: http://localhost:8082/v1/graphql
