@@ -24,3 +24,4 @@ hasuratraining_march_2023/README.org
 *.env
 .env
 hasurawebinar_january_2024/node_modules/
+router
