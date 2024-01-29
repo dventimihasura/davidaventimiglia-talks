@@ -5,5 +5,3 @@ object_relationships:
   - name: order
     using:
       foreign_key_constraint_on: order_id
-apollo_federation_config:
-  enable: v1

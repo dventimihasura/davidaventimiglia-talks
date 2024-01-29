@@ -9,5 +9,3 @@ array_relationships:
         table:
           name: order
           schema: public
-apollo_federation_config:
-  enable: v1

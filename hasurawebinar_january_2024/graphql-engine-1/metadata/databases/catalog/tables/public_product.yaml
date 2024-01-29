@@ -1,5 +1,3 @@
 table:
   name: product
   schema: public
-apollo_federation_config:
-  enable: v1

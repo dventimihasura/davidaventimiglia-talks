@@ -1,8 +1,0 @@
-supergraph:
-  introspection: true
-headers:
-  subgraphs:
-    store: # Header rules for just the store subgraph
-      request:
-        - propagate:
-            matching: ^x-hasura-.*

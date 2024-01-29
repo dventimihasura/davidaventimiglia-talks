@@ -26,3 +26,6 @@ hasuratraining_march_2023/README.org
 hasurawebinar_january_2024/node_modules/
 router
 hasurawebinar_january_2024/.idea/
+hasurawebinar_january_2024/.mesh/
+hasurawebinar_january_2024/graphql_mesh/.mesh/sources/catalog/introspectionSchema.ts
+hasurawebinar_january_2024/graphql_mesh/.mesh/sources/fulfillment/introspectionSchema.ts
