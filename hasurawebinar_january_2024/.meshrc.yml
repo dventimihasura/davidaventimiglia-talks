@@ -14,7 +14,7 @@ additionalTypeDefs: |
       sourceName: "catalog",
       sourceTypeName: "query_root",
       sourceFieldName: "product_by_pk",
-      requiredSelectionSet: "{ order_id }",
+      requiredSelectionSet: "{ id }",
       sourceArgs: {
         id: "{root.order_id}"
       }

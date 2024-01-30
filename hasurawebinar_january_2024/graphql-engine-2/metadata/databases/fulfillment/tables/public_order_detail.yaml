@@ -1,7 +1,0 @@
-table:
-  name: order_detail
-  schema: public
-object_relationships:
-  - name: order
-    using:
-      foreign_key_constraint_on: order_id

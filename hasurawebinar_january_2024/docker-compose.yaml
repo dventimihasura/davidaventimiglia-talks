@@ -16,8 +16,6 @@ services:
     ports:
       - "${HGEPORT1}:8080"
     restart: always
-    volumes:
-      - "./graphql-engine-1/metadata:/hasura-metadata:ro"
     depends_on:
        postgres:
          condition: service_healthy
@@ -33,8 +31,6 @@ services:
     ports:
       - "${HGEPORT2}:8080"
     restart: always
-    volumes:
-      - "./graphql-engine-2/metadata:/hasura-metadata:ro"
     depends_on:
        postgres:
          condition: service_healthy
