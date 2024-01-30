@@ -12,7 +12,7 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
   graphql-engine-1:
-    image: hasura/graphql-engine:v2.36.0.cli-migrations-v3
+    image: hasura/graphql-engine:v2.36.0
     ports:
       - "${HGEPORT1}:8080"
     restart: always
@@ -28,9 +28,8 @@ services:
       HASURA_GRAPHQL_ENABLE_APOLLO_FEDERATION: "true"
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgres@postgres:5432/graphql_engine_1
-      HGE_BINARY: "graphql-engine +RTS --nonmoving-gc -RTS"
   graphql-engine-2:
-    image: hasura/graphql-engine:v2.36.0.cli-migrations-v3
+    image: hasura/graphql-engine:v2.36.0
     ports:
       - "${HGEPORT2}:8080"
     restart: always
@@ -46,4 +45,3 @@ services:
       HASURA_GRAPHQL_ENABLE_APOLLO_FEDERATION: "true"
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgres@postgres:5432/graphql_engine_2
-      HGE_BINARY: "graphql-engine +RTS --nonmoving-gc -RTS"
