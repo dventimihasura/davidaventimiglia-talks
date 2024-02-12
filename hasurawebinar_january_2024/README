@@ -1,0 +1,19 @@
+# -*- mode: org; -*-
+
+#+STARTUP: indent
+
+* What
+
+* Why
+
+* How
+
+* Steps
+
+** Step 1:  Check out this repository.
+
+** Step 2:  Navigate to this directory.
+
+** Step 3:  Create a ~.env~ file.
+
+** Step 4:  Launch the Docker Compose services.
