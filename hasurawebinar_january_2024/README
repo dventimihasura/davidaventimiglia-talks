@@ -4,16 +4,128 @@
 
 * What
 
+This [[https://hasura.io/events/webinar/accelerate-graphql-federation-with-rapid-subgraph-development][Hasura webinar]] demonstrates composing GraphQL sub-graphs using
+[[https://the-guild.dev/graphql/mesh][GraphQL Mesh]] and its ability to [[https://the-guild.dev/graphql/mesh/docs/getting-started/combine-multiple-sources][combine multiple sources]] easily.  The
+sub-graphs are automatically generated using [[https://hasura.io/docs/latest/index/][Hasura]] from data in a
+[[https://www.postgresql.org/][PostgreSQL]] database.
+
 * Why
+
+There are a variety of ways of combining multiple GraphQL sub-graphs
+into one super-graph:
+
+- [[https://the-guild.dev/graphql/stitching][Schema Stitching]]
+- [[https://hasura.io/docs/latest/remote-schemas/overview/][Hasura Remote Schema]]
+- [[https://www.apollographql.com/docs/federation/][Apollo Federation]]
+
+Adding to this list is [[https://the-guild.dev/graphql/mesh][GraphQL Mesh]] from [[https://the-guild.dev/][The Guild]], which offers an
+easy way to combine multiple sub-graph sources declaritively in a
+gateway without needing to add metadata to sub-graphs, which in some
+cases may not be possible.  The goal of this webinar is to demonstrate
+how easily both sub-graphs and a super-graph can be created without
+code using Hasura and GraphQL Mesh.
 
 * How
 
+The demo for this webinar uses [[https://docs.docker.com/compose/][Docker Compose]] to launch these
+services:
+
+- postgres :: PostgreSQL database cluster that both hosts the
+  underlying data model and also hosts the metadata used by Hasura, in
+  different databases.
+- graphql-engine-1 :: Hasura server instance for sub-graph #1, which
+  offers the "catalog" API
+- graphql-engine-2 :: Hasura server instance for sub-graph #2, which
+  offers the "fulfillment" API
+- graphql-mesh :: GraphQL Mesh server instance for the super-graph
+
+The underlying data model is for a toy online retail grocery
+operation, with these domains and tables:
+
+- catalog
+  - product :: grocery items that can be purchased
+  - product_search :: full-text search interface over ~product~
+  - product_search_slow :: full-text search interface over ~product~
+    with artificial delay (for demonstrating time-out security
+    features)
+- fulfillment
+  - account :: account holders who can place orders
+  - order :: order invoice information for an ~account~
+  - order_detail :: order line-item detail information for an ~order~
+    and associated with a single ~product~
+  - region :: sales region lookup table
+
+Importantly, these data are all served from the same database which
+makes it easy for demonstration purposes.  However, because different
+tables are tracked by the two instances of Hasura ~graphql-engine~
+they appear at the GraphQL API level as two separate but still related
+data repositories.
+
+The primary goal is to use GraphQL Mesh not only to combine these two
+sub-graphs into one super-graph with top-level fields and types from
+both the ~catalog~ and ~fulfillment~ sub-graphs, but also to [[https://the-guild.dev/graphql/mesh/docs/getting-started/combine-multiple-sources#setup-hierarchy-with-nested-queries][set up a
+hierarchy with nested queries]] between ~order_detail~ and ~product~,
+which are naturally related.
+
+The data model is automatically initialized and seeded with sample
+data from the SQL files in the [[file:initdb.d-postgres][initdb.d-postgres]] folder.  Moreover,
+the system [[https://hasura.io/docs/latest/migrations-metadata-seeds/auto-apply-migrations/#auto-apply-metadata][automatically applies Hasura metadata]] from the folders in
+[[file:graphql-engine-1][graphql-server-1]] and [[file:graphql-engine-2][graphql-server-2]].  
+
 * Steps
 
-** Step 1:  Check out this repository.
+** Step 1:  Check out the [[https://github.com/dventimihasura/davidaventimiglia-talks][davidaventimiglia-talks]] repository.
 
-** Step 2:  Navigate to this directory.
+#+begin_src bash
+  git checkout https://github.com/dventimihasura/davidaventimiglia-talks.git
+#+end_src
+
+** Step 2:  Navigate to [[file:hasurawebinar_january_2024][hasurawebinar_january_2024]] sub-directory.
+
+#+begin_src bash
+  cd hasurawebinar_january_2024
+#+end_src
 
 ** Step 3:  Create a ~.env~ file.
 
+#+begin_src bash
+  cat <<EOF > .env
+  HGEPORT1=<your exposed Hasura sub-graph 1 port>
+  HGEPORT2=<your exposed Hasura sub-graph 2 port>
+  MESHPORT=<your exposed GraphQL Mesh port>
+  PGPORT=<your exposed PostgreSQL port>
+  EOF
+#+end_src
+
 ** Step 4:  Launch the Docker Compose services.
+
+#+begin_src bash
+  docker-compose up -d
+#+end_src
+
+or
+
+#+begin_src bash
+  docker compose up -d
+#+end_src
+
+** Step 5:  Launch a GraphQL query editor at [[http://localhost:MESHPORT]]
+
+** Step 6:  Issue a hierarchical GraphQL query
+
+A good choice is one that gets data both from the "catalog" sub-graph
+and the "fulfillment" sub-graph.
+
+#+begin_src graphql
+  query {
+    order_detail(limit: 1) {
+      id
+      units
+      product {
+        id
+        name
+        price
+      }
+    }
+  }
+#+end_src
