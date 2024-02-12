@@ -45,3 +45,20 @@ services:
       HASURA_GRAPHQL_ENABLE_APOLLO_FEDERATION: "true"
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgres@postgres:5432/graphql_engine_2
+  graphql-mesh:
+    build: .
+    restart: always
+    ports:
+      - "${MESHPORT}:4000"
+    depends_on:
+      - graphql-engine-1
+      - graphql-engine-2
+    volumes:
+      - "./.meshrc.yaml:/root/.meshrc.yaml:ro"
+    environment:
+      DEBUG: 1
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1G"
