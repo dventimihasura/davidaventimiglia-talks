@@ -12,10 +12,12 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
   graphql-engine-1:
-    image: hasura/graphql-engine:v2.36.0
+    image: hasura/graphql-engine:v2.36.0.cli-migrations-v3
     ports:
       - "${HGEPORT1}:8080"
     restart: always
+    volumes:
+      - "./graphql-engine-1/metadata:/hasura-metadata:ro"
     depends_on:
        postgres:
          condition: service_healthy
@@ -27,10 +29,12 @@ services:
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgres@postgres:5432/graphql_engine_1
   graphql-engine-2:
-    image: hasura/graphql-engine:v2.36.0
+    image: hasura/graphql-engine:v2.36.0.cli-migrations-v3
     ports:
       - "${HGEPORT2}:8080"
     restart: always
+    volumes:
+      - "./graphql-engine-2/metadata:/hasura-metadata:ro"
     depends_on:
        postgres:
          condition: service_healthy
