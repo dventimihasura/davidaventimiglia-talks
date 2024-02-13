@@ -54,11 +54,6 @@ services:
       - graphql-engine-1
       - graphql-engine-2
     volumes:
-      - "./.meshrc.yaml:/root/.meshrc.yaml:ro"
+      - "./graphql-mesh/.meshrc.yaml:/root/.meshrc.yaml:ro"
     environment:
       DEBUG: 1
-    deploy:
-      resources:
-        limits:
-          cpus: "1.0"
-          memory: "1G"
