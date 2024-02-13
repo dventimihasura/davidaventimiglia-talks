@@ -16,9 +16,7 @@ additionalTypeDefs: |
       sourceFieldName: "product_by_pk",
       requiredSelectionSet: "{ product_id }",
       sourceArgs: {
-        input: {
-          id: "{root.product_id}"
-        }
+        id: "{root.product_id}"
       }
     )
   }
