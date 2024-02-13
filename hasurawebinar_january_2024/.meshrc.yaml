@@ -2,11 +2,11 @@ sources:
   - name: catalog
     handler:
       graphql:
-        endpoint: http://graphql-engine-1:8080/v1/graphql
+        endpoint: http://localhost:8081/v1/graphql
   - name: fulfillment
     handler:
       graphql:
-        endpoint: http://graphql-engine-2:8080/v1/graphql
+        endpoint: http://localhost:8082/v1/graphql
 
 additionalTypeDefs: |
   extend type order_detail {
@@ -14,9 +14,11 @@ additionalTypeDefs: |
       sourceName: "catalog",
       sourceTypeName: "query_root",
       sourceFieldName: "product_by_pk",
-      requiredSelectionSet: "{ id }",
+      requiredSelectionSet: "{ product_id }",
       sourceArgs: {
-        id: "{root.order_id}"
+        input: {
+          id: "{root.product_id}"
+        }
       }
     )
   }
