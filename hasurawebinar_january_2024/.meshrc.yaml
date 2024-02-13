@@ -18,5 +18,13 @@ additionalTypeDefs: |
       sourceArgs: {
         id: "{root.product_id}"
       }
+    ),
+    product_batched: product @resolveTo(
+      sourceName: "catalog",
+      sourceTypeName: "query_root",
+      sourceFieldName: "product",
+      requiredSelectionSet: "{ product_id }",
+      keyField: "product_id",
+      keysArg: "where.id._in"
     )
   }
