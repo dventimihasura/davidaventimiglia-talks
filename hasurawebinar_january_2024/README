@@ -70,7 +70,47 @@ which are naturally related.
 The data model is automatically initialized and seeded with sample
 data from the SQL files in the [[file:initdb.d-postgres][initdb.d-postgres]] folder.  Moreover,
 the system [[https://hasura.io/docs/latest/migrations-metadata-seeds/auto-apply-migrations/#auto-apply-metadata][automatically applies Hasura metadata]] from the folders in
-[[file:graphql-engine-1][graphql-server-1]] and [[file:graphql-engine-2][graphql-server-2]].  
+[[file:graphql-engine-1][graphql-server-1]] and [[file:graphql-engine-2][graphql-server-2]].
+
+** Principles
+
+There are just a few key principles on display in this POC.
+
+*** Sub-Graph Development
+
+GraphQL sub-graph development can be made especially easy by using a
+tool like [[https://hasura.io/][Hasura]] which is a "batteries-included" platform.  Some of
+those batteries which are included comprise:
+
+- server :: high-performance API server run-time in [[https://github.com/hasura/graphql-engine][graphql-engine]]
+- IDE :: low-code Integrated Development Environment (IDE) out of the
+  box in [[https://hasura.io/docs/latest/hasura-cli/commands/hasura_console/][Console]]
+- authentication :: JWT and Webhook authentication [[https://hasura.io/docs/latest/auth/authentication/index/][modes]]
+- authorization :: role-based [[https://hasura.io/docs/latest/auth/authorization/index/][permissions]] system
+- security :: protect against attacks with by [[https://hasura.io/docs/latest/security/overview/][securing]] the API
+- business logic :: asynchronous and synchronous business logic with
+  [[https://hasura.io/docs/latest/event-triggers/overview/][event triggers]] and [[https://hasura.io/docs/latest/actions/overview/][actions]]
+- observability :: open-standards [[https://hasura.io/docs/latest/observability/overview/][observability]] with metrics, traces,
+  and logs
+- integration :: data integratio with [[https://hasura.io/docs/latest/remote-schemas/overview/][remote schema]]
+
+*** Super-Graph Development
+
+GraphQL super-graph development can be made especially easy by using a
+tool like [[https://the-guild.dev/graphql/mesh][GraphQL Mesh]] which is another "batteries-included" platform.
+Some of its batters include:
+
+- source handlers :: integrate heterogeneous data sources (which need
+  not even be "sub-graphs" via a GraphQL Mesh gateway
+- transforms :: shape and curate the resulting super-graph in the
+  gateway without needing to change the integrated data sources
+- plugins :: extensible platform for adding new functionality in a
+  component-oriented approach
+
+*** Efficient Development
+
+- compilation :: [[https://hasura.io/docs/latest/getting-started/how-it-works/index/][compilation]] over [[https://graphql.org/learn/execution/#root-fields-resolvers][resolvers]] can lead to more optimal
+  data fetching patterns
 
 * Steps
 
@@ -116,9 +156,9 @@ or
 A good choice is one that gets data both from the "catalog" sub-graph
 and the "fulfillment" sub-graph.
 
-#+begin_src graphql
+#+begin_src graphql :url http://localhost:8083/graphql
   query {
-    order_detail(limit: 1) {
+    order_detail(limit: 2) {
       id
       units
       product {
@@ -129,3 +169,31 @@ and the "fulfillment" sub-graph.
     }
   }
 #+end_src
+
+#+RESULTS:
+#+begin_example
+{
+  "data": {
+    "order_detail": [
+      {
+        "id": "5badd507-3109-4deb-831b-02a940daab31",
+        "units": 8,
+        "product": {
+          "id": "ae57c91e-255d-4c0d-9984-8616ccb0a054",
+          "name": "Spinach - Baby",
+          "price": 740
+        }
+      },
+      {
+        "id": "55f27cb5-0152-482a-b64c-153c22b0a0f2",
+        "units": 4,
+        "product": {
+          "id": "1f452e91-4960-4474-b185-558ce08572d4",
+          "name": "Sugar - Brown, Individual",
+          "price": 874
+        }
+      }
+    ]
+  }
+}
+#+end_example
