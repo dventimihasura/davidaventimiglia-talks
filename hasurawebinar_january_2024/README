@@ -149,7 +149,7 @@ or
   docker compose up -d
 #+end_src
 
-** Step 5:  Launch a GraphQL query editor at [[http://localhost:MESHPORT]]
+** Step 5:  Launch a GraphQL query editor at [[http://localhost:MESHPORT/graphql]]
 
 ** Step 6:  Issue a hierarchical GraphQL query
 
