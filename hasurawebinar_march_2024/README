@@ -64,27 +64,27 @@ And let's see what works and what doesn't.
 
 ** The Architecture
 
-- Model :: POJOs, DAOs, Maps, etc.
-- +View+ :: the API /is/ the view
-- Controller :: resolvers, data fetchers, etc.
+- 🧱 Model :: POJOs, DAOs, Maps, etc.
+- 📺 +View+ :: the API /is/ the view
+- 🕹 Controller :: resolvers, data fetchers, etc.
 
 ** The Road-Map
 
-- ☑ Get a Pulse :: "naive" approach with graphql-java
-- ☐ Make it Real :: [[https://hibernate.org/orm/][Hibernate]] the N+1 problem
-- ☐ Make it Modern :: Upgrade to Netflix DGS
-- ☐ Make it Sing :: caching, security, observability, etc.
+- ☑ 💡 Make it Blink :: "naive" approach with graphql-java 
+- ☐ 😈 Make it Real :: [[https://hibernate.org/orm/][Hibernate]] that ol' N+1 problem
+- ☐ 🤖 Make it Modern :: Upgrade to Netflix DGS
+- ☐ 🎶 Make it Sing :: caching, security, observability, etc.
 
 * Steps
 
-** Step 1:  Check out the [[https://github.com/dventimihasura/davidaventimiglia-talks][davidaventimiglia-talks]] repository.
+** Step 1:  Check out the [[https://github.com/dventimihasura/davidaventimiglia-talks][~davidaventimiglia-talks~]] repository.
 
 #+begin_src bash
   git checkout \
       https://github.com/dventimihasura/davidaventimiglia-talks.git
 #+end_src
 
-** Step 2:  Navigate to [[file:hasurawebinar_march_2024][hasurawebinar_january_2024]] sub-directory.
+** Step 2:  Navigate to [[file:hasurawebinar_march_2024][~hasurawebinar_january_2024~]] sub-directory.
 
 #+begin_src bash
   cd hasurawebinar_january_2024
