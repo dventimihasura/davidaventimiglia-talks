@@ -21,9 +21,9 @@ import com.graphqljava.tutorial.retail.models.Schema.order_detail;
 import com.graphqljava.tutorial.retail.models.Schema.product;
 
 public class Controllers {
-    @Autowired JdbcClient jdbcClient;
+    @Controller public static class AccountController {
+	@Autowired JdbcClient jdbcClient;
 
-    @Controller class AccountController {
 	RowMapper<account>
 	    accountMapper = new RowMapper<>() {
 		    public account mapRow (ResultSet rs, int rowNum) throws SQLException {
@@ -65,7 +65,9 @@ public class Controllers {
 		.optional()
 		.get();}}
 
-    @Controller class OrderController {
+    @Controller public static class OrderController {
+	@Autowired JdbcClient jdbcClient;
+
 	RowMapper<order>
 	    orderMapper = new RowMapper<order>() {
 		    public order mapRow (ResultSet rs, int rowNum) throws SQLException {
@@ -118,7 +120,9 @@ public class Controllers {
 		.optional()
 		.get();}}
 
-    @Controller class OrderDetailController {
+    @Controller public static class OrderDetailController {
+	@Autowired JdbcClient jdbcClient;
+
 	RowMapper<order_detail>
 	    orderDetailMapper = new RowMapper<order_detail>() {
 		    public order_detail mapRow (ResultSet rs, int rowNum) throws SQLException {
@@ -173,7 +177,9 @@ public class Controllers {
 		.optional()
 		.get();}}
 
-    @Controller class ProductController {
+    @Controller public static class ProductController {
+	@Autowired JdbcClient jdbcClient;
+
 	RowMapper<product>
 	    productMapper = new RowMapper<product>() {
 		    public product mapRow (ResultSet rs, int rowNum) throws SQLException {
