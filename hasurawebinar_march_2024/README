@@ -1,0 +1,155 @@
+# -*- mode: org; -*-
+
+#+STARTUP: indent
+
+* What
+
+* Why
+
+* How
+
+* Steps
+
+** Step 1:  Check out the [[https://github.com/dventimihasura/davidaventimiglia-talks][davidaventimiglia-talks]] repository.
+
+#+begin_src bash
+  git checkout https://github.com/dventimihasura/davidaventimiglia-talks.git
+#+end_src
+
+** Step 2:  Navigate to [[file:hasurawebinar_march_2024][hasurawebinar_january_2024]] sub-directory.
+
+#+begin_src bash
+  cd hasurawebinar_january_2024
+#+end_src
+
+** Step 3:  Create a ~setenv.sh~ file.
+
+#+begin_src bash
+  cat <<EOF > setenv.sh
+  export HGEPORT=8081
+  export PGPORT=5433
+  export SBPORT=8080
+  EOF
+#+end_src
+
+#+RESULTS:
+
+** Step 4:  Source the ~setenv.sh~ file.
+
+#+begin_src bash
+  source setenv.sh
+#+end_src
+
+** Step 5:  Launch the Docker Compose services.
+
+#+begin_src bash
+  docker-compose up -d
+#+end_src
+
+or
+
+#+begin_src bash
+  docker compose up -d
+#+end_src
+
+** Step 6:  Launch the Spring Boot application.
+
+#+begin_src bash
+  mvn clean spring-boot:run
+#+end_src
+
+* Tests
+
+#+begin_src graphql :url http://localhost:8080/graphql
+query {
+  orders(limit: 1) {
+    id
+    status
+    account {
+      name
+    }
+    order_details {
+      units
+      product {
+        name
+        price
+      }
+    }
+  }
+}
+#+end_src
+
+#+RESULTS:
+#+begin_example
+{
+  "data": {
+    "orders": [
+      {
+        "id": "2c0a0c8d-cc54-4a47-8ef6-65cbd8b487bf",
+        "status": "processing",
+        "account": {
+          "name": "Roana Crate"
+        },
+        "order_details": [
+          {
+            "units": 4,
+            "product": {
+              "name": "Zucchini - Green",
+              "price": 23
+            }
+          },
+          {
+            "units": 3,
+            "product": {
+              "name": "Sproutsmustard Cress",
+              "price": 771
+            }
+          },
+          {
+            "units": 7,
+            "product": {
+              "name": "Wine - Prosecco Valdobienne",
+              "price": 220
+            }
+          },
+          {
+            "units": 8,
+            "product": {
+              "name": "Arizona - Green Tea",
+              "price": 377
+            }
+          },
+          {
+            "units": 6,
+            "product": {
+              "name": "Plastic Wrap",
+              "price": 71
+            }
+          },
+          {
+            "units": 9,
+            "product": {
+              "name": "Ecolab - Ster Bac",
+              "price": 227
+            }
+          },
+          {
+            "units": 8,
+            "product": {
+              "name": "Lemonade - Strawberry, 591 Ml",
+              "price": 75
+            }
+          },
+          {
+            "units": 4,
+            "product": {
+              "name": "Gherkin",
+              "price": 678
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+#+end_example
