@@ -2,18 +2,86 @@
 
 #+STARTUP: indent
 
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:nil title:t toc:nil todo:t |:t
+#+title: GraphQL & Java
+#+subtitle: You're doing it the wrong way
+#+date: <2024-03-06 Wed>
+#+author: David A. Ventimiglia
+#+email: davidaventimiglia@hasura.io
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.2 (Org mode 9.6.15)
+#+cite_export:
+
+#+reveal_default_slide_background: ./slide_background.png
+#+reveal_highlight_css: %r/plugin/highlight/zenburn.css
+#+reveal_init_options: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+#+reveal_mathjax_url: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+#+reveal_root: https://cdn.jsdelivr.net/npm/reveal.js
+#+reveal_theme: black
+#+reveal_title_slide_background: ./slide_background.png
+
 * What
+
+** Goals
+
+- have Java GraphQL + SQL DB
+- be non-trivial
+- start a conversation
+
+** Non-Goals
+
+- +be done+
+- +be correct+
+- +start a war+
 
 * Why
 
+Let's move beyond tutorials, "Getting Started" guides, and
+"Hello, World!" apps.  Let's solve a real and common problem.  Let's
+keep adding bells and whistles.  Let's see what's /really/ involved.
+And let's see what works and what doesn't.
+
 * How
+
+** The Context
+
+- [[file:docker-compose.yaml][docker-compose.yaml]] :: nice and easy
+- postgres :: useful reference point
+- data model :: online retail (accounts, orders, products, etc.)
+- Hasura :: [[https://en.wikipedia.org/wiki/Stalking_horse][stalking horse]]
+
+** The Application
+
+- [[https://netflix.github.io/dgs/][+Netflix DGS+]] :: we'll get there
+- [[https://www.graphql-java.com/][graphql-java]] :: the foundation
+- [[https://spring.io/projects/spring-boot][Spring Boot]] :: the gold standard
+
+** The Architecture
+
+- Model :: POJOs, DAOs, Maps, etc.
+- +View+ :: the API /is/ the view
+- Controller :: resolvers, data fetchers, etc.
+
+** The Road-Map
+
+- ☑ Get a Pulse :: "naive" approach with graphql-java
+- ☐ Make it Real :: [[https://hibernate.org/orm/][Hibernate]] the N+1 problem
+- ☐ Make it Modern :: Upgrade to Netflix DGS
+- ☐ Make it Sing :: caching, security, observability, etc.
 
 * Steps
 
 ** Step 1:  Check out the [[https://github.com/dventimihasura/davidaventimiglia-talks][davidaventimiglia-talks]] repository.
 
 #+begin_src bash
-  git checkout https://github.com/dventimihasura/davidaventimiglia-talks.git
+  git checkout \
+      https://github.com/dventimihasura/davidaventimiglia-talks.git
 #+end_src
 
 ** Step 2:  Navigate to [[file:hasurawebinar_march_2024][hasurawebinar_january_2024]] sub-directory.
