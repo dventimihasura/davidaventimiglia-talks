@@ -1,0 +1,18 @@
+table:
+  name: order
+  schema: public
+object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: account_id
+  - name: regionByRegion
+    using:
+      foreign_key_constraint_on: region
+array_relationships:
+  - name: order_details
+    using:
+      foreign_key_constraint_on:
+        column: order_id
+        table:
+          name: order_detail
+          schema: public
