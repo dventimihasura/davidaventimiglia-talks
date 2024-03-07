@@ -26,6 +26,12 @@
 #+reveal_theme: black
 #+reveal_title_slide_background: ./slide_background.png
 
+* 
+#+CAPTION: https://github.com/dventimihasura/davidaventimiglia-talks/tree/master/hasurawebinar_march_2024
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
+[[file:qrcode_github.com.png]]
+
 * What
 
 ** Goals
