@@ -8,7 +8,7 @@
 #+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
 #+options: timestamp:nil title:t toc:nil todo:t |:t
 #+title: GraphQL & Java
-#+subtitle: You're doing it the wrong way
+#+subtitle: The State of Tooling
 #+date: <2024-03-06 Wed>
 #+author: David A. Ventimiglia
 #+email: davidaventimiglia@hasura.io
