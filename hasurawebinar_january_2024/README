@@ -1,0 +1,199 @@
+# -*- mode: org; -*-
+
+#+STARTUP: indent
+
+* What
+
+This [[https://hasura.io/events/webinar/accelerate-graphql-federation-with-rapid-subgraph-development][Hasura webinar]] demonstrates composing GraphQL sub-graphs using
+[[https://the-guild.dev/graphql/mesh][GraphQL Mesh]] and its ability to [[https://the-guild.dev/graphql/mesh/docs/getting-started/combine-multiple-sources][combine multiple sources]] easily.  The
+sub-graphs are automatically generated using [[https://hasura.io/docs/latest/index/][Hasura]] from data in a
+[[https://www.postgresql.org/][PostgreSQL]] database.
+
+* Why
+
+There are a variety of ways of combining multiple GraphQL sub-graphs
+into one super-graph:
+
+- [[https://the-guild.dev/graphql/stitching][Schema Stitching]]
+- [[https://hasura.io/docs/latest/remote-schemas/overview/][Hasura Remote Schema]]
+- [[https://www.apollographql.com/docs/federation/][Apollo Federation]]
+
+Adding to this list is [[https://the-guild.dev/graphql/mesh][GraphQL Mesh]] from [[https://the-guild.dev/][The Guild]], which offers an
+easy way to combine multiple sub-graph sources declaritively in a
+gateway without needing to add metadata to sub-graphs, which in some
+cases may not be possible.  The goal of this webinar is to demonstrate
+how easily both sub-graphs and a super-graph can be created without
+code using Hasura and GraphQL Mesh.
+
+* How
+
+The demo for this webinar uses [[https://docs.docker.com/compose/][Docker Compose]] to launch these
+services:
+
+- postgres :: PostgreSQL database cluster that both hosts the
+  underlying data model and also hosts the metadata used by Hasura, in
+  different databases.
+- graphql-engine-1 :: Hasura server instance for sub-graph #1, which
+  offers the "catalog" API
+- graphql-engine-2 :: Hasura server instance for sub-graph #2, which
+  offers the "fulfillment" API
+- graphql-mesh :: GraphQL Mesh server instance for the super-graph
+
+The underlying data model is for a toy online retail grocery
+operation, with these domains and tables:
+
+- catalog
+  - product :: grocery items that can be purchased
+  - product_search :: full-text search interface over ~product~
+  - product_search_slow :: full-text search interface over ~product~
+    with artificial delay (for demonstrating time-out security
+    features)
+- fulfillment
+  - account :: account holders who can place orders
+  - order :: order invoice information for an ~account~
+  - order_detail :: order line-item detail information for an ~order~
+    and associated with a single ~product~
+  - region :: sales region lookup table
+
+Importantly, these data are all served from the same database which
+makes it easy for demonstration purposes.  However, because different
+tables are tracked by the two instances of Hasura ~graphql-engine~
+they appear at the GraphQL API level as two separate but still related
+data repositories.
+
+The primary goal is to use GraphQL Mesh not only to combine these two
+sub-graphs into one super-graph with top-level fields and types from
+both the ~catalog~ and ~fulfillment~ sub-graphs, but also to [[https://the-guild.dev/graphql/mesh/docs/getting-started/combine-multiple-sources#setup-hierarchy-with-nested-queries][set up a
+hierarchy with nested queries]] between ~order_detail~ and ~product~,
+which are naturally related.
+
+The data model is automatically initialized and seeded with sample
+data from the SQL files in the [[file:initdb.d-postgres][initdb.d-postgres]] folder.  Moreover,
+the system [[https://hasura.io/docs/latest/migrations-metadata-seeds/auto-apply-migrations/#auto-apply-metadata][automatically applies Hasura metadata]] from the folders in
+[[file:graphql-engine-1][graphql-server-1]] and [[file:graphql-engine-2][graphql-server-2]].
+
+** Principles
+
+There are just a few key principles on display in this POC.
+
+*** Sub-Graph Development
+
+GraphQL sub-graph development can be made especially easy by using a
+tool like [[https://hasura.io/][Hasura]] which is a "batteries-included" platform.  Some of
+those batteries which are included comprise:
+
+- server :: high-performance API server run-time in [[https://github.com/hasura/graphql-engine][graphql-engine]]
+- IDE :: low-code Integrated Development Environment (IDE) out of the
+  box in [[https://hasura.io/docs/latest/hasura-cli/commands/hasura_console/][Console]]
+- authentication :: JWT and Webhook authentication [[https://hasura.io/docs/latest/auth/authentication/index/][modes]]
+- authorization :: role-based [[https://hasura.io/docs/latest/auth/authorization/index/][permissions]] system
+- security :: protect against attacks with by [[https://hasura.io/docs/latest/security/overview/][securing]] the API
+- business logic :: asynchronous and synchronous business logic with
+  [[https://hasura.io/docs/latest/event-triggers/overview/][event triggers]] and [[https://hasura.io/docs/latest/actions/overview/][actions]]
+- observability :: open-standards [[https://hasura.io/docs/latest/observability/overview/][observability]] with metrics, traces,
+  and logs
+- integration :: data integratio with [[https://hasura.io/docs/latest/remote-schemas/overview/][remote schema]]
+
+*** Super-Graph Development
+
+GraphQL super-graph development can be made especially easy by using a
+tool like [[https://the-guild.dev/graphql/mesh][GraphQL Mesh]] which is another "batteries-included" platform.
+Some of its batters include:
+
+- source handlers :: integrate heterogeneous data sources (which need
+  not even be "sub-graphs" via a GraphQL Mesh gateway
+- transforms :: shape and curate the resulting super-graph in the
+  gateway without needing to change the integrated data sources
+- plugins :: extensible platform for adding new functionality in a
+  component-oriented approach
+
+*** Efficient Development
+
+- compilation :: [[https://hasura.io/docs/latest/getting-started/how-it-works/index/][compilation]] over [[https://graphql.org/learn/execution/#root-fields-resolvers][resolvers]] can lead to more optimal
+  data fetching patterns
+
+* Steps
+
+** Step 1:  Check out the [[https://github.com/dventimihasura/davidaventimiglia-talks][davidaventimiglia-talks]] repository.
+
+#+begin_src bash
+  git checkout https://github.com/dventimihasura/davidaventimiglia-talks.git
+#+end_src
+
+** Step 2:  Navigate to [[file:hasurawebinar_january_2024][hasurawebinar_january_2024]] sub-directory.
+
+#+begin_src bash
+  cd hasurawebinar_january_2024
+#+end_src
+
+** Step 3:  Create a ~.env~ file.
+
+#+begin_src bash
+  cat <<EOF > .env
+  HGEPORT1=<your exposed Hasura sub-graph 1 port>
+  HGEPORT2=<your exposed Hasura sub-graph 2 port>
+  MESHPORT=<your exposed GraphQL Mesh port>
+  PGPORT=<your exposed PostgreSQL port>
+  EOF
+#+end_src
+
+** Step 4:  Launch the Docker Compose services.
+
+#+begin_src bash
+  docker-compose up -d
+#+end_src
+
+or
+
+#+begin_src bash
+  docker compose up -d
+#+end_src
+
+** Step 5:  Launch a GraphQL query editor at [[http://localhost:MESHPORT/graphql]]
+
+** Step 6:  Issue a hierarchical GraphQL query
+
+A good choice is one that gets data both from the "catalog" sub-graph
+and the "fulfillment" sub-graph.
+
+#+begin_src graphql :url http://localhost:8083/graphql
+  query {
+    order_detail(limit: 2) {
+      id
+      units
+      product {
+        id
+        name
+        price
+      }
+    }
+  }
+#+end_src
+
+#+RESULTS:
+#+begin_example
+{
+  "data": {
+    "order_detail": [
+      {
+        "id": "5badd507-3109-4deb-831b-02a940daab31",
+        "units": 8,
+        "product": {
+          "id": "ae57c91e-255d-4c0d-9984-8616ccb0a054",
+          "name": "Spinach - Baby",
+          "price": 740
+        }
+      },
+      {
+        "id": "55f27cb5-0152-482a-b64c-153c22b0a0f2",
+        "units": 4,
+        "product": {
+          "id": "1f452e91-4960-4474-b185-558ce08572d4",
+          "name": "Sugar - Brown, Individual",
+          "price": 874
+        }
+      }
+    ]
+  }
+}
+#+end_example

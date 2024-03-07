@@ -1,0 +1,50 @@
+# -*- mode: graphql; -*-
+
+type Query {
+  accounts(limit: Int): [account]!
+  account_by_pk(id: ID): account
+  orders(limit: Int): [order]!
+  order_by_pk(id: ID): order
+  order_details(limit: Int): [order_detail]!
+  order_detail_by_pk(id: ID): order_detail
+  products(limit: Int): [product]!
+  product_by_pk(id: ID): product
+}
+
+type account {
+  id: ID
+  name: String
+  created_at: String
+  updated_at: String
+  orders(limit: Int): [order]!
+}
+
+type order {
+  id: ID
+  account_id: ID
+  status: String
+  created_at: String
+  updated_at: String
+  order_details(limit: Int): [order_detail]!
+  account: account!
+}
+
+type order_detail {
+  id: ID
+  order_id: ID
+  product_id: ID
+  units: Int
+  created_at: String
+  updated_at: String
+  product: product!
+  order: order!
+}
+
+type product {
+  id: ID
+  name: String
+  price: Int
+  created_at: String
+  updated_at: String
+  order_details(limit: Int): [order_detail]!
+}

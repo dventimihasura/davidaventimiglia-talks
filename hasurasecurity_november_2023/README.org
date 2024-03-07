@@ -1,0 +1,111 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:t title:t toc:nil todo:t |:t
+#+title: Hasura Security
+#+date: <2023-11-20 Mon>
+#+author: David A. Ventimiglia
+#+email: davidaventimiglia@hasura.io
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.1 (Org mode 9.6.6)
+#+cite_export:
+#+reveal_root: https://cdn.jsdelivr.net/npm/reveal.js
+
+* Hasura
+** TODO SHOULD review the Hasura [[https://hasura.io/docs/latest/deployment/production-checklist/][Production Checklist]].
+- good but incomplete
+** TODO SHOULD review the [[https://hasura.io/docs/latest/security/security-best-practices][Security Best Practices]].
+- good but incomplete
+** Configuration
+*** TODO MUST secure with an [[https://hasura.io/docs/latest/auth/authentication/admin-secret-access/][Admin Secret]].
+- required on Enterprise Edition anyway
+*** TODO MUST NOT share Admin Secret with clients.
+- /may/ share with trusted back-ends but even that is dodgy
+*** TODO MAY allow [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#admin-internal-errors][Admin Internal Errors]].
+- best not to leak internal details
+*** TODO MAY configure [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#console-assets-directory][Console Assets Directory]].
+- tangential esp. if Console access is disabled, but relevant in some environments
+*** TODO SHOULD configure [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#cors-domain][CORS Domain]].
+- naturally
+*** TODO SHOULD NOT enable [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#dev-mode][Dev Mode]].
+- again best not to leak internal details
+*** TODO SHOULD NOT enable [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#enable-console][Console Access]].
+- on prod there's just never a good reason to allow Console access
+- unfortunately, can't be disabled on Cloud
+- disabling the metadata API is even better
+- but that warrants attention to CI/CD
+*** TODO SHOULD use a separate [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#metadata-database-url][Metadata Database]].
+- separation of concerns, bulkheading, etc.
+*** TODO SHOULD enable /ONLY/ the [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#enabled-apis][graphql API]].
+- but that warrants attention to CI/CD
+*** TODO SHOULD audit [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#enabled-log-types][Enabled Log Types]].
+- be wary of leaking information in side-channels (APMs)
+*** TODO MAY enable [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#enable-allow-list][Allow Lists]].
+- Hasura says "should" and that's prudent, but not always possible for public or semi-public APIs
+- have to be enabled /and then/ configured
+*** TODO MAY enable an [[https://hasura.io/docs/latest/auth/authentication/unauthenticated-access/#enabling-unauthenticated-access-with-a-unauthorized-role][Unauthorized Role]].
+- Hasura says "should" but I'm on the fence
+*** TODO MAY configure a [[https://hasura.io/docs/latest/deployment/graphql-engine-flags/reference/#rate-limit-redis-url][Redis server]] for rate limiting.
+- besides a Redis server being needed for caching it's /also/ needed for rate limiting
+** Authentication
+*** TODO SHOULD review [[https://hasura.io/docs/latest/auth/how-it-works/][How Authentication Works]].
+- it's complicated
+*** TODO SHOULD review the [[https://www.plantuml.com/plantuml/svg/nLPDK_Cs43xRls8RBdaFnYyzmZ0G4fUa14ppGJgb6KRO6wB1bbnz3Crqyj-BB0EES9gKotl9AjvzLiz-UDVdKX6XT9xvFnM2FEK4jCGx58ec91iiW3FVBqrydowWVN-_LAgGns6u958BSaXvcF94XXbHA5MOOf7nLOwiVWoUD4rH6iDd5E61bO74H0k4SIbIUA5g2Pqqfymy4gZEvlDle9R8eBr2-Sq7C0n-3_gTyNJK2Jgzwy5DC8wwesW2IoGfYZF77g0WGb55EOE38jCvj6v7Wxl1CBgCUd0Tzw8M_5FQERv7yJ1gzEaT_ntOo0F1CuHJsC2S-9vKlF0zp2H2c_4c134nVbYob2vyRrtHg04Derzd4xZcAJeiQc4bNB1VClw2uYBJ2AqIKKNc0RmvAGHAPEfFPlESQAbu3ab6Q2xFuFNnEyiK5qHdohAjAqXchabBXTpaisVwcWqfWu-Y3eVnBEgLYl4dxCxa0zYaRkGH05bQ2Rfmb9PGS_1qM_1kdpLHQtIvFyNjN6t43vUZpct_j-73zAOpdVJZqU2FgFTWqk1chVuEPFHfgIu58eEM1KOtaq6tCubwzQPf26VNhISMnxX2UneZmfGHRRYOOQ8m1O5_QPJA6kmQ9GOQrl2Kir1lEWn8ag2KuO7xlBh8v9woCdO9jVDyRYaWIskCt-e2i3R2IVrxYQhQECTcaAtO31-Nd3ytlSZEZ4g9U1wJBESCMhFeeX_7LvjrgLfWChaDZmwFuEVlto6--knoosicK1QSoIOIN-mjWF_VNzvdRgT066Uhd6lfNE5zfHCzMrJlFtlG-y4Dw7rqNxKAwbl3QEslwIzlxMXtJaBhidAmtVNUbxfQHpgM-wnTpuEty05YbgsWNqO4NPxdcb6rWYYrJjhTo7W5I0Y3HmIXxHhZMW5XTg62B3yQ3akxMchtNatxx9VtwLqVp8rGIyg5LAa2MDV-dxyAym7sBm00][Authentication Flow]].
+- it's complicated
+*** TODO SHOULD prefer [[https://hasura.io/docs/latest/auth/authentication/index/#1-jwt][JWT Mode]] over [[https://hasura.io/docs/latest/auth/authentication/index/#2-webhook][Webhook Mode]].
+- this is largely lore
+*** TODO SHOULD review how [[https://hasura.io/docs/latest/auth/authentication/unauthenticated-access/][Unauthorized Roles]] work.
+- it's not that complicated
+** Authorization
+*** TODO MAY use [[https://hasura.io/docs/latest/auth/authorization/permissions/][Permisson Rules]] with custom checks.
+- heavily dependent on use case and problem domain
+*** TODO MAY model complex Permissions systems.
+- see [[https://github.com/dventimihasura/hasura-projects/tree/master/permissions-builder-1][demo]]
+*** TODO SHOULD use [[https://hasura.io/docs/latest/auth/authorization/permissions/row-fetch-limit/][Row Limits]].
+- important backstop
+** Security Tab
+*** API Limits
+**** TODO SHOULD set stringent Global [[https://hasura.io/docs/latest/security/api-limits/#manage-api-limits][API Limits]].
+- another important backstop
+**** TODO SHOULD set [[https://hasura.io/docs/latest/security/api-limits/#manage-api-limits][API Limits]] for each additional role.
+- be proactive in thinking about roles and security
+**** TODO SHOULD review how [[https://hasura.io/docs/latest/security/api-limits/#manage-api-limits][API Limits]] work.
+- [[https://hasura.io/docs/latest/security/api-limits/#rate-limits][Rate Limits]] :: requests per interval, requires Redis
+- [[https://hasura.io/docs/latest/security/api-limits/#depth-limits][Depth Limits]] :: limits depth and /especially/ recursion
+- [[https://hasura.io/docs/latest/security/api-limits/#node-limits][Node Limits]] :: limits "internal modes" only, quite limited
+- [[https://hasura.io/docs/latest/security/api-limits/#time-limits][Time Limits]] :: be wary of database interaction
+- [[https://hasura.io/docs/latest/security/api-limits/#batch-limits][Batch Limits]] :: pretty straightforward
+*** Schema Introspection
+**** TODO MAY [[https://hasura.io/docs/latest/security/disable-graphql-introspection/][Disable Schema Introspection]] by role.
+- consider [[https://github.com/anvilco/spectaql][generating documentation]] in CI/CD instead
+** Allow List Tab
+*** TODO MAY configure [[https://hasura.io/docs/latest/security/allow-list/][Allow Lists]].
+- have to be enabled first
+*** TODO MAY use [[https://hasura.io/docs/latest/security/allow-list/#role-based-allow-list][Role-based Allow Lists]].
+- be proactive in thinking about roles and security
+** Connection Pool
+*** TODO SHOULD configure [[https://hasura.io/docs/latest/api-reference/syntax-defs/#pgpoolsettings][Pool Settings]].
+- not strictly about security, but it is related
+** Dynamic Routing for Databases
+*** TODO MAY use [[https://hasura.io/docs/latest/databases/database-config/dynamic-db-connection/][Dynamic DB Connections]].
+- advanced feature
+- warrants its own deep-dive
+* Database
+** PostgreSQL
+*** TODO MAY hide core tables behind views and functions.
+*** TODO MAY use multiple roles and Role-Based Access Controls (RBAC).
+- See [[*Dynamic Routing for Databases][Dynamic Routing for Databases]]
+*** TODO SHOULD set a connection limit [[https://www.postgresql.org/docs/current/sql-alteruser.html][configuration parameter]] for roles.
+*** TODO MAY set a connection limit on the [[https://www.postgresql.org/docs/current/sql-createdatabase.html][database]].
+*** TODO SHOULD set [[https://www.postgresql.org/docs/current/runtime-config-client.html#RUNTIME-CONFIG-CLIENT-STATEMENT][statement timeouts]].
+- ~statement_timeout~ no-brainer
+- ~idle_session_timeout~ test its interaction with Hasura's connection pool
+- ~idle_in_transaction_session_timeout~ almost a no-brainer
+- ~transaction_timeout~ coming in PG17
+*** TODO MAY use [[https://www.postgresql.org/docs/current/ddl-rowsecurity.html][Row Security Polices]]
+- see [[https://github.com/dventimihasura/hasura-projects/tree/master/row-security-policies-1][demo]]
+- unfortunately only works with mutations, but not queries or subscriptions
+

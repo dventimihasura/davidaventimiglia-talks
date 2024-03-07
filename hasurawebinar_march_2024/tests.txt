@@ -1,0 +1,7 @@
+# -*- mode: restclient; -*-
+
+#
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{"query":"query{products(limit:1){id order_details{id order_id order{id account{id}}}}}","variables":{}}

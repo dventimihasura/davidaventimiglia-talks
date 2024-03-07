@@ -1,0 +1,59 @@
+version: "3.6"
+services:
+  postgres:
+    image: postgres:16
+    ports:
+      - "${PGPORT}:5432"
+    restart: always
+    volumes:
+      - "./initdb.d-postgres:/docker-entrypoint-initdb.d:ro"
+    healthcheck:
+      test: psql -d graphql_engine_2 -U postgres -c 'select 1' || exit 1
+    environment:
+      POSTGRES_PASSWORD: postgres
+  graphql-engine-1:
+    image: hasura/graphql-engine:v2.36.0.cli-migrations-v3
+    ports:
+      - "${HGEPORT1}:8080"
+    restart: always
+    volumes:
+      - "./graphql-engine-1/metadata:/hasura-metadata:ro"
+    depends_on:
+       postgres:
+         condition: service_healthy
+    environment:
+      DB_URL: postgres://postgres:postgres@postgres:5432/postgres
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ENABLE_APOLLO_FEDERATION: "true"
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgres@postgres:5432/graphql_engine_1
+  graphql-engine-2:
+    image: hasura/graphql-engine:v2.36.0.cli-migrations-v3
+    ports:
+      - "${HGEPORT2}:8080"
+    restart: always
+    volumes:
+      - "./graphql-engine-2/metadata:/hasura-metadata:ro"
+    depends_on:
+       postgres:
+         condition: service_healthy
+    environment:
+      DB_URL: postgres://postgres:postgres@postgres:5432/postgres
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ENABLE_APOLLO_FEDERATION: "true"
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgres@postgres:5432/graphql_engine_2
+  graphql-mesh:
+    build: .
+    restart: always
+    ports:
+      - "${MESHPORT}:4000"
+    depends_on:
+      - graphql-engine-1
+      - graphql-engine-2
+    volumes:
+      - "./graphql-mesh/.meshrc.yaml:/root/.meshrc.yaml:ro"
+    environment:
+      DEBUG: 1

@@ -1,0 +1,151 @@
+#+title: Hasura Training
+#+author: David A. Ventimiglia
+#+email: davidaventimiglia@hasura.io
+
+#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./assets/slide_background.png
+#+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+#+REVEAL_THEME: black
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./assets/slide_background.png
+#+REVEAL_PLUGINS: (highlight)
+#+PANDOC_OPTIONS: standalone:t pdf-engine:pdflatex
+#+PANDOC_VARIABLES: background-image:./assets/slide_background.png
+
+* 
+#+CAPTION: https://github.com/dventimiglia/davidaventimiglia-talks/tree/master/cloud_native_july_2022
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
+[[file:assets/qr.png]]
+
+* What We Will Need
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+#+ATTR_HTML: :width 90%
+#+ATTR_HTML: :height 90%
+[[file:assets/log_into_hasura_cloud.png]]
+
+http://cloud.hasura.io
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:40%;">
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/neon.png]]
+
+[[https://neon.tech]]
+
+#+REVEAL_HTML: </div>
+
+* What We Will Need (Optional)
+
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:assets/app-shot.png]]
+
+https://altairgraphql.dev/
+
+* What We Will Cover
+
+- What is GraphQL?
+- What is Hasura?
+- How do we use them?
+- How do we use them well?
+- What are the general principles?
+- What are the particular details?
+- What is the proper mental model?
+- How do we get there?
+
+* What is GraphQL?
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:60%">
+
+- Query Language
+- /Development/ Tool
+- Schema
+  - Types
+    - Fields
+- Types relate to Types
+- Sound familiar?
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:40%;">
+
+#+ATTR_HTML: :width 100%
+#+ATTR_HTML: :height 100%
+[[file:GraphQL.png]]
+
+#+REVEAL_HTML: </div>
+
+* What is Hasura?
+
+- API Server :: run-time network server
+- Compiler :: run-time GQL to SQL
+- IDE :: dev-time authoring environment
+
+* How do we use them?
+
+- Build network applications /*faster*/, more /*reliably*/, and /*cheaper*/ with GraphQL.
+- Build GraphQL applications /*faster*/, more /*reliably*/, and /*cheaper*/ with Hasura.
+- Apply the general principles with training from /*Hasura Solutions Architects*/.
+- Apply the particular details with support from /*Hasura Support Engineering*/.
+
+* How do we use them well?
+
+- Adopt a principled approach.
+- Develop a proper mental model.
+
+* What are the general principles?
+
+1. Build for /humans/.
+2. Build with /personas/.
+3. Build /in/ the database.
+4. Build a /data model/.
+5. /Remember/ OLTP vs OLAP.
+
+* What is the proper mental model?
+
+- Hasura ~graphql-engine~ is the API server, is on the data plane, and is on the critical path.
+- Hasura ~console~ is part of the development environment, is on the control plane, and is off the critical path.
+- Hasura ~CLI~ is part of the development environment, is on the control plane, and is far off the critical path.
+
+* What is the proper mental model?
+
+- The key /functional/ concerns are: data modeling, API development, business logic, authorization, and integration.
+- The key /non-functional/ concerns are: deployment, caching, monitoring, performance, and security.
+
+* How do we get there?
+
+- Track 1: Development
+- Track 2: Deployment
+
+* Track 1: Development
+
+- [X] Setup: data-sources
+- [X] Tables and Relationships: data modeling
+- [X] Customization: GraphQL API development
+
+* Track 1: Development
+
+- [X] Events: async integration for side-effects
+- [X] Actions: synced integration with REST
+- [X] Actions: integration with REST
+- [X] Remote Schema: integration with GraphQL
+- [X] REST Endpoints: REST APIs
+- [X] Authorization: business logic
+
+* Track 2: Deployment
+
+- [X] Self-Hosted vs Cloud
+- [X] Development Environment
+- [X] Development Workflow (CI/CD)
+- [X] Security: API Limits
+- [X] Monitoring
+- [X] Performance: Read-replicas
+- [X] Caching: Redis
+- [X] Authentication

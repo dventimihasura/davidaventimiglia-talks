@@ -1,0 +1,30 @@
+sources:
+  - name: catalog
+    handler:
+      graphql:
+        endpoint: http://localhost:8081/v1/graphql
+  - name: fulfillment
+    handler:
+      graphql:
+        endpoint: http://localhost:8082/v1/graphql
+
+additionalTypeDefs: |
+  extend type order_detail {
+    product: product @resolveTo(
+      sourceName: "catalog",
+      sourceTypeName: "query_root",
+      sourceFieldName: "product_by_pk",
+      requiredSelectionSet: "{ product_id }",
+      sourceArgs: {
+        id: "{root.product_id}"
+      }
+    ),
+    product_batched: product @resolveTo(
+      sourceName: "catalog",
+      sourceTypeName: "query_root",
+      sourceFieldName: "product",
+      requiredSelectionSet: "{ product_id }",
+      keyField: "product_id",
+      keysArg: "where.id._in"
+    )
+  }
