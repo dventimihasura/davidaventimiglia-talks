@@ -2011,13 +2011,13 @@ with
       from
 	account
      order by random()
-     limit 200
+     limit 1000
   ),
   account as (
     select
       id,
       name,
-      (random()*5)::int orders
+      (random()*10)::int orders
       from sample)
     insert into "order" (account_id)
 select
@@ -2026,7 +2026,7 @@ select
     select
       account.id account_id,
       row_number() over (partition by account.id order by account.name) ordinal
-      from account, generate_series(1, 5)) orders
+      from account, generate_series(1, 10)) orders
        join account on account.id = orders.account_id
 	   and orders.ordinal <= account.orders;
 
