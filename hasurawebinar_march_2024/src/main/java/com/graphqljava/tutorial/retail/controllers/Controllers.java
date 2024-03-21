@@ -45,7 +45,7 @@ public class Controllers {
 		.get();}
 
 	@QueryMapping List<account>
-	    accounts (ArgumentValue<Integer> limit) {
+	    account (ArgumentValue<Integer> limit) {
 	    StatementSpec
 		spec = limit.isOmitted() ?
 		jdbcClient.sql("select * from account") :

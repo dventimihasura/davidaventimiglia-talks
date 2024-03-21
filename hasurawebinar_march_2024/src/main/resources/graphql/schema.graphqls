@@ -1,7 +1,7 @@
 # -*- mode: graphql; -*-
 
 type Query {
-  accounts(limit: Int): [account]!
+  account(limit: Int): [account]!
   account_by_pk(id: ID): account
   orders(limit: Int): [order]!
   order_by_pk(id: ID): order
