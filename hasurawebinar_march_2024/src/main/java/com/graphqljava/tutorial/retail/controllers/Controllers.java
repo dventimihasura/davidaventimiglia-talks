@@ -2,9 +2,12 @@ package com.graphqljava.tutorial.retail.controllers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.Session;
+import org.hibernate.jpa.SpecHints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.ArgumentValue;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -15,14 +18,24 @@ import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.jdbc.core.simple.JdbcClient.StatementSpec;
 import org.springframework.stereotype.Controller;
 
+import com.graphqljava.tutorial.retail.jpamodel.Account;
 import com.graphqljava.tutorial.retail.models.Schema.account;
 import com.graphqljava.tutorial.retail.models.Schema.order;
 import com.graphqljava.tutorial.retail.models.Schema.order_detail;
 import com.graphqljava.tutorial.retail.models.Schema.product;
 
+import graphql.GraphQL;
+import jakarta.persistence.EntityGraph;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.Subgraph;
+
 public class Controllers {
     @Controller public static class AccountController {
 	@Autowired JdbcClient jdbcClient;
+
+	private EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("example");
 
 	RowMapper<account>
 	    accountMapper = new RowMapper<>() {
@@ -55,15 +68,32 @@ public class Controllers {
 		.query(accountMapper)
 		.list();}
 
-	@QueryMapping account
-	    account_by_pk (@Argument String id) {
-	    return
-		jdbcClient
-		.sql("select * from account where id = ? limit 1")
-		.param(UUID.fromString(id))
-		.query(accountMapper)
-		.optional()
-		.get();}}
+	@QueryMapping
+	Account account_by_pk (@Argument String id) {
+	    var em = emFactory.createEntityManager();
+	    var session = em.unwrap(Session.class);
+	    var graph = session.createEntityGraph(Account.class);
+	    var orderGraph = graph.addSubgraph("orders");
+	    var orderDetailGraph = orderGraph.addSubgraph("orderDetails");
+	    orderDetailGraph.addSubgraph("product");
+	    var hints = new HashMap<>();
+	    hints.put(SpecHints.HINT_SPEC_FETCH_GRAPH, graph);
+	    for (Account a : session.byMultipleIds(Account.class)
+		     .withFetchGraph(graph)
+		     .multiLoad(UUID.fromString(id))) return a;
+	    return null;}
+
+	// @QueryMapping account
+	//     account_by_pk (@Argument String id) {
+	//     return
+	// 	jdbcClient
+	// 	.sql("select * from account where id = ? limit 1")
+	// 	.param(UUID.fromString(id))
+	// 	.query(accountMapper)
+	// 	.optional()
+	// 	.get();}
+
+    }
 
     @Controller public static class OrderController {
 	@Autowired JdbcClient jdbcClient;
