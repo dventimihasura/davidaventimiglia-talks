@@ -8,19 +8,22 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.google.gson.annotations.Expose;
 
 @Entity @Table(name = "`order`")
-public class Order extends AbstractModel {
+public class order extends AbstractModel {
     @Id @GeneratedValue @Expose
     public UUID id;
 
     @Column(name = "created_at") @CreationTimestamp @Expose
-    public Date createdAt;
+    public Date created_at;
 
     @Column(name = "updated_at") @UpdateTimestamp @Expose
-    public Date updatedAt;
+    public Date updated_at;
+
+    @Expose
+    public UUID account_id;
 
     @Expose
     public String status;
 
     @OneToMany(fetch = FetchType.LAZY) @JoinColumn(name = "order_id") @Expose
-    public Set<OrderDetail> orderDetails = new HashSet<>();
+    public Set<order_detail> order_details = new HashSet<>();
 }

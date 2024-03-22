@@ -7,20 +7,23 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.google.gson.annotations.Expose;
 
-@Entity @Table(name = "product")
-public class Product extends AbstractModel {
+@Entity @Table(name = "order_detail")
+public class order_detail extends AbstractModel {
     @Id @GeneratedValue @Expose
     public UUID id;
 
     @Column(name = "created_at") @CreationTimestamp @Expose
-    public Date createdAt;
+    public Date created_at;
 
     @Column(name = "updated_at") @UpdateTimestamp @Expose
-    public Date updatedAt;
+    public Date updated_at;
 
     @Expose
-    public String name;
+    public int units;
 
-    @Expose
-    public int price;
+    @ManyToOne(fetch = FetchType.LAZY) @Expose
+    public order_detail order;
+
+    @ManyToOne(fetch = FetchType.LAZY) @Expose
+    public product product;
 }
