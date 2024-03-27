@@ -1,0 +1,3 @@
+export HGEPORT=8081
+export PGPORT=5433
+export SBPORT=8080
