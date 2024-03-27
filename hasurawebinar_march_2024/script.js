@@ -51,7 +51,7 @@ const headers = {
 };
 
 export default function() {
-    const res = http.post('http://localhost:8081/v1/graphql', JSON.stringify({ query: query }), {
+    const res = http.post('http://localhost:8080/graphql', JSON.stringify({ query: query }), {
 	headers: headers,
     })
     check(res, {
