@@ -2,12 +2,6 @@
 
 #+STARTUP: indent
 
-#+title: Hasura Training
-#+author: David A. Ventimiglia
-#+email: davidaventimiglia@hasura.io
-
-#+options: timestamp:nil title:t toc:nil todo:t |:t num:nil author:nil
-
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 #+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./slide_background.png
 #+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
@@ -15,8 +9,23 @@
 #+REVEAL_TITLE_SLIDE_BACKGROUND: ./slide_background.png
 #+REVEAL_PLUGINS: (highlight)
 
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:nil title:t toc:nil todo:t |:t
+#+title: Hasura Training
+#+date: <2024-03-29 Fri>
+#+author: David A. Ventimiglia
+#+email: davidaventimiglia@hasura.io
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.3 (Org mode 9.6.15)
+#+cite_export:
+
 * 
-#+CAPTION: https://tinyurl.com/mvf2ecee
+#+CAPTION: https://github.com/dventimihasura/davidaventimiglia-talks/tree/master/hmh_april_2024
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:qr.png]]
@@ -25,21 +34,21 @@
 
 #+REVEAL_HTML: <div class="column" style="float:left; width:50%">
 
+http://cloud.hasura.io
+
 #+ATTR_HTML: :width 90%
 #+ATTR_HTML: :height 90%
 [[file:log_into_hasura_cloud.png]]
 
-http://cloud.hasura.io
-
 #+REVEAL_HTML: </div>
 
-#+REVEAL_HTML: <div class="column" style="float:right; width:40%;">
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
 
-#+ATTR_HTML: :width 80%
-#+ATTR_HTML: :height 80%
-[[file:log_into_heroku.png]]
+[[https://neon.tech/]]
 
-https://www.heroku.com/
+#+ATTR_HTML: :width 90%
+#+ATTR_HTML: :height 90%
+[[file:log_into_neon.png]]
 
 #+REVEAL_HTML: </div>
 
@@ -123,9 +132,9 @@ https://altairgraphql.dev/
 
 ** Step 1:  Log into Neon
 
-#+ATTR_HTML: :width 40%
-#+ATTR_HTML: :height 40%
-[[file:log_into_heroku.png]]
+#+ATTR_HTML: :width 80%
+#+ATTR_HTML: :height 80%
+[[file:log_into_neon.png]]
 
 ** Step 2:  Log into Hasura Cloud
 
@@ -135,15 +144,25 @@ https://altairgraphql.dev/
 
 ** Step 3:  Connect Neon to Hasura Cloud
 
+My Account › Connections
+
 #+ATTR_HTML: :width 80%
 #+ATTR_HTML: :height 80%
-[[file:connect_heroku_hasura.png]]
+[[file:link_neon.png]]
 
 ** Step 4:  Create a new Hasura Cloud Project
+
+Projects › New Project
 
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:create_new_hasura_project.png]]
+
+** Step 5:  Launch Console
+
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
+[[file:launch_console.png]]
 
 ** Step 5:  Create a new Neon database
 
@@ -153,7 +172,7 @@ https://altairgraphql.dev/
 
 ** Step 6:  Create the Data Model
 
-[[https://tinyurl.com/4vvue9vk]]
+[[file:init_model.sql]]
 
 #+begin_src sql
 -- -*- sql-product: postgres; -*-
@@ -304,9 +323,9 @@ alter table "public"."order"
 create index on "order" (region);
 #+end_src
 
-*** Insert Sample Data
+** Insert Sample Data
 
-[[https://tinyurl.com/2t32axzh]]
+[[file:init_data.sql]]
 
 #+begin_src sql
 -- -*- sql-product: postgres; -*-
