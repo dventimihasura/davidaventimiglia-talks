@@ -154,8 +154,8 @@ My Account › Connections
 
 Projects › New Project
 
-#+ATTR_HTML: :width 40%
-#+ATTR_HTML: :height 40%
+#+ATTR_HTML: :width 30%
+#+ATTR_HTML: :height 30%
 [[file:create_new_hasura_project.png]]
 
 ** Step 5:  Launch Console
@@ -168,8 +168,8 @@ Projects › New Project
 
 Console › Data › Connect Your First Database
 
-#+ATTR_HTML: :width 80%
-#+ATTR_HTML: :height 80%
+#+ATTR_HTML: :width 30%
+#+ATTR_HTML: :height 30%
 [[file:create_database.png]]
 
 ** Step 6:  Create the Data Model
