@@ -26,7 +26,7 @@
 #+cite_export:
 
 * 
-#+CAPTION: https://github.com/dventimihasura/davidaventimiglia-talks/tree/master/hmh_april_2024
+#+CAPTION: https://tinyurl.com/ytxjjck7https://github.com/dventimihasura/davidaventimiglia-talks/tree/master/hmh_april_2024
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:qr.png]]
@@ -77,7 +77,7 @@ Console › Data › Connect Your First Database
 
 Console › Data › Run SQL
 
-[[https://github.com/dventimihasura/davidaventimiglia-talks/blob/20164036cf822b597a738c5f95933adcbd5d2da9/hmh_april_2024/init_model.sql]]
+[[https://tinyurl.com/367p55ca]]
 
 #+begin_src sql
 -- -*- sql-product: postgres; -*-
@@ -232,7 +232,7 @@ create index on "order" (region);
 
 Console › Data › Run SQL
 
-[[https://github.com/dventimihasura/davidaventimiglia-talks/blob/20164036cf822b597a738c5f95933adcbd5d2da9/hmh_april_2024/init_data.sql]]
+[[https://tinyurl.com/392tvc9p]]
 
 #+begin_src sql
 -- -*- sql-product: postgres; -*-
