@@ -166,13 +166,17 @@ Projects › New Project
 
 ** Step 5:  Create a new Neon database
 
+Console › Data › Connect Your First Database
+
 #+ATTR_HTML: :width 80%
 #+ATTR_HTML: :height 80%
 [[file:create_database.png]]
 
 ** Step 6:  Create the Data Model
 
-[[file:init_model.sql]]
+Console › Data › Run SQL
+
+[[https://github.com/dventimihasura/davidaventimiglia-talks/blob/20164036cf822b597a738c5f95933adcbd5d2da9/hmh_april_2024/init_model.sql]]
 
 #+begin_src sql
 -- -*- sql-product: postgres; -*-
@@ -325,7 +329,9 @@ create index on "order" (region);
 
 ** Insert Sample Data
 
-[[file:init_data.sql]]
+Console › Data › Run SQL
+
+[[https://github.com/dventimihasura/davidaventimiglia-talks/blob/20164036cf822b597a738c5f95933adcbd5d2da9/hmh_april_2024/init_data.sql]]
 
 #+begin_src sql
 -- -*- sql-product: postgres; -*-
