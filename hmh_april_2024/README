@@ -26,7 +26,7 @@
 #+cite_export:
 
 * 
-#+CAPTION: https://tinyurl.com/ytxjjck7https://github.com/dventimihasura/davidaventimiglia-talks/tree/master/hmh_april_2024
+#+CAPTION: https://tinyurl.com/ytxjjck7
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:qr.png]]
@@ -65,7 +65,7 @@ Projects › New Project
 #+ATTR_HTML: :height 40%
 [[file:launch_console.png]]
 
-* Step 5:  Create a new Neon database
+* Step 6:  Create a new Neon database
 
 Console › Data › Connect Your First Database
 
@@ -73,7 +73,7 @@ Console › Data › Connect Your First Database
 #+ATTR_HTML: :height 30%
 [[file:create_database.png]]
 
-* Step 6:  Create the Data Model
+* Step 7:  Create the Data Model
 
 Console › Data › Run SQL
 
@@ -228,7 +228,7 @@ alter table "public"."order"
 create index on "order" (region);
 #+end_src
 
-** Insert Sample Data
+* Step 8:  Insert Sample Data
 
 Console › Data › Run SQL
 
