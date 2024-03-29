@@ -15,6 +15,7 @@
 #+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
 #+options: timestamp:nil title:t toc:nil todo:t |:t
 #+title: Hasura Training
+#+subtitle:  Pre-Work
 #+date: <2024-03-29 Fri>
 #+author: David A. Ventimiglia
 #+email: davidaventimiglia@hasura.io
@@ -24,125 +25,26 @@
 #+creator: Emacs 29.3 (Org mode 9.6.15)
 #+cite_export:
 
+
 * 
 #+CAPTION: https://github.com/dventimihasura/davidaventimiglia-talks/tree/master/hmh_april_2024
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:qr.png]]
 
-* What We Will Need
-
-#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
-
-http://cloud.hasura.io
-
-#+ATTR_HTML: :width 90%
-#+ATTR_HTML: :height 90%
-[[file:log_into_hasura_cloud.png]]
-
-#+REVEAL_HTML: </div>
-
-#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
-
-[[https://neon.tech/]]
-
-#+ATTR_HTML: :width 90%
-#+ATTR_HTML: :height 90%
-[[file:log_into_neon.png]]
-
-#+REVEAL_HTML: </div>
-
-* What We Will Need (Optional)
-
-#+ATTR_HTML: :width 80%
-#+ATTR_HTML: :height 80%
-[[file:app-shot.png]]
-
-https://altairgraphql.dev/
-
-* What We Will Cover
-
-- What is GraphQL?
-- What is Hasura?
-- How do we use them?
-- How do we use them well?
-- What are the general principles?
-- What are the particular details?
-- What is the proper mental model?
-- How do we get there?
-
-* What is GraphQL?
-
-#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
-
-- Query Language
-- Schema
-  - Types
-    - Fields
-- Types relate to Types
-- Sound familiar?
-
-#+REVEAL_HTML: </div>
-
-#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
-
-#+ATTR_HTML: :width 100%
-#+ATTR_HTML: :height 100%
-[[file:GraphQL.png]]
-
-#+REVEAL_HTML: </div>
-
-* What is Hasura?
-
-- API Server
-- Development Environment
-
-* How do we use them?
-
-- Build network applications /*faster*/, more /*reliably*/, and /*cheaper*/ with GraphQL.
-- Build GraphQL applications /*faster*/, more /*reliably*/, and /*cheaper*/ with Hasura.
-- Apply the general principles with training from /*Hasura Developer Relations*/.
-- Apply the particular details with support from /*Hasura Developer Success*/.
-
-* How do we use them well?
-
-- Adopt a principled approach.
-- Develop a proper mental model.
-
-* What are the general principles?
-
-1. Build for /humans/.
-2. Build with /personas/.
-3. Build /in/ the database.
-4. Build a /data model/.
-5. /Remember/ OLTP vs OLAP.
-
-* What is the proper mental model?
-
-- Hasura ~graphql-engine~ is the API server, is on the data plane, and is on the critical path.
-- Hasura ~console~ is part of the development environment, is on the control plane, and is off the critical path.
-- Hasura ~CLI~ is part of the development environment, is on the control plane, and is far off the critical path.
-
-* What is the proper mental model?
-
-- The key /functional/ concerns are: data modeling, API development, security, and integrations.
-- The key /non-functional/ concerns are: deployment, caching, monitoring.
-
-* Pre-Work
-
-** Step 1:  Log into Neon
+* Step 1:  Log into Neon
 
 #+ATTR_HTML: :width 80%
 #+ATTR_HTML: :height 80%
 [[file:log_into_neon.png]]
 
-** Step 2:  Log into Hasura Cloud
+* Step 2:  Log into Hasura Cloud
 
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:log_into_hasura_cloud.png]]
 
-** Step 3:  Connect Neon to Hasura Cloud
+* Step 3:  Connect Neon to Hasura Cloud
 
 My Account › Connections
 
@@ -150,7 +52,7 @@ My Account › Connections
 #+ATTR_HTML: :height 80%
 [[file:link_neon.png]]
 
-** Step 4:  Create a new Hasura Cloud Project
+* Step 4:  Create a new Hasura Cloud Project
 
 Projects › New Project
 
@@ -158,13 +60,13 @@ Projects › New Project
 #+ATTR_HTML: :height 30%
 [[file:create_new_hasura_project.png]]
 
-** Step 5:  Launch Console
+* Step 5:  Launch Console
 
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:launch_console.png]]
 
-** Step 5:  Create a new Neon database
+* Step 5:  Create a new Neon database
 
 Console › Data › Connect Your First Database
 
@@ -172,7 +74,7 @@ Console › Data › Connect Your First Database
 #+ATTR_HTML: :height 30%
 [[file:create_database.png]]
 
-** Step 6:  Create the Data Model
+* Step 6:  Create the Data Model
 
 Console › Data › Run SQL
 
