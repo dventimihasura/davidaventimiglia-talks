@@ -15,7 +15,7 @@
 #+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
 #+options: timestamp:nil title:t toc:nil todo:t |:t
 #+title: Hasura Training
-#+subtitle:  Pre-Work
+#+subtitle: Theory & Practice
 #+date: <2024-03-29 Fri>
 #+author: David A. Ventimiglia
 #+email: davidaventimiglia@hasura.io
@@ -31,19 +31,49 @@
 #+ATTR_HTML: :height 40%
 [[file:qr.png]]
 
-* Step 1:  Log into Neon
+* What is GraphQL?
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:60%">
+
+- Query Language
+- /Development/ Tool
+- Schema
+  - Types
+    - Fields
+- Types relate to Types
+- Sound familiar?
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:40%;">
+
+#+ATTR_HTML: :width 100%
+#+ATTR_HTML: :height 100%
+[[file:GraphQL.png]]
+
+#+REVEAL_HTML: </div>
+
+* What is Hasura?
+
+- API Server :: run-time network server
+- Compiler :: run-time GQL to SQL
+- IDE :: dev-time authoring environment
+
+* Workshop
+
+** Step 1:  Log into Neon
 
 #+ATTR_HTML: :width 80%
 #+ATTR_HTML: :height 80%
 [[file:log_into_neon.png]]
 
-* Step 2:  Log into Hasura Cloud
+** Step 2:  Log into Hasura Cloud
 
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:log_into_hasura_cloud.png]]
 
-* Step 3:  Connect Neon to Hasura Cloud
+** Step 3:  Connect Neon to Hasura Cloud
 
 My Account › Connections
 
@@ -51,7 +81,7 @@ My Account › Connections
 #+ATTR_HTML: :height 80%
 [[file:link_neon.png]]
 
-* Step 4:  Create a new Hasura Cloud Project
+** Step 4:  Create a new Hasura Cloud Project
 
 Projects › New Project
 
@@ -59,13 +89,13 @@ Projects › New Project
 #+ATTR_HTML: :height 30%
 [[file:create_new_hasura_project.png]]
 
-* Step 5:  Launch Console
+** Step 5:  Launch Console
 
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:launch_console.png]]
 
-* Step 6:  Create a new Neon database
+** Step 6:  Create a new Neon database
 
 Console › Data › Connect Your First Database
 
@@ -73,7 +103,7 @@ Console › Data › Connect Your First Database
 #+ATTR_HTML: :height 30%
 [[file:create_database.png]]
 
-* Step 7:  Create the Data Model
+** Step 7:  Create the Data Model
 
 Console › Data › Run SQL
 
@@ -228,7 +258,7 @@ alter table "public"."order"
 create index on "order" (region);
 #+end_src
 
-* Step 8:  Insert Sample Data
+** Step 8:  Insert Sample Data
 
 Console › Data › Run SQL
 
