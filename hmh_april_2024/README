@@ -59,7 +59,7 @@
 - Compiler :: run-time GQL to SQL
 - IDE :: dev-time authoring environment
 
-* Workshop
+* Workshop I
 
 ** Step 1:  Log into Neon
 
@@ -344,3 +344,6 @@ update "order" set region = ((array[
 
 commit;
 #+end_src
+
+* Workshop II
+

@@ -1,0 +1,13 @@
+- name: allowed-queries
+  definition:
+    queries:
+      - name: summary
+        query: |
+          query SummaryQuery ($id: uuid!) {
+            account_by_pk(id: $id) {
+              name
+              account_summary {
+                sum
+              }
+            }
+          }

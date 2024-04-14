@@ -3,6 +3,7 @@
 begin;
 
 insert into account (name) values ('Estevan Leeming');
+
 insert into account (name) values ('Laurianne Stansby');
 insert into account (name) values ('Wendie Rennison');
 insert into account (name) values ('Justinn Trowsdale');
@@ -2076,4 +2077,7 @@ update "order" set region = ((array[
   'SOUTHWEST'
   ])[floor(random()*9+1)])::text;
 
+insert into credentials select id, format($$%s.%s@test.com$$, lower(split_part(name, ' ', 1)), lower(split_part(name, ' ', 2))), 'password', 'basic_user' from account;
+
 commit;
+

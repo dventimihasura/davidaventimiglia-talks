@@ -1,0 +1,18 @@
+- name: default
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url:
+        from_env: PG_DATABASE_URL
+      isolation_level: read-committed
+      use_prepared_statements: false
+  tables: "!include default/tables/tables.yaml"
+- name: snowflake
+  kind: snowflake
+  configuration:
+    template: null
+    timeout: null
+    value:
+      fully_qualify_all_names: false
+      jdbc_url: jdbc:snowflake://SAMBSMM-WS19216.snowflakecomputing.com?user=davidventimiglia&password=akv*KMP-nbe-qhv6zhq
+  tables: "!include snowflake/tables/tables.yaml"

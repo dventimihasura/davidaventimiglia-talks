@@ -1,0 +1,9 @@
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: summary
+  methods:
+    - GET
+  name: summary
+  url: summaryquery/:id

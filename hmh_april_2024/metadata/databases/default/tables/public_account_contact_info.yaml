@@ -1,0 +1,10 @@
+table:
+  name: account_contact_info
+  schema: public
+configuration:
+  column_config: {}
+  custom_column_names: {}
+  custom_name: contact_info
+  custom_root_fields: {}
+apollo_federation_config:
+  enable: v1
