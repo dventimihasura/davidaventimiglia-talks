@@ -18,11 +18,14 @@ public class order extends AbstractModel {
     @Column(name = "updated_at") @UpdateTimestamp @Expose
     public Date updated_at;
 
-    @Expose
-    public UUID account_id;
+    // @Expose
+    // public UUID account_id;
 
     @Expose
     public String status;
+
+    @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "account_id") @Expose
+    public account account;
 
     @OneToMany(fetch = FetchType.LAZY) @JoinColumn(name = "order_id") @Expose
     public Set<order_detail> order_details = new HashSet<>();

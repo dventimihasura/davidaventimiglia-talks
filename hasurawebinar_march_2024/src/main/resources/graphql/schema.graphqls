@@ -3,11 +3,11 @@
 type Query {
   account(limit: Int): [account]!
   account_by_pk(id: ID): account
-  orders(limit: Int): [order]!
+  order(limit: Int): [order]!
   order_by_pk(id: ID): order
-  order_details(limit: Int): [order_detail]!
+  order_detail(limit: Int): [order_detail]!
   order_detail_by_pk(id: ID): order_detail
-  products(limit: Int): [product]!
+  product(limit: Int): [product]!
   product_by_pk(id: ID): product
 }
 
@@ -26,7 +26,6 @@ type order {
   created_at: String
   updated_at: String
   order_details(limit: Int): [order_detail]!
-  account: account!
 }
 
 type order_detail {
@@ -37,7 +36,6 @@ type order_detail {
   created_at: String
   updated_at: String
   product: product!
-  order: order!
 }
 
 type product {
@@ -46,5 +44,4 @@ type product {
   price: Int
   created_at: String
   updated_at: String
-  order_details(limit: Int): [order_detail]!
 }

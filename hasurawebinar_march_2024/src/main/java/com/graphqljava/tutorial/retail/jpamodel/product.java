@@ -23,4 +23,7 @@ public class product extends AbstractModel {
 
     @Expose
     public int price;
+
+    @OneToMany(fetch = FetchType.LAZY) @JoinColumn(name = "order_id") @Expose
+    public Set<order_detail> order_details = new HashSet<>();
 }
