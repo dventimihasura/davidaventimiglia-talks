@@ -31,3 +31,8 @@ hasurawebinar_january_2024/graphql_mesh/.mesh/sources/catalog/introspectionSchem
 hasurawebinar_january_2024/graphql_mesh/.mesh/sources/fulfillment/introspectionSchema.ts
 hasurawebinar_march_2024/.mvn/wrapper/
 hasurawebinar_march_2024/setenv.sh
+*.class
+*.classpath
+*.project
+.settings
+target
