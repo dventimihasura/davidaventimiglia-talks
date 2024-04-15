@@ -12,16 +12,16 @@ export const options = {
 	    executor: 'ramping-vus',
 	    stages: [
 		{ duration: '10s', target: 10 },
-		// { duration: '10s', target: 20 },
-		// { duration: '10s', target: 40 },
-		// { duration: '10s', target: 80 },
-		// { duration: '10s', target: 160 },
-		// { duration: '10s', target: 320 },
-		// { duration: '10s', target: 640 },
-		// { duration: '10s', target: 1024 },
-		// { duration: '10s', target: 2048 },
-		// { duration: '10s', target: 4096 },
-		// { duration: '10s', target: 8192 },
+		{ duration: '10s', target: 20 },
+		{ duration: '10s', target: 40 },
+		{ duration: '10s', target: 80 },
+		{ duration: '10s', target: 160 },
+		{ duration: '10s', target: 320 },
+		{ duration: '10s', target: 640 },
+		{ duration: '10s', target: 1024 },
+		{ duration: '10s', target: 2048 },
+		{ duration: '10s', target: 4096 },
+		{ duration: '10s', target: 8192 },
 	    ],
 	},
     },
@@ -29,8 +29,20 @@ export const options = {
 
 const query = `
 query {
-  account(limit: 1) {
+  order(limit: 10) {
     id
+    status
+    account {
+      id
+      name 
+    }
+    order_details {
+      units
+      product {
+        name
+        price
+      }
+    }
   }
 }
 `;
