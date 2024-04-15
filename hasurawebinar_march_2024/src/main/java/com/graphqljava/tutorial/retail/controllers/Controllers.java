@@ -45,7 +45,7 @@ public class Controllers {
 		.get();}
 
 	@QueryMapping List<account>
-	    accounts (ArgumentValue<Integer> limit) {
+	    account (ArgumentValue<Integer> limit) {
 	    StatementSpec
 		spec = limit.isOmitted() ?
 		jdbcClient.sql("select * from account") :
@@ -100,7 +100,7 @@ public class Controllers {
 		.list();}
 
 	@QueryMapping List<order>
-	    orders (ArgumentValue<Integer> limit) {
+	    order (ArgumentValue<Integer> limit) {
 	    StatementSpec
 		spec = limit.isOmitted() ?
 		jdbcClient.sql("select * from \"order\"") :
@@ -157,7 +157,7 @@ public class Controllers {
 		.list();}
 
 	@QueryMapping List<order_detail>
-	    order_details (ArgumentValue<Integer> limit) {
+	    order_detail (ArgumentValue<Integer> limit) {
 	    StatementSpec
 		spec = limit.isOmitted() ?
 		jdbcClient.sql("select * from order_detail") :
@@ -201,7 +201,7 @@ public class Controllers {
 		.get();}
 
 	@QueryMapping List<product>
-	    products (ArgumentValue<Integer> limit) {
+	    product (ArgumentValue<Integer> limit) {
 	    StatementSpec
 		spec = limit.isOmitted() ?
 		jdbcClient.sql("select * from product") :

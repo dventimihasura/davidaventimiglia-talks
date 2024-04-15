@@ -1,13 +1,13 @@
 # -*- mode: graphql; -*-
 
 type Query {
-  accounts(limit: Int): [account]!
+  account(limit: Int): [account]!
   account_by_pk(id: ID): account
-  orders(limit: Int): [order]!
+  order(limit: Int): [order]!
   order_by_pk(id: ID): order
   order_details(limit: Int): [order_detail]!
   order_detail_by_pk(id: ID): order_detail
-  products(limit: Int): [product]!
+  product(limit: Int): [product]!
   product_by_pk(id: ID): product
 }
 

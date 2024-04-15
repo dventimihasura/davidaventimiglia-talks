@@ -101,7 +101,11 @@ And let's see what works and what doesn't.
 #+begin_src bash
   cat <<EOF > setenv.sh
   export HGEPORT=8081
+  export PGDATABASE=postgres
+  export PGHOST=localhost
+  export PGPASSWORD=postgres
   export PGPORT=5433
+  export PGUSER=postgres
   export SBPORT=8080
   EOF
 #+end_src
