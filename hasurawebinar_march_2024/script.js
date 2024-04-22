@@ -11,17 +11,17 @@ export const options = {
 	average_load: {
 	    executor: 'ramping-vus',
 	    stages: [
-		{ duration: '10s', target: 10 },
-		{ duration: '10s', target: 20 },
-		{ duration: '10s', target: 40 },
-		{ duration: '10s', target: 80 },
-		{ duration: '10s', target: 160 },
-		{ duration: '10s', target: 320 },
-		{ duration: '10s', target: 640 },
-		{ duration: '10s', target: 1024 },
-		{ duration: '10s', target: 2048 },
-		{ duration: '10s', target: 4096 },
-		{ duration: '10s', target: 8192 },
+		{ duration: '300s', target: 1 },
+		// { duration: '10s', target: 20 },
+		// { duration: '10s', target: 40 },
+		// { duration: '10s', target: 80 },
+		// { duration: '10s', target: 160 },
+		// { duration: '10s', target: 320 },
+		// { duration: '10s', target: 640 },
+		// { duration: '10s', target: 1024 },
+		// { duration: '10s', target: 2048 },
+		// { duration: '10s', target: 4096 },
+		// { duration: '10s', target: 8192 },
 	    ],
 	},
     },
@@ -52,7 +52,7 @@ const headers = {
 };
 
 export default function() {
-    const res = http.post('http://localhost:8080/graphql', JSON.stringify({ query: query }), {
+    const res = http.post('http://34.94.25.86/graphql', JSON.stringify({ query: query }), {
 	headers: headers,
     })
     check(res, {

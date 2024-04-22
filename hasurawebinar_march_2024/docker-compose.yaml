@@ -28,8 +28,9 @@ services:
     ports:
       - ${SBPORT:-8080}:8080
     environment:
-      PGDATABASE: ${PGDATABASE:-postgres}
-      PGHOST: ${PGHOST:-postgres}
-      PGPASSWORD: ${PGPASSWORD:-postgres}
-      PGPORT: ${PGPORT:-5432}
-      PGUSER: ${PGUSER:-postgres}
+      PGDATABASE: postgres
+      PGHOST: postgres
+      PGPASSWORD: postgres
+      PGPORT: 5432
+      PGUSER: postgres
+      SBPORT: 8080
