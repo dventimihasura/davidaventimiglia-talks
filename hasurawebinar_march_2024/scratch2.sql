@@ -1,7 +1,6 @@
 -- -*- sql-product: postgres; -*-
 
 explain analyze
-
 with
   sample
     as not materialized (
@@ -9,7 +8,7 @@ with
 	account_id
 	from
 	  "order"
-       limit 10),
+    limit 1),
   l0
     as not materialized (
       select
