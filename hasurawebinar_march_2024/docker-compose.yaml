@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:16
     ports:
-      - ${PGPORT:-5432}:5432
+      - ${PGPORT:-5433}:5432
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres
@@ -26,7 +26,7 @@ services:
   graphql-java:
     build: .
     ports:
-      - ${SBPORT:-8080}:8080
+      - ${SBPORT:-8082}:8080
     environment:
       PGDATABASE: postgres
       PGHOST: postgres
