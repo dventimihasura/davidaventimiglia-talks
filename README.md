@@ -1,2 +1,0 @@
-# talks
-Public Speaking Activities
