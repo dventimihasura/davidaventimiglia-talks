@@ -103,6 +103,12 @@ And let's see what works and what doesn't.
 
 #+RESULTS:
 
+** Step 3:  Build the JAR file.
+
+#+begin_src bash
+  mvn package
+#+end_src
+
 ** Step 4:  Source the ~setenv.sh~ file.
 
 #+begin_src bash
@@ -123,9 +129,9 @@ or
 
 * Tests
 
-#+begin_src graphql :url http://localhost:8080/graphql
+#+begin_src graphql :url http://localhost:8081/graphql
 query {
-  orders(limit: 1) {
+  order(limit: 1) {
     id
     status
     account {
@@ -146,68 +152,33 @@ query {
 #+begin_example
 {
   "data": {
-    "orders": [
+    "order": [
       {
-        "id": "2c0a0c8d-cc54-4a47-8ef6-65cbd8b487bf",
-        "status": "processing",
+        "id": "89eb8dc4-c77a-4a6f-9f4d-bd89da8454a8",
+        "status": "fulfilled",
         "account": {
-          "name": "Roana Crate"
+          "name": "Sophia Albrook"
         },
         "order_details": [
           {
-            "units": 4,
+            "units": 7,
+            "product": {
+              "name": "Sugar - Brown, Individual",
+              "price": 874
+            }
+          },
+          {
+            "units": 6,
             "product": {
               "name": "Zucchini - Green",
               "price": 23
             }
           },
           {
-            "units": 3,
+            "units": 10,
             "product": {
-              "name": "Sproutsmustard Cress",
-              "price": 771
-            }
-          },
-          {
-            "units": 7,
-            "product": {
-              "name": "Wine - Prosecco Valdobienne",
-              "price": 220
-            }
-          },
-          {
-            "units": 8,
-            "product": {
-              "name": "Arizona - Green Tea",
-              "price": 377
-            }
-          },
-          {
-            "units": 6,
-            "product": {
-              "name": "Plastic Wrap",
-              "price": 71
-            }
-          },
-          {
-            "units": 9,
-            "product": {
-              "name": "Ecolab - Ster Bac",
-              "price": 227
-            }
-          },
-          {
-            "units": 8,
-            "product": {
-              "name": "Lemonade - Strawberry, 591 Ml",
-              "price": 75
-            }
-          },
-          {
-            "units": 4,
-            "product": {
-              "name": "Gherkin",
-              "price": 678
+              "name": "Sour Cream",
+              "price": 788
             }
           }
         ]
