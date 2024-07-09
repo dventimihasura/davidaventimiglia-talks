@@ -1,0 +1,195 @@
+# -*- mode: org; -*-
+
+#+STARTUP: indent
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./slide_background.png
+#+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+#+REVEAL_THEME: black
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./slide_background.png
+#+REVEAL_PLUGINS: (highlight)
+
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:nil title:t toc:nil todo:t |:t
+#+title: +Data-First+ Domain-Driven GraphQL
+#+subtitle: Teach the Controversy!
+#+date: <2024-07-10 Wed>
+#+author: David A. Ventimiglia
+#+email: davidaventimiglia@hasura.io
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.3 (Org mode 9.6.15)
+#+cite_export:
+
+* 
+#+CAPTION: https://tinyurl.com/dventimihasura
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
+[[file:qrcode_github.com.png]]
+
+* Abstract
+
+#+ATTR_HTML: :width 100%
+#+begin_quote
+There is a debate in the GraphQL community between "schema-first" and
+"code-first" development. Yet, there is a third way: data-first
+GraphQL APIs. This is where principles and pragmatism meet. "Do not
+Repeat Yourself", "Domain-Driven Design," and "Data-Driven
+Development" are important principles blah blah blah...
+#+end_quote
+
+* In a Nutshell
+
+We think there's a better way, but hey, /maybe we're wrong!/
+
+* What is GraphQL?
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- Query Language
+- Schema
+  - Types
+    - Fields
+      - Types
+- Sound familiar? 🛢
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
+[[file:GraphQL.png]]
+
+#+REVEAL_HTML: </div>
+
+* /WHAT/ is GraphQL?
+
+- REST replacement?
+- failed promise?
+- snake oil? 🐍
+
+* How is it Implemented?
+
+- schema-first :: Write a schema, then write resolvers.
+- code-first :: Just write resolvers.
+
+* /HOW/ is it Implemented?
+
+by writing a lot of code
+
+* What is the problem?
+
+- security :: exposes bad stuff to enemies
+- performance :: exposes bad performance even to friends
+- complexity :: exposes enormous complexity to implementers
+
+* /WHAT/ is the problem?
+
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
+[[file:twitter.png]]
+
+* What is the solution?
+
+Use [[https://hasura.io/][Hasura]], or [[https://www.graphile.org/postgraphile/][PostGraphile]], or +Prisma+, or even [[https://postgrest.org/][PostgREST]].
+
+* /WHAT/ is the solution?
+
+Domain-Driven development
+
+* What is Domain-Driven Development?
+
+#+begin_quote
+the domain-driven approach translates the richness of your domain,
+primarily the storage layer (databases), to your API
+#+end_quote
+/cf./ [[https://hasura.io/blog/@praveenweb][Praveen Durairaju]]
+
+* /WHAT/ is Domain-Driven Development?
+
+Compile (or translate, or transpile, or whatever) a GraphQL query into
+a SQL (for example) query.  Use this to "generate" a GraphQL API from
+the underlying database. 
+
+* Isn't that nuts?
+
+Hear me out.
+
+* 
+
+#+ATTR_HTML: :width 70%
+#+ATTR_HTML: :height 70%
+[[file:Intermission_LCCN2012645960.jpg]]
+
+* OK, but what is the benefit?
+
+/If/ you already have a powerful underlying database and query
+language /then/ using it can help address the problems of security,
+performance, and complexity.
+
+* /OBJECTION!/  This exposes the database.
+
+No. It only exposes the objects available to the role (provided the
+database has Role-Based Access Controls, that is).
+
+* /OBJECTION!/  The API should be independent.
+
+No. That's a matter of judgement.  It /can/ be, but it need not
+/necessarily/ be.  When independence is needed, the database itself
+can often furnish that independence.
+
+* /OBJECTION!/  Dataloaders fix the performance problem.
+
+No. Dataloaders /address/ the performance problem.
+
+* /OBJECTION!/  Java frameworks fix the complexity problem.
+
+No. Java frameworks like [[https://github.com/introproventures/graphql-jpa-query][graphql-jpa-query]] and [[https://github.com/leangen/graphql-spqr][graphql-spqr]] /address/
+the complexity problem.
+
+* /OBJECTION!/  Code is necessary for business logic.
+
+Yes and no. Data validation and Data Transformation can often be
+addressed by SQL (for example).  Side-Effects, on the other hand, are
+a different story.
+
+* Domain-Driven GraphQL
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- Resolvers are easy, flexible, tedious, and inefficient.
+- Dataloaders are efficient, difficult, inflexible.
+- Toss in NFRs and that's a lot of code.
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
+
+- [[https://en.wikipedia.org/wiki/Don%27t_repeat_yourself][DRY]] your code and you're well on your way to Hasura.
+- That's good!  [[https://en.wiktionary.org/wiki/TMTOWTDI][TMTOWTDI]] after all.
+- OTOH, you might just use Hasura and get on with your life.
+
+#+REVEAL_HTML: </div>
+
+* Domain-Driven GraphQL
+
+#+begin_quote
+[databases] have long been the gold standard of expressiveness of data
+requirements – any sufficiently expressive API will begin to look like
+SQL – there’s no alternative. So, instead of reinventing the wheel, a
+domain-driven approach mirrors whatever flexibility your domain allows
+in terms of access patterns/capabilities.
+#+end_quote
+/cf./ [[https://hasura.io/blog/@praveenweb][Praveen Durairaju]]
+
+* References
+
+- [[https://hasura.io/blog/compile-dont-resolve-designing-a-feature-rich-high-performance-domain-driven-graphql-api][Compile, don't resolve: Designing a feature-rich, high-performance, domain-driven GraphQL API]]
+- [[https://thenewstack.io/is-graphql-over-or-do-we-just-need-to-rethink-it/][Is GraphQL Over or Do We Just Need to Rethink It?]]
+- [[https://hasura.io/blog/the-ultimate-graphql-for-java-guide][The Ultimate GraphQL for Java Guide]]
+- [[https://hasura.io/blog/building-a-graphql-server-with-netflix-dgs-an-unfiltered-review][Building a GraphQL server with Netflix DGS: An unfiltered review]]
+- [[https://grafast.org/grafast][Gra/fast/ introduction]]
+- [[https://x.com/schrockn/status/1721340874771062933][Nick Schrock on Twitter]]
+
