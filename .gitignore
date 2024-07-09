@@ -41,3 +41,6 @@ scratch.*
 setenv.sh
 .mvn
 .gitignore
+./
+sfjug_july_2024/SLIDES
+sfjug_july_2024/target/
