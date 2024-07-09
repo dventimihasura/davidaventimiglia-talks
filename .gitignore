@@ -30,3 +30,14 @@ hasurawebinar_january_2024/graphql_mesh/.mesh/sources/fulfillment/introspectionS
 hasurawebinar_march_2024/.mvn/wrapper/
 hasurawebinar_march_2024/setenv.sh
 hasurawebinar_march_2024/scratch2.sql
+
+
+hasuracon_june_2022/README.html
+*.html
+hasurameetup_july_2024/README.tex
+*.tex
+scratch.*
+.env
+setenv.sh
+.mvn
+.gitignore
