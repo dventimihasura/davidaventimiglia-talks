@@ -1,0 +1,121 @@
+# -*- mode: org; -*-
+
+#+STARTUP: indent
+
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND: ./slide_background.png
+#+REVEAL_INIT_OPTIONS: transition:'none', controlsLayout:'edges', progress:false, controlsTutorial:false
+#+REVEAL_THEME: black
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./slide_background.png
+#+REVEAL_PLUGINS: (highlight)
+
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:nil title:t toc:nil todo:t |:t
+#+title: +Data-First+ Domain-Driven GraphQL
+#+subtitle: Teach the Controversy
+#+date: <2024-07-10 Wed>
+#+author: David A. Ventimiglia
+#+email: davidaventimiglia@hasura.io
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.3 (Org mode 9.6.15)
+#+cite_export:
+
+* 
+#+CAPTION: https://github.com/dventimihasura/davidaventimiglia-talks/tree/master/hmh_april_2024
+#+ATTR_HTML: :width 40%
+#+ATTR_HTML: :height 40%
+[[file:qr.png]]
+
+* Abstract
+
+#+begin_quote
+There is a debate in the GraphQL community between "schema-first" and
+"code-first" development. Yet, there is a third way: data-first
+GraphQL APIs. This is where principles and pragmatism meet. "Do not
+Repeat Yourself", "Domain-Driven Design," and "Data-Driven
+Development" are important principles in software. Just as important
+are pragmatic concerns like integrating vast reservoirs of
+heterogeneous brownfield data sources, exposing it all as
+production-grade APIs, and doing it fast. The remorseless logic of
+these factors leads ineluctably to one conclusion: APIs must derive
+from the data, not from a schema or from code that has been curated
+manually, independent of the data. In this talk, we at Hasura wade
+into the debate to argue for this third way. Ship APIs faster,
+cheaper, and more reliably with data-first GraphQL development.
+#+end_quote
+
+* In a Nutshell
+
+#+begin_quote
+We think there's a better way, but hey, maybe we're wrong.
+#+end_quote
+
+* What is GraphQL?
+
+#+REVEAL_HTML: <div class="column" style="float:left; width:50%">
+
+- Query Language
+- Schema
+  - Types
+    - Fields
+      - Types
+- Sound familiar?
+
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width:50%;">
+[[file:GraphQL.png]]
+
+#+REVEAL_HTML: </div>
+
+* WHAT is GraphQL?
+
+REST replacement
+
+* How is it Implemented?
+
+Recursive network of resolvers
+
+* What is a resolver?
+
+Function to resolve a field value
+
+* HOW is it Implemented?
+
+- schema-first :: Write a GraphQL schema and then write the resolvers
+  to support it.
+- code-first :: Just write the resolvers.
+
+* What is the problem?
+
+- security :: exposes exfiltration, tampering, and denial-of-service to bad
+  actors.
+- performance :: exposes bad performance even to friendly actors
+- complexity :: exposes enormous complexity to implementers.
+
+* WHAT is the problem?
+
+#+begin_quote
+GraphQL is a dream for users, but a nighmare for implementers.
+#+end_quote
+
+#+ATTR_HTML: :width 70%
+#+ATTR_HTML: :height 70%
+[[file:twitter.png]]
+
+* What is the solution?
+
+Use Hasura, or PostGraphile, or +Prisma+, or even PostgREST.
+
+* WHAT is the solution?
+
+"Domain-Driven" development
+
+* What is Domain-Driven Development?
+
+
