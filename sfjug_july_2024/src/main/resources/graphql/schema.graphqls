@@ -1,0 +1,184 @@
+# -*- mode: graphql; -*-
+
+type Query {
+  account(limit: Int): [account]!
+  account_by_pk(id: ID): account
+  order(limit: Int): [order]!
+  order_by_pk(id: ID): order
+  order_detail(limit: Int): [order_detail]!
+  order_detail_by_pk(id: ID): order_detail
+  product(limit: Int): [product]!
+  product_by_pk(id: ID): product
+  Artist(limit: Int): [Artist]!
+  Album(limit: Int): [Album]!
+  Track(limit: Int): [Track]!
+  Playlist(limit: Int): [Playlist]!
+  PlaylistTrack(limit: Int): [PlaylistTrack]!
+  Genre(limit: Int): [Genre]!
+  MediaType(limit: Int): [MediaType]!
+  Customer(limit: Int): [Customer]!
+  Employee(limit: Int): [Employee]!
+  Invoice(limit: Int): [Invoice]!
+  InvoiceLine(limit: Int): [InvoiceLine]!
+}
+
+# Retail
+
+type account {
+  id: ID
+  name: String
+  created_at: String
+  updated_at: String
+  orders(limit: Int): [order]!
+}
+
+type order {
+  id: ID
+  account_id: ID
+  status: String
+  created_at: String
+  updated_at: String
+  order_details(limit: Int): [order_detail]!
+  account: account!
+}
+
+type order_detail {
+  id: ID
+  order_id: ID
+  product_id: ID
+  units: Int
+  created_at: String
+  updated_at: String
+  product: product!
+  order: order!
+}
+
+type product {
+  id: ID
+  name: String
+  price: Int
+  created_at: String
+  updated_at: String
+  order_details(limit: Int): [order_detail]!
+}
+
+# Chinook
+
+type Album {
+  AlbumId  : Int
+  Title    : String
+  ArtistId : Int
+  Artist   : Artist
+  Tracks(limit: Int)   : [Track]!
+}
+
+type Artist {
+  ArtistId: Int
+  Name: String
+  Albums(limit: Int): [Album]!
+}
+
+type Customer {
+  CustomerId   : Int
+  FirstName    : String
+  LastName     : String
+  Company      : String
+  Address      : String
+  City         : String
+  State        : String
+  Country      : String
+  PostalCode   : String
+  Phone        : String
+  Fax          : String
+  Email        : String
+  SupportRepId : Int
+  SupportRep   : Employee
+  Invoices(limit: Int)     : [Invoice]!
+}
+
+type Employee {
+  EmployeeId : Int
+  LastName   : String
+  FirstName  : String
+  Title      : String
+  ReportsTo  : Int
+  BirthDate  : String
+  HireDate   : String
+  Address    : String
+  City       : String
+  State      : String
+  Country    : String
+  PostalCode : String
+  Phone      : String
+  Fax        : String
+  Email      : String
+  Customers(limit: Int)  : [Customer]!
+  Manager    : Employee
+  Reports(limit: Int)    : [Employee]!
+}
+
+type Genre {
+  GenreId : Int
+  Name    : String
+  Tracks(limit: Int)  : [Track]!
+}
+
+type Invoice {
+  InvoiceId         : Int
+  CustomerId        : Int
+  InvoiceDate       : String
+  BillingAddress    : String
+  BillingCity       : String
+  BillingState      : String
+  BillingCountry    : String
+  BillingPostalCode : String
+  Total             : Float
+  InvoiceLines(limit: Int)      : [InvoiceLine]!
+  Customer          : Customer
+}
+
+type InvoiceLine {
+  InvoiceLineId : Int
+  InvoiceId     : Int
+  TrackId       : Int
+  UnitPrice     : Float
+  Quantity      : Int
+  Track         : Track
+  Invoice       : Invoice
+}
+
+type MediaType {
+  MediaTypeId : Int
+  Name        : String
+  Tracks(limit: Int)      : [Track]!
+}
+
+type Playlist {
+  PlaylistId : Int
+  Name       : String
+  PlaylistTracks(limit: Int) : [PlaylistTrack]!
+}
+
+type PlaylistTrack {
+  PlaylistId : Int
+  TrackId    : Int
+  Playlist   : Playlist
+  Track      : Track
+}
+
+type Track {
+  TrackId      : Int
+  Name         : String
+  AlbumId      : Int
+  MediaTypeId  : Int
+  GenreId      : Int
+  Composer     : String
+  Milliseconds : Int
+  Bytes        : Int
+  UnitPrice    : Float
+  Album        : Album
+  PlaylistTracks(limit: Int) : [PlaylistTrack]!
+  MediaType    : MediaType
+  Genre        : Genre
+  InvoiceLines(limit: Int) : [InvoiceLine]!
+}
