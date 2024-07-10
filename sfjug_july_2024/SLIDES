@@ -14,7 +14,7 @@
 #+options: d:(not "LOGBOOK") date:nil e:t email:nil f:t inline:t num:nil
 #+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
 #+options: timestamp:nil title:t toc:nil todo:t |:t
-#+title: +Data-First+ Domain-Driven GraphQL
+#+title: Domain-Driven GraphQL
 #+subtitle: Teach the Controversy!
 #+date: <2024-07-10 Wed>
 #+author: David A. Ventimiglia
@@ -30,6 +30,8 @@
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:qrcode_github.com.png]]
+
+[[mailto:davidaventimiglia@hasura.io][davidaventimiglia@hasura.io]]
 
 * Abstract
 
@@ -72,7 +74,7 @@ We think there's a better way, but hey, /maybe we're wrong!/
   as an open standard.
 - 2016 - Apollo founded.
 - 2017 - Hasura founded.
-- 2014 - Grumbling about GraphQL reaches a crescendo.
+- 2024 - Grumbling about GraphQL reaches a crescendo.
 
 ** History
 
@@ -304,7 +306,7 @@ cf. [[https://netflixtechblog.medium.com/a-tale-of-two-frameworks-the-domain-gra
 #+end_src
 
 - The N+1 Problem :: resolvers, calls, and queries scales as $k^m$,
-  which is exponential in $m$.
+  which is exponential in query depth $m$.
   
 ** Performance?
 
@@ -316,7 +318,7 @@ Use [[https://hasura.io/][Hasura]], or [[https://www.graphile.org/postgraphile/]
 
 * /WHAT/ is the solution?
 
-Domain-Driven development
+Domain-Driven GraphQL
 
 * What is Domain-Driven Development?
 
@@ -370,7 +372,7 @@ the complexity problem.
 
 * /OBJECTION!/  Code is necessary for business logic.
 
-Yes and no. Data validation and Data Transformation can often be
+Yes and no. Data Validation and Data Transformation can often be
 addressed by SQL (for example).  Side-Effects, on the other hand, are
 a different story.
 
@@ -417,7 +419,7 @@ in terms of access patterns/capabilities.
 - [[https://thenewstack.io/is-graphql-over-or-do-we-just-need-to-rethink-it/][Is GraphQL Over or Do We Just Need to Rethink It?]]
 - [[https://hasura.io/blog/the-ultimate-graphql-for-java-guide][The Ultimate GraphQL for Java Guide]]
 - [[https://hasura.io/blog/building-a-graphql-server-with-netflix-dgs-an-unfiltered-review][Building a GraphQL server with Netflix DGS: An unfiltered review]]
-- [[https://grafast.org/grafast][Gra/fast/ introduction]]
+- [[https://grafast.org/grafast][Grafast introduction]]
 - [[https://x.com/schrockn/status/1721340874771062933][Nick Schrock on Twitter]]
 - [[https://netflixtechblog.medium.com/a-tale-of-two-frameworks-the-domain-graph-service-framework-meets-spring-graphql-f8237f09c389][A Tale of Two Frameworks: The Domain Graph Service Framework Meets Spring GraphQL]]
 
@@ -426,3 +428,5 @@ in terms of access patterns/capabilities.
 #+ATTR_HTML: :width 40%
 #+ATTR_HTML: :height 40%
 [[file:qrcode_github.com.png]]
+
+[[mailto:davidaventimiglia@hasura.io][davidaventimiglia@hasura.io]]
