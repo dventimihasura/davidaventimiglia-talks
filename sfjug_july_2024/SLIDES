@@ -102,8 +102,8 @@ cf. [[https://graphql.org/learn/execution/][graphql.org]]
 ** Trivial Resolvers
 
 #+begin_quote
-many GraphQL libraries will let you omit resolvers this simple and
-will just assume that if a resolver isn’t provided for a field, that a
+many GraphQL libraries will let you omit [simple] resolvers and will
+just assume that if a resolver isn’t provided for a field, that a
 property of the same name should be read and returned
 #+end_quote
 cf. [[https://graphql.org/learn/execution/][graphql.org]]
@@ -125,6 +125,27 @@ by writing a lot of code
 - [[https://www.graphql-java.com/][graphql-java]] :: low-level foundation
 - [[https://netflix.github.io/dgs/][Netflix DGS]] :: high-level framework
 - [[https://spring.io/projects/spring-graphql][Spring GraphQL]] :: high-level framework
+
+** Schema File
+
+#+begin_src graphql
+type Query {
+  account(limit: Int): [account]!
+  account_by_pk(id: ID): account
+  order(limit: Int): [order]!
+}
+type account {
+  id: ID
+  name: String
+  orders(limit: Int): [order]!
+}
+type order {
+  id: ID
+  account_id: ID
+  status: String
+  account: account!
+}
+#+end_src
 
 ** graphql-java
 
@@ -162,7 +183,7 @@ public class ShowDataFetcher {
 #+begin_src java
   @Controller
   public class GreetingController {
-  @QueryMapping
+      @QueryMapping
       public String greeting(@Argument String name) {
           return "Hello, " + name + "!";
       }
