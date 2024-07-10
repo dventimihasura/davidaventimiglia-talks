@@ -31,56 +31,13 @@
 #+ATTR_HTML: :height 40%
 # [[file:qrcode_github.com.png]]
 
-* What
-
-** Goals
-
-- have Java GraphQL + SQL DB
-- be non-trivial
-- start a conversation
-
-** Non-Goals
-
-- +be done+
-- +be correct+
-- +start a war+
-
-* Why
-
-Let's move beyond tutorials, "Getting Started" guides, and
-"Hello, World!" apps.  Let's solve a real and common problem.  Let's
-keep adding bells and whistles.  Let's see what's /really/ involved.
-And let's see what works and what doesn't.
-
-* How
-
-** The Context
-
-- [[file:docker-compose.yaml][docker-compose.yaml]] :: nice and easy
-- postgres :: useful reference point
-- data model :: online retail (accounts, orders, products, etc.)
-- Hasura :: [[https://en.wikipedia.org/wiki/Stalking_horse][stalking horse]]
-
-** The Application
-
-- [[https://netflix.github.io/dgs/][+Netflix DGS+]] :: we'll get there
-- [[https://www.graphql-java.com/][graphql-java]] :: the foundation
-- [[https://spring.io/projects/spring-boot][Spring Boot]] :: the gold standard
-
-** The Architecture
-
-- Model :: 🧱 POJOs, DAOs, Maps, etc.
-- +View+ :: 📺 the API /is/ the view
-- Controller :: 🕹 resolvers, data fetchers, etc.
-
-** The Road-Map
-
-- ☑ Make it Blink :: 💡 "naive" approach with graphql-java 
-- ☐ Make it Real :: 😈 [[https://hibernate.org/orm/][Hibernate]] that ol' N+1 problem
-- ☐ Make it Modern :: 🤖 Upgrade to Netflix DGS
-- ☐ Make it Sing :: 🎶 caching, security, observability, etc.
-
 * Steps
+
+** Step 0:  Fulfil the requirements.
+
+- [[https://maven.apache.org/][Apache Maven]]
+- [[https://jdk.java.net/archive/][Java JDK 21 or later]]
+- [[https://docs.docker.com/compose/install/][Docker Compose]]
 
 ** Step 1:  Clone this repository.
 
