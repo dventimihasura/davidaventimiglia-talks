@@ -303,20 +303,8 @@ cf. [[https://netflixtechblog.medium.com/a-tale-of-two-frameworks-the-domain-gra
 ...
 #+end_src
 
-1. Get up to 10 ~Artist~ entry.
-2. For each ~Artist~, get all of the related ~Album~ entries.
-3. For each ~Album~, get all of the related ~Track~ entries.
-4. For each entry, just get its identifier field:  ~ArtistId~,
-   ~AlbumId~, ~TrackId~.
-5. This query is nested 2 levels below ~Artist~.  Let $~n=2~$.
-6. ~Album~ is a [[https://spec.graphql.org/October2021/#sec-Wrapping-Types][List]] wrapping type on ~Artist~, as is ~Track~ is a
-   [[https://spec.graphql.org/October2021/#sec-Wrapping-Types][List]] wrapping type on ~Album~.  Suppose the typical [[https://en.wikipedia.org/wiki/Cardinality][cardinality]] is
-   $m$.
-
-** Performance
-
-- The N+1 Problem :: resolvers, calls, and queries scales as $m^n$,
-  which is exponential in $n$.
+- The N+1 Problem :: resolvers, calls, and queries scales as $k^m$,
+  which is exponential in $m$.
   
 ** Performance?
 
