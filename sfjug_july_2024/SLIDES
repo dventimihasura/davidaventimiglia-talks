@@ -64,6 +64,20 @@ We think there's a better way, but hey, /maybe we're wrong!/
 
 #+REVEAL_HTML: </div>
 
+** History
+
+- 2012 - Facebook created GraphQL to support its shift from web to
+  mobile.
+- 2015 - Facebook revamped GraphQL and released it to the community
+  as an open standard.
+- 2016 - Apollo founded.
+- 2017 - Hasura founded.
+- 2014 - Grumbling about GraphQL reaches a crescendo.
+
+** History
+
+[[file:trends.png]]
+
 * /WHAT/ is GraphQL?
 
 - REST replacement?
@@ -75,15 +89,179 @@ We think there's a better way, but hey, /maybe we're wrong!/
 - schema-first :: Write a schema, then write resolvers.
 - code-first :: Just write resolvers.
 
+** Resolvers
+
+#+begin_quote
+Each field on each type is backed by a function called the resolver
+which is provided by the GraphQL server developer. When a field is
+executed, the corresponding resolver is called to produce the next
+value.
+#+end_quote
+cf. [[https://graphql.org/learn/execution/][graphql.org]]
+
+** Trivial Resolvers
+
+#+begin_quote
+many GraphQL libraries will let you omit resolvers this simple and
+will just assume that if a resolver isn’t provided for a field, that a
+property of the same name should be read and returned
+#+end_quote
+cf. [[https://graphql.org/learn/execution/][graphql.org]]
+
 * /HOW/ is it Implemented?
 
 by writing a lot of code
+
+** GraphQL in Java
+
+1. Create a Spring Boot application.
+2. Write schema.
+3. Write models.
+4. Write mappings.
+5. Write tests.
+
+** GraphQL in Java
+
+- [[https://www.graphql-java.com/][graphql-java]] :: low-level foundation
+- [[https://netflix.github.io/dgs/][Netflix DGS]] :: high-level framework
+- [[https://spring.io/projects/spring-graphql][Spring GraphQL]] :: high-level framework
+
+** graphql-java
+
+#+begin_src java
+DataFetcher productsDataFetcher = new DataFetcher<List<ProductDTO>>() {
+    @Override
+    public List<ProductDTO> get(DataFetchingEnvironment environment) {
+        DatabaseSecurityCtx ctx = environment.getContext();
+        List<ProductDTO> products;
+        String match = environment.getArgument("match");
+        if (match != null) {
+            products = fetchProductsFromDatabaseWithMatching(ctx, match);
+        } else {
+            products = fetchAllProductsFromDatabase(ctx);
+        }
+        return products;
+    }
+};
+#+end_src
+
+** Netflix DGS
+
+#+begin_src java
+@DgsComponent
+public class ShowDataFetcher {
+    @DgsData(parentType = "Query", field = "shows")
+    public List<Show> shows() {
+        return shows;
+    }
+}
+#+end_src
+
+** Spring GraphQL
+
+#+begin_src java
+  @Controller
+  public class GreetingController {
+  @QueryMapping
+      public String greeting(@Argument String name) {
+          return "Hello, " + name + "!";
+      }
+  }
+#+end_src
+
+** Netflix DGS & Spring GraphQL
+
+#+begin_quote
+Soon after we open-sourced the DGS Framework, we learned about
+parallel efforts by the Spring team to develop a GraphQL framework for
+Spring Boot...We now have two competing frameworks that solve the same
+problem for our users.
+#+end_quote
+cf. [[https://netflixtechblog.medium.com/a-tale-of-two-frameworks-the-domain-graph-service-framework-meets-spring-graphql-f8237f09c389][Netflix Technology Blog]]
+
+** Netflix DGS & Spring GraphQL
+
+#+begin_quote
+Today, new users must choose between the DGS Framework and Spring
+GraphQL...For the DGS and Spring GraphQL maintainers, it would be far
+more effective to collaborate on features and improvements and provide
+more robust solutions for the GraphQL community as a whole.
+#+end_quote
+cf. [[https://netflixtechblog.medium.com/a-tale-of-two-frameworks-the-domain-graph-service-framework-meets-spring-graphql-f8237f09c389][Netflix Technology Blog]]
+
+** Netflix DGS & Spring GraphQL
+
+- CHALLENGE :: Read the Netflix Technlogy Blog [[https://netflixtechblog.medium.com/a-tale-of-two-frameworks-the-domain-graph-service-framework-meets-spring-graphql-f8237f09c389][article]] and see if you
+  can determine why you wouldn't just use Spring for GraphQL for a /de
+  novo/ project.
 
 * What is the problem?
 
 - security :: exposes bad stuff to enemies
 - performance :: exposes bad performance even to friends
 - complexity :: exposes enormous complexity to implementers
+
+** Security
+
+- Deep Queries :: /Confidentiality, Availability/
+- Recursive Queries :: /Availability/
+- Unbounded Queries :: /Confidentiality, Availability/
+- Malicious Queries :: /Confidentiality, Integrity/
+- Batch Requests :: /Confidentiality, Availability/
+
+*** Deep / Recursive Queries
+
+#+begin_src graphql
+  query {
+    author(id: 42) {
+      posts {
+        author {...and so on...
+        }
+      }
+    }
+  }
+#+end_src
+
+*** Unbounded / Large Queries
+
+#+begin_src graphql
+  query {
+    authors(first: 1000) {
+      name
+      posts(last: 100) {
+        title
+        content
+      }
+    }
+  }
+#+end_src
+
+*** Malicious Queries
+
+#+begin_src graphql
+  query User {
+    user (id: "User*") {
+      email
+      id 
+    }
+  }
+#+end_src
+
+*** Batch Requests
+
+#+begin_src graphql
+  query MaliciousQuery {
+    alias1: fieldName { subField1 subField2 ...}
+    alias2: fieldName { subField1 subField2 ...}
+    ...
+    alias10: fieldName { subField1 subField2 ...}
+    ...
+    alias100: fieldName { subField1 subField2 ...
+    ...
+    alias1000: fieldName { subField1 subField2 ...}
+    ...
+  }
+#+end_src
 
 * /WHAT/ is the problem?
 
@@ -175,6 +353,14 @@ a different story.
 
 * Domain-Driven GraphQL
 
+- Consider! ::
+  1. Use Hasura or PostGraphile if you're willing to not write code.
+  2. Use [[https://github.com/introproventures/graphql-jpa-query][graphql-jpa-query]] if you must write code and want something new.
+  3. Use [[https://github.com/leangen/graphql-spqr][graphql-spqr]] if you must write code and want something old.
+  4. Use whatever and rewrite Hasura in Java!
+
+* Domain-Driven GraphQL
+
 #+begin_quote
 [databases] have long been the gold standard of expressiveness of data
 requirements – any sufficiently expressive API will begin to look like
@@ -192,4 +378,5 @@ in terms of access patterns/capabilities.
 - [[https://hasura.io/blog/building-a-graphql-server-with-netflix-dgs-an-unfiltered-review][Building a GraphQL server with Netflix DGS: An unfiltered review]]
 - [[https://grafast.org/grafast][Gra/fast/ introduction]]
 - [[https://x.com/schrockn/status/1721340874771062933][Nick Schrock on Twitter]]
+- [[https://netflixtechblog.medium.com/a-tale-of-two-frameworks-the-domain-graph-service-framework-meets-spring-graphql-f8237f09c389][A Tale of Two Frameworks: The Domain Graph Service Framework Meets Spring GraphQL]]
 
