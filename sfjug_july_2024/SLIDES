@@ -353,11 +353,11 @@ a different story.
 
 * Domain-Driven GraphQL
 
-- Consider! ::
-  1. Use Hasura or PostGraphile if you're willing to not write code.
-  2. Use [[https://github.com/introproventures/graphql-jpa-query][graphql-jpa-query]] if you must write code and want something new.
-  3. Use [[https://github.com/leangen/graphql-spqr][graphql-spqr]] if you must write code and want something old.
-  4. Use whatever and rewrite Hasura in Java!
+- Consider... ::
+  1. using Hasura or PostGraphile if you're willing to not write code.
+  2. using [[https://github.com/introproventures/graphql-jpa-query][graphql-jpa-query]] if you must write code and want something new.
+  3. using [[https://github.com/leangen/graphql-spqr][graphql-spqr]] if you must write code and want something old.
+  4. using whatever and rewrite Hasura in Java!
 
 * Domain-Driven GraphQL
 
